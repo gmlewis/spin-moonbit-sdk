@@ -5,13 +5,17 @@
   "link": {
     "wasm": {
       "exports": [
-        "handle_request"
-      ]
+        "fermyon:spin/inbound-http",
+        "spin_http_handle_http_request"
+      ],
+      "export-memory-name": "memory"
     },
     "wasm-gc": {
       "exports": [
-        "handle_request"
-      ]
+        "fermyon:spin/inbound-http",
+        "spin_http_handle_http_request"
+      ],
+      "export-memory-name": "memory"
     }
   }
 }

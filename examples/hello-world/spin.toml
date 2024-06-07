@@ -11,6 +11,6 @@ route = "/hello"
 component = "hello"
 
 [component.hello]
-source = "hello.wasm"
+source = "hello-world.wasm"
 [component.hello.build]
 command = "moon build --target wasm-gc"

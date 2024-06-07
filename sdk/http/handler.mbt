@@ -4,7 +4,7 @@ let handler : Ref[Handler] = { val: default_handler }
 // the handler is not set.
 fn default_handler(_req : Request) -> Result[Response, String] {
   let msg = "http handler undefined"
-  println(msg)
+  // println(msg)  // This adds a "spectest:print_char" export requirement on the host.
   Err(msg)
 }
 

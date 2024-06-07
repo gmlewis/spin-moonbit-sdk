@@ -9,3 +9,8 @@
 # so this Go program performs that task:
 # moon build --target wasm --output-wat
 moon build --target wasm
+BASE_DIR=target/wasm/release/build
+for wasmpath in ${BASE_DIR}/examples/*/*.wasm ; do
+  FILENAME=${wasmpath#"${BASE_DIR}/"}
+  cp ${wasmpath} ${FILENAME}
+done
