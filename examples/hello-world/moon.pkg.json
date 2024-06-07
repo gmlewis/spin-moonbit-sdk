@@ -1,0 +1,17 @@
+{
+  "import": [
+    "gmlewis/spin-moonbit-sdk/sdk/http"
+  ],
+  "link": {
+    "wasm": {
+      "exports": [
+        "handle_request"
+      ]
+    },
+    "wasm-gc": {
+      "exports": [
+        "handle_request"
+      ]
+    }
+  }
+}
