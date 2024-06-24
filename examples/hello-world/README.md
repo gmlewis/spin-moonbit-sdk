@@ -4,7 +4,7 @@
 $ RUST_LOG=spin=trace spin build --up
 ```
 
-The application can now receive requests on `http://localhost:3000`:
+The application can now receive requests at `http://localhost:3000/hello`:
 
 ```shell
 $ curl -i localhost:3000/hello

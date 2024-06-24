@@ -9,3 +9,7 @@ fn handle_hello_world(_req : @http.Request) -> Result[@http.Response, String] {
     ),
   )
 }
+
+pub fn fermyon_spin_inbound_http() -> Int {
+  @http.fermyon_spin_inbound_http()
+}
