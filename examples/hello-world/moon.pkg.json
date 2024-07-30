@@ -5,14 +5,18 @@
   "link": {
     "wasm": {
       "exports": [
-        "fermyon_spin_inbound_http",
+        "canonical_abi_free",
+        "canonical_abi_realloc",
+        "handle_http_request",
         "spin_http_handle_http_request"
       ],
       "export-memory-name": "memory"
     },
     "wasm-gc": {
       "exports": [
-        "fermyon_spin_inbound_http",
+        "canonical_abi_free",
+        "canonical_abi_realloc",
+        "handle_http_request",
         "spin_http_handle_http_request"
       ],
       "export-memory-name": "memory"

@@ -16,8 +16,8 @@ https://www.moonbitlang.com/download/
 Then, to build this SDK, clone the repo, and type:
 
 ```bash
-$ moon update
-$ moon install
+moon update && moon install
+./build.sh
 ```
 
 [Spin CLI tool]: https://developer.fermyon.com/spin
@@ -39,8 +39,14 @@ $ curl -i localhost:3000
 
 ## Status
 
-This SDK is just in its infancy.
+The code has been updated to support compiler:
 
-These plugins work:
+```bash
+$ moon version --all
+moon 0.1.20240726 (67f143f 2024-07-26) ~/.moon/bin/moon
+moonc v0.1.20240729+3efb92d5a ~/.moon/bin/moonc
+moonrun 0.1.20240716 (08bce9c 2024-07-16) ~/.moon/bin/moonrun
+```
 
-* [greet](examples/greet/)
+Use [`moonup`] to manage `moon` compiler versions:
+https://github.com/chawyehsu/moonup

@@ -2,8 +2,8 @@
 
 // fix-exports reads all *.wat files found under target/wasm/release/build
 // and writes a new *.wasm file that changes the string:
-// `(export "fermyon_spin_inbound_http"`
-// to: `(export "fermyon:spin/inbound-http"`.
+// `(export "handle_http_request"`
+// to: `(export "handle-http-request"`
 //
 // Obviously, this is a royal hack, but allows the resulting WASM files to be used directly
 // with the spin CLI, which is really nice.
@@ -25,8 +25,8 @@ var (
 )
 
 const (
-	exportBefore = `(export "fermyon_spin_inbound_http"`
-	exportAfter  = `(export "fermyon:spin/inbound-http"`
+	exportBefore = `(export "handle_http_request"`
+	exportAfter  = `(export "handle-http-request"`
 )
 
 func main() {

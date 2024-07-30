@@ -13,4 +13,5 @@ component = "hello"
 [component.hello]
 source = "hello-world.wasm"
 [component.hello.build]
-command = "moon build --target wasm-gc"
+command = "moon build --target wasm && cp ../../target/wasm/release/build/examples/hello-world/hello-world.wasm ."
+# command = "moon build --target wasm-gc && cp ../../target/wasm-gc/release/build/examples/hello-world/hello-world.wasm ."
