@@ -14,7 +14,7 @@ pub fn handle(
   response_out : @types.ResponseOutparam
 ) -> Unit {
   let response = match request.path_with_query() {
-      None | Some("/hello") => make_response(b"Hello, World")
+      None | Some("/") => make_response(b"Hello, World")
       _ => make_response(b"Not Found", status_code=404)
     }
     |> Ok
