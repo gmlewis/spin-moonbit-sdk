@@ -10,5 +10,5 @@
     "moonbit",
     "sdk"
   ],
-  "description": "Spin SDK for the MoonBit programming language."
+  "description": "Experimental Spin SDK for the MoonBit programming language."
 }
