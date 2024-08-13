@@ -13,26 +13,5 @@ pub fn handle(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam
 ) -> Unit {
-  let response = match request.path_with_query() {
-      None | Some("/") => make_response(b"Hello, World")
-      _ => make_response(b"Not Found", status_code=404)
-    }
-    |> Ok
-  response_out.set(response)
-}
-
-fn make_response(
-  body : Bytes,
-  ~status_code : UInt = 200
-) -> @types.OutgoingResponse {
-  let response = @types.outgoing_response(@types.fields())
-  response
-  .body()
-  .unwrap()
-  .write()
-  .unwrap()
-  .blocking_write_and_flush(body)
-  .unwrap()
-  response.set_status_code(status_code).unwrap()
-  response
+  abort("todo")
 }

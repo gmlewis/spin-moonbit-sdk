@@ -1,0 +1,12 @@
+{
+  "import": [
+    {
+      "path": "gmlewis/spin-moonbit-pdk/ffi",
+      "alias": "ffi"
+    },
+    {
+      "path": "gmlewis/spin-moonbit-pdk/interface/imports/gmlewis/spin_moonbit_pdk/rdbmsTypes",
+      "alias": "rdbmsTypes"
+    }
+  ]
+}

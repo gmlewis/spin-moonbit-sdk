@@ -5,26 +5,27 @@ pub type Pollable Int derive(Show, Eq)
 fn wasmImportResourceDropPollable(resource : Int) = "wasi:io/poll@0.2.0" "[resource-drop]pollable"
 
 pub fn Pollable::drop(self : Pollable) -> Unit {
-  wasmImportResourceDropPollable(self.0)
+      wasmImportResourceDropPollable(self.0)
 }
-
 /// Return the readiness of a pollable. This function never blocks.
 ///
 /// Returns `true` when the pollable is ready, and `false` otherwise.
 pub fn Pollable::ready(self : Pollable) -> Bool {
-  let result : Int = wasmImportMethodPollableReady(self.0)
-  return result != 0
-}
 
+      let result : Int =  wasmImportMethodPollableReady(self.0);
+      return (result != 0)
+
+}
 /// `block` returns immediately if the pollable is ready, and otherwise
 /// blocks until ready.
 ///
 /// This function is equivalent to calling `poll.poll` on a list
 /// containing only this pollable.
 pub fn Pollable::block(self : Pollable) -> Unit {
-  wasmImportMethodPollableBlock(self.0)
-}
 
+      wasmImportMethodPollableBlock(self.0);
+
+}
 /// Poll for completion on a set of pollables.
 ///
 /// This function takes a list of pollables, which identify I/O sources of
@@ -44,16 +45,21 @@ pub fn Pollable::block(self : Pollable) -> Unit {
 /// the pollables has an error, it is indicated by marking the source as
 /// being reaedy for I/O.
 pub fn poll(in_ : Array[Pollable]) -> FixedArray[UInt] {
-  let address = @ffi.malloc(in_.length() * 4)
-  for index = 0; index < in_.length(); index = index + 1 {
-    let element : Pollable = in_[index]
-    let base = address + index * 4
-    @ffi.store32(base + 0, element.0)
-  }
-  let return_area = @ffi.malloc(8)
-  wasmImportPoll(address, in_.length(), return_area)
-  let result = @ffi.ptr2uint_array(@ffi.load32(return_area + 0))
-  @ffi.free(address)
-  @ffi.free(return_area)
-  return result
+
+      let address = @ffi.malloc((in_).length() * 4);
+      for index = 0; index < (in_).length(); index = index + 1 {
+            let element : Pollable = (in_)[(index)]
+            let base = address + (index * 4);
+            @ffi.store32((base) + 0, element.0)
+
+      }
+      let return_area = @ffi.malloc(8)
+      wasmImportPoll(address, (in_).length(), return_area);
+
+      let result = @ffi.ptr2uint_array(@ffi.load32((return_area) + 0))
+      @ffi.free(address)
+      @ffi.free(return_area)
+      return result
+
 }
+
