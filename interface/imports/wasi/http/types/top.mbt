@@ -928,7 +928,7 @@ pub fn OutgoingRequest::set_method(
       ignoreList.push(payload26)
       (9, @ffi.str2ptr(payload26), payload26.iter().count())
     }
-    _ => panic()
+    // _ => panic()
   }
   let result : Int = wasmImportMethodOutgoingRequestSetMethod(
     self.0,
@@ -1039,7 +1039,7 @@ pub fn OutgoingRequest::set_scheme(
           ignoreList.push(payload11)
           (2, @ffi.str2ptr(payload11), payload11.iter().count())
         }
-        _ => panic()
+        // _ => panic()
       }
       (1, lowered, lowered12, lowered13)
     }
@@ -1523,14 +1523,14 @@ pub fn ResponseOutparam::set(
           }
           (38, lowered305, Int::to_int64(lowered306), lowered307, 0, 0, 0)
         }
-        _ => panic()
+        // _ => panic()
       }
       (
         1, lowered308, lowered309, lowered310, lowered311, lowered312, lowered313,
         lowered314,
       )
     }
-    _ => panic()
+    // _ => panic()
   }
   wasmImportStaticResponseOutparamSet(
     param.0,

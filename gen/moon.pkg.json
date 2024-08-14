@@ -15,10 +15,6 @@
       "alias": "ffi"
     },
     {
-      "path": "gmlewis/spin-moonbit-sdk/interface/exports/wasi/http/incomingHandler",
-      "alias": "incomingHandler"
-    },
-    {
       "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
       "alias": "types"
     }
