@@ -1,8 +1,13 @@
-package gmlewis:spin-moonbit-sdk;
+package fermyon:spin@2.0.0;
 
 /// The full world of a guest targeting an http-trigger
-/// The imports needed for a guest to run on a Spin host
 world http-trigger {
+  include platform;
+  export wasi:http/incoming-handler@0.2.0;
+}
+
+/// The imports needed for a guest to run on a Spin host
+world platform {
   include wasi:cli/imports@0.2.0;
   import wasi:http/outgoing-handler@0.2.0;
   import llm;
@@ -13,5 +18,4 @@ world http-trigger {
   import sqlite;
   import key-value;
   import variables;
-  export wasi:http/incoming-handler@0.2.0;
 }

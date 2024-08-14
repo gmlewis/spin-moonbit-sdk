@@ -13,4 +13,4 @@ route = "/hello"
 [component.hello]
 source = "hello-world.wasm"
 [component.hello.build]
-command = "moon build --target wasm && wasm-tools component embed ../../wit ../../target/wasm/release/build/examples/hello-world/hello-world.wasm -o hello-world.wasm --encoding utf16 && wasm-tools component new hello-world.wasm -o hello-world.wasm"
+command = "moon build --target wasm && wasm-tools component embed ../../wit ../../target/wasm/release/build/examples/hello-world/hello-world.wasm -o hello-world.wasm --encoding utf16 -w http-trigger && wasm-tools component new hello-world.wasm -o hello-world.wasm"

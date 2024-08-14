@@ -1,0 +1,19 @@
+spin_manifest_version = 2
+
+[application]
+authors = ["Glenn Lewis"]
+description = "A simple Spin application written in MoonBit."
+name = "kv-store"
+version = "0.1.0"
+
+[[trigger.http]]
+component = "kvstore"
+route = "/kv-store"
+
+[component.kvstore]
+source = "kv-store.wasm"
+key_value_stores = ["default"]
+
+[component.kvstore.build]
+command = "moon build --target wasm && wasm-tools component embed ../../wit ../../target/wasm/release/build/examples/kv-store/kv-store.wasm -o kv-store.wasm --encoding utf16 -w http-trigger && wasm-tools component new kv-store.wasm -o kv-store.wasm"
+watch = ["**/*.mbt"]

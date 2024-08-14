@@ -8,7 +8,7 @@ fn wasmImportStaticConnectionOpen(
   p5 : Int,
   p6 : Int64,
   p7 : Int
-) = "gmlewis:spin-moonbit-sdk/mqtt" "[static]connection.open"
+) = "fermyon:spin@2.0.0/mqtt" "[static]connection.open"
 
 fn wasmImportMethodConnectionPublish(
   p0 : Int,
@@ -18,4 +18,4 @@ fn wasmImportMethodConnectionPublish(
   p4 : Int,
   p5 : Int,
   p6 : Int
-) = "gmlewis:spin-moonbit-sdk/mqtt" "[method]connection.publish"
+) = "fermyon:spin@2.0.0/mqtt" "[method]connection.publish"
