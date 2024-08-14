@@ -1,1 +1,16 @@
-{ "import": [{ "path" : "gmlewis/spin-moonbit-pdk/ffi", "alias" : "ffi" }, { "path" : "gmlewis/spin-moonbit-pdk/interface/imports/wasi/sockets/network", "alias" : "network" }, { "path" : "gmlewis/spin-moonbit-pdk/interface/imports/wasi/sockets/udp", "alias" : "udp" }] }
+{
+  "import": [
+    {
+      "path": "gmlewis/spin-moonbit-pdk/ffi",
+      "alias": "ffi"
+    },
+    {
+      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/sockets/network",
+      "alias": "network"
+    },
+    {
+      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/sockets/udp",
+      "alias": "udp"
+    }
+  ]
+}

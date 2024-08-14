@@ -1,1 +1,12 @@
-{ "import": [{ "path" : "gmlewis/spin-moonbit-pdk/ffi", "alias" : "ffi" }, { "path" : "gmlewis/spin-moonbit-pdk/interface/imports/wasi/filesystem/types", "alias" : "types" }] }
+{
+  "import": [
+    {
+      "path": "gmlewis/spin-moonbit-pdk/ffi",
+      "alias": "ffi"
+    },
+    {
+      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/filesystem/types",
+      "alias": "types"
+    }
+  ]
+}

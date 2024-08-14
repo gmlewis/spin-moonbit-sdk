@@ -1,1 +1,12 @@
-{ "import": [{ "path" : "gmlewis/spin-moonbit-pdk/ffi", "alias" : "ffi" }, { "path" : "gmlewis/spin-moonbit-pdk/interface/imports/wasi/cli/terminalOutput", "alias" : "terminalOutput" }] }
+{
+  "import": [
+    {
+      "path": "gmlewis/spin-moonbit-pdk/ffi",
+      "alias": "ffi"
+    },
+    {
+      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/cli/terminalOutput",
+      "alias": "terminalOutput"
+    }
+  ]
+}

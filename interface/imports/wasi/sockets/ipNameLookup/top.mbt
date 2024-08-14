@@ -5,8 +5,9 @@ pub type ResolveAddressStream Int derive(Show, Eq)
 fn wasmImportResourceDropResolveAddressStream(resource : Int) = "wasi:sockets/ip-name-lookup@0.2.0" "[resource-drop]resolve-address-stream"
 
 pub fn ResolveAddressStream::drop(self : ResolveAddressStream) -> Unit {
-      wasmImportResourceDropResolveAddressStream(self.0)
+  wasmImportResourceDropResolveAddressStream(self.0)
 }
+
 /// Resolve an internet host name to a list of IP addresses.
 ///
 /// Unicode domain names are automatically converted to ASCII using IDNA encoding.
@@ -27,27 +28,30 @@ pub fn ResolveAddressStream::drop(self : ResolveAddressStream) -> Unit {
 /// - <https://man7.org/linux/man-pages/man3/getaddrinfo.3.html>
 /// - <https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo>
 /// - <https://man.freebsd.org/cgi/man.cgi?query=getaddrinfo&sektion=3>
-pub fn resolve_addresses(network : @network.Network, name : String) -> Result[ResolveAddressStream, @network.ErrorCode] {
-
-      let return_area = @ffi.malloc(8)
-      wasmImportResolveAddresses(network.0, @ffi.str2ptr(name), name.iter().count(), return_area);
-
-      let lifted = match (@ffi.load8_u((return_area) + 0)) {
-            0 => {
-
-                  Result::Ok(ResolveAddressStream::ResolveAddressStream(@ffi.load32((return_area) + 4)))
-            }
-            1 => {
-
-                  Result::Err(@network.ErrorCode::from(@ffi.load8_u((return_area) + 4)))
-            }
-            _ => panic()
-      }
-      ignore(name)
-      @ffi.free(return_area)
-      return lifted
-
+pub fn resolve_addresses(
+  network : @network.Network,
+  name : String
+) -> Result[ResolveAddressStream, @network.ErrorCode] {
+  let return_area = @ffi.malloc(8)
+  wasmImportResolveAddresses(
+    network.0,
+    @ffi.str2ptr(name),
+    name.iter().count(),
+    return_area,
+  )
+  let lifted = match @ffi.load8_u(return_area + 0) {
+    0 =>
+      Result::Ok(
+        ResolveAddressStream::ResolveAddressStream(@ffi.load32(return_area + 4)),
+      )
+    1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 4)))
+    _ => panic()
+  }
+  ignore(name)
+  @ffi.free(return_area)
+  return lifted
 }
+
 /// Returns the next address from the resolver.
 ///
 /// This function should be called multiple times. On each call, it will
@@ -61,55 +65,61 @@ pub fn resolve_addresses(network : @network.Network, name : String) -> Result[Re
 /// - `temporary-resolver-failure`: A temporary failure in name resolution occurred. (EAI_AGAIN)
 /// - `permanent-resolver-failure`: A permanent failure in name resolution occurred. (EAI_FAIL)
 /// - `would-block`:                A result is not available yet. (EWOULDBLOCK, EAGAIN)
-pub fn ResolveAddressStream::resolve_next_address(self : ResolveAddressStream) -> Result[@network.IpAddress?, @network.ErrorCode] {
-
-      let return_area = @ffi.malloc(22)
-      wasmImportMethodResolveAddressStreamResolveNextAddress(self.0, return_area);
-
-      let lifted11 = match (@ffi.load8_u((return_area) + 0)) {
-            0 => {
-
-                  let lifted8 : @network.IpAddress? = match @ffi.load8_u((return_area) + 2) {
-                        0 => Option::None
-                        1 => {
-
-                              let lifted = match (@ffi.load8_u((return_area) + 4)) {
-                                    0 => {
-
-                                          @network.IpAddress::Ipv4(((@ffi.load8_u((return_area) + 6)).to_byte(), (@ffi.load8_u((return_area) + 7)).to_byte(), (@ffi.load8_u((return_area) + 8)).to_byte(), (@ffi.load8_u((return_area) + 9)).to_byte()))
-                                    }
-                                    1 => {
-
-                                          @network.IpAddress::Ipv6(((@ffi.load16_u((return_area) + 6).land(0xFFFF).to_uint()), (@ffi.load16_u((return_area) + 8).land(0xFFFF).to_uint()), (@ffi.load16_u((return_area) + 10).land(0xFFFF).to_uint()), (@ffi.load16_u((return_area) + 12).land(0xFFFF).to_uint()), (@ffi.load16_u((return_area) + 14).land(0xFFFF).to_uint()), (@ffi.load16_u((return_area) + 16).land(0xFFFF).to_uint()), (@ffi.load16_u((return_area) + 18).land(0xFFFF).to_uint()), (@ffi.load16_u((return_area) + 20).land(0xFFFF).to_uint())))
-                                    }
-                                    _ => panic()
-                              }
-
-                              Option::Some(lifted)
-                        }
-                        _ => panic()
-                  }
-
-                  Result::Ok(lifted8)
-            }
-            1 => {
-
-                  Result::Err(@network.ErrorCode::from(@ffi.load8_u((return_area) + 2)))
-            }
+pub fn ResolveAddressStream::resolve_next_address(
+  self : ResolveAddressStream
+) -> Result[@network.IpAddress?, @network.ErrorCode] {
+  let return_area = @ffi.malloc(22)
+  wasmImportMethodResolveAddressStreamResolveNextAddress(self.0, return_area)
+  let lifted11 = match @ffi.load8_u(return_area + 0) {
+    0 => {
+      let lifted8 : @network.IpAddress? = match @ffi.load8_u(return_area + 2) {
+        0 => Option::None
+        1 => {
+          let lifted = match @ffi.load8_u(return_area + 4) {
+            0 =>
+              @network.IpAddress::Ipv4(
+                (
+                  @ffi.load8_u(return_area + 6).to_byte(),
+                  @ffi.load8_u(return_area + 7).to_byte(),
+                  @ffi.load8_u(return_area + 8).to_byte(),
+                  @ffi.load8_u(return_area + 9).to_byte(),
+                ),
+              )
+            1 =>
+              @network.IpAddress::Ipv6(
+                (
+                  @ffi.load16_u(return_area + 6).land(0xFFFF).to_uint(),
+                  @ffi.load16_u(return_area + 8).land(0xFFFF).to_uint(),
+                  @ffi.load16_u(return_area + 10).land(0xFFFF).to_uint(),
+                  @ffi.load16_u(return_area + 12).land(0xFFFF).to_uint(),
+                  @ffi.load16_u(return_area + 14).land(0xFFFF).to_uint(),
+                  @ffi.load16_u(return_area + 16).land(0xFFFF).to_uint(),
+                  @ffi.load16_u(return_area + 18).land(0xFFFF).to_uint(),
+                  @ffi.load16_u(return_area + 20).land(0xFFFF).to_uint(),
+                ),
+              )
             _ => panic()
+          }
+          Option::Some(lifted)
+        }
+        _ => panic()
       }
-      @ffi.free(return_area)
-      return lifted11
-
+      Result::Ok(lifted8)
+    }
+    1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 2)))
+    _ => panic()
+  }
+  @ffi.free(return_area)
+  return lifted11
 }
+
 /// Create a `pollable` which will resolve once the stream is ready for I/O.
 ///
 /// Note: this function is here for WASI Preview2 only.
 /// It's planned to be removed when `future` is natively supported in Preview3.
-pub fn ResolveAddressStream::subscribe(self : ResolveAddressStream) -> @poll.Pollable {
-
-      let result : Int =  wasmImportMethodResolveAddressStreamSubscribe(self.0);
-      return @poll.Pollable::Pollable(result)
-
+pub fn ResolveAddressStream::subscribe(
+  self : ResolveAddressStream
+) -> @poll.Pollable {
+  let result : Int = wasmImportMethodResolveAddressStreamSubscribe(self.0)
+  return @poll.Pollable::Pollable(result)
 }
-
