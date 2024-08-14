@@ -1,11 +1,22 @@
-
 {
-      "link": {
-            "wasm": {
-                  "exports": ["cabi_realloc:cabi_realloc", "wasmExportHandle:wasi:http/incoming-handler@0.2.0#handle"],
-                  "export-memory-name": "memory",
-                  "heap-start-address": 16
-            }
-      }
-      ,"import": [{ "path" : "gmlewis/spin-moonbit-sdk/ffi", "alias" : "ffi" }, { "path" : "gmlewis/spin-moonbit-sdk/interface/exports/wasi/http/incomingHandler", "alias" : "incomingHandler" }, { "path" : "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types", "alias" : "types" }]
+  "link": {
+    "wasm": {
+      "exports": [
+        "cabi_realloc:cabi_realloc",
+        "wasmExportHandle:wasi:http/incoming-handler@0.2.0#handle"
+      ],
+      "export-memory-name": "memory",
+      "heap-start-address": 16
+    }
+  },
+  "import": [
+    {
+      "path": "gmlewis/spin-moonbit-sdk/ffi",
+      "alias": "ffi"
+    },
+    {
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
+      "alias": "types"
+    }
+  ]
 }

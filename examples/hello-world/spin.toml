@@ -7,8 +7,8 @@ name = "hello-world"
 version = "0.1.0"
 
 [[trigger.http]]
-route = "/hello"
 component = "hello"
+route = "/hello"
 
 [component.hello]
 source = "hello-world.wasm"
