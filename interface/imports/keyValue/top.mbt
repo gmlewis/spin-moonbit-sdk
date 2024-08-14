@@ -2,7 +2,7 @@
 /// An open key-value store
 pub type Store Int derive(Show, Eq)
 
-fn wasmImportResourceDropStore(resource : Int) = "gmlewis:spin-moonbit-pdk/key-value" "[resource-drop]store"
+fn wasmImportResourceDropStore(resource : Int) = "gmlewis:spin-moonbit-sdk/key-value" "[resource-drop]store"
 
 pub fn Store::drop(self : Store) -> Unit {
   wasmImportResourceDropStore(self.0)

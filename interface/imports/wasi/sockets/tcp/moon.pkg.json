@@ -1,19 +1,19 @@
 {
   "import": [
     {
-      "path": "gmlewis/spin-moonbit-pdk/ffi",
+      "path": "gmlewis/spin-moonbit-sdk/ffi",
       "alias": "ffi"
     },
     {
-      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/io/poll",
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll",
       "alias": "poll"
     },
     {
-      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/io/streams",
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
       "alias": "streams"
     },
     {
-      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/sockets/network",
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network",
       "alias": "network"
     }
   ]

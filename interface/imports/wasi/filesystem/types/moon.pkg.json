@@ -1,19 +1,19 @@
 {
   "import": [
     {
-      "path": "gmlewis/spin-moonbit-pdk/ffi",
+      "path": "gmlewis/spin-moonbit-sdk/ffi",
       "alias": "ffi"
     },
     {
-      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/clocks/wallClock",
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock",
       "alias": "wallClock"
     },
     {
-      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/io/error",
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error",
       "alias": "error"
     },
     {
-      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/io/streams",
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
       "alias": "streams"
     }
   ]

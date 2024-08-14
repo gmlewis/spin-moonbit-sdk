@@ -11,15 +11,15 @@
   },
   "import": [
     {
-      "path": "gmlewis/spin-moonbit-pdk/ffi",
+      "path": "gmlewis/spin-moonbit-sdk/ffi",
       "alias": "ffi"
     },
     {
-      "path": "gmlewis/spin-moonbit-pdk/interface/exports/wasi/http/incomingHandler",
+      "path": "gmlewis/spin-moonbit-sdk/interface/exports/wasi/http/incomingHandler",
       "alias": "incomingHandler"
     },
     {
-      "path": "gmlewis/spin-moonbit-pdk/interface/imports/wasi/http/types",
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
       "alias": "types"
     }
   ]

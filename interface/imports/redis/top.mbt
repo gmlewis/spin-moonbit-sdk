@@ -9,7 +9,7 @@ pub enum Error_ {
 
 pub type Connection Int derive(Show, Eq)
 
-fn wasmImportResourceDropConnection(resource : Int) = "gmlewis:spin-moonbit-pdk/redis" "[resource-drop]connection"
+fn wasmImportResourceDropConnection(resource : Int) = "gmlewis:spin-moonbit-sdk/redis" "[resource-drop]connection"
 
 pub fn Connection::drop(self : Connection) -> Unit {
   wasmImportResourceDropConnection(self.0)

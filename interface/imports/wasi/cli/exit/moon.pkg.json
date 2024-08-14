@@ -1,7 +1,7 @@
 {
   "import": [
     {
-      "path": "gmlewis/spin-moonbit-pdk/ffi",
+      "path": "gmlewis/spin-moonbit-sdk/ffi",
       "alias": "ffi"
     }
   ]

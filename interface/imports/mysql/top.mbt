@@ -2,7 +2,7 @@
 /// A connection to a MySQL database.
 pub type Connection Int derive(Show, Eq)
 
-fn wasmImportResourceDropConnection(resource : Int) = "gmlewis:spin-moonbit-pdk/mysql" "[resource-drop]connection"
+fn wasmImportResourceDropConnection(resource : Int) = "gmlewis:spin-moonbit-sdk/mysql" "[resource-drop]connection"
 
 pub fn Connection::drop(self : Connection) -> Unit {
   wasmImportResourceDropConnection(self.0)

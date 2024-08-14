@@ -12,7 +12,7 @@ fn wasmImportInfer(
   p9 : Int,
   p10 : Float,
   p11 : Int
-) = "gmlewis:spin-moonbit-pdk/llm" "infer"
+) = "gmlewis:spin-moonbit-sdk/llm" "infer"
 
 fn wasmImportGenerateEmbeddings(
   p0 : Int,
@@ -20,4 +20,4 @@ fn wasmImportGenerateEmbeddings(
   p2 : Int,
   p3 : Int,
   p4 : Int
-) = "gmlewis:spin-moonbit-pdk/llm" "generate-embeddings"
+) = "gmlewis:spin-moonbit-sdk/llm" "generate-embeddings"
