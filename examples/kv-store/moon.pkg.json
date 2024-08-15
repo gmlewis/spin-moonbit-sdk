@@ -19,7 +19,17 @@
       "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
       "alias": "types"
     },
-    "gmlewis/spin-moonbit-sdk/gen",
-    "gmlewis/spin-moonbit-sdk/interface/imports/keyValue"
+    {
+      "path": "gmlewis/spin-moonbit-sdk/gen",
+      "alias": "gen"
+    },
+    {
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/keyValue",
+      "alias": "keyValue"
+    },
+    {
+      "path": "gmlewis/spin-moonbit-sdk/util",
+      "alias": "util"
+    }
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "import": [
+    {
+      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
+      "alias": "types"
+    }
+  ]
+}

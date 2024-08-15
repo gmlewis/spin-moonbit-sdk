@@ -1,4 +1,4 @@
-package fermyon:spin@2.0.0;
+package gmlewis:spin-moonbit-sdk;
 
 /// The full world of a guest targeting an http-trigger
 world http-trigger {

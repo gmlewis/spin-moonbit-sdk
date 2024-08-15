@@ -22,7 +22,7 @@ pub fn handle(
       return
     }
   }
-  let response = match @gen.split_path(request) {
+  let response = match @util.split_path(request) {
       (@types.Get, ["/kv-store", key]) => handle_get(store, key)
       (@types.Post, ["/kv-store", key, value]) => handle_post(store, key, value)
       _ => make_response(b"Not Found", status_code=404)

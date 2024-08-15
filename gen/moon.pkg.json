@@ -13,10 +13,6 @@
     {
       "path": "gmlewis/spin-moonbit-sdk/ffi",
       "alias": "ffi"
-    },
-    {
-      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
-      "alias": "types"
     }
   ]
 }
