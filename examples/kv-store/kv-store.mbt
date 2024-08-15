@@ -18,55 +18,26 @@ pub fn handle(
 ) -> Unit {
   let store = match @keyValue.Store::open("default") {
     Ok(store) => store
-    _ => {
-      let ise = @util.make_response(b"Internal Server Error", status_code=500)
-        |> Ok
-      response_out.set(ise)
-      return
-    }
+    _ => return @util.respond_500(response_out)
   }
   let response = match @util.split_path(request) {
       (@types.Get, ["kv-store", key]) => handle_get(store, key)
       (@types.Post, ["kv-store", key]) => {
         let body = match request.consume() {
           Ok(body) => body.stream()
-          _ => {
-            let ise = @util.make_response(
-                b"Internal Server Error",
-                status_code=500,
-              )
-              |> Ok
-            response_out.set(ise)
-            return
-          }
+          _ => return @util.respond_500(response_out)
         }
         let body = match body {
           Ok(body) => body.blocking_read(max_value_length)
-          _ => {
-            let ise = @util.make_response(
-                b"Internal Server Error",
-                status_code=500,
-              )
-              |> Ok
-            response_out.set(ise)
-            return
-          }
+          _ => return @util.respond_500(response_out)
         }
         let body = match body {
           Ok(body) => body
-          _ => {
-            let ise = @util.make_response(
-                b"Internal Server Error",
-                status_code=500,
-              )
-              |> Ok
-            response_out.set(ise)
-            return
-          }
+          _ => return @util.respond_500(response_out)
         }
         handle_post(store, key, body)
       }
-      _ => @util.make_response(b"Not Found", status_code=404)
+      _ => return @util.respond_404(response_out)
     }
     |> Ok
   response_out.set(response)
@@ -74,8 +45,9 @@ pub fn handle(
 
 fn handle_get(store : @keyValue.Store, key : String) -> @types.OutgoingResponse {
   match store.get(key) {
-    Ok(Some(value)) => @util.make_response(value)
-    _ => @util.make_response(b"Not Found", status_code=404)
+    Ok(Some(value)) =>
+      @util.make_response(value, content_type=b"application/octet-stream")
+    _ => @util.make_404_response()
   }
 }
 
@@ -86,6 +58,6 @@ fn handle_post(
 ) -> @types.OutgoingResponse {
   match store.set(key, value) {
     Ok(_) => @util.make_response(b"OK")
-    _ => @util.make_response(b"Not Found", status_code=404)
+    _ => @util.make_404_response()
   }
 }

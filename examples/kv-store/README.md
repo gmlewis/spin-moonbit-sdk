@@ -8,9 +8,11 @@ To save a key/value pair:
 ```shell
 $ curl -i -X POST localhost:3000/kv-store/key -d 'value'
 HTTP/1.1 200 OK
+content-type: text/plain
 transfer-encoding: chunked
-date: Thu, 15 Aug 2024 12:57:50 GMT
+date: Thu, 15 Aug 2024 13:43:18 GMT
 
+OK
 ```
 
 To get a value:
@@ -18,8 +20,9 @@ To get a value:
 ```shell
 $ curl -i localhost:3000/kv-store/key
 HTTP/1.1 200 OK
+content-type: application/octet-stream
 transfer-encoding: chunked
-date: Thu, 15 Aug 2024 12:57:55 GMT
+date: Thu, 15 Aug 2024 13:44:12 GMT
 
 value
 ```

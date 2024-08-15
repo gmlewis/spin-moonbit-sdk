@@ -16,7 +16,7 @@ pub fn handle(
 ) -> Unit {
   let response = match request.path_with_query() {
       Some("/hello") => @util.make_response(b"Hello, World")
-      _ => @util.make_response(b"Not Found", status_code=404)
+      _ => return @util.respond_404(response_out)
     }
     |> Ok
   response_out.set(response)
