@@ -34,7 +34,7 @@ pub fn Qos::from(self : Int) -> Qos {
 
 pub type Connection Int derive(Show, Eq)
 
-fn wasmImportResourceDropConnection(resource : Int) = "gmlewis:spin-moonbit-sdk/mqtt" "[resource-drop]connection"
+fn wasmImportResourceDropConnection(resource : Int) = "fermyon:spin/mqtt@2.0.0" "[resource-drop]connection"
 
 pub fn Connection::drop(self : Connection) -> Unit {
   wasmImportResourceDropConnection(self.0)
