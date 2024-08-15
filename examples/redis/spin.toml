@@ -1,0 +1,19 @@
+spin_manifest_version = 2
+
+[application]
+authors = ["Glenn Lewis"]
+description = "A simple Spin application written in MoonBit."
+name = "redis"
+version = "0.1.0"
+
+[[trigger.http]]
+component = "redis"
+route = "/..."
+
+[component.redis]
+source = "redis.wasm"
+allowed_outbound_hosts = ["redis://*:*"]
+
+[component.redis.build]
+command = "moon build --target wasm && wasm-tools component embed ../../wit ../../target/wasm/release/build/examples/redis/redis.wasm -o redis.wasm --encoding utf16 -w http-trigger && wasm-tools component new redis.wasm -o redis.wasm"
+watch = ["**/*.mbt"]
