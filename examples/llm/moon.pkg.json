@@ -1,0 +1,19 @@
+{
+  "link": {
+    "wasm": {
+      "exports": [
+        "cabi_realloc:cabi_realloc",
+        "wasmExportHandle:wasi:http/incoming-handler@0.2.0#handle"
+      ],
+      "export-memory-name": "memory",
+      "heap-start-address": 16
+    }
+  },
+  "import": [
+    "gmlewis/spin-moonbit-sdk/gen",
+    "gmlewis/spin-moonbit-sdk/interface/imports/llm",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
+    "gmlewis/spin-moonbit-sdk/util"
+  ]
+}
