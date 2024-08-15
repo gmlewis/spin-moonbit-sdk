@@ -23,8 +23,8 @@ pub fn handle(
     }
   }
   let response = match @util.split_path(request) {
-      (@types.Get, ["/kv-store", key]) => handle_get(store, key)
-      (@types.Post, ["/kv-store", key]) => {
+      (@types.Get, ["kv-store", key]) => handle_get(store, key)
+      (@types.Post, ["kv-store", key]) => {
         let body = match request.consume() {
           Ok(body) => @ffi.ptr2bytes(body.0)
           _ => {

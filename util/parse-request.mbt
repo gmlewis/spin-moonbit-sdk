@@ -3,7 +3,7 @@ pub fn split_path(
 ) -> (@types.Method, Array[String]) {
   let method = request.method()
   let result = match request.path_with_query() {
-    Some(s) => s.split("/").collect()
+    Some(s) => s.substring(start=1).split("/").collect()
     _ => []
   }
   (method, result)
