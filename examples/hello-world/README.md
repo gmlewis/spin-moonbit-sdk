@@ -3,8 +3,10 @@
 This example is based on this blog post: https://www.moonbitlang.com/blog/component-model
 and this GitHub example: https://github.com/moonbitlang/moonbit-docs/tree/464356567270284446244cccecd101c04e9806f8/examples/wasi-http
 
+In one terminal window, start up the app:
+
 ```shell
-$ RUST_LOG=spin=trace spin build --up
+$ spin build --up
 ```
 
 The application can now receive requests at `http://localhost:3000/hello`:
