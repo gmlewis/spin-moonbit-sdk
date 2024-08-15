@@ -16,5 +16,5 @@ Caused by:
 Error: Build command for component kvstore failed with status Exited(1)
 ```
 
-The application can now receive requests at `http://localhost:3000/kv-store/key`
-and `http://localhost:3000/kv-store/key/value`.
+The application can now receive requests at `GET http://localhost:3000/kv-store/key`
+and `POST http://localhost:3000/kv-store/key`.

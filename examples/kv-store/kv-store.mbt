@@ -24,7 +24,18 @@ pub fn handle(
   }
   let response = match @util.split_path(request) {
       (@types.Get, ["/kv-store", key]) => handle_get(store, key)
-      (@types.Post, ["/kv-store", key, value]) => handle_post(store, key, value)
+      (@types.Post, ["/kv-store", key]) => {
+        let body = match request.consume() {
+          Ok(body) => @ffi.ptr2bytes(body.0)
+          _ => {
+            let ise = make_response(b"Internal Server Error", status_code=500)
+              |> Ok
+            response_out.set(ise)
+            return
+          }
+        }
+        handle_post(store, key, body)
+      }
       _ => make_response(b"Not Found", status_code=404)
     }
     |> Ok
@@ -41,9 +52,9 @@ fn handle_get(store : @keyValue.Store, key : String) -> @types.OutgoingResponse 
 fn handle_post(
   store : @keyValue.Store,
   key : String,
-  value : String
+  value : Bytes
 ) -> @types.OutgoingResponse {
-  match store.set(key, value.to_bytes()) {
+  match store.set(key, value) {
     Ok(_) => make_response(b"OK")
     _ => make_response(b"Not Found", status_code=404)
   }

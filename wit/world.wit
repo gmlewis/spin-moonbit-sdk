@@ -1,4 +1,4 @@
-package gmlewis:spin-moonbit-sdk;
+package gmlewis:spin-moonbit-sdk@0.1.0;
 
 /// The full world of a guest targeting an http-trigger
 world http-trigger {
