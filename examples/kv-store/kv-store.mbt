@@ -22,21 +22,7 @@ pub fn handle(
   }
   let response = match @util.split_path(request) {
       (@types.Get, ["kv-store", key]) => handle_get(store, key)
-      (@types.Post, ["kv-store", key]) => {
-        let body = match request.consume() {
-          Ok(body) => body.stream()
-          _ => return @util.respond_500(response_out)
-        }
-        let body = match body {
-          Ok(body) => body.blocking_read(max_value_length)
-          _ => return @util.respond_500(response_out)
-        }
-        let body = match body {
-          Ok(body) => body
-          _ => return @util.respond_500(response_out)
-        }
-        handle_post(store, key, body)
-      }
+      (@types.Post, ["kv-store", key]) => handle_post(store, key, request)
       _ => return @util.respond_404(response_out)
     }
     |> Ok
@@ -54,8 +40,12 @@ fn handle_get(store : @keyValue.Store, key : String) -> @types.OutgoingResponse 
 fn handle_post(
   store : @keyValue.Store,
   key : String,
-  value : Bytes
+  request : @types.IncomingRequest
 ) -> @types.OutgoingResponse {
+  let value = match @util.get_body_bytes(request, max_value_length) {
+    Ok(body) => body
+    _ => return @util.make_500_response()
+  }
   match store.set(key, value) {
     Ok(_) => @util.make_response(b"OK")
     _ => @util.make_404_response()
