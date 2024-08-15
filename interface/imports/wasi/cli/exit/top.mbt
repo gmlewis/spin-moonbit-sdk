@@ -3,9 +3,9 @@
 /// Exit the current instance and any linked instances.
 pub fn exit(status : Result[Unit, Unit]) -> Unit {
   let lowered = match status {
-    Ok(payload) => 0
-    Err(payload2) => 1
-    _ => panic()
+    Ok(_payload) => 0
+    Err(_payload2) => 1
+    // _ => panic()
   }
   wasmImportExit(lowered)
 }

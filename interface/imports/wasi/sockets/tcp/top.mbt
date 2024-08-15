@@ -139,7 +139,7 @@ pub fn TcpSocket::start_bind(
         payload2.address.7.to_int(),
         payload2.scope_id.to_int(),
       )
-    _ => panic()
+    // _ => panic()
   }
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketStartBind(
@@ -273,7 +273,7 @@ pub fn TcpSocket::start_connect(
         payload2.address.7.to_int(),
         payload2.scope_id.to_int(),
       )
-    _ => panic()
+    // _ => panic()
   }
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketStartConnect(

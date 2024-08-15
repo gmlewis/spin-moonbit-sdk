@@ -572,14 +572,14 @@ pub fn Descriptor::set_times(
     Now => (1, 0L, 0)
     Timestamp(payload5) =>
       (2, payload5.seconds.to_int64(), payload5.nanoseconds.to_int())
-    _ => panic()
+    // _ => panic()
   }
   let (lowered17, lowered18, lowered19) = match data_modification_timestamp {
     NoChange => (0, 0L, 0)
     Now => (1, 0L, 0)
     Timestamp(payload16) =>
       (2, payload16.seconds.to_int64(), payload16.nanoseconds.to_int())
-    _ => panic()
+    // _ => panic()
   }
   let return_area = @ffi.malloc(2)
   wasmImportMethodDescriptorSetTimes(
@@ -897,14 +897,14 @@ pub fn Descriptor::set_times_at(
     Now => (1, 0L, 0)
     Timestamp(payload5) =>
       (2, payload5.seconds.to_int64(), payload5.nanoseconds.to_int())
-    _ => panic()
+    // _ => panic()
   }
   let (lowered17, lowered18, lowered19) = match data_modification_timestamp {
     NoChange => (0, 0L, 0)
     Now => (1, 0L, 0)
     Timestamp(payload16) =>
       (2, payload16.seconds.to_int64(), payload16.nanoseconds.to_int())
-    _ => panic()
+    // _ => panic()
   }
   let return_area = @ffi.malloc(2)
   wasmImportMethodDescriptorSetTimesAt(

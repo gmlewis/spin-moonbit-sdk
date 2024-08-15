@@ -431,7 +431,7 @@ pub fn Connection::execute(
         ignoreList.push(payload4)
         ()
       }
-      _ => panic()
+      // _ => panic()
     }
   }
   let return_area = @ffi.malloc(16)

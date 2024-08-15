@@ -140,7 +140,7 @@ pub fn Connection::query(
         @ffi.store8(base + 0, 13)
         ()
       }
-      _ => panic()
+      // _ => panic()
     }
   }
   let return_area = @ffi.malloc(20)
@@ -340,7 +340,7 @@ pub fn Connection::execute(
         @ffi.store8(base + 0, 13)
         ()
       }
-      _ => panic()
+      // _ => panic()
     }
   }
   let return_area = @ffi.malloc(24)

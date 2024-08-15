@@ -112,7 +112,7 @@ pub fn UdpSocket::start_bind(
         payload2.address.7.to_int(),
         payload2.scope_id.to_int(),
       )
-    _ => panic()
+    // _ => panic()
   }
   let return_area = @ffi.malloc(2)
   wasmImportMethodUdpSocketStartBind(
@@ -264,7 +264,7 @@ pub fn UdpSocket::stream(
             payload8.address.7.to_int(),
             payload8.scope_id.to_int(),
           )
-        _ => panic()
+        // _ => panic()
       }
       (
         1, lowered, lowered9, lowered10, lowered11, lowered12, lowered13, lowered14,
@@ -763,7 +763,7 @@ pub fn OutgoingDatagramStream::send(
             @ffi.store32(base + 40, payload10.scope_id.to_int())
             ()
           }
-          _ => panic()
+          // _ => panic()
         }
         ()
       }

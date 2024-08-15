@@ -114,7 +114,7 @@ pub fn Connection::execute(
         @ffi.store8(base + 0, 4)
         ()
       }
-      _ => panic()
+      // _ => panic()
     }
   }
   let return_area = @ffi.malloc(20)
