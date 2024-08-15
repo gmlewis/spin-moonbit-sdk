@@ -19,7 +19,8 @@ pub fn handle(
   let store = match @keyValue.Store::open("default") {
     Ok(store) => store
     _ => {
-      let ise = make_response(b"Internal Server Error", status_code=500) |> Ok
+      let ise = @util.make_response(b"Internal Server Error", status_code=500)
+        |> Ok
       response_out.set(ise)
       return
     }
@@ -30,7 +31,10 @@ pub fn handle(
         let body = match request.consume() {
           Ok(body) => body.stream()
           _ => {
-            let ise = make_response(b"Internal Server Error", status_code=500)
+            let ise = @util.make_response(
+                b"Internal Server Error",
+                status_code=500,
+              )
               |> Ok
             response_out.set(ise)
             return
@@ -39,7 +43,10 @@ pub fn handle(
         let body = match body {
           Ok(body) => body.blocking_read(max_value_length)
           _ => {
-            let ise = make_response(b"Internal Server Error", status_code=500)
+            let ise = @util.make_response(
+                b"Internal Server Error",
+                status_code=500,
+              )
               |> Ok
             response_out.set(ise)
             return
@@ -48,7 +55,10 @@ pub fn handle(
         let body = match body {
           Ok(body) => body
           _ => {
-            let ise = make_response(b"Internal Server Error", status_code=500)
+            let ise = @util.make_response(
+                b"Internal Server Error",
+                status_code=500,
+              )
               |> Ok
             response_out.set(ise)
             return
@@ -56,7 +66,7 @@ pub fn handle(
         }
         handle_post(store, key, body)
       }
-      _ => make_response(b"Not Found", status_code=404)
+      _ => @util.make_response(b"Not Found", status_code=404)
     }
     |> Ok
   response_out.set(response)
@@ -64,8 +74,8 @@ pub fn handle(
 
 fn handle_get(store : @keyValue.Store, key : String) -> @types.OutgoingResponse {
   match store.get(key) {
-    Ok(Some(value)) => make_response(value)
-    _ => make_response(b"Not Found", status_code=404)
+    Ok(Some(value)) => @util.make_response(value)
+    _ => @util.make_response(b"Not Found", status_code=404)
   }
 }
 
@@ -75,23 +85,7 @@ fn handle_post(
   value : Bytes
 ) -> @types.OutgoingResponse {
   match store.set(key, value) {
-    Ok(_) => make_response(b"OK")
-    _ => make_response(b"Not Found", status_code=404)
+    Ok(_) => @util.make_response(b"OK")
+    _ => @util.make_response(b"Not Found", status_code=404)
   }
-}
-
-fn make_response(
-  body : Bytes,
-  ~status_code : UInt = 200
-) -> @types.OutgoingResponse {
-  let response = @types.outgoing_response(@types.fields())
-  response
-  .body()
-  .unwrap()
-  .write()
-  .unwrap()
-  .blocking_write_and_flush(body)
-  .unwrap()
-  response.set_status_code(status_code).unwrap()
-  response
 }

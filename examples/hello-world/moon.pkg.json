@@ -10,18 +10,9 @@
     }
   },
   "import": [
+    "gmlewis/spin-moonbit-sdk/gen",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
-    {
-      "path": "gmlewis/spin-moonbit-sdk/ffi",
-      "alias": "ffi"
-    },
-    {
-      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
-      "alias": "types"
-    },
-    {
-      "path": "gmlewis/spin-moonbit-sdk/gen",
-      "alias": "gen"
-    }
+    "gmlewis/spin-moonbit-sdk/util"
   ]
 }

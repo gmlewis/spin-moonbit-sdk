@@ -10,25 +10,10 @@
     }
   },
   "import": [
-    {
-      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
-      "alias": "types"
-    },
-    {
-      "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
-      "alias": "streams"
-    },
-    {
-      "path": "gmlewis/spin-moonbit-sdk/gen",
-      "alias": "gen"
-    },
-    {
-      "path": "gmlewis/spin-moonbit-sdk/interface/imports/keyValue",
-      "alias": "keyValue"
-    },
-    {
-      "path": "gmlewis/spin-moonbit-sdk/util",
-      "alias": "util"
-    }
+    "gmlewis/spin-moonbit-sdk/gen",
+    "gmlewis/spin-moonbit-sdk/interface/imports/keyValue",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
+    "gmlewis/spin-moonbit-sdk/util"
   ]
 }
