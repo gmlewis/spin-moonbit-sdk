@@ -963,7 +963,7 @@ pub fn OutgoingRequest::path_with_query(self : OutgoingRequest) -> String? {
 }
 
 /// Set the combination of the HTTP Path and Query for the Request.
-/// When `none`, this represents an empty Path and empty Query. Fails is the
+/// When `none`, this represents an empty Path and empty Query. Fails if the
 /// string given is not a syntactically valid path and query uri component.
 pub fn OutgoingRequest::set_path_with_query(
   self : OutgoingRequest,
