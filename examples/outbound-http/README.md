@@ -13,20 +13,10 @@ Then in another terminal window, get the results:
 
 ```shell
 $ curl -i localhost:3000/outbound-http
-HTTP/1.1 500 Internal Server Error
-content-type: text/plain
+HTTP/1.1 200 OK
+content-type: application/json
 transfer-encoding: chunked
-date: Fri, 16 Aug 2024 15:53:29 GMT
+date: Fri, 16 Aug 2024 21:42:38 GMT
 
-HttpRequestUriInvalid
-```
-
-The `spin` app reports:
-
-```shell
-Serving http://127.0.0.1:3000
-Available Routes:
-  outbound-http: http://127.0.0.1:3000 (wildcard)
-Get
-https://random-data-api.fermyon.app/physics/json
+{"timestamp":1723844558854,"fact":"Water slows down light"}
 ```

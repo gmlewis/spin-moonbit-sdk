@@ -25,20 +25,10 @@ pub fn handle(
 }
 
 fn handle_get() -> @types.OutgoingResponse {
-  let req = @types.OutgoingRequest::outgoing_request(
-    @types.Fields::from_list([]).unwrap(),
-  )
-  req.set_path_with_query(Some(url)).unwrap()
-  // For debugging:
-  @util.println(req.method().to_string())
-  @util.println(req.path_with_query().unwrap())
+  let req = @util.new_request(@types.Get, url)
   //
-  match @outgoingHandler.handle(req, None) {
-    Ok(result) =>
-      @util.make_response(
-        @util.str2bytes(result.to_string()),
-        content_type=b"application/json",
-      )
+  match @util.send_request(req) {
+    Ok(result) => @util.make_response(result, content_type=b"application/json")
     Err(e) => {
       let msg = @util.str2bytes(e.to_string())
       @util.make_response(msg, status_code=500)

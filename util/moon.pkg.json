@@ -2,7 +2,9 @@
   "import": [
     "gmlewis/spin-moonbit-sdk/decoder",
     "gmlewis/spin-moonbit-sdk/encoder",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/outgoingHandler",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stderr"
   ]

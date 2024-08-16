@@ -8,7 +8,7 @@ version = "0.1.0"
 
 [[trigger.http]]
 component = "outbound-http"
-route = "/..."
+route = "/outbound-http"
 
 [component.outbound-http]
 source = "outbound-http.wasm"
