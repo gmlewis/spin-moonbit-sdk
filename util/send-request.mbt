@@ -1,4 +1,5 @@
 /// `send_request` sends an outgoing request and waits for the response.
+/// Note that the default `max_body_size` is 8KiB which can be overridden.
 pub fn send_request(
   req : @types.OutgoingRequest,
   ~max_body_size : UInt64 = 8192UL

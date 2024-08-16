@@ -2,30 +2,32 @@
 
 let llm_model = "llama2-chat"
 
-/// This function is invoked with an incoming HTTP Request, and a resource
-/// `response-outparam` which provides the capability to reply with an HTTP
-/// Response. The response is sent by calling the `response-outparam.set`
-/// method, which allows execution to continue after the response has been
-/// sent. This enables both streaming to the response body, and performing other
-/// work.
-///
-/// The implementor of this function must write a response to the
-/// `response-outparam` before returning, or else the caller will respond
-/// with an error on its behalf.
+let default_prompt = "tell me a joke"
+
+/// `handle` handles a `GET /llm` request and responds with the answer
+/// to a fixed prompt. It also handles a `POST /llm` request and sends
+/// the body as a prompt to the LLM.
 pub fn handle(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam
 ) -> Unit {
   let response = match @util.split_path(request) {
-      (@types.Get, ["llm"]) => handle_get()
+      (@types.Get, ["llm"]) => prompt_llm(default_prompt)
+      (@types.Post, ["llm"]) =>
+        match @util.get_body_bytes(request) {
+          Ok(bytes) => @util.bytes2str(bytes) |> prompt_llm()
+          Err(e) =>
+            @util.make_response(@util.str2bytes(e.to_string()), status_code=500)
+        }
       _ => return @util.respond_404(response_out)
     }
     |> Ok
   response_out.set(response)
 }
 
-fn handle_get() -> @types.OutgoingResponse {
-  match @llm.infer(llm_model, "tell me a joke", None) {
+fn prompt_llm(prompt : String) -> @types.OutgoingResponse {
+  @util.println("prompting '\{llm_model}' with: '\{prompt}")
+  match @llm.infer(llm_model, prompt, None) {
     Ok(result) =>
       @util.make_response(
         @util.str2bytes(result.to_string()),
