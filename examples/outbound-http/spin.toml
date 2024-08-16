@@ -1,0 +1,19 @@
+spin_manifest_version = 2
+
+[application]
+authors = ["Glenn Lewis"]
+description = "A simple Spin application written in MoonBit."
+name = "outbound-http"
+version = "0.1.0"
+
+[[trigger.http]]
+component = "outbound-http"
+route = "/..."
+
+[component.outbound-http]
+source = "outbound-http.wasm"
+allowed_outbound_hosts = ["https://*:*"]
+
+[component.outbound-http.build]
+command = "moon build --target wasm && wasm-tools component embed ../../wit ../../target/wasm/release/build/examples/outbound-http/outbound-http.wasm -o outbound-http.wasm --encoding utf16 -w http-trigger && wasm-tools component new outbound-http.wasm -o outbound-http.wasm"
+watch = ["**/*.mbt"]
