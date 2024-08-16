@@ -28,7 +28,7 @@ fn handle_get() -> @types.OutgoingResponse {
   match @llm.infer(llm_model, "tell me a joke", None) {
     Ok(result) =>
       @util.make_response(
-        @encoder.str2bytes(result.to_string()),
+        @util.str2bytes(result.to_string()),
         content_type=b"application/json",
       )
     _ => @util.make_404_response()

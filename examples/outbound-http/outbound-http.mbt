@@ -36,11 +36,11 @@ fn handle_get() -> @types.OutgoingResponse {
   match @outgoingHandler.handle(req, None) {
     Ok(result) =>
       @util.make_response(
-        @encoder.str2bytes(result.to_string()),
+        @util.str2bytes(result.to_string()),
         content_type=b"application/json",
       )
     Err(e) => {
-      let msg = @encoder.str2bytes(e.to_string())
+      let msg = @util.str2bytes(e.to_string())
       @util.make_response(msg, status_code=500)
     }
   }

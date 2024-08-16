@@ -1,5 +1,6 @@
 {
   "import": [
+    "gmlewis/spin-moonbit-sdk/decoder",
     "gmlewis/spin-moonbit-sdk/encoder",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",

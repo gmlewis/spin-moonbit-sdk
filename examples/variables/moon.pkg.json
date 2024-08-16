@@ -10,7 +10,6 @@
     }
   },
   "import": [
-    "gmlewis/spin-moonbit-sdk/encoder",
     "gmlewis/spin-moonbit-sdk/gen",
     "gmlewis/spin-moonbit-sdk/interface/imports/variables",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
