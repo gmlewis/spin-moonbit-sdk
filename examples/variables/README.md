@@ -14,9 +14,9 @@ Then in another terminal window, get the "secret" variable value:
 ```shell
 $ curl -i localhost:3000/variables/secret_var_name
 HTTP/1.1 200 OK
-content-type: application/octet-stream
+content-type: text/plain
 transfer-encoding: chunked
-date: Thu, 15 Aug 2024 13:44:12 GMT
+date: Fri, 16 Aug 2024 13:28:12 GMT
 
 secret_var_name_value
 ```

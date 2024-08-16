@@ -24,7 +24,7 @@ pub fn handle(
 
 fn handle_get(key : String) -> @types.OutgoingResponse {
   match @variables.get(key) {
-    Ok(value) => @util.make_response(value.to_bytes())
+    Ok(value) => @util.make_response(@encoder.str2bytes(value))
     _ => @util.make_404_response()
   }
 }

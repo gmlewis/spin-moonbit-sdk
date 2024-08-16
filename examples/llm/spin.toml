@@ -12,7 +12,7 @@ route = "/..."
 
 [component.llm]
 source = "llm.wasm"
-allowed_models = ["llama2-chat"]
+ai_models = ["llama2-chat"]
 
 [component.llm.build]
 command = "moon build --target wasm && wasm-tools component embed ../../wit ../../target/wasm/release/build/examples/llm/llm.wasm -o llm.wasm --encoding utf16 -w http-trigger && wasm-tools component new llm.wasm -o llm.wasm"
