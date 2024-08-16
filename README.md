@@ -1,4 +1,5 @@
 # gmlewis/spin-moonbit-sdk
+[![check](https://github.com/gmlewis/spin-moonbit-sdk/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/spin-moonbit-sdk/actions/workflows/check.yml)
 
 This is an experimental [Spin SDK] for the [MoonBit] programming language.
 
