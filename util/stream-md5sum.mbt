@@ -8,10 +8,10 @@ pub fn stream_md5sum(
   response_out : @types.ResponseOutparam,
   ~debug : Bool = false
 ) -> Result[(Int64, String), @types.ErrorCode] {
-  let mut sum = 0
-  let byte_func : ByteFunc = fn(b : Byte) { sum += b.to_int() }
+  let md5sum = @md5.Digest::new()
+  let byte_func : ByteFunc = fn(b : Byte) { md5sum.write(b) }
   match stream_func(request, response_out, Some(byte_func), ~debug) {
-    Ok(count) => Ok((count, "todo: sum=\{sum}"))
+    Ok(count) => Ok((count, md5sum.check_sum()))
     Err(e) => Err(e)
   }
 }

@@ -31,15 +31,21 @@ $ python3 -m http.server 8080
 Then use `curl` to test the endpoint:
 
 ```shell
-$ curl -i -X POST http://localhost:3000/md5sum -d 'http://localhost:8080/examples/hello-world/hello-world.mbt'
-...
-$ curl -i -X POST http://localhost:3000/md5sum -d 'http://localhost:8080/LICENSE'
-...
+$ curl -X POST http://localhost:3000/md5sum -d 'http://localhost:8080/LICENSE' | wc
+     201    1581   11357
+$ md5sum LICENSE
+86d3f3a95c324c9479bd8986968f4327  LICENSE
 ```
 
 View the `spin` output:
 
 ```shell
-streamed 421 bytes from 'GET http://localhost:8080/examples/hello-world/hello-world.mbt', md5sum = 0ff46e702fb63fa11791efdb87005402
-streamed 11357 bytes from 'GET http://localhost:8080/LICENSE', md5sum = 86d3f3a95c324c9479bd8986968f4327
+INFO: Performing GET 'http://localhost:8080/LICENSE'
+INFO: Status code = 200
+INFO: Header['server'] = 'SimpleHTTP/0.6 Python/3.9.6'
+INFO: Header['date'] = 'Sat, 17 Aug 2024 23:33:23 GMT'
+INFO: Header['content-type'] = 'application/octet-stream'
+INFO: Header['content-length'] = '11357'
+INFO: Header['last-modified'] = 'Tue, 04 Jun 2024 20:58:42 GMT'
+INFO: Streamed 11357 bytes from 'GET http://localhost:8080/LICENSE', md5sum = 86d3f3a95c324c9479bd8986968f4327
 ```

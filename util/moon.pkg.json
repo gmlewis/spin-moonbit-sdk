@@ -7,6 +7,7 @@
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/random/random",
-    "gmlewis/spin-moonbit-sdk/log"
+    "gmlewis/spin-moonbit-sdk/log",
+    "gmlewis/spin-moonbit-sdk/md5"
   ]
 }
