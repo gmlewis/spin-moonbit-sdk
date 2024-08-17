@@ -1,14 +1,34 @@
 let max_buf_size = 4096UL
 
-/// `stream_md5sum` performs a `GET` request on the provided `request`
+/// `stream_md5sum` performs the provided `request`
 /// then streams its output to the provided `response_out` and calculates
 /// the stream's md5sum and content length, reporting them back to the caller.
-/// `buf_size` cannot be more than 4096.
 pub fn stream_md5sum(
   request : @types.OutgoingRequest,
   response_out : @types.ResponseOutparam,
   ~debug : Bool = false
 ) -> Result[(Int64, String), @types.ErrorCode] {
+  let mut sum = 0
+  let byte_func : ByteFunc = fn(b : Byte) { sum += b.to_int() }
+  match stream_func(request, response_out, Some(byte_func), ~debug) {
+    Ok(count) => Ok((count, "todo: sum=\{sum}"))
+    Err(e) => Err(e)
+  }
+}
+
+/// `ByteFunc` is a function that operates on a stream of bytes.
+type ByteFunc (Byte) -> Unit
+
+/// `stream_func` performs the provided `request`
+/// then streams its output to the provided `response_out` and runs the
+/// provided `byte_func` on each byte, then returns the content length
+/// back to the caller.
+pub fn stream_func(
+  request : @types.OutgoingRequest,
+  response_out : @types.ResponseOutparam,
+  byte_func : ByteFunc?,
+  ~debug : Bool = false
+) -> Result[Int64, @types.ErrorCode] {
   let future = match @outgoingHandler.handle(request, None) {
     Ok(result) => result
     Err(e) => return Err(e)
@@ -24,12 +44,8 @@ pub fn stream_md5sum(
   let incoming_headers = incoming_response.headers()
   if debug {
     let status = incoming_response.status()
-    @log.debug("Status code = \{status}", leading_blank_line=true)
-    for entry in incoming_headers.entries() {
-      let key = entry.0
-      let value = @common.bytes2str(entry.1)
-      @log.debug("Header['\{key}'] = '\{value}'")
-    }
+    @log.info("Status code = \{status}")
+    dump_headers(incoming_headers)
   }
   //
   let in_stream = match incoming_response.consume() {
@@ -87,6 +103,13 @@ pub fn stream_md5sum(
     if buf.length() == 0 {
       break
     }
+    match byte_func {
+      Some(f) =>
+        for b in buf {
+          (f.0)(b)
+        }
+      _ => ()
+    }
     match out_stream.blocking_write_and_flush(buf) {
       Ok(_) => ()
       Err(e) => {
@@ -99,6 +122,5 @@ pub fn stream_md5sum(
       }
     }
   }
-  // TODO: calculate the streaming md5sum
-  Ok((count, ""))
+  Ok(count)
 }

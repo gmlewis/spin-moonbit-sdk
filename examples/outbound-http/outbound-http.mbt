@@ -40,6 +40,7 @@ fn md5sum(
     Ok(body) => @common.bytes2str(body)
     _ => return @util.respond_500(response_out)
   }
+  @log.info("Performing GET '\{url}'", leading_blank_line=true)
   let req = @util.new_request(@types.Get, url)
   let (num_bytes, md5sum) = match
     @util.stream_md5sum(req, response_out, debug=true) {
