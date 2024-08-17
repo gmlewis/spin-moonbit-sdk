@@ -20,3 +20,26 @@ date: Fri, 16 Aug 2024 21:42:38 GMT
 
 {"timestamp":1723844558854,"fact":"Water slows down light"}
 ```
+
+To test the `md5sum` endpoint, start up a python server in
+another terminal window in the root directory of this repo:
+
+```shell
+$ python3 -m http.server 8080
+```
+
+Then use `curl` to test the endpoint:
+
+```shell
+$ curl -i -X POST http://localhost:3000/md5sum -d 'http://localhost:8080/examples/hello-world/hello-world.mbt'
+...
+$ curl -i -X POST http://localhost:3000/md5sum -d 'http://localhost:8080/LICENSE'
+...
+```
+
+View the `spin` output:
+
+```shell
+streamed 421 bytes from 'GET http://localhost:8080/examples/hello-world/hello-world.mbt', md5sum = 0ff46e702fb63fa11791efdb87005402
+streamed 11357 bytes from 'GET http://localhost:8080/LICENSE', md5sum = 86d3f3a95c324c9479bd8986968f4327
+```

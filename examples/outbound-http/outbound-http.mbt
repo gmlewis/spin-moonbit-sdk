@@ -3,13 +3,17 @@
 let url = "https://random-data-api.fermyon.app/physics/json"
 
 /// `handle` handles a `GET /outbound-http` request and makes an outbound
-/// GET request to `url` and returns its JSON response.
+/// GET request to `url` and returns its JSON response. It also handles
+/// a `POST /md5sum` where the body is another URL to GET from. It will
+/// stream the response of that endpoint to its `response_out` and calculate
+/// that stream's md5sum, reporting it to stderr when the stream ends.
 pub fn handle(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam
 ) -> Unit {
   let response = match @util.split_path(request) {
       (@types.Get, ["outbound-http"]) => handle_get()
+      (@types.Post, ["md5sum"]) => return md5sum(request, response_out)
       _ => return @util.respond_404(response_out)
     }
     |> Ok
@@ -26,4 +30,25 @@ fn handle_get() -> @types.OutgoingResponse {
       @util.make_response(msg, status_code=500)
     }
   }
+}
+
+fn md5sum(
+  request : @types.IncomingRequest,
+  response_out : @types.ResponseOutparam
+) -> Unit {
+  let url = match @util.get_body_bytes(request) {
+    Ok(body) => @util.bytes2str(body)
+    _ => return @util.respond_500(response_out)
+  }
+  let req = @util.new_request(@types.Get, url)
+  let (num_bytes, md5sum) = match @util.stream_md5sum(req, response_out) {
+    Ok(t) => t
+    Err(e) => {
+      let msg = @util.str2bytes(e.to_string())
+      return response_out.set(@util.make_response(msg, status_code=500) |> Ok)
+    }
+  }
+  @util.println(
+    "streamed \{num_bytes} bytes from 'GET \{url}', md5sum = \{md5sum}",
+  )
 }

@@ -8,11 +8,11 @@ version = "0.1.0"
 
 [[trigger.http]]
 component = "outbound-http"
-route = "/outbound-http"
+route = "/..."
 
 [component.outbound-http]
 source = "outbound-http.wasm"
-allowed_outbound_hosts = ["https://*:*"]
+allowed_outbound_hosts = ["*://*:*"]
 
 [component.outbound-http.build]
 command = "moon build --target wasm && wasm-tools component embed ../../wit ../../target/wasm/release/build/examples/outbound-http/outbound-http.wasm -o outbound-http.wasm --encoding utf16 -w http-trigger && wasm-tools component new outbound-http.wasm -o outbound-http.wasm"
