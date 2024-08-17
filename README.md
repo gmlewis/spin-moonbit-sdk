@@ -17,18 +17,11 @@ and the [Spin CLI tool].
 To install MoonBit, follow the instructions here (it is super-easy with VSCode):
 https://www.moonbitlang.com/download/
 
-You must also have a version of `wit-bindgen` that supports MoonBit (which means
-that you also need the Rust toolchain and `cargo`):
-
-```bash
-cargo install wit-bindgen-cli --git https://github.com/peter-jerry-ye/wit-bindgen/ --branch moonbit
-```
-
 Then, to build this SDK, clone the repo, and type:
 
 ```bash
 moon update && moon install
-./build.sh
+moon build
 ```
 
 [Spin CLI tool]: https://developer.fermyon.com/spin
@@ -45,7 +38,13 @@ $ spin up --build
 then from another terminal, hit the endpoint with `curl`:
 
 ```bash
-$ curl -i localhost:3000
+$ curl -i localhost:3000/hello
+HTTP/1.1 200 OK
+content-type: text/plain
+transfer-encoding: chunked
+date: Sat, 17 Aug 2024 00:15:14 GMT
+
+Hello, World!
 ```
 
 ## Status
