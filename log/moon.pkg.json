@@ -1,12 +1,10 @@
 {
   "import": [
     "gmlewis/spin-moonbit-sdk/common",
-    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stdout",
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stderr",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/outgoingHandler",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll",
-    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
-    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/random/random",
-    "gmlewis/spin-moonbit-sdk/log"
+    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams"
   ]
 }

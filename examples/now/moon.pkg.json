@@ -10,6 +10,7 @@
     }
   },
   "import": [
+    "gmlewis/spin-moonbit-sdk/common",
     "gmlewis/spin-moonbit-sdk/gen",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",

@@ -9,7 +9,7 @@ pub fn handle(
       Some(_) => {
         let now = @wallClock.now().seconds
         let msg = "It is now \{now} seconds since Unix Epoch.\n"
-        @util.make_response(@util.str2bytes(msg))
+        @util.make_response(@common.str2bytes(msg))
       }
       _ => return @util.respond_404(response_out)
     }

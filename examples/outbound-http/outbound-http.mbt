@@ -26,7 +26,7 @@ fn handle_get() -> @types.OutgoingResponse {
   match @util.send_request(req) {
     Ok(result) => @util.make_response(result, content_type=b"application/json")
     Err(e) => {
-      let msg = @util.str2bytes(e.to_string())
+      let msg = @common.str2bytes(e.to_string())
       @util.make_response(msg, status_code=500)
     }
   }
@@ -37,18 +37,19 @@ fn md5sum(
   response_out : @types.ResponseOutparam
 ) -> Unit {
   let url = match @util.get_body_bytes(request) {
-    Ok(body) => @util.bytes2str(body)
+    Ok(body) => @common.bytes2str(body)
     _ => return @util.respond_500(response_out)
   }
   let req = @util.new_request(@types.Get, url)
-  let (num_bytes, md5sum) = match @util.stream_md5sum(req, response_out) {
+  let (num_bytes, md5sum) = match
+    @util.stream_md5sum(req, response_out, debug=true) {
     Ok(t) => t
     Err(e) => {
-      let msg = @util.str2bytes(e.to_string())
+      let err = e.to_string()
+      @log.error(err)
+      let msg = @common.str2bytes(err)
       return response_out.set(@util.make_response(msg, status_code=500) |> Ok)
     }
   }
-  @util.println(
-    "streamed \{num_bytes} bytes from 'GET \{url}', md5sum = \{md5sum}",
-  )
+  @log.info("Streamed \{num_bytes} bytes from 'GET \{url}', md5sum = \{md5sum}")
 }
