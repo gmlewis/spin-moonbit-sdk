@@ -1,6 +1,0 @@
-{
-  "import": [
-    "gmlewis/base64",
-    "gmlewis/spin-moonbit-sdk/common"
-  ]
-}
