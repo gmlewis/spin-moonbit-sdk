@@ -27,6 +27,16 @@ pub fn make_response_str(
   make_response(body, ~content_type, ~status_code)
 }
 
+/// `respond_str` sets response_out to an `OutgoingResponse` from the provided `String`.
+pub fn respond_str(
+  response_out : @types.ResponseOutparam,
+  body : String,
+  ~content_type : Bytes = b"text/plain",
+  ~status_code : UInt = 200
+) -> Unit {
+  response_out.set(make_response_str(body, ~content_type, ~status_code) |> Ok)
+}
+
 /// `make_404_response` makes a new `OutgoingResponse` with "404 Not Found".
 pub fn make_404_response() -> @types.OutgoingResponse {
   make_response(b"Not Found", status_code=404)
