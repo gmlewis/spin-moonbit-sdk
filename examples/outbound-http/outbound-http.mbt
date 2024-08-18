@@ -13,8 +13,16 @@ pub fn handle(
 ) -> Unit {
   let response = match @util.split_path(request) {
       (@types.Get, ["outbound-http"]) => handle_get()
-      (@types.Post, ["md5sum"]) => return md5sum(request, response_out)
-      (@types.Post, ["sha256sum"]) => return sha256sum(request, response_out)
+      (@types.Post, ["consume"]) => return consume(request, response_out, None)
+      (@types.Post, ["consume?md5sum"]) =>
+        return consume(request, response_out, Some(@md5.Digest::new()))
+      (@types.Post, ["consume?sha256sum"]) =>
+        return consume(request, response_out, Some(@sha256.Digest::new()))
+      (@types.Post, ["stream"]) => return stream(request, response_out, None)
+      (@types.Post, ["stream?md5sum"]) =>
+        return stream(request, response_out, Some(@md5.Digest::new()))
+      (@types.Post, ["stream?sha256sum"]) =>
+        return stream(request, response_out, Some(@sha256.Digest::new()))
       _ => return @util.respond_404(response_out)
     }
     |> Ok
@@ -33,9 +41,10 @@ fn handle_get() -> @types.OutgoingResponse {
   }
 }
 
-fn md5sum(
+fn consume(
   request : @types.IncomingRequest,
-  response_out : @types.ResponseOutparam
+  response_out : @types.ResponseOutparam,
+  hash : @common.HashFunc?
 ) -> Unit {
   let url = match @util.get_body_bytes(request) {
     Ok(body) => @common.bytes2str(body)
@@ -43,8 +52,7 @@ fn md5sum(
   }
   @log.info("Performing GET '\{url}'", leading_blank_line=true)
   let req = @util.new_request(@types.Get, url)
-  let (num_bytes, md5sum) = match
-    @util.stream_md5sum(req, response_out, debug=true) {
+  let (num_bytes, hash_sum) = match @util.consume(req, hash, debug=true) {
     Ok(t) => t
     Err(e) => {
       let err = e.to_string()
@@ -53,12 +61,25 @@ fn md5sum(
       return response_out.set(@util.make_response(msg, status_code=500) |> Ok)
     }
   }
-  @log.info("Streamed \{num_bytes} bytes from 'GET \{url}', md5sum = \{md5sum}")
+  match hash {
+    Some(hash) => {
+      let hash_name = hash.name()
+      @log.info(
+        "Consumed \{num_bytes} bytes from 'GET \{url}', \{hash_name}sum = \{hash_sum}",
+      )
+      response_out.set(@util.make_response_str("\{hash_sum}\n") |> Ok)
+    }
+    _ => {
+      @log.info("Consumed \{num_bytes} bytes from 'GET \{url}'")
+      response_out.set(@util.make_response(b"OK\n") |> Ok)
+    }
+  }
 }
 
-fn sha256sum(
+fn stream(
   request : @types.IncomingRequest,
-  response_out : @types.ResponseOutparam
+  response_out : @types.ResponseOutparam,
+  hash : @common.HashFunc?
 ) -> Unit {
   let url = match @util.get_body_bytes(request) {
     Ok(body) => @common.bytes2str(body)
@@ -66,8 +87,8 @@ fn sha256sum(
   }
   @log.info("Performing GET '\{url}'", leading_blank_line=true)
   let req = @util.new_request(@types.Get, url)
-  let (num_bytes, sha256sum) = match
-    @util.stream_sha256sum(req, response_out, debug=true) {
+  let (num_bytes, hash_sum) = match
+    @util.stream(req, response_out, hash, debug=true) {
     Ok(t) => t
     Err(e) => {
       let err = e.to_string()
@@ -76,7 +97,13 @@ fn sha256sum(
       return response_out.set(@util.make_response(msg, status_code=500) |> Ok)
     }
   }
-  @log.info(
-    "Streamed \{num_bytes} bytes from 'GET \{url}', sha256sum = \{sha256sum}",
-  )
+  match hash {
+    Some(hash) => {
+      let hash_name = hash.name()
+      @log.info(
+        "Streamed \{num_bytes} bytes from 'GET \{url}', \{hash_name}sum = \{hash_sum}",
+      )
+    }
+    _ => @log.info("Streamed \{num_bytes} bytes from 'GET \{url}'")
+  }
 }

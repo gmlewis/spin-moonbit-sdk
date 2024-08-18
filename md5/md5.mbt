@@ -37,6 +37,12 @@ pub fn Digest::new() -> Digest {
   }
 }
 
+let _interface : @common.HashFunc = Digest::new()
+
+pub fn name(self : Digest) -> String {
+  "md5"
+}
+
 /// `check_sum` returns the final md5sum as a hex string.
 pub fn check_sum(self : Digest) -> String {
   // Append 0x80 to the end of the message and then append zeros

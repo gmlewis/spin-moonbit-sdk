@@ -49,6 +49,12 @@ pub fn Digest::new() -> Digest {
   }
 }
 
+let _interface : @common.HashFunc = Digest::new()
+
+pub fn name(self : Digest) -> String {
+  "sha256"
+}
+
 /// `check_sum` returns the final sha256sum as a hex string.
 pub fn check_sum(self : Digest) -> String {
   let digest = self.sum()

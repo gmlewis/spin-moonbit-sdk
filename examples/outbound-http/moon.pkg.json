@@ -11,11 +11,13 @@
   },
   "import": [
     "gmlewis/spin-moonbit-sdk/common",
+    "gmlewis/spin-moonbit-sdk/md5",
     "gmlewis/spin-moonbit-sdk/gen",
     "gmlewis/spin-moonbit-sdk/log",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/outgoingHandler",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
+    "gmlewis/spin-moonbit-sdk/sha256",
     "gmlewis/spin-moonbit-sdk/util"
   ]
 }

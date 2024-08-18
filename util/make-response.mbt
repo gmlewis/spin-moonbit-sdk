@@ -17,6 +17,16 @@ pub fn make_response(
   response
 }
 
+/// `make_response_str` makes a new `OutgoingResponse` from the provided `String`.
+pub fn make_response_str(
+  body : String,
+  ~content_type : Bytes = b"text/plain",
+  ~status_code : UInt = 200
+) -> @types.OutgoingResponse {
+  let body = @common.str2bytes(body)
+  make_response(body, ~content_type, ~status_code)
+}
+
 /// `make_404_response` makes a new `OutgoingResponse` with "404 Not Found".
 pub fn make_404_response() -> @types.OutgoingResponse {
   make_response(b"Not Found", status_code=404)

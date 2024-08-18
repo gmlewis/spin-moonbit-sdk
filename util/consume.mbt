@@ -1,9 +1,13 @@
-/// `stream` performs the provided `request`
-/// then streams its output to the provided `response_out` and optionally calculates
+/// `ByteFunc` is a function that operates on a stream of bytes, one byte at a time.
+type ByteFunc (Byte) -> Unit
+
+let max_buf_size = 4096UL
+
+/// `consume` performs the provided `request`
+/// then consumes its output and optionally calculates
 /// the stream's hash, reporting the byte count and hash back to the caller.
-pub fn stream(
+pub fn consume(
   request : @types.OutgoingRequest,
-  response_out : @types.ResponseOutparam,
   hash : @common.HashFunc?,
   ~debug : Bool = false
 ) -> Result[(Int64, String), @types.ErrorCode] {
@@ -16,19 +20,18 @@ pub fn stream(
     _ => (None, fn() -> String { "" })
   }
   //
-  match stream_func(request, response_out, byte_func, ~debug) {
+  match consume_func(request, byte_func, ~debug) {
     Ok(count) => Ok((count, sum_func()))
     Err(e) => Err(e)
   }
 }
 
-/// `stream_func` performs the provided `request`
-/// then streams its output to the provided `response_out` and runs the
-/// provided `byte_func` on each byte, then returns the content length
+/// `consume_func` performs the provided `request`
+/// then consumes its output and runs the optional
+/// `byte_func` on each byte, then returns the content length
 /// back to the caller.
-pub fn stream_func(
+pub fn consume_func(
   request : @types.OutgoingRequest,
-  response_out : @types.ResponseOutparam,
   byte_func : ByteFunc?,
   ~debug : Bool = false
 ) -> Result[Int64, @types.ErrorCode] {
@@ -60,35 +63,6 @@ pub fn stream_func(
     _ => return Err(@types.ErrorCode::InternalError(Some("unknown error 3")))
   }
   //
-  let content_type = match incoming_headers.get("Content-Type") {
-    [value] => value
-    _ => b"text/plain"
-  }
-  let fields_array = [("Content-Type", content_type)]
-  match incoming_headers.get("Content-Length") {
-    [value] => fields_array.push(("Content-Length", value))
-    _ => ()
-  }
-  //
-  let fields = @types.Fields::from_list(fields_array).unwrap()
-  let out_resp = @types.OutgoingResponse::outgoing_response(fields)
-  out_resp.set_status_code(200U).unwrap()
-  let out_body = match out_resp.body() {
-    Ok(body) => body
-    Err(_) =>
-      return Err(
-        @types.ErrorCode::InternalError(Some("out_resp.body: unknown error 4")),
-      )
-  }
-  let out_stream = match out_body.write() {
-    Ok(stream) => stream
-    Err(_) =>
-      return Err(
-        @types.ErrorCode::InternalError(Some("out_body.write: unknown error 5")),
-      )
-  }
-  response_out.set(out_resp |> Ok)
-  //
   let mut count = 0L
   for {
     let buf = match in_stream.blocking_read(max_buf_size) {
@@ -112,17 +86,6 @@ pub fn stream_func(
           (f.0)(b)
         }
       _ => ()
-    }
-    match out_stream.blocking_write_and_flush(buf) {
-      Ok(_) => ()
-      Err(e) => {
-        if e == @streams.Closed {
-          break
-        }
-        let msg = e.to_string()
-        @log.error("outstream.blocking_write_and_flush: \{msg}")
-        return Err(@types.ErrorCode::InternalError(Some(msg)))
-      }
     }
   }
   Ok(count)
