@@ -14,6 +14,7 @@ pub fn handle(
   let response = match @util.split_path(request) {
       (@types.Get, ["outbound-http"]) => handle_get()
       (@types.Post, ["md5sum"]) => return md5sum(request, response_out)
+      (@types.Post, ["sha256sum"]) => return sha256sum(request, response_out)
       _ => return @util.respond_404(response_out)
     }
     |> Ok
@@ -53,4 +54,29 @@ fn md5sum(
     }
   }
   @log.info("Streamed \{num_bytes} bytes from 'GET \{url}', md5sum = \{md5sum}")
+}
+
+fn sha256sum(
+  request : @types.IncomingRequest,
+  response_out : @types.ResponseOutparam
+) -> Unit {
+  let url = match @util.get_body_bytes(request) {
+    Ok(body) => @common.bytes2str(body)
+    _ => return @util.respond_500(response_out)
+  }
+  @log.info("Performing GET '\{url}'", leading_blank_line=true)
+  let req = @util.new_request(@types.Get, url)
+  let (num_bytes, sha256sum) = match
+    @util.stream_sha256sum(req, response_out, debug=true) {
+    Ok(t) => t
+    Err(e) => {
+      let err = e.to_string()
+      @log.error(err)
+      let msg = @common.str2bytes(err)
+      return response_out.set(@util.make_response(msg, status_code=500) |> Ok)
+    }
+  }
+  @log.info(
+    "Streamed \{num_bytes} bytes from 'GET \{url}', sha256sum = \{sha256sum}",
+  )
 }

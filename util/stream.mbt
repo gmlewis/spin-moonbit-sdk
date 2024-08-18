@@ -16,6 +16,22 @@ pub fn stream_md5sum(
   }
 }
 
+/// `stream_sha256sum` performs the provided `request`
+/// then streams its output to the provided `response_out` and calculates
+/// the stream's sha256sum and content length, reporting them back to the caller.
+pub fn stream_sha256sum(
+  request : @types.OutgoingRequest,
+  response_out : @types.ResponseOutparam,
+  ~debug : Bool = false
+) -> Result[(Int64, String), @types.ErrorCode] {
+  let sha256sum = @sha256.Digest::new()
+  let byte_func : ByteFunc = fn(b : Byte) { sha256sum.write(b) }
+  match stream_func(request, response_out, Some(byte_func), ~debug) {
+    Ok(count) => Ok((count, sha256sum.check_sum()))
+    Err(e) => Err(e)
+  }
+}
+
 /// `ByteFunc` is a function that operates on a stream of bytes.
 type ByteFunc (Byte) -> Unit
 
