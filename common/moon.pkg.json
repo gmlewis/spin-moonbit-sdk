@@ -1,6 +1,1 @@
-{
-  "import": [
-    "gmlewis/spin-moonbit-sdk/decoder",
-    "gmlewis/spin-moonbit-sdk/encoder"
-  ]
-}
+{}

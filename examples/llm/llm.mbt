@@ -15,10 +15,10 @@ pub fn handle(
       (@types.Get, ["llm"]) => prompt_llm(default_prompt)
       (@types.Post, ["llm"]) =>
         match @util.get_body_bytes(request) {
-          Ok(bytes) => @common.bytes2str(bytes) |> prompt_llm()
+          Ok(bytes) => @base64.bytes2str(bytes) |> prompt_llm()
           Err(e) =>
             @util.make_response(
-              @common.str2bytes(e.to_string()),
+              @base64.str2bytes(e.to_string()),
               status_code=500,
             )
         }
@@ -33,7 +33,7 @@ fn prompt_llm(prompt : String) -> @types.OutgoingResponse {
   match @llm.infer(llm_model, prompt, None) {
     Ok(result) =>
       @util.make_response(
-        @common.str2bytes(result.to_string()),
+        @base64.str2bytes(result.to_string()),
         content_type=b"application/json",
       )
     _ => @util.make_404_response()

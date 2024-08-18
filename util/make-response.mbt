@@ -23,7 +23,7 @@ pub fn make_response_str(
   ~content_type : Bytes = b"text/plain",
   ~status_code : UInt = 200
 ) -> @types.OutgoingResponse {
-  let body = @common.str2bytes(body)
+  let body = @base64.str2bytes(body)
   make_response(body, ~content_type, ~status_code)
 }
 

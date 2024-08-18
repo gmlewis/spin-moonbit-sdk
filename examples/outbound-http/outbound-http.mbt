@@ -35,7 +35,7 @@ fn handle_get() -> @types.OutgoingResponse {
   match @util.send_request(req) {
     Ok(result) => @util.make_response(result, content_type=b"application/json")
     Err(e) => {
-      let msg = @common.str2bytes(e.to_string())
+      let msg = @base64.str2bytes(e.to_string())
       @util.make_response(msg, status_code=500)
     }
   }
@@ -47,7 +47,7 @@ fn consume(
   hash : @common.HashFunc?
 ) -> Unit {
   let url = match @util.get_body_bytes(request) {
-    Ok(body) => @common.bytes2str(body)
+    Ok(body) => @base64.bytes2str(body)
     _ => return @util.respond_500(response_out)
   }
   @log.info("Performing GET '\{url}'", leading_blank_line=true)
@@ -57,7 +57,7 @@ fn consume(
     Err(e) => {
       let err = e.to_string()
       @log.error(err)
-      let msg = @common.str2bytes(err)
+      let msg = @base64.str2bytes(err)
       return response_out.set(@util.make_response(msg, status_code=500) |> Ok)
     }
   }
@@ -82,7 +82,7 @@ fn stream(
   hash : @common.HashFunc?
 ) -> Unit {
   let url = match @util.get_body_bytes(request) {
-    Ok(body) => @common.bytes2str(body)
+    Ok(body) => @base64.bytes2str(body)
     _ => return @util.respond_500(response_out)
   }
   @log.info("Performing GET '\{url}'", leading_blank_line=true)
@@ -93,7 +93,7 @@ fn stream(
     Err(e) => {
       let err = e.to_string()
       @log.error(err)
-      let msg = @common.str2bytes(err)
+      let msg = @base64.str2bytes(err)
       return response_out.set(@util.make_response(msg, status_code=500) |> Ok)
     }
   }

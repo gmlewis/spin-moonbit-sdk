@@ -1,7 +1,9 @@
 {
   "name": "gmlewis/spin-moonbit-sdk",
-  "version": "0.24.0",
-  "deps": {},
+  "version": "0.25.0",
+  "deps": {
+    "gmlewis/base64": "0.1.0"
+  },
   "readme": "README.md",
   "repository": "https://github.com/gmlewis/spin-moonbit-sdk",
   "license": "Apache-2.0",

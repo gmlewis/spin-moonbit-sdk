@@ -101,7 +101,7 @@ let golden : Array[MD5Test] = [
 test "check_sum works properly" {
   for tt in golden {
     let digest = @md5.Digest::new()
-    let bytes = @common.str2bytes(tt.s)
+    let bytes = @base64.str2bytes(tt.s)
     for b in bytes {
       digest.write(b)
     }

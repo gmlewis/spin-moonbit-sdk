@@ -2,7 +2,7 @@
 pub fn dump_headers(headers : @types.Fields) -> Unit {
   for entry in headers.entries() {
     let key = entry.0
-    let value = @common.bytes2str(entry.1)
+    let value = @base64.bytes2str(entry.1)
     @log.info("Header['\{key}'] = '\{value}'")
   }
 }
