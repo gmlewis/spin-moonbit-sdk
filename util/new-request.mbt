@@ -1,10 +1,11 @@
 /// `new_request` creates a new outgoing request.
 pub fn new_request(
   method : @types.Method,
-  url : String
+  url : String,
+  ~fields : Array[(String, Bytes)] = []
 ) -> @types.OutgoingRequest {
   let req = @types.OutgoingRequest::outgoing_request(
-    @types.Fields::from_list([]).unwrap(),
+    @types.Fields::from_list(fields).unwrap(),
   )
   req.set_method(method).unwrap()
   let i = url.index_of("://")
