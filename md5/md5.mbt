@@ -19,7 +19,7 @@ let init2 = 0x98BADCFEU
 
 let init3 = 0x10325476U
 
-// `Digest` represents the partial evaluation of a checksum.
+/// `Digest` represents the partial evaluation of a checksum.
 struct Digest {
   s : FixedArray[UInt] // 4
   x : FixedArray[Byte] // block_size

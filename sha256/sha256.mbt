@@ -29,7 +29,7 @@ let init6 = 0x1F83D9ABU
 
 let init7 = 0x5BE0CD19U
 
-// `Digest` represents the partial evaluation of a checksum.
+/// `Digest` represents the partial evaluation of a checksum.
 struct Digest {
   h : FixedArray[UInt] // 8
   x : FixedArray[Byte] // chunk
@@ -51,6 +51,17 @@ pub fn Digest::new() -> Digest {
 
 /// `check_sum` returns the final sha256sum as a hex string.
 pub fn check_sum(self : Digest) -> String {
+  let digest = self.sum()
+  let result = Buffer::new(size_hint=2 * size)
+  for b in digest {
+    result.write_char(to_hex(b.to_int().lsr(4) & 0xf))
+    result.write_char(to_hex(b.to_int() & 0xf))
+  }
+  result.to_string()
+}
+
+/// `sum` returns the final sha256sum as a `FixedArray[Byte]`.
+fn sum(self : Digest) -> FixedArray[Byte] {
   // Padding. Add a 1 bit and 0 bits until 56 bytes mod 64.
   let tmp = FixedArray::make(64 + 8, b'\x00')
   tmp[0] = b'\x80'
@@ -83,12 +94,7 @@ pub fn check_sum(self : Digest) -> String {
   be_put_uint32(digest, 20, self.h[5])
   be_put_uint32(digest, 24, self.h[6])
   be_put_uint32(digest, 28, self.h[7])
-  let result = Buffer::new(size_hint=2 * size)
-  for b in digest {
-    result.write_char(to_hex(b.to_int().lsr(4) & 0xf))
-    result.write_char(to_hex(b.to_int() & 0xf))
-  }
-  result.to_string()
+  digest
 }
 
 /// `reset` resets a digest for re-use.
