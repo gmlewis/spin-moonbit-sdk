@@ -8,13 +8,13 @@
 /// `gen_hmac` generates a base64-encoded String representing
 /// the SHA256 signature of the provided `body` using the provided
 /// `client_secret` key.
-pub fn gen_hmac(body : Bytes, client_secret : Bytes) -> Bytes {
+pub fn gen_hmac(body : Bytes, client_secret : Bytes) -> String {
   let h = HMAC::new(client_secret)
   for b in body {
     h.inner.write(b)
   }
   let buf = h.sum()
-  @base64.encode2bytes(buf)
+  @base64.encode2str(buf)
 }
 
 struct HMAC {

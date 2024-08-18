@@ -1,1 +1,5 @@
-{}
+{
+  "import": [
+    "gmlewis/spin-moonbit-sdk/common"
+  ]
+}

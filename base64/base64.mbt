@@ -15,6 +15,11 @@ pub fn encode2bytes(src : FixedArray[Byte]) -> Bytes {
   Bytes::from_iter(buf.iter())
 }
 
+/// `encode2str` base64-encodes the provided bytes using URL encoding and returns a String.
+pub fn encode2str(src : FixedArray[Byte]) -> String {
+  @common.bytes2str(encode2bytes(src))
+}
+
 fn encode_buf(dst : FixedArray[Byte], src : FixedArray[Byte]) -> Unit {
   let mut di = 0
   let mut si = 0
