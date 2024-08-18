@@ -14,7 +14,7 @@ pub fn gen_hmac(body : Bytes, client_secret : Bytes) -> String {
     h.inner.write(b)
   }
   let buf = h.sum()
-  @base64.encode2str(buf)
+  @base64.url_encode2str(buf)
 }
 
 struct HMAC {

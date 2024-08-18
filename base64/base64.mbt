@@ -5,22 +5,41 @@
 /// Use of this source code is governed by a BSD-style
 /// license that can be found in the LICENSE file.
 
-/// `encode2bytes` base64-encodes the provided bytes using URL encoding.
-pub fn encode2bytes(src : FixedArray[Byte]) -> Bytes {
+/// `std_encode2bytes` base64-encodes the provided bytes using Standard encoding.
+pub fn std_encode2bytes(src : FixedArray[Byte]) -> Bytes {
   if src.length() == 0 {
     return Bytes::from_array([])
   }
   let buf = FixedArray::make(encoded_len(src.length()), b'\x00')
-  encode_buf(buf, src)
+  encode_buf(std_encoding, buf, src)
   Bytes::from_iter(buf.iter())
 }
 
-/// `encode2str` base64-encodes the provided bytes using URL encoding and returns a String.
-pub fn encode2str(src : FixedArray[Byte]) -> String {
-  @common.bytes2str(encode2bytes(src))
+/// `std_encode2str` base64-encodes the provided bytes using Standard encoding and returns a String.
+pub fn std_encode2str(src : FixedArray[Byte]) -> String {
+  @common.bytes2str(std_encode2bytes(src))
 }
 
-fn encode_buf(dst : FixedArray[Byte], src : FixedArray[Byte]) -> Unit {
+/// `url_encode2bytes` base64-encodes the provided bytes using URL encoding.
+pub fn url_encode2bytes(src : FixedArray[Byte]) -> Bytes {
+  if src.length() == 0 {
+    return Bytes::from_array([])
+  }
+  let buf = FixedArray::make(encoded_len(src.length()), b'\x00')
+  encode_buf(url_encoding, buf, src)
+  Bytes::from_iter(buf.iter())
+}
+
+/// `url_encode2str` base64-encodes the provided bytes using URL encoding and returns a String.
+pub fn url_encode2str(src : FixedArray[Byte]) -> String {
+  @common.bytes2str(url_encode2bytes(src))
+}
+
+fn encode_buf(
+  encode : FixedArray[Byte],
+  dst : FixedArray[Byte],
+  src : FixedArray[Byte]
+) -> Unit {
   let mut di = 0
   let mut si = 0
   let n = src.length() / 3 * 3
@@ -64,8 +83,13 @@ fn encoded_len(n : Int) -> Int {
   (n + 2) / 3 * 4 // minimum # 4-char quanta, 3 bytes each
 }
 
-// URL encoding:
-let encode : FixedArray[Byte] = FixedArray::from_array(
+let std_encoding : FixedArray[Byte] = FixedArray::from_array(
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+  .to_array()
+  .map(fn(c) { c.to_int().to_byte() }),
+)
+
+let url_encoding : FixedArray[Byte] = FixedArray::from_array(
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
   .to_array()
   .map(fn(c) { c.to_int().to_byte() }),
