@@ -17,6 +17,16 @@ pub fn make_response(
   response
 }
 
+/// `respond_bytes` sets response_out to an `OutgoingResponse` from the provided `Bytes`.
+pub fn respond_bytes(
+  response_out : @types.ResponseOutparam,
+  body : Bytes,
+  ~content_type : Bytes = b"text/plain",
+  ~status_code : UInt = 200
+) -> Unit {
+  response_out.set(make_response(body, ~content_type, ~status_code) |> Ok)
+}
+
 /// `make_response_str` makes a new `OutgoingResponse` from the provided `String`.
 pub fn make_response_str(
   body : String,
