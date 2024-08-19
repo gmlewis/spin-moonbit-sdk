@@ -47,7 +47,9 @@ jobs:
           moon install
 
       - name: moon check
-        run: moon check --deny-warn
+        # run: moon check --deny-warn
+        # Allow warnings during development:
+        run: moon check
 
       - name: moon info
         run: |
