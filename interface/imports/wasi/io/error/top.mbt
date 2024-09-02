@@ -24,7 +24,7 @@ pub type Error_ Int derive(Show, Eq)
 fn wasmImportResourceDropError_(resource : Int) = "wasi:io/error@0.2.0" "[resource-drop]error"
 
 pub fn Error_::drop(self : Error_) -> Unit {
-  wasmImportResourceDropError_(self.0)
+  wasmImportResourceDropError_(self._)
 }
 
 /// Returns a string that is suitable to assist humans in debugging
@@ -36,7 +36,7 @@ pub fn Error_::drop(self : Error_) -> Unit {
 /// hazard.
 pub fn Error_::to_debug_string(self : Error_) -> String {
   let return_area = @ffi.malloc(8)
-  wasmImportMethodErrorToDebugString(self.0, return_area)
+  wasmImportMethodErrorToDebugString(self._, return_area)
   let result = @ffi.ptr2str(@ffi.load32(return_area + 0))
   @ffi.free(return_area)
   return result

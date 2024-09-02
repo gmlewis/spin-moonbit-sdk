@@ -25,7 +25,7 @@ pub fn now() -> Datetime {
   @ffi.free(return_area)
   return Datetime::{
     seconds: @ffi.load64(return_area + 0).to_uint64(),
-    nanoseconds: @ffi.load32(return_area + 8).to_uint(),
+    nanoseconds: @ffi.load32(return_area + 8).reinterpret_as_uint(),
   }
 }
 
@@ -38,6 +38,6 @@ pub fn resolution() -> Datetime {
   @ffi.free(return_area)
   return Datetime::{
     seconds: @ffi.load64(return_area + 0).to_uint64(),
-    nanoseconds: @ffi.load32(return_area + 8).to_uint(),
+    nanoseconds: @ffi.load32(return_area + 8).reinterpret_as_uint(),
   }
 }

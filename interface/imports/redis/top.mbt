@@ -13,7 +13,7 @@ pub type Connection Int derive(Show, Eq)
 fn wasmImportResourceDropConnection(resource : Int) = "fermyon:spin/redis@2.0.0" "[resource-drop]connection"
 
 pub fn Connection::drop(self : Connection) -> Unit {
-  wasmImportResourceDropConnection(self.0)
+  wasmImportResourceDropConnection(self._)
 }
 
 /// A parameter type for the general-purpose `execute` function.
@@ -68,7 +68,7 @@ pub fn Connection::publish(
 ) -> Result[Unit, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodConnectionPublish(
-    self.0,
+    self._,
     @ffi.str2ptr(channel),
     channel.iter().count(),
     @ffi.bytes2ptr(payload),
@@ -105,7 +105,7 @@ pub fn Connection::get(
 ) -> Result[Bytes?, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodConnectionGet(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     return_area,
@@ -152,7 +152,7 @@ pub fn Connection::set(
 ) -> Result[Unit, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodConnectionSet(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     @ffi.bytes2ptr(value),
@@ -193,7 +193,7 @@ pub fn Connection::incr(
 ) -> Result[Int64, Error_] {
   let return_area = @ffi.malloc(24)
   wasmImportMethodConnectionIncr(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     return_area,
@@ -238,9 +238,9 @@ pub fn Connection::del(
     ignoreList.push(element)
   }
   let return_area = @ffi.malloc(16)
-  wasmImportMethodConnectionDel(self.0, address, keys.length(), return_area)
+  wasmImportMethodConnectionDel(self._, address, keys.length(), return_area)
   let lifted12 = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load32(return_area + 4).to_uint())
+    0 => Result::Ok(@ffi.load32(return_area + 4).reinterpret_as_uint())
     1 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
         0 => Error_::InvalidAddress
@@ -281,7 +281,7 @@ pub fn Connection::sadd(
   }
   let return_area = @ffi.malloc(16)
   wasmImportMethodConnectionSadd(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     address,
@@ -289,7 +289,7 @@ pub fn Connection::sadd(
     return_area,
   )
   let lifted12 = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load32(return_area + 4).to_uint())
+    0 => Result::Ok(@ffi.load32(return_area + 4).reinterpret_as_uint())
     1 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
         0 => Error_::InvalidAddress
@@ -320,7 +320,7 @@ pub fn Connection::smembers(
 ) -> Result[Array[String], Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodConnectionSmembers(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     return_area,
@@ -374,7 +374,7 @@ pub fn Connection::srem(
   }
   let return_area = @ffi.malloc(16)
   wasmImportMethodConnectionSrem(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     address,
@@ -382,7 +382,7 @@ pub fn Connection::srem(
     return_area,
   )
   let lifted12 = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load32(return_area + 4).to_uint())
+    0 => Result::Ok(@ffi.load32(return_area + 4).reinterpret_as_uint())
     1 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
         0 => Error_::InvalidAddress
@@ -436,7 +436,7 @@ pub fn Connection::execute(
   }
   let return_area = @ffi.malloc(16)
   wasmImportMethodConnectionExecute(
-    self.0,
+    self._,
     @ffi.str2ptr(command),
     command.iter().count(),
     address,

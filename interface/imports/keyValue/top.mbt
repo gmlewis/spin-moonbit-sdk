@@ -5,7 +5,7 @@ pub type Store Int derive(Show, Eq)
 fn wasmImportResourceDropStore(resource : Int) = "fermyon:spin/key-value@2.0.0" "[resource-drop]store"
 
 pub fn Store::drop(self : Store) -> Unit {
-  wasmImportResourceDropStore(self.0)
+  wasmImportResourceDropStore(self._)
 }
 
 /// The set of errors which may be raised by functions in this interface
@@ -56,7 +56,7 @@ pub fn Store::open(label : String) -> Result[Store, Error_] {
 pub fn Store::get(self : Store, key : String) -> Result[Bytes?, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodStoreGet(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     return_area,
@@ -101,7 +101,7 @@ pub fn Store::set(
 ) -> Result[Unit, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodStoreSet(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     @ffi.bytes2ptr(value),
@@ -137,7 +137,7 @@ pub fn Store::set(
 pub fn Store::delete(self : Store, key : String) -> Result[Unit, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodStoreDelete(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     return_area,
@@ -168,7 +168,7 @@ pub fn Store::delete(self : Store, key : String) -> Result[Unit, Error_] {
 pub fn Store::exists(self : Store, key : String) -> Result[Bool, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodStoreExists(
-    self.0,
+    self._,
     @ffi.str2ptr(key),
     key.iter().count(),
     return_area,
@@ -198,7 +198,7 @@ pub fn Store::exists(self : Store, key : String) -> Result[Bool, Error_] {
 /// Return a list of all the keys
 pub fn Store::get_keys(self : Store) -> Result[Array[String], Error_] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodStoreGetKeys(self.0, return_area)
+  wasmImportMethodStoreGetKeys(self._, return_area)
   let lifted13 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let array : Array[String] = []

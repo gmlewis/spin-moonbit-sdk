@@ -8,7 +8,7 @@ pub type Network Int derive(Show, Eq)
 fn wasmImportResourceDropNetwork(resource : Int) = "wasi:sockets/network@0.2.0" "[resource-drop]network"
 
 pub fn Network::drop(self : Network) -> Unit {
-  wasmImportResourceDropNetwork(self.0)
+  wasmImportResourceDropNetwork(self._)
 }
 
 /// Error codes.

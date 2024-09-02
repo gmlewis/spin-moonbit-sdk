@@ -6,7 +6,7 @@ pub type Connection Int derive(Show, Eq)
 fn wasmImportResourceDropConnection(resource : Int) = "fermyon:spin/sqlite@2.0.0" "[resource-drop]connection"
 
 pub fn Connection::drop(self : Connection) -> Unit {
-  wasmImportResourceDropConnection(self.0)
+  wasmImportResourceDropConnection(self._)
 }
 
 /// The set of errors which may be raised by functions in this interface
@@ -119,7 +119,7 @@ pub fn Connection::execute(
   }
   let return_area = @ffi.malloc(20)
   wasmImportMethodConnectionExecute(
-    self.0,
+    self._,
     @ffi.str2ptr(statement),
     statement.iter().count(),
     address,

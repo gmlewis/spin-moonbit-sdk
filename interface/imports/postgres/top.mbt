@@ -6,7 +6,7 @@ pub type Connection Int derive(Show, Eq)
 fn wasmImportResourceDropConnection(resource : Int) = "fermyon:spin/postgres@2.0.0" "[resource-drop]connection"
 
 pub fn Connection::drop(self : Connection) -> Unit {
-  wasmImportResourceDropConnection(self.0)
+  wasmImportResourceDropConnection(self._)
 }
 
 /// Open a connection to the Postgres instance at `address`.
@@ -99,12 +99,12 @@ pub fn Connection::query(
       }
       Uint16(payload19) => {
         @ffi.store8(base + 0, 6)
-        @ffi.store16(base + 8, payload19.to_int())
+        @ffi.store16(base + 8, payload19.reinterpret_as_int())
         ()
       }
       Uint32(payload22) => {
         @ffi.store8(base + 0, 7)
-        @ffi.store32(base + 8, payload22.to_int())
+        @ffi.store32(base + 8, payload22.reinterpret_as_int())
         ()
       }
       Uint64(payload25) => {
@@ -145,7 +145,7 @@ pub fn Connection::query(
   }
   let return_area = @ffi.malloc(20)
   wasmImportMethodConnectionQuery(
-    self.0,
+    self._,
     @ffi.str2ptr(statement),
     statement.iter().count(),
     address,
@@ -188,9 +188,12 @@ pub fn Connection::query(
             5 => @rdbmsTypes.DbValue::Uint8(@ffi.load8_u(base49 + 8).to_byte())
             6 =>
               @rdbmsTypes.DbValue::Uint16(
-                @ffi.load16_u(base49 + 8).land(0xFFFF).to_uint(),
+                @ffi.load16_u(base49 + 8).land(0xFFFF).reinterpret_as_uint(),
               )
-            7 => @rdbmsTypes.DbValue::Uint32(@ffi.load32(base49 + 8).to_uint())
+            7 =>
+              @rdbmsTypes.DbValue::Uint32(
+                @ffi.load32(base49 + 8).reinterpret_as_uint(),
+              )
             8 =>
               @rdbmsTypes.DbValue::Uint64(@ffi.load64(base49 + 8).to_uint64())
             9 =>
@@ -299,12 +302,12 @@ pub fn Connection::execute(
       }
       Uint16(payload19) => {
         @ffi.store8(base + 0, 6)
-        @ffi.store16(base + 8, payload19.to_int())
+        @ffi.store16(base + 8, payload19.reinterpret_as_int())
         ()
       }
       Uint32(payload22) => {
         @ffi.store8(base + 0, 7)
-        @ffi.store32(base + 8, payload22.to_int())
+        @ffi.store32(base + 8, payload22.reinterpret_as_int())
         ()
       }
       Uint64(payload25) => {
@@ -345,7 +348,7 @@ pub fn Connection::execute(
   }
   let return_area = @ffi.malloc(24)
   wasmImportMethodConnectionExecute(
-    self.0,
+    self._,
     @ffi.str2ptr(statement),
     statement.iter().count(),
     address,

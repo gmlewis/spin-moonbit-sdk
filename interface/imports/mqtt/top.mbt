@@ -37,7 +37,7 @@ pub type Connection Int derive(Show, Eq)
 fn wasmImportResourceDropConnection(resource : Int) = "fermyon:spin/mqtt@2.0.0" "[resource-drop]connection"
 
 pub fn Connection::drop(self : Connection) -> Unit {
-  wasmImportResourceDropConnection(self.0)
+  wasmImportResourceDropConnection(self._)
 }
 
 /// Open a connection to the Mqtt instance at `address`.
@@ -94,7 +94,7 @@ pub fn Connection::publish(
 ) -> Result[Unit, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodConnectionPublish(
-    self.0,
+    self._,
     @ffi.str2ptr(topic),
     topic.iter().count(),
     @ffi.bytes2ptr(payload),

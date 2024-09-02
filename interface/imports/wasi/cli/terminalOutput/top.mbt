@@ -6,5 +6,5 @@ pub type TerminalOutput Int derive(Show, Eq)
 fn wasmImportResourceDropTerminalOutput(resource : Int) = "wasi:cli/terminal-output@0.2.0" "[resource-drop]terminal-output"
 
 pub fn TerminalOutput::drop(self : TerminalOutput) -> Unit {
-  wasmImportResourceDropTerminalOutput(self.0)
+  wasmImportResourceDropTerminalOutput(self._)
 }

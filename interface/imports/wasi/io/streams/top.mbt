@@ -19,7 +19,7 @@ pub type InputStream Int derive(Show, Eq)
 fn wasmImportResourceDropInputStream(resource : Int) = "wasi:io/streams@0.2.0" "[resource-drop]input-stream"
 
 pub fn InputStream::drop(self : InputStream) -> Unit {
-  wasmImportResourceDropInputStream(self.0)
+  wasmImportResourceDropInputStream(self._)
 }
 
 /// An output bytestream.
@@ -35,7 +35,7 @@ pub type OutputStream Int derive(Show, Eq)
 fn wasmImportResourceDropOutputStream(resource : Int) = "wasi:io/streams@0.2.0" "[resource-drop]output-stream"
 
 pub fn OutputStream::drop(self : OutputStream) -> Unit {
-  wasmImportResourceDropOutputStream(self.0)
+  wasmImportResourceDropOutputStream(self._)
 }
 
 /// Perform a non-blocking read from the stream.
@@ -69,7 +69,7 @@ pub fn InputStream::read(
   len : UInt64
 ) -> Result[Bytes, StreamError] {
   let return_area = @ffi.malloc(12)
-  wasmImportMethodInputStreamRead(self.0, len.to_int64(), return_area)
+  wasmImportMethodInputStreamRead(self._, len.to_int64(), return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2bytes(@ffi.load32(return_area + 4))
@@ -99,7 +99,7 @@ pub fn InputStream::blocking_read(
   len : UInt64
 ) -> Result[Bytes, StreamError] {
   let return_area = @ffi.malloc(12)
-  wasmImportMethodInputStreamBlockingRead(self.0, len.to_int64(), return_area)
+  wasmImportMethodInputStreamBlockingRead(self._, len.to_int64(), return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2bytes(@ffi.load32(return_area + 4))
@@ -131,7 +131,7 @@ pub fn InputStream::skip(
   len : UInt64
 ) -> Result[UInt64, StreamError] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodInputStreamSkip(self.0, len.to_int64(), return_area)
+  wasmImportMethodInputStreamSkip(self._, len.to_int64(), return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
     1 => {
@@ -158,7 +158,7 @@ pub fn InputStream::blocking_skip(
   len : UInt64
 ) -> Result[UInt64, StreamError] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodInputStreamBlockingSkip(self.0, len.to_int64(), return_area)
+  wasmImportMethodInputStreamBlockingSkip(self._, len.to_int64(), return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
     1 => {
@@ -185,7 +185,7 @@ pub fn InputStream::blocking_skip(
 /// Implementations may trap if the `input-stream` is dropped before
 /// all derived `pollable`s created with this function are dropped.
 pub fn InputStream::subscribe(self : InputStream) -> @poll.Pollable {
-  let result : Int = wasmImportMethodInputStreamSubscribe(self.0)
+  let result : Int = wasmImportMethodInputStreamSubscribe(self._)
   return @poll.Pollable::Pollable(result)
 }
 
@@ -202,7 +202,7 @@ pub fn OutputStream::check_write(
   self : OutputStream
 ) -> Result[UInt64, StreamError] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodOutputStreamCheckWrite(self.0, return_area)
+  wasmImportMethodOutputStreamCheckWrite(self._, return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
     1 => {
@@ -241,7 +241,7 @@ pub fn OutputStream::write(
 ) -> Result[Unit, StreamError] {
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutputStreamWrite(
-    self.0,
+    self._,
     @ffi.bytes2ptr(contents),
     contents.length(),
     return_area,
@@ -296,7 +296,7 @@ pub fn OutputStream::blocking_write_and_flush(
 ) -> Result[Unit, StreamError] {
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutputStreamBlockingWriteAndFlush(
-    self.0,
+    self._,
     @ffi.bytes2ptr(contents),
     contents.length(),
     return_area,
@@ -333,7 +333,7 @@ pub fn OutputStream::blocking_write_and_flush(
 /// flush has completed and the stream can accept more writes.
 pub fn OutputStream::flush(self : OutputStream) -> Result[Unit, StreamError] {
   let return_area = @ffi.malloc(12)
-  wasmImportMethodOutputStreamFlush(self.0, return_area)
+  wasmImportMethodOutputStreamFlush(self._, return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -359,7 +359,7 @@ pub fn OutputStream::blocking_flush(
   self : OutputStream
 ) -> Result[Unit, StreamError] {
   let return_area = @ffi.malloc(12)
-  wasmImportMethodOutputStreamBlockingFlush(self.0, return_area)
+  wasmImportMethodOutputStreamBlockingFlush(self._, return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -390,7 +390,7 @@ pub fn OutputStream::blocking_flush(
 /// Implementations may trap if the `output-stream` is dropped before
 /// all derived `pollable`s created with this function are dropped.
 pub fn OutputStream::subscribe(self : OutputStream) -> @poll.Pollable {
-  let result : Int = wasmImportMethodOutputStreamSubscribe(self.0)
+  let result : Int = wasmImportMethodOutputStreamSubscribe(self._)
   return @poll.Pollable::Pollable(result)
 }
 
@@ -405,7 +405,7 @@ pub fn OutputStream::write_zeroes(
   len : UInt64
 ) -> Result[Unit, StreamError] {
   let return_area = @ffi.malloc(12)
-  wasmImportMethodOutputStreamWriteZeroes(self.0, len.to_int64(), return_area)
+  wasmImportMethodOutputStreamWriteZeroes(self._, len.to_int64(), return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -455,7 +455,7 @@ pub fn OutputStream::blocking_write_zeroes_and_flush(
 ) -> Result[Unit, StreamError] {
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutputStreamBlockingWriteZeroesAndFlush(
-    self.0,
+    self._,
     len.to_int64(),
     return_area,
   )
@@ -497,7 +497,7 @@ pub fn OutputStream::splice(
   len : UInt64
 ) -> Result[UInt64, StreamError] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodOutputStreamSplice(self.0, src.0, len.to_int64(), return_area)
+  wasmImportMethodOutputStreamSplice(self._, src._, len.to_int64(), return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
     1 => {
@@ -529,8 +529,8 @@ pub fn OutputStream::blocking_splice(
 ) -> Result[UInt64, StreamError] {
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutputStreamBlockingSplice(
-    self.0,
-    src.0,
+    self._,
+    src._,
     len.to_int64(),
     return_area,
   )

@@ -5,7 +5,7 @@ pub type ResolveAddressStream Int derive(Show, Eq)
 fn wasmImportResourceDropResolveAddressStream(resource : Int) = "wasi:sockets/ip-name-lookup@0.2.0" "[resource-drop]resolve-address-stream"
 
 pub fn ResolveAddressStream::drop(self : ResolveAddressStream) -> Unit {
-  wasmImportResourceDropResolveAddressStream(self.0)
+  wasmImportResourceDropResolveAddressStream(self._)
 }
 
 /// Resolve an internet host name to a list of IP addresses.
@@ -34,7 +34,7 @@ pub fn resolve_addresses(
 ) -> Result[ResolveAddressStream, @network.ErrorCode] {
   let return_area = @ffi.malloc(8)
   wasmImportResolveAddresses(
-    network.0,
+    network._,
     @ffi.str2ptr(name),
     name.iter().count(),
     return_area,
@@ -69,7 +69,7 @@ pub fn ResolveAddressStream::resolve_next_address(
   self : ResolveAddressStream
 ) -> Result[@network.IpAddress?, @network.ErrorCode] {
   let return_area = @ffi.malloc(22)
-  wasmImportMethodResolveAddressStreamResolveNextAddress(self.0, return_area)
+  wasmImportMethodResolveAddressStreamResolveNextAddress(self._, return_area)
   let lifted11 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted8 : @network.IpAddress? = match @ffi.load8_u(return_area + 2) {
@@ -88,14 +88,30 @@ pub fn ResolveAddressStream::resolve_next_address(
             1 =>
               @network.IpAddress::Ipv6(
                 (
-                  @ffi.load16_u(return_area + 6).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(return_area + 8).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(return_area + 10).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(return_area + 12).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(return_area + 14).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(return_area + 16).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(return_area + 18).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(return_area + 20).land(0xFFFF).to_uint(),
+                  @ffi.load16_u(return_area + 6)
+                  .land(0xFFFF)
+                  .reinterpret_as_uint(),
+                  @ffi.load16_u(return_area + 8)
+                  .land(0xFFFF)
+                  .reinterpret_as_uint(),
+                  @ffi.load16_u(return_area + 10)
+                  .land(0xFFFF)
+                  .reinterpret_as_uint(),
+                  @ffi.load16_u(return_area + 12)
+                  .land(0xFFFF)
+                  .reinterpret_as_uint(),
+                  @ffi.load16_u(return_area + 14)
+                  .land(0xFFFF)
+                  .reinterpret_as_uint(),
+                  @ffi.load16_u(return_area + 16)
+                  .land(0xFFFF)
+                  .reinterpret_as_uint(),
+                  @ffi.load16_u(return_area + 18)
+                  .land(0xFFFF)
+                  .reinterpret_as_uint(),
+                  @ffi.load16_u(return_area + 20)
+                  .land(0xFFFF)
+                  .reinterpret_as_uint(),
                 ),
               )
             _ => panic()
@@ -120,6 +136,6 @@ pub fn ResolveAddressStream::resolve_next_address(
 pub fn ResolveAddressStream::subscribe(
   self : ResolveAddressStream
 ) -> @poll.Pollable {
-  let result : Int = wasmImportMethodResolveAddressStreamSubscribe(self.0)
+  let result : Int = wasmImportMethodResolveAddressStreamSubscribe(self._)
   return @poll.Pollable::Pollable(result)
 }

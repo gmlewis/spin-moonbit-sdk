@@ -18,7 +18,7 @@ pub type UdpSocket Int derive(Show, Eq)
 fn wasmImportResourceDropUdpSocket(resource : Int) = "wasi:sockets/udp@0.2.0" "[resource-drop]udp-socket"
 
 pub fn UdpSocket::drop(self : UdpSocket) -> Unit {
-  wasmImportResourceDropUdpSocket(self.0)
+  wasmImportResourceDropUdpSocket(self._)
 }
 
 pub type IncomingDatagramStream Int derive(Show, Eq)
@@ -26,7 +26,7 @@ pub type IncomingDatagramStream Int derive(Show, Eq)
 fn wasmImportResourceDropIncomingDatagramStream(resource : Int) = "wasi:sockets/udp@0.2.0" "[resource-drop]incoming-datagram-stream"
 
 pub fn IncomingDatagramStream::drop(self : IncomingDatagramStream) -> Unit {
-  wasmImportResourceDropIncomingDatagramStream(self.0)
+  wasmImportResourceDropIncomingDatagramStream(self._)
 }
 
 pub type OutgoingDatagramStream Int derive(Show, Eq)
@@ -34,7 +34,7 @@ pub type OutgoingDatagramStream Int derive(Show, Eq)
 fn wasmImportResourceDropOutgoingDatagramStream(resource : Int) = "wasi:sockets/udp@0.2.0" "[resource-drop]outgoing-datagram-stream"
 
 pub fn OutgoingDatagramStream::drop(self : OutgoingDatagramStream) -> Unit {
-  wasmImportResourceDropOutgoingDatagramStream(self.0)
+  wasmImportResourceDropOutgoingDatagramStream(self._)
 }
 
 /// Bind the socket to a specific network on the provided IP address and port.
@@ -85,7 +85,7 @@ pub fn UdpSocket::start_bind(
     Ipv4(payload) =>
       (
         0,
-        payload.port.to_int(),
+        payload.port.reinterpret_as_int(),
         payload.address.0.to_int(),
         payload.address.1.to_int(),
         payload.address.2.to_int(),
@@ -100,24 +100,24 @@ pub fn UdpSocket::start_bind(
     Ipv6(payload2) =>
       (
         1,
-        payload2.port.to_int(),
-        payload2.flow_info.to_int(),
-        payload2.address.0.to_int(),
-        payload2.address.1.to_int(),
-        payload2.address.2.to_int(),
-        payload2.address.3.to_int(),
-        payload2.address.4.to_int(),
-        payload2.address.5.to_int(),
-        payload2.address.6.to_int(),
-        payload2.address.7.to_int(),
-        payload2.scope_id.to_int(),
+        payload2.port.reinterpret_as_int(),
+        payload2.flow_info.reinterpret_as_int(),
+        payload2.address.0.reinterpret_as_int(),
+        payload2.address.1.reinterpret_as_int(),
+        payload2.address.2.reinterpret_as_int(),
+        payload2.address.3.reinterpret_as_int(),
+        payload2.address.4.reinterpret_as_int(),
+        payload2.address.5.reinterpret_as_int(),
+        payload2.address.6.reinterpret_as_int(),
+        payload2.address.7.reinterpret_as_int(),
+        payload2.scope_id.reinterpret_as_int(),
       )
     // _ => panic()
   }
   let return_area = @ffi.malloc(2)
   wasmImportMethodUdpSocketStartBind(
-    self.0,
-    network.0,
+    self._,
+    network._,
     lowered,
     lowered3,
     lowered4,
@@ -145,7 +145,7 @@ pub fn UdpSocket::finish_bind(
   self : UdpSocket
 ) -> Result[Unit, @network.ErrorCode] {
   let return_area = @ffi.malloc(2)
-  wasmImportMethodUdpSocketFinishBind(self.0, return_area)
+  wasmImportMethodUdpSocketFinishBind(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -237,7 +237,7 @@ pub fn UdpSocket::stream(
         Ipv4(payload5) =>
           (
             0,
-            payload5.port.to_int(),
+            payload5.port.reinterpret_as_int(),
             payload5.address.0.to_int(),
             payload5.address.1.to_int(),
             payload5.address.2.to_int(),
@@ -252,17 +252,17 @@ pub fn UdpSocket::stream(
         Ipv6(payload8) =>
           (
             1,
-            payload8.port.to_int(),
-            payload8.flow_info.to_int(),
-            payload8.address.0.to_int(),
-            payload8.address.1.to_int(),
-            payload8.address.2.to_int(),
-            payload8.address.3.to_int(),
-            payload8.address.4.to_int(),
-            payload8.address.5.to_int(),
-            payload8.address.6.to_int(),
-            payload8.address.7.to_int(),
-            payload8.scope_id.to_int(),
+            payload8.port.reinterpret_as_int(),
+            payload8.flow_info.reinterpret_as_int(),
+            payload8.address.0.reinterpret_as_int(),
+            payload8.address.1.reinterpret_as_int(),
+            payload8.address.2.reinterpret_as_int(),
+            payload8.address.3.reinterpret_as_int(),
+            payload8.address.4.reinterpret_as_int(),
+            payload8.address.5.reinterpret_as_int(),
+            payload8.address.6.reinterpret_as_int(),
+            payload8.address.7.reinterpret_as_int(),
+            payload8.scope_id.reinterpret_as_int(),
           )
         // _ => panic()
       }
@@ -274,7 +274,7 @@ pub fn UdpSocket::stream(
   }
   let return_area = @ffi.malloc(12)
   wasmImportMethodUdpSocketStream(
-    self.0,
+    self._,
     lowered20,
     lowered21,
     lowered22,
@@ -329,14 +329,16 @@ pub fn UdpSocket::local_address(
   self : UdpSocket
 ) -> Result[@network.IpSocketAddress, @network.ErrorCode] {
   let return_area = @ffi.malloc(36)
-  wasmImportMethodUdpSocketLocalAddress(self.0, return_area)
+  wasmImportMethodUdpSocketLocalAddress(self._, return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
         0 =>
           @network.IpSocketAddress::Ipv4(
             @network.Ipv4SocketAddress::{
-              port: @ffi.load16_u(return_area + 8).land(0xFFFF).to_uint(),
+              port: @ffi.load16_u(return_area + 8)
+              .land(0xFFFF)
+              .reinterpret_as_uint(),
               address: (
                 @ffi.load8_u(return_area + 10).to_byte(),
                 @ffi.load8_u(return_area + 11).to_byte(),
@@ -348,19 +350,37 @@ pub fn UdpSocket::local_address(
         1 =>
           @network.IpSocketAddress::Ipv6(
             @network.Ipv6SocketAddress::{
-              port: @ffi.load16_u(return_area + 8).land(0xFFFF).to_uint(),
-              flow_info: @ffi.load32(return_area + 12).to_uint(),
+              port: @ffi.load16_u(return_area + 8)
+              .land(0xFFFF)
+              .reinterpret_as_uint(),
+              flow_info: @ffi.load32(return_area + 12).reinterpret_as_uint(),
               address: (
-                @ffi.load16_u(return_area + 16).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 18).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 20).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 22).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 24).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 26).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 28).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 30).land(0xFFFF).to_uint(),
+                @ffi.load16_u(return_area + 16)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 18)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 20)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 22)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 24)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 26)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 28)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 30)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
               ),
-              scope_id: @ffi.load32(return_area + 32).to_uint(),
+              scope_id: @ffi.load32(return_area + 32).reinterpret_as_uint(),
             },
           )
         _ => panic()
@@ -388,14 +408,16 @@ pub fn UdpSocket::remote_address(
   self : UdpSocket
 ) -> Result[@network.IpSocketAddress, @network.ErrorCode] {
   let return_area = @ffi.malloc(36)
-  wasmImportMethodUdpSocketRemoteAddress(self.0, return_area)
+  wasmImportMethodUdpSocketRemoteAddress(self._, return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
         0 =>
           @network.IpSocketAddress::Ipv4(
             @network.Ipv4SocketAddress::{
-              port: @ffi.load16_u(return_area + 8).land(0xFFFF).to_uint(),
+              port: @ffi.load16_u(return_area + 8)
+              .land(0xFFFF)
+              .reinterpret_as_uint(),
               address: (
                 @ffi.load8_u(return_area + 10).to_byte(),
                 @ffi.load8_u(return_area + 11).to_byte(),
@@ -407,19 +429,37 @@ pub fn UdpSocket::remote_address(
         1 =>
           @network.IpSocketAddress::Ipv6(
             @network.Ipv6SocketAddress::{
-              port: @ffi.load16_u(return_area + 8).land(0xFFFF).to_uint(),
-              flow_info: @ffi.load32(return_area + 12).to_uint(),
+              port: @ffi.load16_u(return_area + 8)
+              .land(0xFFFF)
+              .reinterpret_as_uint(),
+              flow_info: @ffi.load32(return_area + 12).reinterpret_as_uint(),
               address: (
-                @ffi.load16_u(return_area + 16).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 18).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 20).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 22).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 24).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 26).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 28).land(0xFFFF).to_uint(),
-                @ffi.load16_u(return_area + 30).land(0xFFFF).to_uint(),
+                @ffi.load16_u(return_area + 16)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 18)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 20)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 22)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 24)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 26)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 28)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                @ffi.load16_u(return_area + 30)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
               ),
-              scope_id: @ffi.load32(return_area + 32).to_uint(),
+              scope_id: @ffi.load32(return_area + 32).reinterpret_as_uint(),
             },
           )
         _ => panic()
@@ -437,7 +477,7 @@ pub fn UdpSocket::remote_address(
 ///
 /// Equivalent to the SO_DOMAIN socket option.
 pub fn UdpSocket::address_family(self : UdpSocket) -> @network.IpAddressFamily {
-  let result : Int = wasmImportMethodUdpSocketAddressFamily(self.0)
+  let result : Int = wasmImportMethodUdpSocketAddressFamily(self._)
   return @network.IpAddressFamily::from(result)
 }
 
@@ -451,7 +491,7 @@ pub fn UdpSocket::unicast_hop_limit(
   self : UdpSocket
 ) -> Result[Byte, @network.ErrorCode] {
   let return_area = @ffi.malloc(2)
-  wasmImportMethodUdpSocketUnicastHopLimit(self.0, return_area)
+  wasmImportMethodUdpSocketUnicastHopLimit(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load8_u(return_area + 1).to_byte())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -467,7 +507,7 @@ pub fn UdpSocket::set_unicast_hop_limit(
 ) -> Result[Unit, @network.ErrorCode] {
   let return_area = @ffi.malloc(2)
   wasmImportMethodUdpSocketSetUnicastHopLimit(
-    self.0,
+    self._,
     value.to_int(),
     return_area,
   )
@@ -494,7 +534,7 @@ pub fn UdpSocket::receive_buffer_size(
   self : UdpSocket
 ) -> Result[UInt64, @network.ErrorCode] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodUdpSocketReceiveBufferSize(self.0, return_area)
+  wasmImportMethodUdpSocketReceiveBufferSize(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -510,7 +550,7 @@ pub fn UdpSocket::set_receive_buffer_size(
 ) -> Result[Unit, @network.ErrorCode] {
   let return_area = @ffi.malloc(2)
   wasmImportMethodUdpSocketSetReceiveBufferSize(
-    self.0,
+    self._,
     value.to_int64(),
     return_area,
   )
@@ -527,7 +567,7 @@ pub fn UdpSocket::send_buffer_size(
   self : UdpSocket
 ) -> Result[UInt64, @network.ErrorCode] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodUdpSocketSendBufferSize(self.0, return_area)
+  wasmImportMethodUdpSocketSendBufferSize(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -543,7 +583,7 @@ pub fn UdpSocket::set_send_buffer_size(
 ) -> Result[Unit, @network.ErrorCode] {
   let return_area = @ffi.malloc(2)
   wasmImportMethodUdpSocketSetSendBufferSize(
-    self.0,
+    self._,
     value.to_int64(),
     return_area,
   )
@@ -561,7 +601,7 @@ pub fn UdpSocket::set_send_buffer_size(
 /// Note: this function is here for WASI Preview2 only.
 /// It's planned to be removed when `future` is natively supported in Preview3.
 pub fn UdpSocket::subscribe(self : UdpSocket) -> @poll.Pollable {
-  let result : Int = wasmImportMethodUdpSocketSubscribe(self.0)
+  let result : Int = wasmImportMethodUdpSocketSubscribe(self._)
   return @poll.Pollable::Pollable(result)
 }
 
@@ -594,7 +634,7 @@ pub fn IncomingDatagramStream::receive(
 ) -> Result[Array[IncomingDatagram], @network.ErrorCode] {
   let return_area = @ffi.malloc(12)
   wasmImportMethodIncomingDatagramStreamReceive(
-    self.0,
+    self._,
     max_results.to_int64(),
     return_area,
   )
@@ -608,7 +648,9 @@ pub fn IncomingDatagramStream::receive(
           0 =>
             @network.IpSocketAddress::Ipv4(
               @network.Ipv4SocketAddress::{
-                port: @ffi.load16_u(base1 + 12).land(0xFFFF).to_uint(),
+                port: @ffi.load16_u(base1 + 12)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
                 address: (
                   @ffi.load8_u(base1 + 14).to_byte(),
                   @ffi.load8_u(base1 + 15).to_byte(),
@@ -620,19 +662,21 @@ pub fn IncomingDatagramStream::receive(
           1 =>
             @network.IpSocketAddress::Ipv6(
               @network.Ipv6SocketAddress::{
-                port: @ffi.load16_u(base1 + 12).land(0xFFFF).to_uint(),
-                flow_info: @ffi.load32(base1 + 16).to_uint(),
+                port: @ffi.load16_u(base1 + 12)
+                .land(0xFFFF)
+                .reinterpret_as_uint(),
+                flow_info: @ffi.load32(base1 + 16).reinterpret_as_uint(),
                 address: (
-                  @ffi.load16_u(base1 + 20).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(base1 + 22).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(base1 + 24).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(base1 + 26).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(base1 + 28).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(base1 + 30).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(base1 + 32).land(0xFFFF).to_uint(),
-                  @ffi.load16_u(base1 + 34).land(0xFFFF).to_uint(),
+                  @ffi.load16_u(base1 + 20).land(0xFFFF).reinterpret_as_uint(),
+                  @ffi.load16_u(base1 + 22).land(0xFFFF).reinterpret_as_uint(),
+                  @ffi.load16_u(base1 + 24).land(0xFFFF).reinterpret_as_uint(),
+                  @ffi.load16_u(base1 + 26).land(0xFFFF).reinterpret_as_uint(),
+                  @ffi.load16_u(base1 + 28).land(0xFFFF).reinterpret_as_uint(),
+                  @ffi.load16_u(base1 + 30).land(0xFFFF).reinterpret_as_uint(),
+                  @ffi.load16_u(base1 + 32).land(0xFFFF).reinterpret_as_uint(),
+                  @ffi.load16_u(base1 + 34).land(0xFFFF).reinterpret_as_uint(),
                 ),
-                scope_id: @ffi.load32(base1 + 36).to_uint(),
+                scope_id: @ffi.load32(base1 + 36).reinterpret_as_uint(),
               },
             )
           _ => panic()
@@ -656,7 +700,7 @@ pub fn IncomingDatagramStream::receive(
 pub fn IncomingDatagramStream::subscribe(
   self : IncomingDatagramStream
 ) -> @poll.Pollable {
-  let result : Int = wasmImportMethodIncomingDatagramStreamSubscribe(self.0)
+  let result : Int = wasmImportMethodIncomingDatagramStreamSubscribe(self._)
   return @poll.Pollable::Pollable(result)
 }
 
@@ -675,7 +719,7 @@ pub fn OutgoingDatagramStream::check_send(
   self : OutgoingDatagramStream
 ) -> Result[UInt64, @network.ErrorCode] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodOutgoingDatagramStreamCheckSend(self.0, return_area)
+  wasmImportMethodOutgoingDatagramStreamCheckSend(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -741,7 +785,7 @@ pub fn OutgoingDatagramStream::send(
         match payload4 {
           Ipv4(payload7) => {
             @ffi.store8(base + 12, 0)
-            @ffi.store16(base + 16, payload7.port.to_int())
+            @ffi.store16(base + 16, payload7.port.reinterpret_as_int())
             @ffi.store8(base + 18, payload7.address.0.to_int())
             @ffi.store8(base + 19, payload7.address.1.to_int())
             @ffi.store8(base + 20, payload7.address.2.to_int())
@@ -750,17 +794,17 @@ pub fn OutgoingDatagramStream::send(
           }
           Ipv6(payload10) => {
             @ffi.store8(base + 12, 1)
-            @ffi.store16(base + 16, payload10.port.to_int())
-            @ffi.store32(base + 20, payload10.flow_info.to_int())
-            @ffi.store16(base + 24, payload10.address.0.to_int())
-            @ffi.store16(base + 26, payload10.address.1.to_int())
-            @ffi.store16(base + 28, payload10.address.2.to_int())
-            @ffi.store16(base + 30, payload10.address.3.to_int())
-            @ffi.store16(base + 32, payload10.address.4.to_int())
-            @ffi.store16(base + 34, payload10.address.5.to_int())
-            @ffi.store16(base + 36, payload10.address.6.to_int())
-            @ffi.store16(base + 38, payload10.address.7.to_int())
-            @ffi.store32(base + 40, payload10.scope_id.to_int())
+            @ffi.store16(base + 16, payload10.port.reinterpret_as_int())
+            @ffi.store32(base + 20, payload10.flow_info.reinterpret_as_int())
+            @ffi.store16(base + 24, payload10.address.0.reinterpret_as_int())
+            @ffi.store16(base + 26, payload10.address.1.reinterpret_as_int())
+            @ffi.store16(base + 28, payload10.address.2.reinterpret_as_int())
+            @ffi.store16(base + 30, payload10.address.3.reinterpret_as_int())
+            @ffi.store16(base + 32, payload10.address.4.reinterpret_as_int())
+            @ffi.store16(base + 34, payload10.address.5.reinterpret_as_int())
+            @ffi.store16(base + 36, payload10.address.6.reinterpret_as_int())
+            @ffi.store16(base + 38, payload10.address.7.reinterpret_as_int())
+            @ffi.store32(base + 40, payload10.scope_id.reinterpret_as_int())
             ()
           }
           // _ => panic()
@@ -772,7 +816,7 @@ pub fn OutgoingDatagramStream::send(
   }
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutgoingDatagramStreamSend(
-    self.0,
+    self._,
     address,
     datagrams.length(),
     return_area,
@@ -796,6 +840,6 @@ pub fn OutgoingDatagramStream::send(
 pub fn OutgoingDatagramStream::subscribe(
   self : OutgoingDatagramStream
 ) -> @poll.Pollable {
-  let result : Int = wasmImportMethodOutgoingDatagramStreamSubscribe(self.0)
+  let result : Int = wasmImportMethodOutgoingDatagramStreamSubscribe(self._)
   return @poll.Pollable::Pollable(result)
 }

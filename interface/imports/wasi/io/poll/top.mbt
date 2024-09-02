@@ -6,14 +6,14 @@ pub type Pollable Int derive(Show, Eq)
 fn wasmImportResourceDropPollable(resource : Int) = "wasi:io/poll@0.2.0" "[resource-drop]pollable"
 
 pub fn Pollable::drop(self : Pollable) -> Unit {
-  wasmImportResourceDropPollable(self.0)
+  wasmImportResourceDropPollable(self._)
 }
 
 /// Return the readiness of a pollable. This function never blocks.
 ///
 /// Returns `true` when the pollable is ready, and `false` otherwise.
 pub fn Pollable::ready(self : Pollable) -> Bool {
-  let result : Int = wasmImportMethodPollableReady(self.0)
+  let result : Int = wasmImportMethodPollableReady(self._)
   return result != 0
 }
 
@@ -23,7 +23,7 @@ pub fn Pollable::ready(self : Pollable) -> Bool {
 /// This function is equivalent to calling `poll.poll` on a list
 /// containing only this pollable.
 pub fn Pollable::block(self : Pollable) -> Unit {
-  wasmImportMethodPollableBlock(self.0)
+  wasmImportMethodPollableBlock(self._)
 }
 
 /// Poll for completion on a set of pollables.
@@ -49,7 +49,7 @@ pub fn poll(in_ : Array[Pollable]) -> FixedArray[UInt] {
   for index = 0; index < in_.length(); index = index + 1 {
     let element : Pollable = in_[index]
     let base = address + index * 4
-    @ffi.store32(base + 0, element.0)
+    @ffi.store32(base + 0, element._)
   }
   let return_area = @ffi.malloc(8)
   wasmImportPoll(address, in_.length(), return_area)

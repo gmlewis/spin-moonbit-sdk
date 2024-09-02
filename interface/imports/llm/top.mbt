@@ -52,11 +52,11 @@ pub fn infer(
     Some(payload2) =>
       (
         1,
-        payload2.max_tokens.to_int(),
+        payload2.max_tokens.reinterpret_as_int(),
         payload2.repeat_penalty.to_float(),
-        payload2.repeat_penalty_last_n_token_count.to_int(),
+        payload2.repeat_penalty_last_n_token_count.reinterpret_as_int(),
         payload2.temperature.to_float(),
-        payload2.top_k.to_int(),
+        payload2.top_k.reinterpret_as_int(),
         payload2.top_p.to_float(),
       )
   }
@@ -82,8 +82,8 @@ pub fn infer(
         InferencingResult::{
           text: result,
           usage: InferencingUsage::{
-            prompt_token_count: @ffi.load32(return_area + 12).to_uint(),
-            generated_token_count: @ffi.load32(return_area + 16).to_uint(),
+            prompt_token_count: @ffi.load32(return_area + 12).reinterpret_as_uint(),
+            generated_token_count: @ffi.load32(return_area + 16).reinterpret_as_uint(),
           },
         },
       )
@@ -152,7 +152,7 @@ pub fn generate_embeddings(
         EmbeddingsResult::{
           embeddings: array7,
           usage: EmbeddingsUsage::{
-            prompt_token_count: @ffi.load32(return_area + 12).to_uint(),
+            prompt_token_count: @ffi.load32(return_area + 12).reinterpret_as_uint(),
           },
         },
       )
