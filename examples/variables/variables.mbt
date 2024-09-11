@@ -6,10 +6,10 @@ pub fn handle(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam
 ) -> Unit {
-  let response = match @util.split_path(request) {
+  let response = (match @util.split_path(request) {
       (@types.Get, ["variables", key]) => handle_get(key)
       _ => return @util.respond_404(response_out)
-    }
+    })
     |> Ok
   response_out.set(response)
 }

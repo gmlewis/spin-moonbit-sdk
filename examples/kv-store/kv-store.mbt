@@ -12,11 +12,11 @@ pub fn handle(
     Ok(store) => store
     _ => return @util.respond_500(response_out)
   }
-  let response = match @util.split_path(request) {
+  let response = (match @util.split_path(request) {
       (@types.Get, ["kv-store", key]) => handle_get(store, key)
       (@types.Post, ["kv-store", key]) => handle_post(store, key, request)
       _ => return @util.respond_404(response_out)
-    }
+    })
     |> Ok
   response_out.set(response)
 }

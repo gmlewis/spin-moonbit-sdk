@@ -5,14 +5,14 @@ pub fn handle(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam
 ) -> Unit {
-  let response = match request.path_with_query() {
+  let response = (match request.path_with_query() {
       Some(_) => {
         let now = @wallClock.now().seconds
         let msg = "It is now \{now} seconds since Unix Epoch.\n"
         @util.make_response(@base64.str2bytes(msg))
       }
       _ => return @util.respond_404(response_out)
-    }
+    })
     |> Ok
   response_out.set(response)
 }

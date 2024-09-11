@@ -12,10 +12,10 @@ pub fn handle(
     Ok(redis) => redis
     _ => return @util.respond_500(response_out)
   }
-  let response = match @util.split_path(request) {
+  let response = (match @util.split_path(request) {
       (@types.Get, ["redis"]) => handle_get(conn)
       _ => return @util.respond_404(response_out)
-    }
+    })
     |> Ok
   response_out.set(response)
 }

@@ -11,7 +11,7 @@ pub fn handle(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam
 ) -> Unit {
-  let response = match @util.split_path(request) {
+  let response = (match @util.split_path(request) {
       (@types.Get, ["outbound-http"]) => handle_get()
       (@types.Post, ["consume"]) => return consume(request, response_out, None)
       (@types.Post, ["consume?md5sum"]) =>
@@ -24,7 +24,7 @@ pub fn handle(
       (@types.Post, ["stream?sha256sum"]) =>
         return stream(request, response_out, Some(@sha256.Digest::new()))
       _ => return @util.respond_404(response_out)
-    }
+    })
     |> Ok
   response_out.set(response)
 }

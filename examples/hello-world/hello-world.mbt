@@ -5,10 +5,10 @@ pub fn handle(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam
 ) -> Unit {
-  let response = match request.path_with_query() {
+  let response = (match request.path_with_query() {
       Some("/hello") => @util.make_response(b"Hello, World!\n")
       _ => return @util.respond_404(response_out)
-    }
+    })
     |> Ok
   response_out.set(response)
 }

@@ -11,7 +11,7 @@ pub fn handle(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam
 ) -> Unit {
-  let response = match @util.split_path(request) {
+  let response = (match @util.split_path(request) {
       (@types.Get, ["llm"]) => prompt_llm(default_prompt)
       (@types.Post, ["llm"]) =>
         match @util.get_body_bytes(request) {
@@ -23,7 +23,7 @@ pub fn handle(
             )
         }
       _ => return @util.respond_404(response_out)
-    }
+    })
     |> Ok
   response_out.set(response)
 }
