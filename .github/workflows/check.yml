@@ -56,12 +56,10 @@ jobs:
           moon info
           git diff --exit-code
 
-      # Silence testing until compiler bug is fixed:
-      # https://discord.com/channels/1135479745207869510/1272985768498958387/1274917588836548720
-      # - name: moon test
-      #   run: |
-      #     moon test --target wasm
-      #     # moon test --target js
+      - name: moon test
+        run: |
+          moon test --target wasm
+          # moon test --target js
 
       - name: format diff
         run: |
