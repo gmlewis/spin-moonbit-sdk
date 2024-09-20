@@ -180,9 +180,8 @@ pub fn Connection::query(
           let base49 = @ffi.load32(base47 + 0) + index83 * 16
           let lifted = match @ffi.load8_u(base49 + 0) {
             0 => @rdbmsTypes.DbValue::Boolean(@ffi.load8_u(base49 + 8) != 0)
-            1 => @rdbmsTypes.DbValue::Int8(@ffi.load8(base49 + 8).land(0xFF))
-            2 =>
-              @rdbmsTypes.DbValue::Int16(@ffi.load16(base49 + 8).land(0xFFFF))
+            1 => @rdbmsTypes.DbValue::Int8(@ffi.load8(base49 + 8) & 0xFF)
+            2 => @rdbmsTypes.DbValue::Int16(@ffi.load16(base49 + 8) & 0xFFFF)
             3 => @rdbmsTypes.DbValue::Int32(@ffi.load32(base49 + 8))
             4 => @rdbmsTypes.DbValue::Int64(@ffi.load64(base49 + 8))
             5 => @rdbmsTypes.DbValue::Uint8(@ffi.load8_u(base49 + 8).to_byte())

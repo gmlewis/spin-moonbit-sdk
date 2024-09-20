@@ -74,21 +74,21 @@ pub fn DescriptorFlags::set(
   self : DescriptorFlags,
   other : DescriptorFlagsFlag
 ) -> DescriptorFlags {
-  self._.lor(other.value())
+  self._ | other.value()
 }
 
 pub fn DescriptorFlags::unset(
   self : DescriptorFlags,
   other : DescriptorFlagsFlag
 ) -> DescriptorFlags {
-  self._.land(other.value().lnot())
+  self._ & other.value().lnot()
 }
 
 pub fn DescriptorFlags::is_set(
   self : DescriptorFlags,
   other : DescriptorFlagsFlag
 ) -> Bool {
-  self._.land(other.value()) == other.value()
+  (self._ & other.value()) == other.value()
 }
 
 /// Flags determining the method of how paths are resolved.
@@ -109,15 +109,15 @@ fn PathFlagsFlag::value(self : PathFlagsFlag) -> Byte {
 }
 
 pub fn PathFlags::set(self : PathFlags, other : PathFlagsFlag) -> PathFlags {
-  self._.lor(other.value())
+  self._ | other.value()
 }
 
 pub fn PathFlags::unset(self : PathFlags, other : PathFlagsFlag) -> PathFlags {
-  self._.land(other.value().lnot())
+  self._ & other.value().lnot()
 }
 
 pub fn PathFlags::is_set(self : PathFlags, other : PathFlagsFlag) -> Bool {
-  self._.land(other.value()) == other.value()
+  (self._ & other.value()) == other.value()
 }
 
 /// Open flags used by `open-at`.
@@ -144,15 +144,15 @@ fn OpenFlagsFlag::value(self : OpenFlagsFlag) -> Byte {
 }
 
 pub fn OpenFlags::set(self : OpenFlags, other : OpenFlagsFlag) -> OpenFlags {
-  self._.lor(other.value())
+  self._ | other.value()
 }
 
 pub fn OpenFlags::unset(self : OpenFlags, other : OpenFlagsFlag) -> OpenFlags {
-  self._.land(other.value().lnot())
+  self._ & other.value().lnot()
 }
 
 pub fn OpenFlags::is_set(self : OpenFlags, other : OpenFlagsFlag) -> Bool {
-  self._.land(other.value()) == other.value()
+  (self._ & other.value()) == other.value()
 }
 
 /// File attributes.
