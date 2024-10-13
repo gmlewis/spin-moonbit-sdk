@@ -317,7 +317,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
         17 => {
           let lifted62 : UInt64? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
-            1 => Option::Some(@ffi.load64(return_area + 24).to_uint64())
+            1 =>
+              Option::Some(
+                @ffi.load64(return_area + 24).reinterpret_as_uint64(),
+              )
             _ => panic()
           }
           ErrorCode::HttpRequestBodySize(lifted62)
@@ -423,7 +426,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
         28 => {
           let lifted142 : UInt64? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
-            1 => Option::Some(@ffi.load64(return_area + 24).to_uint64())
+            1 =>
+              Option::Some(
+                @ffi.load64(return_area + 24).reinterpret_as_uint64(),
+              )
             _ => panic()
           }
           ErrorCode::HttpResponseBodySize(lifted142)
@@ -1148,7 +1154,7 @@ pub fn RequestOptions::connect_timeout(self : RequestOptions) -> UInt64? {
   wasmImportMethodRequestOptionsConnectTimeout(self._, return_area)
   let lifted : UInt64? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
-    1 => Option::Some(@ffi.load64(return_area + 8).to_uint64())
+    1 => Option::Some(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     _ => panic()
   }
   @ffi.free(return_area)
@@ -1184,7 +1190,7 @@ pub fn RequestOptions::first_byte_timeout(self : RequestOptions) -> UInt64? {
   wasmImportMethodRequestOptionsFirstByteTimeout(self._, return_area)
   let lifted : UInt64? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
-    1 => Option::Some(@ffi.load64(return_area + 8).to_uint64())
+    1 => Option::Some(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     _ => panic()
   }
   @ffi.free(return_area)
@@ -1221,7 +1227,7 @@ pub fn RequestOptions::between_bytes_timeout(self : RequestOptions) -> UInt64? {
   wasmImportMethodRequestOptionsBetweenBytesTimeout(self._, return_area)
   let lifted : UInt64? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
-    1 => Option::Some(@ffi.load64(return_area + 8).to_uint64())
+    1 => Option::Some(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     _ => panic()
   }
   @ffi.free(return_area)
@@ -1745,7 +1751,10 @@ pub fn FutureTrailers::get(
                   let lifted73 : UInt64? = match
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
-                    1 => Option::Some(@ffi.load64(return_area + 40).to_uint64())
+                    1 =>
+                      Option::Some(
+                        @ffi.load64(return_area + 40).reinterpret_as_uint64(),
+                      )
                     _ => panic()
                   }
                   ErrorCode::HttpRequestBodySize(lifted73)
@@ -1881,7 +1890,10 @@ pub fn FutureTrailers::get(
                   let lifted153 : UInt64? = match
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
-                    1 => Option::Some(@ffi.load64(return_area + 40).to_uint64())
+                    1 =>
+                      Option::Some(
+                        @ffi.load64(return_area + 40).reinterpret_as_uint64(),
+                      )
                     _ => panic()
                   }
                   ErrorCode::HttpResponseBodySize(lifted153)
@@ -2169,7 +2181,10 @@ pub fn OutgoingBody::finish(
         17 => {
           let lifted68 : UInt64? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
-            1 => Option::Some(@ffi.load64(return_area + 24).to_uint64())
+            1 =>
+              Option::Some(
+                @ffi.load64(return_area + 24).reinterpret_as_uint64(),
+              )
             _ => panic()
           }
           ErrorCode::HttpRequestBodySize(lifted68)
@@ -2275,7 +2290,10 @@ pub fn OutgoingBody::finish(
         28 => {
           let lifted148 : UInt64? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
-            1 => Option::Some(@ffi.load64(return_area + 24).to_uint64())
+            1 =>
+              Option::Some(
+                @ffi.load64(return_area + 24).reinterpret_as_uint64(),
+              )
             _ => panic()
           }
           ErrorCode::HttpResponseBodySize(lifted148)
@@ -2464,7 +2482,10 @@ pub fn FutureIncomingResponse::get(
                   let lifted68 : UInt64? = match
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
-                    1 => Option::Some(@ffi.load64(return_area + 40).to_uint64())
+                    1 =>
+                      Option::Some(
+                        @ffi.load64(return_area + 40).reinterpret_as_uint64(),
+                      )
                     _ => panic()
                   }
                   ErrorCode::HttpRequestBodySize(lifted68)
@@ -2600,7 +2621,10 @@ pub fn FutureIncomingResponse::get(
                   let lifted148 : UInt64? = match
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
-                    1 => Option::Some(@ffi.load64(return_area + 40).to_uint64())
+                    1 =>
+                      Option::Some(
+                        @ffi.load64(return_area + 40).reinterpret_as_uint64(),
+                      )
                     _ => panic()
                   }
                   ErrorCode::HttpResponseBodySize(lifted148)

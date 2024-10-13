@@ -22,7 +22,7 @@ pub fn insecure_seed() -> (UInt64, UInt64) {
   wasmImportInsecureSeed(return_area)
   @ffi.free(return_area)
   return (
-    @ffi.load64(return_area + 0).to_uint64(),
-    @ffi.load64(return_area + 8).to_uint64(),
+    @ffi.load64(return_area + 0).reinterpret_as_uint64(),
+    @ffi.load64(return_area + 8).reinterpret_as_uint64(),
   )
 }

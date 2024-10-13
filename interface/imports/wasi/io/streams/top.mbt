@@ -133,7 +133,7 @@ pub fn InputStream::skip(
   let return_area = @ffi.malloc(16)
   wasmImportMethodInputStreamSkip(self._, len.to_int64(), return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
       let lifted = match @ffi.load8_u(return_area + 8) {
         0 =>
@@ -160,7 +160,7 @@ pub fn InputStream::blocking_skip(
   let return_area = @ffi.malloc(16)
   wasmImportMethodInputStreamBlockingSkip(self._, len.to_int64(), return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
       let lifted = match @ffi.load8_u(return_area + 8) {
         0 =>
@@ -204,7 +204,7 @@ pub fn OutputStream::check_write(
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutputStreamCheckWrite(self._, return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
       let lifted = match @ffi.load8_u(return_area + 8) {
         0 =>
@@ -499,7 +499,7 @@ pub fn OutputStream::splice(
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutputStreamSplice(self._, src._, len.to_int64(), return_area)
   let lifted6 = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
       let lifted = match @ffi.load8_u(return_area + 8) {
         0 =>
@@ -535,7 +535,7 @@ pub fn OutputStream::blocking_splice(
     return_area,
   )
   let lifted6 = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
       let lifted = match @ffi.load8_u(return_area + 8) {
         0 =>

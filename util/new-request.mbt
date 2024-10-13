@@ -21,7 +21,12 @@ pub fn new_request(
     match parts {
       [authority, .. as remainder] => {
         req.set_authority(Some(authority)).unwrap()
-        let remainder = remainder.iter().collect().join("/")
+        // let remainer = remainder.iter().collect().join("/")
+        // Yuck! https://github.com/moonbitlang/core/pull/993
+        let remainder = String::concat(
+          remainder.iter().collect(),
+          separator="/",
+        )
         let path_with_query = "/\{remainder}"
         req.set_path_with_query(Some(path_with_query)).unwrap()
       }

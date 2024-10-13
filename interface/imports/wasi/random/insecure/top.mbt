@@ -22,5 +22,5 @@ pub fn get_insecure_random_bytes(len : UInt64) -> Bytes {
 /// `get-insecure-random-bytes`, represented as a `u64`.
 pub fn get_insecure_random_u64() -> UInt64 {
   let result : Int64 = wasmImportGetInsecureRandomU64()
-  return result.to_uint64()
+  return result.reinterpret_as_uint64()
 }

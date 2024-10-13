@@ -194,7 +194,9 @@ pub fn Connection::query(
                 @ffi.load32(base49 + 8).reinterpret_as_uint(),
               )
             8 =>
-              @rdbmsTypes.DbValue::Uint64(@ffi.load64(base49 + 8).to_uint64())
+              @rdbmsTypes.DbValue::Uint64(
+                @ffi.load64(base49 + 8).reinterpret_as_uint64(),
+              )
             9 =>
               @rdbmsTypes.DbValue::Floating32(
                 @ffi.loadf32(base49 + 8).to_double(),

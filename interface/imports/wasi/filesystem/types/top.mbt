@@ -667,7 +667,7 @@ pub fn Descriptor::write(
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
@@ -763,7 +763,7 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
         1 =>
           Option::Some(
             @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 40).to_uint64(),
+              seconds: @ffi.load64(return_area + 40).reinterpret_as_uint64(),
               nanoseconds: @ffi.load32(return_area + 48).reinterpret_as_uint(),
             },
           )
@@ -775,7 +775,7 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
         1 =>
           Option::Some(
             @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 64).to_uint64(),
+              seconds: @ffi.load64(return_area + 64).reinterpret_as_uint64(),
               nanoseconds: @ffi.load32(return_area + 72).reinterpret_as_uint(),
             },
           )
@@ -787,7 +787,7 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
         1 =>
           Option::Some(
             @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 88).to_uint64(),
+              seconds: @ffi.load64(return_area + 88).reinterpret_as_uint64(),
               nanoseconds: @ffi.load32(return_area + 96).reinterpret_as_uint(),
             },
           )
@@ -796,8 +796,8 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
       Result::Ok(
         DescriptorStat::{
           type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
-          link_count: @ffi.load64(return_area + 16).to_uint64(),
-          size: @ffi.load64(return_area + 24).to_uint64(),
+          link_count: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
+          size: @ffi.load64(return_area + 24).reinterpret_as_uint64(),
           data_access_timestamp: lifted,
           data_modification_timestamp: lifted8,
           status_change_timestamp: lifted13,
@@ -838,7 +838,7 @@ pub fn Descriptor::stat_at(
         1 =>
           Option::Some(
             @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 40).to_uint64(),
+              seconds: @ffi.load64(return_area + 40).reinterpret_as_uint64(),
               nanoseconds: @ffi.load32(return_area + 48).reinterpret_as_uint(),
             },
           )
@@ -850,7 +850,7 @@ pub fn Descriptor::stat_at(
         1 =>
           Option::Some(
             @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 64).to_uint64(),
+              seconds: @ffi.load64(return_area + 64).reinterpret_as_uint64(),
               nanoseconds: @ffi.load32(return_area + 72).reinterpret_as_uint(),
             },
           )
@@ -862,7 +862,7 @@ pub fn Descriptor::stat_at(
         1 =>
           Option::Some(
             @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 88).to_uint64(),
+              seconds: @ffi.load64(return_area + 88).reinterpret_as_uint64(),
               nanoseconds: @ffi.load32(return_area + 96).reinterpret_as_uint(),
             },
           )
@@ -871,8 +871,8 @@ pub fn Descriptor::stat_at(
       Result::Ok(
         DescriptorStat::{
           type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
-          link_count: @ffi.load64(return_area + 16).to_uint64(),
-          size: @ffi.load64(return_area + 24).to_uint64(),
+          link_count: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
+          size: @ffi.load64(return_area + 24).reinterpret_as_uint64(),
           data_access_timestamp: lifted,
           data_modification_timestamp: lifted8,
           status_change_timestamp: lifted13,
@@ -1207,8 +1207,8 @@ pub fn Descriptor::metadata_hash(
     0 =>
       Result::Ok(
         MetadataHashValue::{
-          lower: @ffi.load64(return_area + 8).to_uint64(),
-          upper: @ffi.load64(return_area + 16).to_uint64(),
+          lower: @ffi.load64(return_area + 8).reinterpret_as_uint64(),
+          upper: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
         },
       )
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -1239,8 +1239,8 @@ pub fn Descriptor::metadata_hash_at(
     0 =>
       Result::Ok(
         MetadataHashValue::{
-          lower: @ffi.load64(return_area + 8).to_uint64(),
-          upper: @ffi.load64(return_area + 16).to_uint64(),
+          lower: @ffi.load64(return_area + 8).reinterpret_as_uint64(),
+          upper: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
         },
       )
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 8)))

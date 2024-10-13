@@ -194,7 +194,9 @@ pub fn Connection::query(
                 @ffi.load32(base49 + 8).reinterpret_as_uint(),
               )
             8 =>
-              @rdbmsTypes.DbValue::Uint64(@ffi.load64(base49 + 8).to_uint64())
+              @rdbmsTypes.DbValue::Uint64(
+                @ffi.load64(base49 + 8).reinterpret_as_uint64(),
+              )
             9 =>
               @rdbmsTypes.DbValue::Floating32(
                 @ffi.loadf32(base49 + 8).to_double(),
@@ -355,7 +357,7 @@ pub fn Connection::execute(
     return_area,
   )
   let lifted59 = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
       let lifted = match @ffi.load8_u(return_area + 8) {
         0 => {

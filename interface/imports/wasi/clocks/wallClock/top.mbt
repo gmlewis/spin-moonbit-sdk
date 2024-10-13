@@ -24,7 +24,7 @@ pub fn now() -> Datetime {
   wasmImportNow(return_area)
   @ffi.free(return_area)
   return Datetime::{
-    seconds: @ffi.load64(return_area + 0).to_uint64(),
+    seconds: @ffi.load64(return_area + 0).reinterpret_as_uint64(),
     nanoseconds: @ffi.load32(return_area + 8).reinterpret_as_uint(),
   }
 }
@@ -37,7 +37,7 @@ pub fn resolution() -> Datetime {
   wasmImportResolution(return_area)
   @ffi.free(return_area)
   return Datetime::{
-    seconds: @ffi.load64(return_area + 0).to_uint64(),
+    seconds: @ffi.load64(return_area + 0).reinterpret_as_uint64(),
     nanoseconds: @ffi.load32(return_area + 8).reinterpret_as_uint(),
   }
 }

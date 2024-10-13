@@ -91,7 +91,10 @@ pub fn handle(
         17 => {
           let lifted68 : UInt64? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
-            1 => Option::Some(@ffi.load64(return_area + 24).to_uint64())
+            1 =>
+              Option::Some(
+                @ffi.load64(return_area + 24).reinterpret_as_uint64(),
+              )
             _ => panic()
           }
           @types.ErrorCode::HttpRequestBodySize(lifted68)
@@ -206,7 +209,10 @@ pub fn handle(
         28 => {
           let lifted148 : UInt64? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
-            1 => Option::Some(@ffi.load64(return_area + 24).to_uint64())
+            1 =>
+              Option::Some(
+                @ffi.load64(return_area + 24).reinterpret_as_uint64(),
+              )
             _ => panic()
           }
           @types.ErrorCode::HttpResponseBodySize(lifted148)

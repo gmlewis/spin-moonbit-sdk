@@ -53,8 +53,8 @@ pub fn send_request(
     dump_headers(incoming_headers)
   }
   let result = match content_length {
-    0 => Buffer::new()
-    size_hint => Buffer::new(~size_hint)
+    0 => @buffer.new()
+    size_hint => @buffer.new(~size_hint)
   }
   //
   let in_stream = match incoming_response.consume() {

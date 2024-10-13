@@ -696,7 +696,7 @@ pub fn TcpSocket::keep_alive_idle_time(
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketKeepAliveIdleTime(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
@@ -739,7 +739,7 @@ pub fn TcpSocket::keep_alive_interval(
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketKeepAliveInterval(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
@@ -860,7 +860,7 @@ pub fn TcpSocket::receive_buffer_size(
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketReceiveBufferSize(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
@@ -893,7 +893,7 @@ pub fn TcpSocket::send_buffer_size(
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketSendBufferSize(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }

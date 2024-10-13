@@ -59,7 +59,7 @@ pub fn malloc(size : Int) -> Int {
   let words = size / 4 + 1
   let address = malloc_inline(8 + words * 4)
   store32(address, 1)
-  store32(address + 4, words.lsl(8) | 246)
+  store32(address + 4, (words << 8) | 246)
   store8(address + words * 4 + 7, 3 - size % 4)
   address + 8
 }

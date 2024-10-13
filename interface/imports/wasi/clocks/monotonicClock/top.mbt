@@ -6,14 +6,14 @@
 /// produce a sequence of non-decreasing values.
 pub fn now() -> UInt64 {
   let result : Int64 = wasmImportNow()
-  return result.to_uint64()
+  return result.reinterpret_as_uint64()
 }
 
 /// Query the resolution of the clock. Returns the duration of time
 /// corresponding to a clock tick.
 pub fn resolution() -> UInt64 {
   let result : Int64 = wasmImportResolution()
-  return result.to_uint64()
+  return result.reinterpret_as_uint64()
 }
 
 /// Create a `pollable` which will resolve once the specified instant

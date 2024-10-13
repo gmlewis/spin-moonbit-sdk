@@ -26,5 +26,5 @@ pub fn get_random_bytes(len : UInt64) -> Bytes {
 /// represented as a `u64`.
 pub fn get_random_u64() -> UInt64 {
   let result : Int64 = wasmImportGetRandomU64()
-  return result.to_uint64()
+  return result.reinterpret_as_uint64()
 }

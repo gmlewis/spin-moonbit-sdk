@@ -536,7 +536,7 @@ pub fn UdpSocket::receive_buffer_size(
   let return_area = @ffi.malloc(16)
   wasmImportMethodUdpSocketReceiveBufferSize(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
@@ -569,7 +569,7 @@ pub fn UdpSocket::send_buffer_size(
   let return_area = @ffi.malloc(16)
   wasmImportMethodUdpSocketSendBufferSize(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
@@ -721,7 +721,7 @@ pub fn OutgoingDatagramStream::check_send(
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutgoingDatagramStreamCheckSend(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
@@ -822,7 +822,7 @@ pub fn OutgoingDatagramStream::send(
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
-    0 => Result::Ok(@ffi.load64(return_area + 8).to_uint64())
+    0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
