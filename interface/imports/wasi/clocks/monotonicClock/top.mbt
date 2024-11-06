@@ -19,7 +19,7 @@ pub fn resolution() -> UInt64 {
 /// Create a `pollable` which will resolve once the specified instant
 /// occured.
 pub fn subscribe_instant(when : UInt64) -> @poll.Pollable {
-  let result : Int = wasmImportSubscribeInstant(when.to_int64())
+  let result : Int = wasmImportSubscribeInstant(when.reinterpret_as_int64())
   return @poll.Pollable::Pollable(result)
 }
 
@@ -27,6 +27,6 @@ pub fn subscribe_instant(when : UInt64) -> @poll.Pollable {
 /// elapsed, starting at the time at which this function was called.
 /// occured.
 pub fn subscribe_duration(when : UInt64) -> @poll.Pollable {
-  let result : Int = wasmImportSubscribeDuration(when.to_int64())
+  let result : Int = wasmImportSubscribeDuration(when.reinterpret_as_int64())
   return @poll.Pollable::Pollable(result)
 }

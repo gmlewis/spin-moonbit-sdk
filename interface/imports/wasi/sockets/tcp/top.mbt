@@ -622,7 +622,7 @@ pub fn TcpSocket::set_listen_backlog_size(
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketSetListenBacklogSize(
     self._,
-    value.to_int64(),
+    value.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -711,7 +711,7 @@ pub fn TcpSocket::set_keep_alive_idle_time(
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketSetKeepAliveIdleTime(
     self._,
-    value.to_int64(),
+    value.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -754,7 +754,7 @@ pub fn TcpSocket::set_keep_alive_interval(
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketSetKeepAliveInterval(
     self._,
-    value.to_int64(),
+    value.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -875,7 +875,7 @@ pub fn TcpSocket::set_receive_buffer_size(
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketSetReceiveBufferSize(
     self._,
-    value.to_int64(),
+    value.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -908,7 +908,7 @@ pub fn TcpSocket::set_send_buffer_size(
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketSetSendBufferSize(
     self._,
-    value.to_int64(),
+    value.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {

@@ -1,10 +1,6 @@
 {
   "import": [
     {
-      "path": "gmlewis/spin-moonbit-sdk/ffi",
-      "alias": "ffi"
-    },
-    {
       "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll",
       "alias": "poll"
     }

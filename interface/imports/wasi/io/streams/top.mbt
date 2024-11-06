@@ -69,7 +69,11 @@ pub fn InputStream::read(
   len : UInt64
 ) -> Result[Bytes, StreamError] {
   let return_area = @ffi.malloc(12)
-  wasmImportMethodInputStreamRead(self._, len.to_int64(), return_area)
+  wasmImportMethodInputStreamRead(
+    self._,
+    len.reinterpret_as_int64(),
+    return_area,
+  )
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2bytes(@ffi.load32(return_area + 4))
@@ -99,7 +103,11 @@ pub fn InputStream::blocking_read(
   len : UInt64
 ) -> Result[Bytes, StreamError] {
   let return_area = @ffi.malloc(12)
-  wasmImportMethodInputStreamBlockingRead(self._, len.to_int64(), return_area)
+  wasmImportMethodInputStreamBlockingRead(
+    self._,
+    len.reinterpret_as_int64(),
+    return_area,
+  )
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2bytes(@ffi.load32(return_area + 4))
@@ -131,7 +139,11 @@ pub fn InputStream::skip(
   len : UInt64
 ) -> Result[UInt64, StreamError] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodInputStreamSkip(self._, len.to_int64(), return_area)
+  wasmImportMethodInputStreamSkip(
+    self._,
+    len.reinterpret_as_int64(),
+    return_area,
+  )
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
@@ -158,7 +170,11 @@ pub fn InputStream::blocking_skip(
   len : UInt64
 ) -> Result[UInt64, StreamError] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodInputStreamBlockingSkip(self._, len.to_int64(), return_area)
+  wasmImportMethodInputStreamBlockingSkip(
+    self._,
+    len.reinterpret_as_int64(),
+    return_area,
+  )
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
@@ -405,7 +421,11 @@ pub fn OutputStream::write_zeroes(
   len : UInt64
 ) -> Result[Unit, StreamError] {
   let return_area = @ffi.malloc(12)
-  wasmImportMethodOutputStreamWriteZeroes(self._, len.to_int64(), return_area)
+  wasmImportMethodOutputStreamWriteZeroes(
+    self._,
+    len.reinterpret_as_int64(),
+    return_area,
+  )
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -456,7 +476,7 @@ pub fn OutputStream::blocking_write_zeroes_and_flush(
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutputStreamBlockingWriteZeroesAndFlush(
     self._,
-    len.to_int64(),
+    len.reinterpret_as_int64(),
     return_area,
   )
   let lifted6 = match @ffi.load8_u(return_area + 0) {
@@ -497,7 +517,12 @@ pub fn OutputStream::splice(
   len : UInt64
 ) -> Result[UInt64, StreamError] {
   let return_area = @ffi.malloc(16)
-  wasmImportMethodOutputStreamSplice(self._, src._, len.to_int64(), return_area)
+  wasmImportMethodOutputStreamSplice(
+    self._,
+    src._,
+    len.reinterpret_as_int64(),
+    return_area,
+  )
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
@@ -531,7 +556,7 @@ pub fn OutputStream::blocking_splice(
   wasmImportMethodOutputStreamBlockingSplice(
     self._,
     src._,
-    len.to_int64(),
+    len.reinterpret_as_int64(),
     return_area,
   )
   let lifted6 = match @ffi.load8_u(return_area + 0) {

@@ -1169,7 +1169,7 @@ pub fn RequestOptions::set_connect_timeout(
 ) -> Result[Unit, Unit] {
   let (lowered, lowered3) = match duration {
     None => (0, 0L)
-    Some(payload2) => (1, payload2.to_int64())
+    Some(payload2) => (1, payload2.reinterpret_as_int64())
   }
   let result : Int = wasmImportMethodRequestOptionsSetConnectTimeout(
     self._,
@@ -1205,7 +1205,7 @@ pub fn RequestOptions::set_first_byte_timeout(
 ) -> Result[Unit, Unit] {
   let (lowered, lowered3) = match duration {
     None => (0, 0L)
-    Some(payload2) => (1, payload2.to_int64())
+    Some(payload2) => (1, payload2.reinterpret_as_int64())
   }
   let result : Int = wasmImportMethodRequestOptionsSetFirstByteTimeout(
     self._,
@@ -1243,7 +1243,7 @@ pub fn RequestOptions::set_between_bytes_timeout(
 ) -> Result[Unit, Unit] {
   let (lowered, lowered3) = match duration {
     None => (0, 0L)
-    Some(payload2) => (1, payload2.to_int64())
+    Some(payload2) => (1, payload2.reinterpret_as_int64())
   }
   let result : Int = wasmImportMethodRequestOptionsSetBetweenBytesTimeout(
     self._,
@@ -1357,7 +1357,7 @@ pub fn ResponseOutparam::set(
         HttpRequestBodySize(payload89) => {
           let (lowered96, lowered97) = match payload89 {
             None => (0, 0L)
-            Some(payload95) => (1, payload95.to_int64())
+            Some(payload95) => (1, payload95.reinterpret_as_int64())
           }
           (17, lowered96, lowered97, 0, 0, 0, 0)
         }
@@ -1471,7 +1471,7 @@ pub fn ResponseOutparam::set(
         HttpResponseBodySize(payload217) => {
           let (lowered224, lowered225) = match payload217 {
             None => (0, 0L)
-            Some(payload223) => (1, payload223.to_int64())
+            Some(payload223) => (1, payload223.reinterpret_as_int64())
           }
           (28, lowered224, lowered225, 0, 0, 0, 0)
         }

@@ -10,7 +10,7 @@
 /// a long period.
 pub fn get_insecure_random_bytes(len : UInt64) -> Bytes {
   let return_area = @ffi.malloc(8)
-  wasmImportGetInsecureRandomBytes(len.to_int64(), return_area)
+  wasmImportGetInsecureRandomBytes(len.reinterpret_as_int64(), return_area)
   let result = @ffi.ptr2bytes(@ffi.load32(return_area + 0))
   @ffi.free(return_area)
   return result

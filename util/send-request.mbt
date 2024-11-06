@@ -66,7 +66,6 @@ pub fn send_request(
     _ => return Err(@types.ErrorCode::InternalError(Some("unknown error 3")))
   }
   //
-  let mut count = 0L
   for {
     let buf = match in_stream.blocking_read(max_buf_size) {
       Ok(buf) => buf
@@ -79,7 +78,6 @@ pub fn send_request(
         return Err(@types.ErrorCode::InternalError(Some(msg)))
       }
     }
-    count += buf.length().to_int64()
     if buf.length() == 0 {
       break
     }

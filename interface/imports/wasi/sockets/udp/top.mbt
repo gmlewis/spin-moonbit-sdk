@@ -551,7 +551,7 @@ pub fn UdpSocket::set_receive_buffer_size(
   let return_area = @ffi.malloc(2)
   wasmImportMethodUdpSocketSetReceiveBufferSize(
     self._,
-    value.to_int64(),
+    value.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -584,7 +584,7 @@ pub fn UdpSocket::set_send_buffer_size(
   let return_area = @ffi.malloc(2)
   wasmImportMethodUdpSocketSetSendBufferSize(
     self._,
-    value.to_int64(),
+    value.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -635,7 +635,7 @@ pub fn IncomingDatagramStream::receive(
   let return_area = @ffi.malloc(12)
   wasmImportMethodIncomingDatagramStreamReceive(
     self._,
-    max_results.to_int64(),
+    max_results.reinterpret_as_int64(),
     return_area,
   )
   let lifted8 = match @ffi.load8_u(return_area + 0) {

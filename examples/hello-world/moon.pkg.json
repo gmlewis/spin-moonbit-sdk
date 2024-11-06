@@ -12,7 +12,6 @@
   "import": [
     "gmlewis/spin-moonbit-sdk/gen",
     "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
-    "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
     "gmlewis/spin-moonbit-sdk/util"
   ]
 }

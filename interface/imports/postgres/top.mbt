@@ -109,7 +109,7 @@ pub fn Connection::query(
       }
       Uint64(payload25) => {
         @ffi.store8(base + 0, 8)
-        @ffi.store64(base + 8, payload25.to_int64())
+        @ffi.store64(base + 8, payload25.reinterpret_as_int64())
         ()
       }
       Floating32(payload28) => {
@@ -313,7 +313,7 @@ pub fn Connection::execute(
       }
       Uint64(payload25) => {
         @ffi.store8(base + 0, 8)
-        @ffi.store64(base + 8, payload25.to_int64())
+        @ffi.store64(base + 8, payload25.reinterpret_as_int64())
         ()
       }
       Floating32(payload28) => {

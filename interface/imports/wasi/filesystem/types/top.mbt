@@ -384,7 +384,7 @@ pub fn Descriptor::read_via_stream(
   let return_area = @ffi.malloc(8)
   wasmImportMethodDescriptorReadViaStream(
     self._,
-    offset.to_int64(),
+    offset.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -412,7 +412,7 @@ pub fn Descriptor::write_via_stream(
   let return_area = @ffi.malloc(8)
   wasmImportMethodDescriptorWriteViaStream(
     self._,
-    offset.to_int64(),
+    offset.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -462,8 +462,8 @@ pub fn Descriptor::advise(
   let return_area = @ffi.malloc(2)
   wasmImportMethodDescriptorAdvise(
     self._,
-    offset.to_int64(),
-    length.to_int64(),
+    offset.reinterpret_as_int64(),
+    length.reinterpret_as_int64(),
     advice.ordinal(),
     return_area,
   )
@@ -547,7 +547,11 @@ pub fn Descriptor::set_size(
   size : UInt64
 ) -> Result[Unit, ErrorCode] {
   let return_area = @ffi.malloc(2)
-  wasmImportMethodDescriptorSetSize(self._, size.to_int64(), return_area)
+  wasmImportMethodDescriptorSetSize(
+    self._,
+    size.reinterpret_as_int64(),
+    return_area,
+  )
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -573,7 +577,7 @@ pub fn Descriptor::set_times(
     Timestamp(payload5) =>
       (
         2,
-        payload5.seconds.to_int64(),
+        payload5.seconds.reinterpret_as_int64(),
         payload5.nanoseconds.reinterpret_as_int(),
       )
     // _ => panic()
@@ -584,7 +588,7 @@ pub fn Descriptor::set_times(
     Timestamp(payload16) =>
       (
         2,
-        payload16.seconds.to_int64(),
+        payload16.seconds.reinterpret_as_int64(),
         payload16.nanoseconds.reinterpret_as_int(),
       )
     // _ => panic()
@@ -628,8 +632,8 @@ pub fn Descriptor::read(
   let return_area = @ffi.malloc(16)
   wasmImportMethodDescriptorRead(
     self._,
-    length.to_int64(),
-    offset.to_int64(),
+    length.reinterpret_as_int64(),
+    offset.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -663,7 +667,7 @@ pub fn Descriptor::write(
     self._,
     @ffi.bytes2ptr(buffer),
     buffer.length(),
-    offset.to_int64(),
+    offset.reinterpret_as_int64(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -906,7 +910,7 @@ pub fn Descriptor::set_times_at(
     Timestamp(payload5) =>
       (
         2,
-        payload5.seconds.to_int64(),
+        payload5.seconds.reinterpret_as_int64(),
         payload5.nanoseconds.reinterpret_as_int(),
       )
     // _ => panic()
@@ -917,7 +921,7 @@ pub fn Descriptor::set_times_at(
     Timestamp(payload16) =>
       (
         2,
-        payload16.seconds.to_int64(),
+        payload16.seconds.reinterpret_as_int64(),
         payload16.nanoseconds.reinterpret_as_int(),
       )
     // _ => panic()

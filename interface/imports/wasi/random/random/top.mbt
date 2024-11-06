@@ -14,7 +14,7 @@
 /// data.
 pub fn get_random_bytes(len : UInt64) -> Bytes {
   let return_area = @ffi.malloc(8)
-  wasmImportGetRandomBytes(len.to_int64(), return_area)
+  wasmImportGetRandomBytes(len.reinterpret_as_int64(), return_area)
   let result = @ffi.ptr2bytes(@ffi.load32(return_area + 0))
   @ffi.free(return_area)
   return result

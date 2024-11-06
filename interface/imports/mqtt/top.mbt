@@ -55,7 +55,7 @@ pub fn Connection::open(
     username.iter().count(),
     @ffi.str2ptr(password),
     password.iter().count(),
-    keep_alive_interval_in_secs.to_int64(),
+    keep_alive_interval_in_secs.reinterpret_as_int64(),
     return_area,
   )
   let lifted11 = match @ffi.load8_u(return_area + 0) {
