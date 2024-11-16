@@ -19,7 +19,7 @@
 ///
 /// The set of functions which can "downcast" an `error` into a more
 /// concrete type is open.
-pub type Error_ Int derive(Show, Eq)
+pub(all) type Error_ Int derive(Show, Eq)
 
 fn wasmImportResourceDropError_(resource : Int) = "wasi:io/error@0.2.0" "[resource-drop]error"
 

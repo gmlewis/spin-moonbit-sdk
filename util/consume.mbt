@@ -9,7 +9,7 @@ let max_buf_size = 4096UL
 pub fn consume(
   request : @types.OutgoingRequest,
   hash : @common.HashFunc?,
-  ~debug : Bool = false
+  debug~ : Bool = false
 ) -> Result[(Int64, String), @types.ErrorCode] {
   let (byte_func, sum_func) = match hash {
     Some(hash) => {
@@ -20,7 +20,7 @@ pub fn consume(
     _ => (None, fn() -> String { "" })
   }
   //
-  match consume_func(request, byte_func, ~debug) {
+  match consume_func(request, byte_func, debug~) {
     Ok(count) => Ok((count, sum_func()))
     Err(e) => Err(e)
   }
@@ -33,7 +33,7 @@ pub fn consume(
 pub fn consume_func(
   request : @types.OutgoingRequest,
   byte_func : ByteFunc?,
-  ~debug : Bool = false
+  debug~ : Bool = false
 ) -> Result[Int64, @types.ErrorCode] {
   let future = match @outgoingHandler.handle(request, None) {
     Ok(result) => result

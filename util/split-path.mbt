@@ -6,7 +6,7 @@ pub fn split_path(
 }
 
 fn split_method_and_path(
-  method : @types.Method,
+  http_method : @types.Method,
   path : String?
 ) -> (@types.Method, Array[String]) {
   let result = match path {
@@ -18,7 +18,7 @@ fn split_method_and_path(
       }
     _ => []
   }
-  (method, result)
+  (http_method, result)
 }
 
 test "split_path random cases" {

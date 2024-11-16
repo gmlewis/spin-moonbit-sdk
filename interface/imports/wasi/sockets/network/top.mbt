@@ -3,7 +3,7 @@
 /// An opaque resource that represents access to (a subset of) the network.
 /// This enables context-based security for networking.
 /// There is no need for this to map 1:1 to a physical network interface.
-pub type Network Int derive(Show, Eq)
+pub(all) type Network Int derive(Show, Eq)
 
 fn wasmImportResourceDropNetwork(resource : Int) = "wasi:sockets/network@0.2.0" "[resource-drop]network"
 
@@ -23,7 +23,7 @@ pub fn Network::drop(self : Network) -> Unit {
 /// - `concurrency-conflict`
 ///
 /// See each individual API for what the POSIX equivalents are. They sometimes differ per API.
-pub enum ErrorCode {
+pub(all) enum ErrorCode {
   UNKNOWN
   ACCESS_DENIED
   NOT_SUPPORTED
@@ -100,7 +100,7 @@ pub fn ErrorCode::from(self : Int) -> ErrorCode {
   }
 }
 
-pub enum IpAddressFamily {
+pub(all) enum IpAddressFamily {
   IPV4
   IPV6
 } derive(Show, Eq)
@@ -120,24 +120,24 @@ pub fn IpAddressFamily::from(self : Int) -> IpAddressFamily {
   }
 }
 
-pub enum IpAddress {
+pub(all) enum IpAddress {
   Ipv4((Byte, Byte, Byte, Byte))
   Ipv6((UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt))
 } derive(Show, Eq)
 
-pub struct Ipv4SocketAddress {
+pub(all) struct Ipv4SocketAddress {
   port : UInt
   address : (Byte, Byte, Byte, Byte)
 } derive(Show, Eq)
 
-pub struct Ipv6SocketAddress {
+pub(all) struct Ipv6SocketAddress {
   port : UInt
   flow_info : UInt
   address : (UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt)
   scope_id : UInt
 } derive(Show, Eq)
 
-pub enum IpSocketAddress {
+pub(all) enum IpSocketAddress {
   Ipv4(Ipv4SocketAddress)
   Ipv6(Ipv6SocketAddress)
 } derive(Show, Eq)

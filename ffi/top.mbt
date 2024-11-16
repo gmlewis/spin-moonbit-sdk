@@ -129,7 +129,7 @@ pub extern "wasm" fn ptr2double_array(ptr : Int) -> FixedArray[Double] =
 
 pub(open) trait Any {}
 
-pub struct Cleanup {
+pub(all) struct Cleanup {
   address : Int
   size : Int
   align : Int

@@ -1,13 +1,13 @@
 /// `new_request` creates a new outgoing request.
 pub fn new_request(
-  method : @types.Method,
+  http_method : @types.Method,
   url : String,
-  ~fields : Array[(String, Bytes)] = []
+  fields~ : Array[(String, Bytes)] = []
 ) -> @types.OutgoingRequest {
   let req = @types.OutgoingRequest::outgoing_request(
     @types.Fields::from_list(fields).unwrap(),
   )
-  req.set_method(method).unwrap()
+  req.set_method(http_method).unwrap()
   let i = url.index_of("://")
   if i > 0 {
     let scheme = match url.substring(end=i) {

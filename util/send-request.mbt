@@ -31,7 +31,7 @@
 /// `send_request` sends an outgoing request and waits for the response.
 pub fn send_request(
   request : @types.OutgoingRequest,
-  ~debug : Bool = false
+  debug~ : Bool = false
 ) -> Result[Bytes, @types.ErrorCode] {
   let future = match @outgoingHandler.handle(request, None) {
     Ok(result) => result
@@ -54,7 +54,7 @@ pub fn send_request(
   }
   let result = match content_length {
     0 => @buffer.new()
-    size_hint => @buffer.new(~size_hint)
+    size_hint => @buffer.new(size_hint~)
   }
   //
   let in_stream = match incoming_response.consume() {
