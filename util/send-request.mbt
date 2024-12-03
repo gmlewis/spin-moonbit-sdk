@@ -28,7 +28,7 @@
 //   }
 // }
 
-/// `send_request` sends an outgoing request and waits for the response.
+///| `send_request` sends an outgoing request and waits for the response.
 pub fn send_request(
   request : @types.OutgoingRequest,
   debug~ : Bool = false
@@ -87,6 +87,7 @@ pub fn send_request(
 }
 
 // `get_content_length` returns the `Content-Length` header or 0 if it doesn't exist.
+///|
 pub fn get_content_length(fields : @types.Fields) -> Int {
   match fields.get("Content-Length") {
     [value] =>

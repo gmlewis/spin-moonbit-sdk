@@ -1,9 +1,10 @@
-/// `ByteFunc` is a function that operates on a stream of bytes, one byte at a time.
+///| `ByteFunc` is a function that operates on a stream of bytes, one byte at a time.
 type ByteFunc (Byte) -> Unit
 
+///|
 let max_buf_size = 4096UL
 
-/// `consume` performs the provided `request`
+///| `consume` performs the provided `request`
 /// then consumes its output and optionally calculates
 /// the stream's hash, reporting the byte count and hash back to the caller.
 pub fn consume(
@@ -26,7 +27,7 @@ pub fn consume(
   }
 }
 
-/// `consume_func` performs the provided `request`
+///| `consume_func` performs the provided `request`
 /// then consumes its output and runs the optional
 /// `byte_func` on each byte, then returns the content length
 /// back to the caller.

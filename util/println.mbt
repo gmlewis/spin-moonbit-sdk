@@ -1,4 +1,4 @@
-/// `println` prints a string to wasi stdout with a newline.
+///| `println` prints a string to wasi stdout with a newline.
 pub fn println(s : String) -> Unit {
   let stdout = @stdout.get_stdout()
   stdout.write(@base64.str2bytes(s)).unwrap()

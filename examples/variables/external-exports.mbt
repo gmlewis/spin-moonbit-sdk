@@ -1,3 +1,4 @@
+///|
 pub fn cabi_realloc(
   src_offset : Int,
   src_size : Int,
@@ -7,6 +8,7 @@ pub fn cabi_realloc(
   @gen.cabi_realloc(src_offset, src_size, _dst_alignment, dst_size)
 }
 
+///|
 pub fn wasmExportHandle(p0 : Int, p1 : Int) -> Unit {
   handle(
     @types.IncomingRequest::IncomingRequest(p0),

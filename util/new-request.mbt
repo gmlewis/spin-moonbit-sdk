@@ -1,4 +1,4 @@
-/// `new_request` creates a new outgoing request.
+///| `new_request` creates a new outgoing request.
 pub fn new_request(
   http_method : @types.Method,
   url : String,
