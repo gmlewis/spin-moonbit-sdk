@@ -9,7 +9,7 @@ let max_buf_size = 4096UL
 /// the stream's hash, reporting the byte count and hash back to the caller.
 pub fn consume(
   request : @types.OutgoingRequest,
-  hash : @common.HashFunc?,
+  hash : &@common.HashFunc?,
   debug~ : Bool = false
 ) -> Result[(Int64, String), @types.ErrorCode] {
   let (byte_func, sum_func) = match hash {

@@ -297,9 +297,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               )
             _ => panic()
           }
-          ErrorCode::DnsError(
-            DnsErrorPayload::{ rcode: lifted, info_code: lifted14 },
-          )
+          ErrorCode::DnsError(DnsErrorPayload::{
+            rcode: lifted,
+            info_code: lifted14,
+          })
         }
         2 => ErrorCode::DestinationNotFound
         3 => ErrorCode::DestinationUnavailable
@@ -327,12 +328,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
             }
             _ => panic()
           }
-          ErrorCode::TlsAlertReceived(
-            TlsAlertReceivedPayload::{
-              alert_id: lifted45,
-              alert_message: lifted51,
-            },
-          )
+          ErrorCode::TlsAlertReceived(TlsAlertReceivedPayload::{
+            alert_id: lifted45,
+            alert_message: lifted51,
+          })
         }
         15 => ErrorCode::HttpRequestDenied
         16 => ErrorCode::HttpRequestLengthRequired
@@ -380,9 +379,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                   )
                 _ => panic()
               }
-              Option::Some(
-                FieldSizePayload::{ field_name: lifted87, field_size: lifted92 },
-              )
+              Option::Some(FieldSizePayload::{
+                field_name: lifted87,
+                field_size: lifted92,
+              })
             }
             _ => panic()
           }
@@ -412,9 +412,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
-          ErrorCode::HttpRequestTrailerSize(
-            FieldSizePayload::{ field_name: lifted108, field_size: lifted113 },
-          )
+          ErrorCode::HttpRequestTrailerSize(FieldSizePayload::{
+            field_name: lifted108,
+            field_size: lifted113,
+          })
         }
         25 => ErrorCode::HttpResponseIncomplete
         26 => {
@@ -441,9 +442,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
-          ErrorCode::HttpResponseHeaderSize(
-            FieldSizePayload::{ field_name: lifted130, field_size: lifted135 },
-          )
+          ErrorCode::HttpResponseHeaderSize(FieldSizePayload::{
+            field_name: lifted130,
+            field_size: lifted135,
+          })
         }
         28 => {
           let lifted142 : UInt64? = match @ffi.load8_u(return_area + 16) {
@@ -480,9 +482,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
-          ErrorCode::HttpResponseTrailerSize(
-            FieldSizePayload::{ field_name: lifted157, field_size: lifted162 },
-          )
+          ErrorCode::HttpResponseTrailerSize(FieldSizePayload::{
+            field_name: lifted157,
+            field_size: lifted162,
+          })
         }
         31 => {
           let lifted170 : String? = match @ffi.load8_u(return_area + 16) {
@@ -559,7 +562,7 @@ pub fn Fields::from_list(
   entries : Array[(String, Bytes)]
 ) -> Result[Fields, HeaderError] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(entries.length() * 16)
   for index = 0; index < entries.length(); index = index + 1 {
     let element : (String, Bytes) = entries[index]
@@ -639,7 +642,7 @@ pub fn Fields::set(
   value : Array[Bytes]
 ) -> Result[Unit, HeaderError] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(value.length() * 8)
   for index = 0; index < value.length(); index = index + 1 {
     let element : Bytes = value[index]
@@ -952,7 +955,7 @@ pub fn OutgoingRequest::set_method(
   method : Method
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let (lowered, lowered27, lowered28) = match method {
     Get => (0, 0, 0)
     Head => (1, 0, 0)
@@ -1010,7 +1013,7 @@ pub fn OutgoingRequest::set_path_with_query(
   path_with_query : String?
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let (lowered, lowered3, lowered4) = match path_with_query {
     None => (0, 0, 0)
     Some(payload2) => {
@@ -1067,7 +1070,7 @@ pub fn OutgoingRequest::set_scheme(
   scheme : Scheme?
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let (lowered14, lowered15, lowered16, lowered17) = match scheme {
     None => (0, 0, 0, 0)
     Some(payload2) => {
@@ -1127,7 +1130,7 @@ pub fn OutgoingRequest::set_authority(
   authority : String?
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let (lowered, lowered3, lowered4) = match authority {
     None => (0, 0, 0)
     Some(payload2) => {
@@ -1294,7 +1297,7 @@ pub fn ResponseOutparam::set(
   response : Result[OutgoingResponse, ErrorCode]
 ) -> Unit {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let (
     lowered315,
     lowered316,
@@ -1729,9 +1732,10 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
-                  ErrorCode::DnsError(
-                    DnsErrorPayload::{ rcode: lifted20, info_code: lifted25 },
-                  )
+                  ErrorCode::DnsError(DnsErrorPayload::{
+                    rcode: lifted20,
+                    info_code: lifted25,
+                  })
                 }
                 2 => ErrorCode::DestinationNotFound
                 3 => ErrorCode::DestinationUnavailable
@@ -1760,12 +1764,10 @@ pub fn FutureTrailers::get(
                     }
                     _ => panic()
                   }
-                  ErrorCode::TlsAlertReceived(
-                    TlsAlertReceivedPayload::{
-                      alert_id: lifted56,
-                      alert_message: lifted62,
-                    },
-                  )
+                  ErrorCode::TlsAlertReceived(TlsAlertReceivedPayload::{
+                    alert_id: lifted56,
+                    alert_message: lifted62,
+                  })
                 }
                 15 => ErrorCode::HttpRequestDenied
                 16 => ErrorCode::HttpRequestLengthRequired
@@ -1820,12 +1822,10 @@ pub fn FutureTrailers::get(
                           )
                         _ => panic()
                       }
-                      Option::Some(
-                        FieldSizePayload::{
-                          field_name: lifted98,
-                          field_size: lifted103,
-                        },
-                      )
+                      Option::Some(FieldSizePayload::{
+                        field_name: lifted98,
+                        field_size: lifted103,
+                      })
                     }
                     _ => panic()
                   }
@@ -1862,12 +1862,10 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
-                  ErrorCode::HttpRequestTrailerSize(
-                    FieldSizePayload::{
-                      field_name: lifted119,
-                      field_size: lifted124,
-                    },
-                  )
+                  ErrorCode::HttpRequestTrailerSize(FieldSizePayload::{
+                    field_name: lifted119,
+                    field_size: lifted124,
+                  })
                 }
                 25 => ErrorCode::HttpResponseIncomplete
                 26 => {
@@ -1901,12 +1899,10 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
-                  ErrorCode::HttpResponseHeaderSize(
-                    FieldSizePayload::{
-                      field_name: lifted141,
-                      field_size: lifted146,
-                    },
-                  )
+                  ErrorCode::HttpResponseHeaderSize(FieldSizePayload::{
+                    field_name: lifted141,
+                    field_size: lifted146,
+                  })
                 }
                 28 => {
                   let lifted153 : UInt64? = match
@@ -1951,12 +1947,10 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
-                  ErrorCode::HttpResponseTrailerSize(
-                    FieldSizePayload::{
-                      field_name: lifted168,
-                      field_size: lifted173,
-                    },
-                  )
+                  ErrorCode::HttpResponseTrailerSize(FieldSizePayload::{
+                    field_name: lifted168,
+                    field_size: lifted173,
+                  })
                 }
                 31 => {
                   let lifted181 : String? = match
@@ -2161,9 +2155,10 @@ pub fn OutgoingBody::finish(
               )
             _ => panic()
           }
-          ErrorCode::DnsError(
-            DnsErrorPayload::{ rcode: lifted, info_code: lifted20 },
-          )
+          ErrorCode::DnsError(DnsErrorPayload::{
+            rcode: lifted,
+            info_code: lifted20,
+          })
         }
         2 => ErrorCode::DestinationNotFound
         3 => ErrorCode::DestinationUnavailable
@@ -2191,12 +2186,10 @@ pub fn OutgoingBody::finish(
             }
             _ => panic()
           }
-          ErrorCode::TlsAlertReceived(
-            TlsAlertReceivedPayload::{
-              alert_id: lifted51,
-              alert_message: lifted57,
-            },
-          )
+          ErrorCode::TlsAlertReceived(TlsAlertReceivedPayload::{
+            alert_id: lifted51,
+            alert_message: lifted57,
+          })
         }
         15 => ErrorCode::HttpRequestDenied
         16 => ErrorCode::HttpRequestLengthRequired
@@ -2244,9 +2237,10 @@ pub fn OutgoingBody::finish(
                   )
                 _ => panic()
               }
-              Option::Some(
-                FieldSizePayload::{ field_name: lifted93, field_size: lifted98 },
-              )
+              Option::Some(FieldSizePayload::{
+                field_name: lifted93,
+                field_size: lifted98,
+              })
             }
             _ => panic()
           }
@@ -2276,9 +2270,10 @@ pub fn OutgoingBody::finish(
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
-          ErrorCode::HttpRequestTrailerSize(
-            FieldSizePayload::{ field_name: lifted114, field_size: lifted119 },
-          )
+          ErrorCode::HttpRequestTrailerSize(FieldSizePayload::{
+            field_name: lifted114,
+            field_size: lifted119,
+          })
         }
         25 => ErrorCode::HttpResponseIncomplete
         26 => {
@@ -2305,9 +2300,10 @@ pub fn OutgoingBody::finish(
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
-          ErrorCode::HttpResponseHeaderSize(
-            FieldSizePayload::{ field_name: lifted136, field_size: lifted141 },
-          )
+          ErrorCode::HttpResponseHeaderSize(FieldSizePayload::{
+            field_name: lifted136,
+            field_size: lifted141,
+          })
         }
         28 => {
           let lifted148 : UInt64? = match @ffi.load8_u(return_area + 16) {
@@ -2344,9 +2340,10 @@ pub fn OutgoingBody::finish(
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
-          ErrorCode::HttpResponseTrailerSize(
-            FieldSizePayload::{ field_name: lifted163, field_size: lifted168 },
-          )
+          ErrorCode::HttpResponseTrailerSize(FieldSizePayload::{
+            field_name: lifted163,
+            field_size: lifted168,
+          })
         }
         31 => {
           let lifted176 : String? = match @ffi.load8_u(return_area + 16) {
@@ -2460,9 +2457,10 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
-                  ErrorCode::DnsError(
-                    DnsErrorPayload::{ rcode: lifted, info_code: lifted20 },
-                  )
+                  ErrorCode::DnsError(DnsErrorPayload::{
+                    rcode: lifted,
+                    info_code: lifted20,
+                  })
                 }
                 2 => ErrorCode::DestinationNotFound
                 3 => ErrorCode::DestinationUnavailable
@@ -2491,12 +2489,10 @@ pub fn FutureIncomingResponse::get(
                     }
                     _ => panic()
                   }
-                  ErrorCode::TlsAlertReceived(
-                    TlsAlertReceivedPayload::{
-                      alert_id: lifted51,
-                      alert_message: lifted57,
-                    },
-                  )
+                  ErrorCode::TlsAlertReceived(TlsAlertReceivedPayload::{
+                    alert_id: lifted51,
+                    alert_message: lifted57,
+                  })
                 }
                 15 => ErrorCode::HttpRequestDenied
                 16 => ErrorCode::HttpRequestLengthRequired
@@ -2551,12 +2547,10 @@ pub fn FutureIncomingResponse::get(
                           )
                         _ => panic()
                       }
-                      Option::Some(
-                        FieldSizePayload::{
-                          field_name: lifted93,
-                          field_size: lifted98,
-                        },
-                      )
+                      Option::Some(FieldSizePayload::{
+                        field_name: lifted93,
+                        field_size: lifted98,
+                      })
                     }
                     _ => panic()
                   }
@@ -2593,12 +2587,10 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
-                  ErrorCode::HttpRequestTrailerSize(
-                    FieldSizePayload::{
-                      field_name: lifted114,
-                      field_size: lifted119,
-                    },
-                  )
+                  ErrorCode::HttpRequestTrailerSize(FieldSizePayload::{
+                    field_name: lifted114,
+                    field_size: lifted119,
+                  })
                 }
                 25 => ErrorCode::HttpResponseIncomplete
                 26 => {
@@ -2632,12 +2624,10 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
-                  ErrorCode::HttpResponseHeaderSize(
-                    FieldSizePayload::{
-                      field_name: lifted136,
-                      field_size: lifted141,
-                    },
-                  )
+                  ErrorCode::HttpResponseHeaderSize(FieldSizePayload::{
+                    field_name: lifted136,
+                    field_size: lifted141,
+                  })
                 }
                 28 => {
                   let lifted148 : UInt64? = match
@@ -2682,12 +2672,10 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
-                  ErrorCode::HttpResponseTrailerSize(
-                    FieldSizePayload::{
-                      field_name: lifted163,
-                      field_size: lifted168,
-                    },
-                  )
+                  ErrorCode::HttpResponseTrailerSize(FieldSizePayload::{
+                    field_name: lifted163,
+                    field_size: lifted168,
+                  })
                 }
                 31 => {
                   let lifted176 : String? = match

@@ -793,48 +793,40 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
       let lifted : @wallClock.Datetime? = match @ffi.load8_u(return_area + 32) {
         0 => Option::None
         1 =>
-          Option::Some(
-            @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 40).reinterpret_as_uint64(),
-              nanoseconds: @ffi.load32(return_area + 48).reinterpret_as_uint(),
-            },
-          )
+          Option::Some(@wallClock.Datetime::{
+            seconds: @ffi.load64(return_area + 40).reinterpret_as_uint64(),
+            nanoseconds: @ffi.load32(return_area + 48).reinterpret_as_uint(),
+          })
         _ => panic()
       }
       let lifted8 : @wallClock.Datetime? = match
         @ffi.load8_u(return_area + 56) {
         0 => Option::None
         1 =>
-          Option::Some(
-            @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 64).reinterpret_as_uint64(),
-              nanoseconds: @ffi.load32(return_area + 72).reinterpret_as_uint(),
-            },
-          )
+          Option::Some(@wallClock.Datetime::{
+            seconds: @ffi.load64(return_area + 64).reinterpret_as_uint64(),
+            nanoseconds: @ffi.load32(return_area + 72).reinterpret_as_uint(),
+          })
         _ => panic()
       }
       let lifted13 : @wallClock.Datetime? = match
         @ffi.load8_u(return_area + 80) {
         0 => Option::None
         1 =>
-          Option::Some(
-            @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 88).reinterpret_as_uint64(),
-              nanoseconds: @ffi.load32(return_area + 96).reinterpret_as_uint(),
-            },
-          )
+          Option::Some(@wallClock.Datetime::{
+            seconds: @ffi.load64(return_area + 88).reinterpret_as_uint64(),
+            nanoseconds: @ffi.load32(return_area + 96).reinterpret_as_uint(),
+          })
         _ => panic()
       }
-      Result::Ok(
-        DescriptorStat::{
-          type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
-          link_count: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
-          size: @ffi.load64(return_area + 24).reinterpret_as_uint64(),
-          data_access_timestamp: lifted,
-          data_modification_timestamp: lifted8,
-          status_change_timestamp: lifted13,
-        },
-      )
+      Result::Ok(DescriptorStat::{
+        type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
+        link_count: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
+        size: @ffi.load64(return_area + 24).reinterpret_as_uint64(),
+        data_access_timestamp: lifted,
+        data_modification_timestamp: lifted8,
+        status_change_timestamp: lifted13,
+      })
     }
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
@@ -868,48 +860,40 @@ pub fn Descriptor::stat_at(
       let lifted : @wallClock.Datetime? = match @ffi.load8_u(return_area + 32) {
         0 => Option::None
         1 =>
-          Option::Some(
-            @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 40).reinterpret_as_uint64(),
-              nanoseconds: @ffi.load32(return_area + 48).reinterpret_as_uint(),
-            },
-          )
+          Option::Some(@wallClock.Datetime::{
+            seconds: @ffi.load64(return_area + 40).reinterpret_as_uint64(),
+            nanoseconds: @ffi.load32(return_area + 48).reinterpret_as_uint(),
+          })
         _ => panic()
       }
       let lifted8 : @wallClock.Datetime? = match
         @ffi.load8_u(return_area + 56) {
         0 => Option::None
         1 =>
-          Option::Some(
-            @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 64).reinterpret_as_uint64(),
-              nanoseconds: @ffi.load32(return_area + 72).reinterpret_as_uint(),
-            },
-          )
+          Option::Some(@wallClock.Datetime::{
+            seconds: @ffi.load64(return_area + 64).reinterpret_as_uint64(),
+            nanoseconds: @ffi.load32(return_area + 72).reinterpret_as_uint(),
+          })
         _ => panic()
       }
       let lifted13 : @wallClock.Datetime? = match
         @ffi.load8_u(return_area + 80) {
         0 => Option::None
         1 =>
-          Option::Some(
-            @wallClock.Datetime::{
-              seconds: @ffi.load64(return_area + 88).reinterpret_as_uint64(),
-              nanoseconds: @ffi.load32(return_area + 96).reinterpret_as_uint(),
-            },
-          )
+          Option::Some(@wallClock.Datetime::{
+            seconds: @ffi.load64(return_area + 88).reinterpret_as_uint64(),
+            nanoseconds: @ffi.load32(return_area + 96).reinterpret_as_uint(),
+          })
         _ => panic()
       }
-      Result::Ok(
-        DescriptorStat::{
-          type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
-          link_count: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
-          size: @ffi.load64(return_area + 24).reinterpret_as_uint64(),
-          data_access_timestamp: lifted,
-          data_modification_timestamp: lifted8,
-          status_change_timestamp: lifted13,
-        },
-      )
+      Result::Ok(DescriptorStat::{
+        type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
+        link_count: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
+        size: @ffi.load64(return_area + 24).reinterpret_as_uint64(),
+        data_access_timestamp: lifted,
+        data_modification_timestamp: lifted8,
+        status_change_timestamp: lifted13,
+      })
     }
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
@@ -1237,12 +1221,10 @@ pub fn Descriptor::metadata_hash(
   wasmImportMethodDescriptorMetadataHash(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
-      Result::Ok(
-        MetadataHashValue::{
-          lower: @ffi.load64(return_area + 8).reinterpret_as_uint64(),
-          upper: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
-        },
-      )
+      Result::Ok(MetadataHashValue::{
+        lower: @ffi.load64(return_area + 8).reinterpret_as_uint64(),
+        upper: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
+      })
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
@@ -1269,12 +1251,10 @@ pub fn Descriptor::metadata_hash_at(
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
-      Result::Ok(
-        MetadataHashValue::{
-          lower: @ffi.load64(return_area + 8).reinterpret_as_uint64(),
-          upper: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
-        },
-      )
+      Result::Ok(MetadataHashValue::{
+        lower: @ffi.load64(return_area + 8).reinterpret_as_uint64(),
+        upper: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
+      })
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 8)))
     _ => panic()
   }
@@ -1295,12 +1275,10 @@ pub fn DirectoryEntryStream::read_directory_entry(
         0 => Option::None
         1 => {
           let result = @ffi.ptr2str(@ffi.load32(return_area + 12))
-          Option::Some(
-            DirectoryEntry::{
-              type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
-              name: result,
-            },
-          )
+          Option::Some(DirectoryEntry::{
+            type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
+            name: result,
+          })
         }
         _ => panic()
       }

@@ -343,55 +343,35 @@ pub fn UdpSocket::local_address(
     0 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
         0 =>
-          @network.IpSocketAddress::Ipv4(
-            @network.Ipv4SocketAddress::{
-              port: @ffi.load16_u(return_area + 8)
-              .land(0xFFFF)
-              .reinterpret_as_uint(),
-              address: (
-                @ffi.load8_u(return_area + 10).to_byte(),
-                @ffi.load8_u(return_area + 11).to_byte(),
-                @ffi.load8_u(return_area + 12).to_byte(),
-                @ffi.load8_u(return_area + 13).to_byte(),
-              ),
-            },
-          )
+          @network.IpSocketAddress::Ipv4(@network.Ipv4SocketAddress::{
+            port: @ffi.load16_u(return_area + 8)
+            .land(0xFFFF)
+            .reinterpret_as_uint(),
+            address: (
+              @ffi.load8_u(return_area + 10).to_byte(),
+              @ffi.load8_u(return_area + 11).to_byte(),
+              @ffi.load8_u(return_area + 12).to_byte(),
+              @ffi.load8_u(return_area + 13).to_byte(),
+            ),
+          })
         1 =>
-          @network.IpSocketAddress::Ipv6(
-            @network.Ipv6SocketAddress::{
-              port: @ffi.load16_u(return_area + 8)
-              .land(0xFFFF)
-              .reinterpret_as_uint(),
-              flow_info: @ffi.load32(return_area + 12).reinterpret_as_uint(),
-              address: (
-                @ffi.load16_u(return_area + 16)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 18)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 20)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 22)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 24)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 26)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 28)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 30)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-              ),
-              scope_id: @ffi.load32(return_area + 32).reinterpret_as_uint(),
-            },
-          )
+          @network.IpSocketAddress::Ipv6(@network.Ipv6SocketAddress::{
+            port: @ffi.load16_u(return_area + 8)
+            .land(0xFFFF)
+            .reinterpret_as_uint(),
+            flow_info: @ffi.load32(return_area + 12).reinterpret_as_uint(),
+            address: (
+              @ffi.load16_u(return_area + 16).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 18).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 20).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 22).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 24).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 26).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 28).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 30).land(0xFFFF).reinterpret_as_uint(),
+            ),
+            scope_id: @ffi.load32(return_area + 32).reinterpret_as_uint(),
+          })
         _ => panic()
       }
       Result::Ok(lifted)
@@ -422,55 +402,35 @@ pub fn UdpSocket::remote_address(
     0 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
         0 =>
-          @network.IpSocketAddress::Ipv4(
-            @network.Ipv4SocketAddress::{
-              port: @ffi.load16_u(return_area + 8)
-              .land(0xFFFF)
-              .reinterpret_as_uint(),
-              address: (
-                @ffi.load8_u(return_area + 10).to_byte(),
-                @ffi.load8_u(return_area + 11).to_byte(),
-                @ffi.load8_u(return_area + 12).to_byte(),
-                @ffi.load8_u(return_area + 13).to_byte(),
-              ),
-            },
-          )
+          @network.IpSocketAddress::Ipv4(@network.Ipv4SocketAddress::{
+            port: @ffi.load16_u(return_area + 8)
+            .land(0xFFFF)
+            .reinterpret_as_uint(),
+            address: (
+              @ffi.load8_u(return_area + 10).to_byte(),
+              @ffi.load8_u(return_area + 11).to_byte(),
+              @ffi.load8_u(return_area + 12).to_byte(),
+              @ffi.load8_u(return_area + 13).to_byte(),
+            ),
+          })
         1 =>
-          @network.IpSocketAddress::Ipv6(
-            @network.Ipv6SocketAddress::{
-              port: @ffi.load16_u(return_area + 8)
-              .land(0xFFFF)
-              .reinterpret_as_uint(),
-              flow_info: @ffi.load32(return_area + 12).reinterpret_as_uint(),
-              address: (
-                @ffi.load16_u(return_area + 16)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 18)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 20)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 22)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 24)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 26)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 28)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                @ffi.load16_u(return_area + 30)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-              ),
-              scope_id: @ffi.load32(return_area + 32).reinterpret_as_uint(),
-            },
-          )
+          @network.IpSocketAddress::Ipv6(@network.Ipv6SocketAddress::{
+            port: @ffi.load16_u(return_area + 8)
+            .land(0xFFFF)
+            .reinterpret_as_uint(),
+            flow_info: @ffi.load32(return_area + 12).reinterpret_as_uint(),
+            address: (
+              @ffi.load16_u(return_area + 16).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 18).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 20).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 22).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 24).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 26).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 28).land(0xFFFF).reinterpret_as_uint(),
+              @ffi.load16_u(return_area + 30).land(0xFFFF).reinterpret_as_uint(),
+            ),
+            scope_id: @ffi.load32(return_area + 32).reinterpret_as_uint(),
+          })
         _ => panic()
       }
       Result::Ok(lifted)
@@ -659,39 +619,31 @@ pub fn IncomingDatagramStream::receive(
         let result = @ffi.ptr2bytes(@ffi.load32(base1 + 0))
         let lifted = match @ffi.load8_u(base1 + 8) {
           0 =>
-            @network.IpSocketAddress::Ipv4(
-              @network.Ipv4SocketAddress::{
-                port: @ffi.load16_u(base1 + 12)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                address: (
-                  @ffi.load8_u(base1 + 14).to_byte(),
-                  @ffi.load8_u(base1 + 15).to_byte(),
-                  @ffi.load8_u(base1 + 16).to_byte(),
-                  @ffi.load8_u(base1 + 17).to_byte(),
-                ),
-              },
-            )
+            @network.IpSocketAddress::Ipv4(@network.Ipv4SocketAddress::{
+              port: @ffi.load16_u(base1 + 12).land(0xFFFF).reinterpret_as_uint(),
+              address: (
+                @ffi.load8_u(base1 + 14).to_byte(),
+                @ffi.load8_u(base1 + 15).to_byte(),
+                @ffi.load8_u(base1 + 16).to_byte(),
+                @ffi.load8_u(base1 + 17).to_byte(),
+              ),
+            })
           1 =>
-            @network.IpSocketAddress::Ipv6(
-              @network.Ipv6SocketAddress::{
-                port: @ffi.load16_u(base1 + 12)
-                .land(0xFFFF)
-                .reinterpret_as_uint(),
-                flow_info: @ffi.load32(base1 + 16).reinterpret_as_uint(),
-                address: (
-                  @ffi.load16_u(base1 + 20).land(0xFFFF).reinterpret_as_uint(),
-                  @ffi.load16_u(base1 + 22).land(0xFFFF).reinterpret_as_uint(),
-                  @ffi.load16_u(base1 + 24).land(0xFFFF).reinterpret_as_uint(),
-                  @ffi.load16_u(base1 + 26).land(0xFFFF).reinterpret_as_uint(),
-                  @ffi.load16_u(base1 + 28).land(0xFFFF).reinterpret_as_uint(),
-                  @ffi.load16_u(base1 + 30).land(0xFFFF).reinterpret_as_uint(),
-                  @ffi.load16_u(base1 + 32).land(0xFFFF).reinterpret_as_uint(),
-                  @ffi.load16_u(base1 + 34).land(0xFFFF).reinterpret_as_uint(),
-                ),
-                scope_id: @ffi.load32(base1 + 36).reinterpret_as_uint(),
-              },
-            )
+            @network.IpSocketAddress::Ipv6(@network.Ipv6SocketAddress::{
+              port: @ffi.load16_u(base1 + 12).land(0xFFFF).reinterpret_as_uint(),
+              flow_info: @ffi.load32(base1 + 16).reinterpret_as_uint(),
+              address: (
+                @ffi.load16_u(base1 + 20).land(0xFFFF).reinterpret_as_uint(),
+                @ffi.load16_u(base1 + 22).land(0xFFFF).reinterpret_as_uint(),
+                @ffi.load16_u(base1 + 24).land(0xFFFF).reinterpret_as_uint(),
+                @ffi.load16_u(base1 + 26).land(0xFFFF).reinterpret_as_uint(),
+                @ffi.load16_u(base1 + 28).land(0xFFFF).reinterpret_as_uint(),
+                @ffi.load16_u(base1 + 30).land(0xFFFF).reinterpret_as_uint(),
+                @ffi.load16_u(base1 + 32).land(0xFFFF).reinterpret_as_uint(),
+                @ffi.load16_u(base1 + 34).land(0xFFFF).reinterpret_as_uint(),
+              ),
+              scope_id: @ffi.load32(base1 + 36).reinterpret_as_uint(),
+            })
           _ => panic()
         }
         array.push(IncomingDatagram::{ data: result, remote_address: lifted })

@@ -4,7 +4,7 @@
 pub fn stream(
   request : @types.OutgoingRequest,
   response_out : @types.ResponseOutparam,
-  hash : @common.HashFunc?,
+  hash : &@common.HashFunc?,
   debug~ : Bool = false
 ) -> Result[(Int64, String), @types.ErrorCode] {
   let (byte_func, sum_func) = match hash {

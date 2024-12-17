@@ -78,15 +78,13 @@ pub fn infer(
   let lifted21 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
-      Result::Ok(
-        InferencingResult::{
-          text: result,
-          usage: InferencingUsage::{
-            prompt_token_count: @ffi.load32(return_area + 12).reinterpret_as_uint(),
-            generated_token_count: @ffi.load32(return_area + 16).reinterpret_as_uint(),
-          },
+      Result::Ok(InferencingResult::{
+        text: result,
+        usage: InferencingUsage::{
+          prompt_token_count: @ffi.load32(return_area + 12).reinterpret_as_uint(),
+          generated_token_count: @ffi.load32(return_area + 16).reinterpret_as_uint(),
         },
-      )
+      })
     }
     1 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
@@ -148,14 +146,12 @@ pub fn generate_embeddings(
         array7.push(array)
       }
       @ffi.free(@ffi.load32(return_area + 4))
-      Result::Ok(
-        EmbeddingsResult::{
-          embeddings: array7,
-          usage: EmbeddingsUsage::{
-            prompt_token_count: @ffi.load32(return_area + 12).reinterpret_as_uint(),
-          },
+      Result::Ok(EmbeddingsResult::{
+        embeddings: array7,
+        usage: EmbeddingsUsage::{
+          prompt_token_count: @ffi.load32(return_area + 12).reinterpret_as_uint(),
         },
-      )
+      })
     }
     1 => {
       let lifted = match @ffi.load8_u(return_area + 4) {

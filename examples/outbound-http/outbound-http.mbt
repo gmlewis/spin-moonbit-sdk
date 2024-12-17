@@ -47,7 +47,7 @@ fn handle_get() -> @types.OutgoingResponse {
 fn consume(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam,
-  hash : @common.HashFunc?
+  hash : &@common.HashFunc?
 ) -> Unit {
   let url = match @util.get_body_bytes(request) {
     Ok(body) => @base64.bytes2str(body)
@@ -83,7 +83,7 @@ fn consume(
 fn stream(
   request : @types.IncomingRequest,
   response_out : @types.ResponseOutparam,
-  hash : @common.HashFunc?
+  hash : &@common.HashFunc?
 ) -> Unit {
   let url = match @util.get_body_bytes(request) {
     Ok(body) => @base64.bytes2str(body)

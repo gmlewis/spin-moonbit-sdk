@@ -162,12 +162,10 @@ pub fn Connection::query(
           index45 = index45 + 1 {
         let base44 = @ffi.load32(return_area + 4) + index45 * 12
         let result = @ffi.ptr2str(@ffi.load32(base44 + 0))
-        array.push(
-          @rdbmsTypes.Column::{
-            name: result,
-            data_type: @rdbmsTypes.DbDataType::from(@ffi.load8_u(base44 + 8)),
-          },
-        )
+        array.push(@rdbmsTypes.Column::{
+          name: result,
+          data_type: @rdbmsTypes.DbDataType::from(@ffi.load8_u(base44 + 8)),
+        })
       }
       @ffi.free(@ffi.load32(return_area + 4))
       let array84 : Array[Array[@rdbmsTypes.DbValue]] = []
