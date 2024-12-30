@@ -733,7 +733,7 @@ pub fn OutgoingDatagramStream::send(
   datagrams : Array[OutgoingDatagram]
 ) -> Result[UInt64, @network.ErrorCode] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(datagrams.length() * 44)
   for index = 0; index < datagrams.length(); index = index + 1 {
     let element : OutgoingDatagram = datagrams[index]

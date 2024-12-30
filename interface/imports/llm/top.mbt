@@ -115,7 +115,7 @@ pub fn generate_embeddings(
   text : Array[String]
 ) -> Result[EmbeddingsResult, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(text.length() * 8)
   for index = 0; index < text.length(); index = index + 1 {
     let element : String = text[index]

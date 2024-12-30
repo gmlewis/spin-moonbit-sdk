@@ -82,7 +82,7 @@ pub fn Connection::execute(
   parameters : Array[Value]
 ) -> Result[QueryResult, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(parameters.length() * 16)
   for index = 0; index < parameters.length(); index = index + 1 {
     let element : Value = parameters[index]

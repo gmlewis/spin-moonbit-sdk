@@ -231,7 +231,7 @@ pub fn Connection::del(
   keys : Array[String]
 ) -> Result[UInt, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(keys.length() * 8)
   for index = 0; index < keys.length(); index = index + 1 {
     let element : String = keys[index]
@@ -273,7 +273,7 @@ pub fn Connection::sadd(
   values : Array[String]
 ) -> Result[UInt, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(values.length() * 8)
   for index = 0; index < values.length(); index = index + 1 {
     let element : String = values[index]
@@ -366,7 +366,7 @@ pub fn Connection::srem(
   values : Array[String]
 ) -> Result[UInt, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(values.length() * 8)
   for index = 0; index < values.length(); index = index + 1 {
     let element : String = values[index]
@@ -416,7 +416,7 @@ pub fn Connection::execute(
   arguments : Array[RedisParameter]
 ) -> Result[Array[RedisResult], Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(arguments.length() * 16)
   for index = 0; index < arguments.length(); index = index + 1 {
     let element : RedisParameter = arguments[index]

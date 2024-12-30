@@ -63,7 +63,7 @@ pub fn Connection::query(
   params : Array[@rdbmsTypes.ParameterValue]
 ) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(params.length() * 16)
   for index = 0; index < params.length(); index = index + 1 {
     let element : @rdbmsTypes.ParameterValue = params[index]
@@ -265,7 +265,7 @@ pub fn Connection::execute(
   params : Array[@rdbmsTypes.ParameterValue]
 ) -> Result[UInt64, @rdbmsTypes.Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
-  let ignoreList : Array[@ffi.Any] = []
+  let ignoreList : Array[&@ffi.Any] = []
   let address = @ffi.malloc(params.length() * 16)
   for index = 0; index < params.length(); index = index + 1 {
     let element : @rdbmsTypes.ParameterValue = params[index]
