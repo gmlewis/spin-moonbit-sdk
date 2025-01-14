@@ -781,7 +781,7 @@ pub fn Fields::clone(self : Fields) -> Fields {
 }
 
 ///| Returns the method of the incoming request.
-pub fn IncomingRequest::method(self : IncomingRequest) -> Method {
+pub fn IncomingRequest::http_method(self : IncomingRequest) -> Method {
   let return_area = @ffi.malloc(12)
   wasmImportMethodIncomingRequestMethod(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -925,7 +925,7 @@ pub fn OutgoingRequest::body(
 }
 
 ///| Get the Method for the Request.
-pub fn OutgoingRequest::method(self : OutgoingRequest) -> Method {
+pub fn OutgoingRequest::http_method(self : OutgoingRequest) -> Method {
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutgoingRequestMethod(self._, return_area)
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -952,11 +952,11 @@ pub fn OutgoingRequest::method(self : OutgoingRequest) -> Method {
 /// `method.other` argument is not a syntactically valid method.
 pub fn OutgoingRequest::set_method(
   self : OutgoingRequest,
-  method : Method
+  http_method : Method
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
-  let (lowered, lowered27, lowered28) = match method {
+  let (lowered, lowered27, lowered28) = match http_method {
     Get => (0, 0, 0)
     Head => (1, 0, 0)
     Post => (2, 0, 0)

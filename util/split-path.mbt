@@ -2,7 +2,7 @@
 pub fn split_path(
   request : @types.IncomingRequest
 ) -> (@types.Method, Array[String]) {
-  split_method_and_path(request.method(), request.path_with_query())
+  split_method_and_path(request.http_method(), request.path_with_query())
 }
 
 ///|

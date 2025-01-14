@@ -19,7 +19,7 @@ pub fn new_request(
     let without_scheme = url.substring(start=i + 3)
     let parts = without_scheme.split("/").collect()
     match parts {
-      [authority, .. as remainder] => {
+      [authority, .. remainder] => {
         req.set_authority(Some(authority)).unwrap()
         // let remainer = remainder.iter().collect().join("/")
         // Yuck! https://github.com/moonbitlang/core/pull/993
