@@ -29,10 +29,12 @@ moon build
 
 ## Run
 
+Examples can be found at: https://github.com/gmlewis/spin-moonbit-sdk-examples
+
 To run an example, type:
 
 ```bash
-$ cd examples/hello-world
+$ cd hello-world
 $ spin up --build
 ```
 
@@ -47,6 +49,8 @@ date: Sat, 17 Aug 2024 00:15:14 GMT
 
 Hello, World!
 ```
+
+Each example contains a README. Please refer to the README for additional commands and setup instructions. It might also be required to issue an update command: `moon update` to retrieve the latest dependencies. 
 
 ## Status
 
