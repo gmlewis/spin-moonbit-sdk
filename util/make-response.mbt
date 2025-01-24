@@ -5,7 +5,7 @@ pub fn make_response(
   status_code~ : UInt = 200
 ) -> @types.OutgoingResponse {
   let fields = @types.Fields::from_list([("Content-Type", content_type)]).unwrap()
-  let response = @types.outgoing_response(fields)
+  let response = @types.OutgoingResponse::outgoing_response(fields)
   response
   .body()
   .unwrap()

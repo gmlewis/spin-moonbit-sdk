@@ -111,7 +111,7 @@ pub(all) enum IpAddressFamily {
 } derive(Show, Eq)
 
 ///|
-pub fn ordinal(self : IpAddressFamily) -> Int {
+pub fn IpAddressFamily::ordinal(self : IpAddressFamily) -> Int {
   match self {
     IPV4 => 0
     IPV6 => 1

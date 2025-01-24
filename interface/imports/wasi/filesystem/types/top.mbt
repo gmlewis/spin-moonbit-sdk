@@ -245,7 +245,7 @@ pub(all) enum ErrorCode {
 } derive(Show, Eq)
 
 ///|
-pub fn ordinal(self : ErrorCode) -> Int {
+pub fn ErrorCode::ordinal(self : ErrorCode) -> Int {
   match self {
     ACCESS => 0
     WOULD_BLOCK => 1
@@ -342,7 +342,7 @@ pub(all) enum Advice {
 } derive(Show, Eq)
 
 ///|
-pub fn ordinal(self : Advice) -> Int {
+pub fn Advice::ordinal(self : Advice) -> Int {
   match self {
     NORMAL => 0
     SEQUENTIAL => 1
