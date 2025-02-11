@@ -1,0 +1,15 @@
+package gmlewis/spin-moonbit-sdk/common
+
+// Values
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+pub(open) trait HashFunc {
+  name(Self) -> String
+  write(Self, Byte) -> Unit
+  check_sum(Self) -> String
+}
+

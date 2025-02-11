@@ -1,0 +1,51 @@
+package gmlewis/spin-moonbit-sdk/interface/imports/sqlite
+
+// Values
+
+// Types and methods
+pub(all) type Connection Int
+impl Connection {
+  drop(Self) -> Unit
+  execute(Self, String, Array[Value]) -> Result[QueryResult, Error_]
+  open(String) -> Result[Self, Error_]
+}
+impl Eq for Connection
+impl Show for Connection
+
+pub(all) enum Error_ {
+  NoSuchDatabase
+  AccessDenied
+  InvalidConnection
+  DatabaseFull
+  Io(String)
+}
+impl Eq for Error_
+impl Show for Error_
+
+pub(all) struct QueryResult {
+  columns : Array[String]
+  rows : Array[RowResult]
+}
+impl Eq for QueryResult
+impl Show for QueryResult
+
+pub(all) struct RowResult {
+  values : Array[Value]
+}
+impl Eq for RowResult
+impl Show for RowResult
+
+pub(all) enum Value {
+  Integer(Int64)
+  Real(Double)
+  Text(String)
+  Blob(Bytes)
+  Null
+}
+impl Eq for Value
+impl Show for Value
+
+// Type aliases
+
+// Traits
+

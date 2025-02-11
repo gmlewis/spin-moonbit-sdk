@@ -1,0 +1,15 @@
+package gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/environment
+
+// Values
+fn get_arguments() -> Array[String]
+
+fn get_environment() -> Array[(String, String)]
+
+fn initial_cwd() -> String?
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

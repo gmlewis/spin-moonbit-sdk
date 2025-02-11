@@ -1,0 +1,14 @@
+package gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udpCreateSocket
+
+alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network as @network
+alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp as @udp
+
+// Values
+fn create_udp_socket(@network.IpAddressFamily) -> Result[@udp.UdpSocket, @network.ErrorCode]
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

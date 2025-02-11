@@ -22,6 +22,7 @@ fn split_method_and_path(
   (http_method, result)
 }
 
+///|
 test "split_path random cases" {
   // Mock request with random path "/random/123/path"
   inspect!(
@@ -48,6 +49,7 @@ test "split_path random cases" {
   )
 }
 
+///|
 test "split_path edge cases" {
   // Mock request with no path
   inspect!(split_method_and_path(@types.Get, None), content="(Get, [])")
@@ -59,6 +61,7 @@ test "split_path edge cases" {
   inspect!(split_method_and_path(@types.Get, Some("/")), content="(Get, [])")
 }
 
+///|
 test "split_path basic functionality" {
   // Mock request with GET method and path "/path/to/resource"
   inspect!(

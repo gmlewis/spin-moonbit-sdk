@@ -1,0 +1,13 @@
+package gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalStdin
+
+alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalInput as @terminalInput
+
+// Values
+fn get_terminal_stdin() -> @terminalInput.TerminalInput?
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

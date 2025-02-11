@@ -1,0 +1,39 @@
+package gmlewis/spin-moonbit-sdk/interface/imports/mqtt
+
+// Values
+
+// Types and methods
+pub(all) type Connection Int
+impl Connection {
+  drop(Self) -> Unit
+  open(String, String, String, UInt64) -> Result[Self, Error_]
+  publish(Self, String, Bytes, Qos) -> Result[Unit, Error_]
+}
+impl Eq for Connection
+impl Show for Connection
+
+pub(all) enum Error_ {
+  InvalidAddress
+  TooManyConnections
+  ConnectionFailed(String)
+  Other(String)
+}
+impl Eq for Error_
+impl Show for Error_
+
+pub(all) enum Qos {
+  AT_MOST_ONCE
+  AT_LEAST_ONCE
+  EXACTLY_ONCE
+}
+impl Qos {
+  from(Int) -> Self
+  ordinal(Self) -> Int
+}
+impl Eq for Qos
+impl Show for Qos
+
+// Type aliases
+
+// Traits
+

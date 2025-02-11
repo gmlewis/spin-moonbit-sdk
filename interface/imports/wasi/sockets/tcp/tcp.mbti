@@ -1,0 +1,60 @@
+package gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcp
+
+alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll as @poll
+alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams as @streams
+alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network as @network
+
+// Values
+
+// Types and methods
+pub(all) enum ShutdownType {
+  RECEIVE
+  SEND
+  BOTH
+}
+impl ShutdownType {
+  from(Int) -> Self
+  ordinal(Self) -> Int
+}
+impl Eq for ShutdownType
+impl Show for ShutdownType
+
+pub(all) type TcpSocket Int
+impl TcpSocket {
+  accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
+  address_family(Self) -> @network.IpAddressFamily
+  drop(Self) -> Unit
+  finish_bind(Self) -> Result[Unit, @network.ErrorCode]
+  finish_connect(Self) -> Result[(@streams.InputStream, @streams.OutputStream), @network.ErrorCode]
+  finish_listen(Self) -> Result[Unit, @network.ErrorCode]
+  hop_limit(Self) -> Result[Byte, @network.ErrorCode]
+  is_listening(Self) -> Bool
+  keep_alive_count(Self) -> Result[UInt, @network.ErrorCode]
+  keep_alive_enabled(Self) -> Result[Bool, @network.ErrorCode]
+  keep_alive_idle_time(Self) -> Result[UInt64, @network.ErrorCode]
+  keep_alive_interval(Self) -> Result[UInt64, @network.ErrorCode]
+  local_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
+  receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
+  remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
+  send_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
+  set_hop_limit(Self, Byte) -> Result[Unit, @network.ErrorCode]
+  set_keep_alive_count(Self, UInt) -> Result[Unit, @network.ErrorCode]
+  set_keep_alive_enabled(Self, Bool) -> Result[Unit, @network.ErrorCode]
+  set_keep_alive_idle_time(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+  set_keep_alive_interval(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+  set_listen_backlog_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+  set_receive_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+  set_send_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+  shutdown(Self, ShutdownType) -> Result[Unit, @network.ErrorCode]
+  start_bind(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
+  start_connect(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
+  start_listen(Self) -> Result[Unit, @network.ErrorCode]
+  subscribe(Self) -> @poll.Pollable
+}
+impl Eq for TcpSocket
+impl Show for TcpSocket
+
+// Type aliases
+
+// Traits
+

@@ -1,0 +1,13 @@
+package gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/outgoingHandler
+
+alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types as @types
+
+// Values
+fn handle(@types.OutgoingRequest, @types.RequestOptions?) -> Result[@types.FutureIncomingResponse, @types.ErrorCode]
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

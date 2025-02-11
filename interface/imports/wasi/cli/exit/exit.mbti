@@ -1,0 +1,11 @@
+package gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/exit
+
+// Values
+fn exit(Result[Unit, Unit]) -> Unit
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
