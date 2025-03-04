@@ -43,17 +43,11 @@ fn malloc(Int) -> Int
 
 fn ptr2bytes(Int) -> Bytes
 
-fn ptr2double_array(Int) -> FixedArray[Double]
-
 fn ptr2float_array(Int) -> FixedArray[Float]
-
-fn ptr2int64_array(Int) -> FixedArray[Int64]
 
 fn ptr2int_array(Int) -> FixedArray[Int]
 
 fn ptr2str(Int) -> String
-
-fn ptr2uint64_array(Int) -> FixedArray[UInt64]
 
 fn ptr2uint_array(Int) -> FixedArray[UInt]
 

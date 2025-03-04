@@ -154,17 +154,17 @@ pub extern "wasm" fn ptr2int_array(ptr : Int) -> FixedArray[Int] =
 pub extern "wasm" fn ptr2float_array(ptr : Int) -> FixedArray[Float] =
   #|(func (param i32) (result i32) local.get 0 i32.const 4 i32.sub i32.const 241 i32.store8 local.get 0 i32.const 8 i32.sub)
 
-///|
-pub extern "wasm" fn ptr2uint64_array(ptr : Int) -> FixedArray[UInt64] =
-  #|(func (param i32) (result i32) local.get 0 i32.const 4 i32.sub i32.load i32.const 2 i32.lsr i32.const 241 i32.lor local.get 0 i32.const 4 i32.sub i32.store local.get 0 i32.const 8 i32.sub)
+// ///|
+// pub extern "wasm" fn ptr2uint64_array(ptr : Int) -> FixedArray[UInt64] =
+//   #|(func (param i32) (result i32) local.get 0 i32.const 4 i32.sub i32.load i32.const 2 i32.lsr i32.const 241 i32.lor local.get 0 i32.const 4 i32.sub i32.store local.get 0 i32.const 8 i32.sub)
 
-///|
-pub extern "wasm" fn ptr2int64_array(ptr : Int) -> FixedArray[Int64] =
-  #|(func (param i32) (result i32) local.get 0 i32.const 4 i32.sub i32.load i32.const 2 i32.lsr i32.const 241 i32.lor local.get 0 i32.const 4 i32.sub i32.store local.get 0 i32.const 8 i32.sub)
+// ///|
+// pub extern "wasm" fn ptr2int64_array(ptr : Int) -> FixedArray[Int64] =
+//   #|(func (param i32) (result i32) local.get 0 i32.const 4 i32.sub i32.load i32.const 2 i32.lsr i32.const 241 i32.lor local.get 0 i32.const 4 i32.sub i32.store local.get 0 i32.const 8 i32.sub)
 
-///|
-pub extern "wasm" fn ptr2double_array(ptr : Int) -> FixedArray[Double] =
-  #|(func (param i32) (result i32) local.get 0 i32.const 4 i32.sub i32.load i32.const 2 i32.lsr i32.const 241 i32.lor local.get 0 i32.const 4 i32.sub i32.store local.get 0 i32.const 8 i32.sub)
+// ///|
+// pub extern "wasm" fn ptr2double_array(ptr : Int) -> FixedArray[Double] =
+//   #|(func (param i32) (result i32) local.get 0 i32.const 4 i32.sub i32.load i32.const 2 i32.lsr i32.const 241 i32.lor local.get 0 i32.const 4 i32.sub i32.store local.get 0 i32.const 8 i32.sub)
 
 ///|
 pub(open) trait Any {}

@@ -52,13 +52,12 @@ jobs:
 
       - name: moon info
         run: |
-          moon info
+          moon info --target wasm
           git diff --exit-code
 
       - name: moon test
         run: |
           moon test --target wasm
-          # moon test --target js
 
       - name: format diff
         run: |
