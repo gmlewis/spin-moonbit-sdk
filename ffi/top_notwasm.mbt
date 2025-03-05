@@ -1,0 +1,179 @@
+///|
+pub fn extend16(_value : Int) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn extend8(_value : Int) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn store8(_offset : Int, _value : Int) -> Unit {
+  abort("not wasm")
+}
+
+///|
+pub fn load8_u(_offset : Int) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn load8(_offset : Int) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn store16(_offset : Int, _value : Int) -> Unit {
+  abort("not wasm")
+}
+
+///|
+pub fn load16(_offset : Int) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn load16_u(_offset : Int) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn store32(_offset : Int, _value : Int) -> Unit {
+  abort("not wasm")
+}
+
+///|
+pub fn load32(_offset : Int) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn store64(_offset : Int, _value : Int64) -> Unit {
+  abort("not wasm")
+}
+
+///|
+pub fn load64(_offset : Int) -> Int64 {
+  abort("not wasm")
+}
+
+///|
+pub fn storef32(_offset : Int, _value : Float) -> Unit {
+  abort("not wasm")
+}
+
+///|
+pub fn loadf32(_offset : Int) -> Float {
+  abort("not wasm")
+}
+
+///|
+pub fn storef64(_offset : Int, _value : Double) -> Unit {
+  abort("not wasm")
+}
+
+///|
+pub fn loadf64(_offset : Int) -> Double {
+  abort("not wasm")
+}
+
+///|
+pub fn f32_to_i32(_value : Float) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn f32_to_i64(_value : Float) -> Int64 {
+  abort("not wasm")
+}
+
+///|
+pub fn malloc(_size : Int) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn free(_position : Int) -> Unit {
+  abort("not wasm")
+}
+
+///|
+pub fn copy(_dest : Int, _src : Int) -> Unit {
+  abort("not wasm")
+}
+
+///|
+pub fn str2ptr(_str : String) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn ptr2str(_ptr : Int) -> String {
+  abort("not wasm")
+}
+
+///|
+pub fn bytes2ptr(_bytes : Bytes) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn ptr2bytes(_ptr : Int) -> Bytes {
+  abort("not wasm")
+}
+
+///|
+pub fn uint_array2ptr(_array : FixedArray[UInt]) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn uint64_array2ptr(_array : FixedArray[UInt64]) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn int_array2ptr(_array : FixedArray[Int]) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn int64_array2ptr(_array : FixedArray[Int64]) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn float_array2ptr(_array : FixedArray[Float]) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn double_array2ptr(_array : FixedArray[Double]) -> Int {
+  abort("not wasm")
+}
+
+///|
+pub fn ptr2uint_array(_ptr : Int) -> FixedArray[UInt] {
+  abort("not wasm")
+}
+
+///|
+pub fn ptr2int_array(_ptr : Int) -> FixedArray[Int] {
+  abort("not wasm")
+}
+
+///|
+pub fn ptr2float_array(_ptr : Int) -> FixedArray[Float] {
+  abort("not wasm")
+}
+
+///|
+pub(open) trait Any {}
+
+///|
+pub(all) struct Cleanup {
+  address : Int
+  size : Int
+  align : Int
+}
