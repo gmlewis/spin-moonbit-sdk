@@ -1,1 +1,6 @@
-{}
+{
+  "import": [
+    "gmlewis/md5",
+    "gmlewis/sha256"
+  ]
+}

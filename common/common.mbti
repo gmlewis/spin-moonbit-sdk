@@ -1,5 +1,8 @@
 package gmlewis/spin-moonbit-sdk/common
 
+alias @gmlewis/md5 as @md5
+alias @gmlewis/sha256 as @sha256
+
 // Values
 
 // Types and methods
@@ -12,4 +15,6 @@ pub(open) trait HashFunc {
   write(Self, Byte) -> Unit
   check_sum(Self) -> String
 }
+impl HashFunc for @md5.Digest
+impl HashFunc for @sha256.Digest
 
