@@ -5,6 +5,7 @@ alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams as @streams
 alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network as @network
 
 // Values
+fn ordinal(ShutdownType) -> Int
 
 // Types and methods
 pub(all) enum ShutdownType {

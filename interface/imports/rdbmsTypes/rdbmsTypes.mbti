@@ -1,6 +1,7 @@
 package gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes
 
 // Values
+fn ordinal(DbDataType) -> Int
 
 // Types and methods
 pub(all) struct Column {

@@ -7,6 +7,8 @@ alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams as @streams
 // Values
 fn filesystem_error_code(@error.Error_) -> ErrorCode?
 
+fn ordinal(DescriptorType) -> Int
+
 // Types and methods
 pub(all) enum Advice {
   NORMAL

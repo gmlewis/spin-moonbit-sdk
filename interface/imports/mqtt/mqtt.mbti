@@ -1,6 +1,7 @@
 package gmlewis/spin-moonbit-sdk/interface/imports/mqtt
 
 // Values
+fn ordinal(Qos) -> Int
 
 // Types and methods
 pub(all) type Connection Int
