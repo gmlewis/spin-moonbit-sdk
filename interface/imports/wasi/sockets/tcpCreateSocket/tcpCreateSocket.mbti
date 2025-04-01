@@ -1,7 +1,9 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcpCreateSocket
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcpCreateSocket"
 
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network as @network
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcp as @tcp
+import(
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network"
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcp"
+)
 
 // Values
 fn create_tcp_socket(@network.IpAddressFamily) -> Result[@tcp.TcpSocket, @network.ErrorCode]

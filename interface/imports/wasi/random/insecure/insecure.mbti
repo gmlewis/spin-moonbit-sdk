@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/random/insecure
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/random/insecure"
 
 // Values
 fn get_insecure_random_bytes(UInt64) -> Bytes

@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network"
 
 // Values
 fn ordinal(ErrorCode) -> Int

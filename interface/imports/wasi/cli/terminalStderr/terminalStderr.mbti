@@ -1,6 +1,8 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalStderr
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalStderr"
 
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput as @terminalOutput
+import(
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput"
+)
 
 // Values
 fn get_terminal_stderr() -> @terminalOutput.TerminalOutput?

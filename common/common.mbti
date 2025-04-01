@@ -1,7 +1,9 @@
-package gmlewis/spin-moonbit-sdk/common
+package "gmlewis/spin-moonbit-sdk/common"
 
-alias @gmlewis/md5 as @md5
-alias @gmlewis/sha256 as @sha256
+import(
+  "gmlewis/md5"
+  "gmlewis/sha256"
+)
 
 // Values
 

@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalInput
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalInput"
 
 // Values
 

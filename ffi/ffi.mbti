@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/ffi
+package "gmlewis/spin-moonbit-sdk/ffi"
 
 // Values
 fn bytes2ptr(Bytes) -> Int

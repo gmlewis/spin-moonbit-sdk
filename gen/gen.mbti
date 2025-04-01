@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/gen
+package "gmlewis/spin-moonbit-sdk/gen"
 
 // Values
 fn cabi_realloc(Int, Int, Int, Int) -> Int

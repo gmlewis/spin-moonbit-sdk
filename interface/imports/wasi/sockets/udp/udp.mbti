@@ -1,7 +1,9 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp"
 
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll as @poll
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network as @network
+import(
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll"
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network"
+)
 
 // Values
 

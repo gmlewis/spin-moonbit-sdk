@@ -1,7 +1,9 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams"
 
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error as @error
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll as @poll
+import(
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error"
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll"
+)
 
 // Values
 

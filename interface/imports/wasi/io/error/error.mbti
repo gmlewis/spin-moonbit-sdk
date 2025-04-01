@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error"
 
 // Values
 

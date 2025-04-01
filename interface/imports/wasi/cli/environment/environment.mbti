@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/environment
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/environment"
 
 // Values
 fn get_arguments() -> Array[String]

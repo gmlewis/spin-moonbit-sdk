@@ -1,8 +1,10 @@
-package gmlewis/spin-moonbit-sdk/util
+package "gmlewis/spin-moonbit-sdk/util"
 
-alias @gmlewis/spin-moonbit-sdk/common as @common
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types as @types
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams as @streams
+import(
+  "gmlewis/spin-moonbit-sdk/common"
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types"
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams"
+)
 
 // Values
 fn consume(@types.OutgoingRequest, &@common.HashFunc?, debug~ : Bool = ..) -> Result[(Int64, String), @types.ErrorCode]

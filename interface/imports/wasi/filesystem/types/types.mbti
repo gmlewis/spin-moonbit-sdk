@@ -1,8 +1,10 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types"
 
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock as @wallClock
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error as @error
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams as @streams
+import(
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock"
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error"
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams"
+)
 
 // Values
 fn filesystem_error_code(@error.Error_) -> ErrorCode?

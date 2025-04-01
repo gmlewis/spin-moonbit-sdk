@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/exit
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/exit"
 
 // Values
 fn exit(Result[Unit, Unit]) -> Unit

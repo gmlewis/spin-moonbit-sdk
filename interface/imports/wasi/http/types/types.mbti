@@ -1,8 +1,10 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types"
 
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error as @error
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll as @poll
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams as @streams
+import(
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error"
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll"
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams"
+)
 
 // Values
 fn http_error_code(@error.Error_) -> ErrorCode?

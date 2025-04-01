@@ -1,6 +1,8 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/monotonicClock
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/monotonicClock"
 
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll as @poll
+import(
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll"
+)
 
 // Values
 fn now() -> UInt64

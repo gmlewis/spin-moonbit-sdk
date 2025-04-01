@@ -1,6 +1,8 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/mysql
+package "gmlewis/spin-moonbit-sdk/interface/imports/mysql"
 
-alias @gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes as @rdbmsTypes
+import(
+  "gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes"
+)
 
 // Values
 

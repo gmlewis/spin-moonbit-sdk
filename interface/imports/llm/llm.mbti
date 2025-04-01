@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/llm
+package "gmlewis/spin-moonbit-sdk/interface/imports/llm"
 
 // Values
 fn generate_embeddings(String, Array[String]) -> Result[EmbeddingsResult, Error_]

@@ -1,6 +1,8 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stdin
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stdin"
 
-alias @gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams as @streams
+import(
+  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams"
+)
 
 // Values
 fn get_stdin() -> @streams.InputStream

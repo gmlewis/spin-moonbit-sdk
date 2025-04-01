@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/wasi/random/insecureSeed
+package "gmlewis/spin-moonbit-sdk/interface/imports/wasi/random/insecureSeed"
 
 // Values
 fn insecure_seed() -> (UInt64, UInt64)

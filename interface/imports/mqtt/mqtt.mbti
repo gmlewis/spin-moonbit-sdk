@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/mqtt
+package "gmlewis/spin-moonbit-sdk/interface/imports/mqtt"
 
 // Values
 fn ordinal(Qos) -> Int

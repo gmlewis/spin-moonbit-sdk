@@ -1,4 +1,4 @@
-package gmlewis/spin-moonbit-sdk/interface/imports/variables
+package "gmlewis/spin-moonbit-sdk/interface/imports/variables"
 
 // Values
 fn get(String) -> Result[String, Error_]
