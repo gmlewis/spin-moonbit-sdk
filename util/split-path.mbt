@@ -1,4 +1,5 @@
-///| `split_path` splits an incoming request into its method and path parts by splitting on "/".
+///|
+/// `split_path` splits an incoming request into its method and path parts by splitting on "/".
 pub fn split_path(
   request : @types.IncomingRequest
 ) -> (@types.Method, Array[String]) {

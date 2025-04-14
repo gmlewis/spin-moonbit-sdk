@@ -1,4 +1,5 @@
-///| `stream` performs the provided `request`
+///|
+/// `stream` performs the provided `request`
 /// then streams its output to the provided `response_out` and optionally calculates
 /// the stream's hash, reporting the byte count and hash back to the caller.
 pub fn stream(
@@ -22,7 +23,8 @@ pub fn stream(
   }
 }
 
-///| `stream_func` performs the provided `request`
+///|
+/// `stream_func` performs the provided `request`
 /// then streams its output to the provided `response_out` and runs the
 /// provided `byte_func` on each byte, then returns the content length
 /// back to the caller.

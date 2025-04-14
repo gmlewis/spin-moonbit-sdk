@@ -28,7 +28,8 @@
 //   }
 // }
 
-///| `send_request` sends an outgoing request and waits for the response.
+///|
+/// `send_request` sends an outgoing request and waits for the response.
 pub fn send_request(
   request : @types.OutgoingRequest,
   debug~ : Bool = false

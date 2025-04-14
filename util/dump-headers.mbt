@@ -1,4 +1,5 @@
-///| `dump_headers` dumps the headers to stderr as INFO lines.
+///|
+/// `dump_headers` dumps the headers to stderr as INFO lines.
 pub fn dump_headers(headers : @types.Fields) -> Unit {
   for entry in headers.entries() {
     let key = entry.0

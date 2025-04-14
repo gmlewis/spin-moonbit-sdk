@@ -26,7 +26,8 @@ pub fn ShutdownType::from(self : Int) -> ShutdownType {
   }
 }
 
-///| A TCP socket resource.
+///|
+/// A TCP socket resource.
 ///
 /// The socket can be in one of the following states:
 /// - `unbound`
@@ -57,7 +58,8 @@ pub fn TcpSocket::drop(self : TcpSocket) -> Unit {
   wasmImportResourceDropTcpSocket(self._)
 }
 
-///| Bind the socket to a specific network on the provided IP address and port.
+///|
+/// Bind the socket to a specific network on the provided IP address and port.
 ///
 /// If the IP address is zero (`0.0.0.0` in IPv4, `::` in IPv6), it is left to the implementation to decide which
 /// network interface(s) to bind to.
@@ -188,7 +190,8 @@ pub fn TcpSocket::finish_bind(
   return lifted
 }
 
-///| Connect to a remote endpoint.
+///|
+/// Connect to a remote endpoint.
 ///
 /// On success:
 /// - the socket is transitioned into the `connection` state.
@@ -329,7 +332,8 @@ pub fn TcpSocket::finish_connect(
   return lifted
 }
 
-///| Start listening for new connections.
+///|
+/// Start listening for new connections.
 ///
 /// Transitions the socket into the `listening` state.
 ///
@@ -383,7 +387,8 @@ pub fn TcpSocket::finish_listen(
   return lifted
 }
 
-///| Accept a new client socket.
+///|
+/// Accept a new client socket.
 ///
 /// The returned socket is bound and in the `connected` state. The following properties are inherited from the listener socket:
 /// - `address-family`
@@ -434,7 +439,8 @@ pub fn TcpSocket::accept(
   return lifted
 }
 
-///| Get the bound local address.
+///|
+/// Get the bound local address.
 ///
 /// POSIX mentions:
 /// > If the socket has not been bound to a local name, the value
@@ -499,7 +505,8 @@ pub fn TcpSocket::local_address(
   return lifted6
 }
 
-///| Get the remote address.
+///|
+/// Get the remote address.
 ///
 /// # Typical errors
 /// - `invalid-state`: The socket is not connected to a remote address. (ENOTCONN)
@@ -558,7 +565,8 @@ pub fn TcpSocket::remote_address(
   return lifted6
 }
 
-///| Whether the socket is in the `listening` state.
+///|
+/// Whether the socket is in the `listening` state.
 ///
 /// Equivalent to the SO_ACCEPTCONN socket option.
 pub fn TcpSocket::is_listening(self : TcpSocket) -> Bool {
@@ -566,7 +574,8 @@ pub fn TcpSocket::is_listening(self : TcpSocket) -> Bool {
   return result != 0
 }
 
-///| Whether this is a IPv4 or IPv6 socket.
+///|
+/// Whether this is a IPv4 or IPv6 socket.
 ///
 /// Equivalent to the SO_DOMAIN socket option.
 pub fn TcpSocket::address_family(self : TcpSocket) -> @network.IpAddressFamily {
@@ -574,7 +583,8 @@ pub fn TcpSocket::address_family(self : TcpSocket) -> @network.IpAddressFamily {
   return @network.IpAddressFamily::from(result)
 }
 
-///| Hints the desired listen queue size. Implementations are free to ignore this.
+///|
+/// Hints the desired listen queue size. Implementations are free to ignore this.
 ///
 /// If the provided value is 0, an `invalid-argument` error is returned.
 /// Any other value will never cause an error, but it might be silently clamped and/or rounded.
@@ -602,7 +612,8 @@ pub fn TcpSocket::set_listen_backlog_size(
   return lifted
 }
 
-///| Enables or disables keepalive.
+///|
+/// Enables or disables keepalive.
 ///
 /// The keepalive behavior can be adjusted using:
 /// - `keep-alive-idle-time`
@@ -649,7 +660,8 @@ pub fn TcpSocket::set_keep_alive_enabled(
   return lifted
 }
 
-///| Amount of time the connection has to be idle before TCP starts sending keepalive packets.
+///|
+/// Amount of time the connection has to be idle before TCP starts sending keepalive packets.
 ///
 /// If the provided value is 0, an `invalid-argument` error is returned.
 /// Any other value will never cause an error, but it might be silently clamped and/or rounded.
@@ -693,7 +705,8 @@ pub fn TcpSocket::set_keep_alive_idle_time(
   return lifted
 }
 
-///| The time between keepalive packets.
+///|
+/// The time between keepalive packets.
 ///
 /// If the provided value is 0, an `invalid-argument` error is returned.
 /// Any other value will never cause an error, but it might be silently clamped and/or rounded.
@@ -737,7 +750,8 @@ pub fn TcpSocket::set_keep_alive_interval(
   return lifted
 }
 
-///| The maximum amount of keepalive packets TCP should send before aborting the connection.
+///|
+/// The maximum amount of keepalive packets TCP should send before aborting the connection.
 ///
 /// If the provided value is 0, an `invalid-argument` error is returned.
 /// Any other value will never cause an error, but it might be silently clamped and/or rounded.
@@ -781,7 +795,8 @@ pub fn TcpSocket::set_keep_alive_count(
   return lifted
 }
 
-///| Equivalent to the IP_TTL & IPV6_UNICAST_HOPS socket options.
+///|
+/// Equivalent to the IP_TTL & IPV6_UNICAST_HOPS socket options.
 ///
 /// If the provided value is 0, an `invalid-argument` error is returned.
 ///
@@ -817,7 +832,8 @@ pub fn TcpSocket::set_hop_limit(
   return lifted
 }
 
-///| The kernel buffer space reserved for sends/receives on this socket.
+///|
+/// The kernel buffer space reserved for sends/receives on this socket.
 ///
 /// If the provided value is 0, an `invalid-argument` error is returned.
 /// Any other value will never cause an error, but it might be silently clamped and/or rounded.
@@ -896,7 +912,8 @@ pub fn TcpSocket::set_send_buffer_size(
   return lifted
 }
 
-///| Create a `pollable` which can be used to poll for, or block on,
+///|
+/// Create a `pollable` which can be used to poll for, or block on,
 /// completion of any of the asynchronous operations of this socket.
 ///
 /// When `finish-bind`, `finish-listen`, `finish-connect` or `accept`
@@ -918,7 +935,8 @@ pub fn TcpSocket::subscribe(self : TcpSocket) -> @poll.Pollable {
   return @poll.Pollable::Pollable(result)
 }
 
-///| Initiate a graceful shutdown.
+///|
+/// Initiate a graceful shutdown.
 ///
 /// - `receive`: The socket is not expecting to receive any data from
 /// the peer. The `input-stream` associated with this socket will be

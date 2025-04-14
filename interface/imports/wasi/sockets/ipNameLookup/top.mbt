@@ -11,7 +11,8 @@ pub fn ResolveAddressStream::drop(self : ResolveAddressStream) -> Unit {
   wasmImportResourceDropResolveAddressStream(self._)
 }
 
-///| Resolve an internet host name to a list of IP addresses.
+///|
+/// Resolve an internet host name to a list of IP addresses.
 ///
 /// Unicode domain names are automatically converted to ASCII using IDNA encoding.
 /// If the input is an IP address string, the address is parsed and returned
@@ -55,7 +56,8 @@ pub fn resolve_addresses(
   return lifted
 }
 
-///| Returns the next address from the resolver.
+///|
+/// Returns the next address from the resolver.
 ///
 /// This function should be called multiple times. On each call, it will
 /// return the next address in connection order preference. If all
@@ -132,7 +134,8 @@ pub fn ResolveAddressStream::resolve_next_address(
   return lifted11
 }
 
-///| Create a `pollable` which will resolve once the stream is ready for I/O.
+///|
+/// Create a `pollable` which will resolve once the stream is ready for I/O.
 ///
 /// Note: this function is here for WASI Preview2 only.
 /// It's planned to be removed when `future` is natively supported in Preview3.
