@@ -9,8 +9,8 @@ pub fn new_request(
     @types.Fields::from_list(fields).unwrap(),
   )
   req.set_method(http_method).unwrap()
-  let i = url.index_of("://")
-  if i > 0 {
+  let i = url.find("://")
+  if i is Some(i) {
     let scheme = match url.substring(end=i) {
       "http" => @types.Http
       "https" => @types.Https
