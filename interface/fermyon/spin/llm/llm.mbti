@@ -1,0 +1,58 @@
+package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/llm"
+
+// Values
+fn generate_embeddings(String, Array[String]) -> Result[EmbeddingsResult, Error_]
+
+fn infer(String, String, InferencingParams?) -> Result[InferencingResult, Error_]
+
+// Types and methods
+pub(all) struct EmbeddingsResult {
+  embeddings : Array[FixedArray[Float]]
+  usage : EmbeddingsUsage
+}
+impl Eq for EmbeddingsResult
+impl Show for EmbeddingsResult
+
+pub(all) struct EmbeddingsUsage {
+  prompt_token_count : UInt
+}
+impl Eq for EmbeddingsUsage
+impl Show for EmbeddingsUsage
+
+pub(all) enum Error_ {
+  ModelNotSupported
+  RuntimeError(String)
+  InvalidInput(String)
+}
+impl Eq for Error_
+impl Show for Error_
+
+pub(all) struct InferencingParams {
+  max_tokens : UInt
+  repeat_penalty : Float
+  repeat_penalty_last_n_token_count : UInt
+  temperature : Float
+  top_k : UInt
+  top_p : Float
+}
+impl Eq for InferencingParams
+impl Show for InferencingParams
+
+pub(all) struct InferencingResult {
+  text : String
+  usage : InferencingUsage
+}
+impl Eq for InferencingResult
+impl Show for InferencingResult
+
+pub(all) struct InferencingUsage {
+  prompt_token_count : UInt
+  generated_token_count : UInt
+}
+impl Eq for InferencingUsage
+impl Show for InferencingUsage
+
+// Type aliases
+
+// Traits
+

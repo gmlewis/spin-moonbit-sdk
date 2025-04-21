@@ -1,0 +1,16 @@
+package "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/tcpCreateSocket"
+
+import(
+  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network"
+  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/tcp"
+)
+
+// Values
+fn create_tcp_socket(@network.IpAddressFamily) -> Result[@tcp.TcpSocket, @network.ErrorCode]
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

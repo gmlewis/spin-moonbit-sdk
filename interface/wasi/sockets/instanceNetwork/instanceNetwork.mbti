@@ -1,0 +1,15 @@
+package "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/instanceNetwork"
+
+import(
+  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network"
+)
+
+// Values
+fn instance_network() -> @network.Network
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
