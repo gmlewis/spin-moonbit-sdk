@@ -1,0 +1,22 @@
+spin_manifest_version = 2
+
+[application]
+authors = ["Glenn Lewis"]
+description = "A simple Spin application written in MoonBit."
+name = "hello-world"
+version = "0.1.0"
+
+[[trigger.http]]
+component = "hello"
+route = "/hello"
+
+[component.hello]
+source = "hello-world.wasm"
+
+[component.hello.build]
+command = """\
+  moon build --target wasm && \
+  wasm-tools component embed ../../wit ./target/wasm/release/build/hello-world.wasm -o hello-world.wasm --encoding utf16 -w http-trigger && \
+  wasm-tools component new hello-world.wasm -o hello-world.wasm
+  """
+watch = ["**/*.mbt"]
