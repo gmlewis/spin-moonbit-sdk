@@ -1,0 +1,1 @@
+{ "import": [{ "path" : "gmlewis/spin-moonbit-sdk/ffi", "alias" : "ffi" }, { "path" : "gmlewis/spin-moonbit-sdk/interface/wasi/clocks/wallClock", "alias" : "wallClock" }, { "path" : "gmlewis/spin-moonbit-sdk/interface/wasi/io/error", "alias" : "error" }, { "path" : "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams", "alias" : "streams" }] }

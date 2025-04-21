@@ -2,7 +2,7 @@
 /// `get_body_bytes` returns the incoming request body as `Bytes`.
 pub fn get_body_bytes(
   request : @types.IncomingRequest
-) -> Result[Bytes, @streams.StreamError] {
+) -> Result[FixedArray[Byte], @streams.StreamError] {
   let in_stream = match request.consume() {
     Ok(body) => body.stream()
     _ => return Err(@streams.StreamError::Closed)
@@ -15,7 +15,7 @@ pub fn get_body_bytes(
   let content_length = match request.headers().get("Content-Length") {
     [value] =>
       try {
-        @strconv.parse_int!(@base64.bytes2str(value))
+        @strconv.parse_int!(@base64.bytes2str(Bytes::from_fixedarray(value)))
       } catch {
         _ => return Err(@streams.StreamError::Closed)
       }
@@ -37,7 +37,7 @@ pub fn get_body_bytes(
     if buf.length() == 0 {
       break
     }
-    result.write_bytes(buf)
+    result.write_iter(buf.iter())
   }
-  Ok(result.to_bytes())
+  Ok(result.to_bytes().to_fixedarray())
 }

@@ -1,14 +1,14 @@
 ///|
 /// `new_request` creates a new outgoing request.
 pub fn new_request(
-  http_method : @types.Method,
+  method_ : @types.Method,
   url : String,
-  fields~ : Array[(String, Bytes)] = []
+  fields~ : Array[(String, FixedArray[Byte])] = []
 ) -> @types.OutgoingRequest {
   let req = @types.OutgoingRequest::outgoing_request(
     @types.Fields::from_list(fields).unwrap(),
   )
-  req.set_method(http_method).unwrap()
+  req.set_method(method_).unwrap()
   let i = url.find("://")
   if i is Some(i) {
     let scheme = match url.substring(end=i) {

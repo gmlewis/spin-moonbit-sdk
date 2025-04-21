@@ -1,0 +1,1 @@
+{ "import": [{ "path" : "gmlewis/spin-moonbit-sdk/ffi", "alias" : "ffi" }, { "path" : "gmlewis/spin-moonbit-sdk/interface/wasi/http/types", "alias" : "types" }] }

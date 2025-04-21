@@ -2,8 +2,8 @@ package "gmlewis/spin-moonbit-sdk/util"
 
 import(
   "gmlewis/spin-moonbit-sdk/common"
-  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types"
-  "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams"
+  "gmlewis/spin-moonbit-sdk/interface/wasi/http/types"
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams"
 )
 
 // Values
@@ -13,7 +13,7 @@ fn consume_func(@types.OutgoingRequest, ByteFunc?, debug~ : Bool = ..) -> Result
 
 fn dump_headers(@types.Fields) -> Unit
 
-fn get_body_bytes(@types.IncomingRequest) -> Result[Bytes, @streams.StreamError]
+fn get_body_bytes(@types.IncomingRequest) -> Result[FixedArray[Byte], @streams.StreamError]
 
 fn get_content_length(@types.Fields) -> Int
 
@@ -21,11 +21,11 @@ fn make_404_response() -> @types.OutgoingResponse
 
 fn make_500_response() -> @types.OutgoingResponse
 
-fn make_response(Bytes, content_type~ : Bytes = .., status_code~ : UInt = ..) -> @types.OutgoingResponse
+fn make_response(FixedArray[Byte], content_type~ : FixedArray[Byte] = .., status_code~ : UInt = ..) -> @types.OutgoingResponse
 
-fn make_response_str(String, content_type~ : Bytes = .., status_code~ : UInt = ..) -> @types.OutgoingResponse
+fn make_response_str(String, content_type~ : FixedArray[Byte] = .., status_code~ : UInt = ..) -> @types.OutgoingResponse
 
-fn new_request(@types.Method, String, fields~ : Array[(String, Bytes)] = ..) -> @types.OutgoingRequest
+fn new_request(@types.Method, String, fields~ : Array[(String, FixedArray[Byte])] = ..) -> @types.OutgoingRequest
 
 fn println(String) -> Unit
 
@@ -35,11 +35,11 @@ fn respond_404(@types.ResponseOutparam) -> Unit
 
 fn respond_500(@types.ResponseOutparam) -> Unit
 
-fn respond_bytes(@types.ResponseOutparam, Bytes, content_type~ : Bytes = .., status_code~ : UInt = ..) -> Unit
+fn respond_bytes(@types.ResponseOutparam, FixedArray[Byte], content_type~ : FixedArray[Byte] = .., status_code~ : UInt = ..) -> Unit
 
-fn respond_str(@types.ResponseOutparam, String, content_type~ : Bytes = .., status_code~ : UInt = ..) -> Unit
+fn respond_str(@types.ResponseOutparam, String, content_type~ : FixedArray[Byte] = .., status_code~ : UInt = ..) -> Unit
 
-fn send_request(@types.OutgoingRequest, debug~ : Bool = ..) -> Result[Bytes, @types.ErrorCode]
+fn send_request(@types.OutgoingRequest, debug~ : Bool = ..) -> Result[FixedArray[Byte], @types.ErrorCode]
 
 fn split_path(@types.IncomingRequest) -> (@types.Method, Array[String])
 

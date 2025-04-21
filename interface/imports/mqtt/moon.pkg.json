@@ -1,9 +1,0 @@
-{
-  "import": [
-    {
-      "path": "gmlewis/spin-moonbit-sdk/ffi",
-      "alias": "ffi"
-    }
-  ],
-  "warn-list": "-44"
-}

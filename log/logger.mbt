@@ -3,10 +3,10 @@
 pub fn info(s : String, leading_blank_line~ : Bool = false) -> Unit {
   let stderr = @stderr.get_stderr()
   if leading_blank_line {
-    stderr.write(b"\n").unwrap()
+    stderr.write(b"\n".to_fixedarray()).unwrap()
   }
-  stderr.write(@base64.str2bytes("INFO: \{s}")).unwrap()
-  stderr.blocking_write_and_flush(b"\n").unwrap()
+  stderr.write(@base64.str2bytes("INFO: \{s}").to_fixedarray()).unwrap()
+  stderr.blocking_write_and_flush(b"\n".to_fixedarray()).unwrap()
 }
 
 ///|
@@ -14,10 +14,10 @@ pub fn info(s : String, leading_blank_line~ : Bool = false) -> Unit {
 pub fn debug(s : String, leading_blank_line~ : Bool = false) -> Unit {
   let stderr = @stderr.get_stderr()
   if leading_blank_line {
-    stderr.write(b"\n").unwrap()
+    stderr.write(b"\n".to_fixedarray()).unwrap()
   }
-  stderr.write(@base64.str2bytes("DEBUG: \{s}")).unwrap()
-  stderr.blocking_write_and_flush(b"\n").unwrap()
+  stderr.write(@base64.str2bytes("DEBUG: \{s}").to_fixedarray()).unwrap()
+  stderr.blocking_write_and_flush(b"\n".to_fixedarray()).unwrap()
 }
 
 ///|
@@ -25,10 +25,10 @@ pub fn debug(s : String, leading_blank_line~ : Bool = false) -> Unit {
 pub fn warn(s : String, leading_blank_line~ : Bool = false) -> Unit {
   let stderr = @stderr.get_stderr()
   if leading_blank_line {
-    stderr.write(b"\n").unwrap()
+    stderr.write(b"\n".to_fixedarray()).unwrap()
   }
-  stderr.write(@base64.str2bytes("WARNING: \{s}")).unwrap()
-  stderr.blocking_write_and_flush(b"\n").unwrap()
+  stderr.write(@base64.str2bytes("WARNING: \{s}").to_fixedarray()).unwrap()
+  stderr.blocking_write_and_flush(b"\n".to_fixedarray()).unwrap()
 }
 
 ///|
@@ -36,8 +36,8 @@ pub fn warn(s : String, leading_blank_line~ : Bool = false) -> Unit {
 pub fn error(s : String, leading_blank_line~ : Bool = false) -> Unit {
   let stderr = @stderr.get_stderr()
   if leading_blank_line {
-    stderr.write(b"\n").unwrap()
+    stderr.write(b"\n".to_fixedarray()).unwrap()
   }
-  stderr.write(@base64.str2bytes("ERROR: \{s}")).unwrap()
-  stderr.blocking_write_and_flush(b"\n").unwrap()
+  stderr.write(@base64.str2bytes("ERROR: \{s}").to_fixedarray()).unwrap()
+  stderr.blocking_write_and_flush(b"\n".to_fixedarray()).unwrap()
 }
