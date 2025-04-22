@@ -3,7 +3,7 @@
 pub fn send_request(
   request : @types.OutgoingRequest,
   debug~ : Bool = false
-) -> Result[FixedArray[Byte], @types.ErrorCode] {
+) -> Result[Bytes, @types.ErrorCode] {
   let future = match @outgoingHandler.handle(request, None) {
     Ok(result) => result
     Err(e) => return Err(e)
@@ -54,7 +54,7 @@ pub fn send_request(
     }
     result.write_iter(buf.iter())
   }
-  Ok(result.to_bytes().to_fixedarray())
+  Ok(result.to_bytes())
 }
 
 ///|

@@ -7,7 +7,7 @@ pub fn handle(
   response_out : @types.ResponseOutparam
 ) -> Unit {
   let response = (match request.path_with_query() {
-      Some("/hello") => @util.make_response(b"Hello, World!\n".to_fixedarray())
+      Some("/hello") => @util.make_response(b"Hello, World!\n")
       _ => return @util.respond_404(response_out)
     })
     |> Ok

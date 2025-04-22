@@ -1,18 +1,20 @@
 ///|
 /// `make_response` makes a new `OutgoingResponse`.
 pub fn make_response(
-  body : FixedArray[Byte],
-  content_type~ : FixedArray[Byte] = b"text/plain".to_fixedarray(),
+  body : Bytes,
+  content_type~ : Bytes = b"text/plain",
   status_code~ : UInt = 200
 ) -> @types.OutgoingResponse {
-  let fields = @types.Fields::from_list([("Content-Type", content_type)]).unwrap()
+  let fields = @types.Fields::from_list([
+    ("Content-Type", content_type.to_fixedarray()),
+  ]).unwrap()
   let response = @types.OutgoingResponse::outgoing_response(fields)
   response
   .body()
   .unwrap()
   .write()
   .unwrap()
-  .blocking_write_and_flush(body)
+  .blocking_write_and_flush(body.to_fixedarray())
   .unwrap()
   response.set_status_code(status_code).unwrap()
   response
@@ -22,8 +24,8 @@ pub fn make_response(
 /// `respond_bytes` sets response_out to an `OutgoingResponse` from the provided inputs.
 pub fn respond_bytes(
   response_out : @types.ResponseOutparam,
-  body : FixedArray[Byte],
-  content_type~ : FixedArray[Byte] = b"text/plain".to_fixedarray(),
+  body : Bytes,
+  content_type~ : Bytes = b"text/plain",
   status_code~ : UInt = 200
 ) -> Unit {
   response_out.set(make_response(body, content_type~, status_code~) |> Ok)
@@ -33,10 +35,10 @@ pub fn respond_bytes(
 /// `make_response_str` makes a new `OutgoingResponse` from the provided `String`.
 pub fn make_response_str(
   body : String,
-  content_type~ : FixedArray[Byte] = b"text/plain".to_fixedarray(),
+  content_type~ : Bytes = b"text/plain",
   status_code~ : UInt = 200
 ) -> @types.OutgoingResponse {
-  let body = @base64.str2bytes(body).to_fixedarray()
+  let body = @base64.str2bytes(body)
   make_response(body, content_type~, status_code~)
 }
 
@@ -45,7 +47,7 @@ pub fn make_response_str(
 pub fn respond_str(
   response_out : @types.ResponseOutparam,
   body : String,
-  content_type~ : FixedArray[Byte] = b"text/plain".to_fixedarray(),
+  content_type~ : Bytes = b"text/plain",
   status_code~ : UInt = 200
 ) -> Unit {
   response_out.set(make_response_str(body, content_type~, status_code~) |> Ok)
@@ -54,7 +56,7 @@ pub fn respond_str(
 ///|
 /// `make_404_response` makes a new `OutgoingResponse` with "404 Not Found".
 pub fn make_404_response() -> @types.OutgoingResponse {
-  make_response(b"Not Found".to_fixedarray(), status_code=404)
+  make_response(b"Not Found", status_code=404)
 }
 
 ///|
@@ -66,7 +68,7 @@ pub fn respond_404(response_out : @types.ResponseOutparam) -> Unit {
 ///|
 /// `make_500_response` makes a new `OutgoingResponse` with "500 Internal Server Error".
 pub fn make_500_response() -> @types.OutgoingResponse {
-  make_response(b"Internal Server Error".to_fixedarray(), status_code=500)
+  make_response(b"Internal Server Error", status_code=500)
 }
 
 ///|

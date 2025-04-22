@@ -3,10 +3,10 @@
 pub fn new_request(
   method_ : @types.Method,
   url : String,
-  fields~ : Array[(String, FixedArray[Byte])] = []
+  fields~ : Array[(String, Bytes)] = []
 ) -> @types.OutgoingRequest {
   let req = @types.OutgoingRequest::outgoing_request(
-    @types.Fields::from_list(fields).unwrap(),
+    @types.Fields::from_list(fields.map(fn(p) { (p.0, p.1.to_fixedarray()) })).unwrap(),
   )
   req.set_method(method_).unwrap()
   let i = url.find("://")

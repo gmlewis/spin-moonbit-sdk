@@ -2,7 +2,7 @@
 /// `get_body_bytes` returns the incoming request body as `Bytes`.
 pub fn get_body_bytes(
   request : @types.IncomingRequest
-) -> Result[FixedArray[Byte], @streams.StreamError] {
+) -> Result[Bytes, @streams.StreamError] {
   let in_stream = match request.consume() {
     Ok(body) => body.stream()
     _ => return Err(@streams.StreamError::Closed)
@@ -39,5 +39,5 @@ pub fn get_body_bytes(
     }
     result.write_iter(buf.iter())
   }
-  Ok(result.to_bytes().to_fixedarray())
+  Ok(result.to_bytes())
 }
