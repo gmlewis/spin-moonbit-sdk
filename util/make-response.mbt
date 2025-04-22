@@ -5,21 +5,23 @@ pub fn make_response(
   content_type~ : Bytes = b"text/plain",
   status_code~ : UInt = 200
 ) -> @types.OutgoingResponse {
-  let fields = @types.Fields::from_list([("Content-Type", content_type)]).unwrap()
+  let fields = @types.Fields::from_list([
+    ("Content-Type", content_type.to_fixedarray()),
+  ]).unwrap()
   let response = @types.OutgoingResponse::outgoing_response(fields)
   response
   .body()
   .unwrap()
   .write()
   .unwrap()
-  .blocking_write_and_flush(body)
+  .blocking_write_and_flush(body.to_fixedarray())
   .unwrap()
   response.set_status_code(status_code).unwrap()
   response
 }
 
 ///|
-/// `respond_bytes` sets response_out to an `OutgoingResponse` from the provided `Bytes`.
+/// `respond_bytes` sets response_out to an `OutgoingResponse` from the provided inputs.
 pub fn respond_bytes(
   response_out : @types.ResponseOutparam,
   body : Bytes,

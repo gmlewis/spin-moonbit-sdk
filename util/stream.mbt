@@ -64,7 +64,7 @@ pub fn stream_func(
   //
   let content_type = match incoming_headers.get("Content-Type") {
     [value] => value
-    _ => b"text/plain"
+    _ => b"text/plain".to_fixedarray()
   }
   let fields_array = [("Content-Type", content_type)]
   match incoming_headers.get("Content-Length") {

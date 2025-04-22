@@ -1,0 +1,50 @@
+package "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams"
+
+import(
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/error"
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll"
+)
+
+// Values
+
+// Types and methods
+pub(all) type InputStream Int
+impl InputStream {
+  blocking_read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]
+  blocking_skip(Self, UInt64) -> Result[UInt64, StreamError]
+  drop(Self) -> Unit
+  read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]
+  skip(Self, UInt64) -> Result[UInt64, StreamError]
+  subscribe(Self) -> @poll.Pollable
+}
+impl Eq for InputStream
+impl Show for InputStream
+
+pub(all) type OutputStream Int
+impl OutputStream {
+  blocking_flush(Self) -> Result[Unit, StreamError]
+  blocking_splice(Self, InputStream, UInt64) -> Result[UInt64, StreamError]
+  blocking_write_and_flush(Self, FixedArray[Byte]) -> Result[Unit, StreamError]
+  blocking_write_zeroes_and_flush(Self, UInt64) -> Result[Unit, StreamError]
+  check_write(Self) -> Result[UInt64, StreamError]
+  drop(Self) -> Unit
+  flush(Self) -> Result[Unit, StreamError]
+  splice(Self, InputStream, UInt64) -> Result[UInt64, StreamError]
+  subscribe(Self) -> @poll.Pollable
+  write(Self, FixedArray[Byte]) -> Result[Unit, StreamError]
+  write_zeroes(Self, UInt64) -> Result[Unit, StreamError]
+}
+impl Eq for OutputStream
+impl Show for OutputStream
+
+pub(all) enum StreamError {
+  LastOperationFailed(@error.Error_)
+  Closed
+}
+impl Eq for StreamError
+impl Show for StreamError
+
+// Type aliases
+
+// Traits
+

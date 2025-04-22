@@ -3,12 +3,12 @@
 pub fn split_path(
   request : @types.IncomingRequest
 ) -> (@types.Method, Array[String]) {
-  split_method_and_path(request.http_method(), request.path_with_query())
+  split_method_and_path(request.method_(), request.path_with_query())
 }
 
 ///|
 fn split_method_and_path(
-  http_method : @types.Method,
+  method_ : @types.Method,
   path : String?
 ) -> (@types.Method, Array[String]) {
   let result = match path {
@@ -20,7 +20,7 @@ fn split_method_and_path(
       }
     _ => []
   }
-  (http_method, result)
+  (method_, result)
 }
 
 ///|

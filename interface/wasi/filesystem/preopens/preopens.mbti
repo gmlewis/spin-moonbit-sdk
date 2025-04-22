@@ -1,0 +1,15 @@
+package "gmlewis/spin-moonbit-sdk/interface/wasi/filesystem/preopens"
+
+import(
+  "gmlewis/spin-moonbit-sdk/interface/wasi/filesystem/types"
+)
+
+// Values
+fn get_directories() -> Array[(@types.Descriptor, String)]
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

@@ -1,7 +1,9 @@
 package "gmlewis/spin-moonbit-sdk/ffi"
 
 // Values
-fn bytes2ptr(Bytes) -> Int
+fn bytes2ptr(FixedArray[Byte]) -> Int
+
+fn cabi_realloc(Int, Int, Int, Int) -> Int
 
 fn copy(Int, Int) -> Unit
 
@@ -41,15 +43,21 @@ fn loadf64(Int) -> Double
 
 fn malloc(Int) -> Int
 
-fn ptr2bytes(Int) -> Bytes
+fn ptr2bytes(Int, Int) -> FixedArray[Byte]
 
-fn ptr2float_array(Int) -> FixedArray[Float]
+fn ptr2double_array(Int, Int) -> FixedArray[Double]
 
-fn ptr2int_array(Int) -> FixedArray[Int]
+fn ptr2float_array(Int, Int) -> FixedArray[Float]
+
+fn ptr2int64_array(Int, Int) -> FixedArray[Int64]
+
+fn ptr2int_array(Int, Int) -> FixedArray[Int]
 
 fn ptr2str(Int) -> String
 
-fn ptr2uint_array(Int) -> FixedArray[UInt]
+fn ptr2uint64_array(Int, Int) -> FixedArray[UInt64]
+
+fn ptr2uint_array(Int, Int) -> FixedArray[UInt]
 
 fn store16(Int, Int) -> Unit
 

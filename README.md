@@ -2,6 +2,7 @@
 [![check](https://github.com/gmlewis/spin-moonbit-sdk/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/spin-moonbit-sdk/actions/workflows/check.yml)
 
 This is an experimental [Spin SDK] for the [MoonBit] programming language.
+Please expect breaking changes while still experimenting with the API.
 
 This is based on this blog post: https://www.moonbitlang.com/blog/component-model
 and this GitHub example: https://github.com/moonbitlang/moonbit-docs/tree/464356567270284446244cccecd101c04e9806f8/examples/wasi-http
@@ -50,7 +51,7 @@ date: Sat, 17 Aug 2024 00:15:14 GMT
 Hello, World!
 ```
 
-Each example contains a README. Please refer to the README for additional commands and setup instructions. It might also be required to issue an update command: `moon update` to retrieve the latest dependencies. 
+Each example contains a README. Please refer to the README for additional commands and setup instructions. It might also be required to issue an update command: `moon update` to retrieve the latest dependencies.
 
 ## Status
 

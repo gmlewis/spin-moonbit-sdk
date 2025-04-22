@@ -15,7 +15,7 @@ pub fn get_body_bytes(
   let content_length = match request.headers().get("Content-Length") {
     [value] =>
       try {
-        @strconv.parse_int!(@base64.bytes2str(value))
+        @strconv.parse_int!(@base64.bytes2str(Bytes::from_fixedarray(value)))
       } catch {
         _ => return Err(@streams.StreamError::Closed)
       }
@@ -37,7 +37,7 @@ pub fn get_body_bytes(
     if buf.length() == 0 {
       break
     }
-    result.write_bytes(buf)
+    result.write_iter(buf.iter())
   }
   Ok(result.to_bytes())
 }

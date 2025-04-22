@@ -1,0 +1,95 @@
+package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes"
+
+// Values
+
+// Types and methods
+pub(all) struct Column {
+  name : String
+  data_type : DbDataType
+}
+impl Eq for Column
+impl Show for Column
+
+pub(all) enum DbDataType {
+  BOOLEAN
+  INT8
+  INT16
+  INT32
+  INT64
+  UINT8
+  UINT16
+  UINT32
+  UINT64
+  FLOATING32
+  FLOATING64
+  STR
+  BINARY
+  OTHER
+}
+impl DbDataType {
+  from(Int) -> Self
+  ordinal(Self) -> Int
+}
+impl Eq for DbDataType
+impl Show for DbDataType
+
+pub(all) enum DbValue {
+  Boolean(Bool)
+  Int8(Int)
+  Int16(Int)
+  Int32(Int)
+  Int64(Int64)
+  Uint8(Byte)
+  Uint16(UInt)
+  Uint32(UInt)
+  Uint64(UInt64)
+  Floating32(Float)
+  Floating64(Double)
+  Str(String)
+  Binary(FixedArray[Byte])
+  DbNull
+  Unsupported
+}
+impl Eq for DbValue
+impl Show for DbValue
+
+pub(all) enum Error_ {
+  ConnectionFailed(String)
+  BadParameter(String)
+  QueryFailed(String)
+  ValueConversionFailed(String)
+  Other(String)
+}
+impl Eq for Error_
+impl Show for Error_
+
+pub(all) enum ParameterValue {
+  Boolean(Bool)
+  Int8(Int)
+  Int16(Int)
+  Int32(Int)
+  Int64(Int64)
+  Uint8(Byte)
+  Uint16(UInt)
+  Uint32(UInt)
+  Uint64(UInt64)
+  Floating32(Float)
+  Floating64(Double)
+  Str(String)
+  Binary(FixedArray[Byte])
+  DbNull
+}
+impl Eq for ParameterValue
+impl Show for ParameterValue
+
+pub(all) struct RowSet {
+  columns : Array[Column]
+  rows : Array[Array[DbValue]]
+}
+impl Eq for RowSet
+impl Show for RowSet
+
+// Type aliases
+
+// Traits
+

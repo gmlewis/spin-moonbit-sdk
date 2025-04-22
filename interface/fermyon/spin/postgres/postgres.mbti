@@ -1,0 +1,23 @@
+package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/postgres"
+
+import(
+  "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes"
+)
+
+// Values
+
+// Types and methods
+pub(all) type Connection Int
+impl Connection {
+  drop(Self) -> Unit
+  execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[UInt64, @rdbmsTypes.Error_]
+  open(String) -> Result[Self, @rdbmsTypes.Error_]
+  query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]
+}
+impl Eq for Connection
+impl Show for Connection
+
+// Type aliases
+
+// Traits
+
