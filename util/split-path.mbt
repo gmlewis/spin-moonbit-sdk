@@ -14,7 +14,9 @@ fn split_method_and_path(
   let result = match path {
     Some(s) =>
       if s.length() > 1 {
-        s.substring(start=1).split("/").collect()
+        // s.substring(start=1).split("/").collect()
+        // Is this map really necessary?!?
+        s.substring(start=1).split("/").map(fn(s) { s.to_string() }).collect()
       } else {
         []
       }
