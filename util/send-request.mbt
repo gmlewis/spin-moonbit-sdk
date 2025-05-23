@@ -62,9 +62,7 @@ pub fn send_request(
 pub fn get_content_length(fields : @types.Fields) -> Int {
   match fields.get("Content-Length") {
     [value] =>
-      try {
-        @strconv.parse_int!(@base64.bytes2str(Bytes::from_fixedarray(value)))
-      } catch {
+      try @strconv.parse_int!(@base64.bytes2str(Bytes::from_fixedarray(value))) catch {
         _ => 0
       }
     _ => 0
