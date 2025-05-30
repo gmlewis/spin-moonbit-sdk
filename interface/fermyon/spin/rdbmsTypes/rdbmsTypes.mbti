@@ -26,10 +26,8 @@ pub(all) enum DbDataType {
   BINARY
   OTHER
 }
-impl DbDataType {
-  from(Int) -> Self
-  ordinal(Self) -> Int
-}
+fn DbDataType::from(Int) -> Self
+fn DbDataType::ordinal(Self) -> Int
 impl Eq for DbDataType
 impl Show for DbDataType
 

@@ -26,10 +26,8 @@ pub(all) enum ErrorCode {
   TEMPORARY_RESOLVER_FAILURE
   PERMANENT_RESOLVER_FAILURE
 }
-impl ErrorCode {
-  from(Int) -> Self
-  ordinal(Self) -> Int
-}
+fn ErrorCode::from(Int) -> Self
+fn ErrorCode::ordinal(Self) -> Int
 impl Eq for ErrorCode
 impl Show for ErrorCode
 
@@ -44,10 +42,8 @@ pub(all) enum IpAddressFamily {
   IPV4
   IPV6
 }
-impl IpAddressFamily {
-  from(Int) -> Self
-  ordinal(Self) -> Int
-}
+fn IpAddressFamily::from(Int) -> Self
+fn IpAddressFamily::ordinal(Self) -> Int
 impl Eq for IpAddressFamily
 impl Show for IpAddressFamily
 
@@ -75,9 +71,7 @@ impl Eq for Ipv6SocketAddress
 impl Show for Ipv6SocketAddress
 
 pub(all) type Network Int
-impl Network {
-  drop(Self) -> Unit
-}
+fn Network::drop(Self) -> Unit
 impl Eq for Network
 impl Show for Network
 

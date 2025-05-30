@@ -8,12 +8,10 @@ import(
 
 // Types and methods
 pub(all) type Connection Int
-impl Connection {
-  drop(Self) -> Unit
-  execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[Unit, @rdbmsTypes.Error_]
-  open(String) -> Result[Self, @rdbmsTypes.Error_]
-  query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]
-}
+fn Connection::drop(Self) -> Unit
+fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[Unit, @rdbmsTypes.Error_]
+fn Connection::open(String) -> Result[Self, @rdbmsTypes.Error_]
+fn Connection::query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]
 impl Eq for Connection
 impl Show for Connection
 

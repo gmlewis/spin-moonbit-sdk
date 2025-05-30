@@ -4,19 +4,17 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/redis"
 
 // Types and methods
 pub(all) type Connection Int
-impl Connection {
-  del(Self, Array[String]) -> Result[UInt, Error_]
-  drop(Self) -> Unit
-  execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]
-  get(Self, String) -> Result[FixedArray[Byte]?, Error_]
-  incr(Self, String) -> Result[Int64, Error_]
-  open(String) -> Result[Self, Error_]
-  publish(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
-  sadd(Self, String, Array[String]) -> Result[UInt, Error_]
-  set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
-  smembers(Self, String) -> Result[Array[String], Error_]
-  srem(Self, String, Array[String]) -> Result[UInt, Error_]
-}
+fn Connection::del(Self, Array[String]) -> Result[UInt, Error_]
+fn Connection::drop(Self) -> Unit
+fn Connection::execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]
+fn Connection::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
+fn Connection::incr(Self, String) -> Result[Int64, Error_]
+fn Connection::open(String) -> Result[Self, Error_]
+fn Connection::publish(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
+fn Connection::sadd(Self, String, Array[String]) -> Result[UInt, Error_]
+fn Connection::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
+fn Connection::smembers(Self, String) -> Result[Array[String], Error_]
+fn Connection::srem(Self, String, Array[String]) -> Result[UInt, Error_]
 impl Eq for Connection
 impl Show for Connection
 

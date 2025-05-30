@@ -13,15 +13,13 @@ impl Eq for Error_
 impl Show for Error_
 
 pub(all) type Store Int
-impl Store {
-  delete(Self, String) -> Result[Unit, Error_]
-  drop(Self) -> Unit
-  exists(Self, String) -> Result[Bool, Error_]
-  get(Self, String) -> Result[FixedArray[Byte]?, Error_]
-  get_keys(Self) -> Result[Array[String], Error_]
-  open(String) -> Result[Self, Error_]
-  set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
-}
+fn Store::delete(Self, String) -> Result[Unit, Error_]
+fn Store::drop(Self) -> Unit
+fn Store::exists(Self, String) -> Result[Bool, Error_]
+fn Store::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
+fn Store::get_keys(Self) -> Result[Array[String], Error_]
+fn Store::open(String) -> Result[Self, Error_]
+fn Store::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
 impl Eq for Store
 impl Show for Store
 

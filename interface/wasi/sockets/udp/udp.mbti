@@ -16,11 +16,9 @@ impl Eq for IncomingDatagram
 impl Show for IncomingDatagram
 
 pub(all) type IncomingDatagramStream Int
-impl IncomingDatagramStream {
-  drop(Self) -> Unit
-  receive(Self, UInt64) -> Result[Array[IncomingDatagram], @network.ErrorCode]
-  subscribe(Self) -> @poll.Pollable
-}
+fn IncomingDatagramStream::drop(Self) -> Unit
+fn IncomingDatagramStream::receive(Self, UInt64) -> Result[Array[IncomingDatagram], @network.ErrorCode]
+fn IncomingDatagramStream::subscribe(Self) -> @poll.Pollable
 impl Eq for IncomingDatagramStream
 impl Show for IncomingDatagramStream
 
@@ -32,32 +30,28 @@ impl Eq for OutgoingDatagram
 impl Show for OutgoingDatagram
 
 pub(all) type OutgoingDatagramStream Int
-impl OutgoingDatagramStream {
-  check_send(Self) -> Result[UInt64, @network.ErrorCode]
-  drop(Self) -> Unit
-  send(Self, Array[OutgoingDatagram]) -> Result[UInt64, @network.ErrorCode]
-  subscribe(Self) -> @poll.Pollable
-}
+fn OutgoingDatagramStream::check_send(Self) -> Result[UInt64, @network.ErrorCode]
+fn OutgoingDatagramStream::drop(Self) -> Unit
+fn OutgoingDatagramStream::send(Self, Array[OutgoingDatagram]) -> Result[UInt64, @network.ErrorCode]
+fn OutgoingDatagramStream::subscribe(Self) -> @poll.Pollable
 impl Eq for OutgoingDatagramStream
 impl Show for OutgoingDatagramStream
 
 pub(all) type UdpSocket Int
-impl UdpSocket {
-  address_family(Self) -> @network.IpAddressFamily
-  drop(Self) -> Unit
-  finish_bind(Self) -> Result[Unit, @network.ErrorCode]
-  local_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
-  receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
-  remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
-  send_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
-  set_receive_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
-  set_send_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
-  set_unicast_hop_limit(Self, Byte) -> Result[Unit, @network.ErrorCode]
-  start_bind(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
-  stream(Self, @network.IpSocketAddress?) -> Result[(IncomingDatagramStream, OutgoingDatagramStream), @network.ErrorCode]
-  subscribe(Self) -> @poll.Pollable
-  unicast_hop_limit(Self) -> Result[Byte, @network.ErrorCode]
-}
+fn UdpSocket::address_family(Self) -> @network.IpAddressFamily
+fn UdpSocket::drop(Self) -> Unit
+fn UdpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
+fn UdpSocket::local_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
+fn UdpSocket::receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
+fn UdpSocket::remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
+fn UdpSocket::send_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
+fn UdpSocket::set_receive_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+fn UdpSocket::set_send_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+fn UdpSocket::set_unicast_hop_limit(Self, Byte) -> Result[Unit, @network.ErrorCode]
+fn UdpSocket::start_bind(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
+fn UdpSocket::stream(Self, @network.IpSocketAddress?) -> Result[(IncomingDatagramStream, OutgoingDatagramStream), @network.ErrorCode]
+fn UdpSocket::subscribe(Self) -> @poll.Pollable
+fn UdpSocket::unicast_hop_limit(Self) -> Result[Byte, @network.ErrorCode]
 impl Eq for UdpSocket
 impl Show for UdpSocket
 

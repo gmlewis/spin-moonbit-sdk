@@ -69,36 +69,30 @@ impl Eq for FieldSizePayload
 impl Show for FieldSizePayload
 
 pub(all) type Fields Int
-impl Fields {
-  append(Self, String, FixedArray[Byte]) -> Result[Unit, HeaderError]
-  clone(Self) -> Self
-  delete(Self, String) -> Result[Unit, HeaderError]
-  drop(Self) -> Unit
-  entries(Self) -> Array[(String, FixedArray[Byte])]
-  fields() -> Self
-  from_list(Array[(String, FixedArray[Byte])]) -> Result[Self, HeaderError]
-  get(Self, String) -> Array[FixedArray[Byte]]
-  has(Self, String) -> Bool
-  set(Self, String, Array[FixedArray[Byte]]) -> Result[Unit, HeaderError]
-}
+fn Fields::append(Self, String, FixedArray[Byte]) -> Result[Unit, HeaderError]
+fn Fields::clone(Self) -> Self
+fn Fields::delete(Self, String) -> Result[Unit, HeaderError]
+fn Fields::drop(Self) -> Unit
+fn Fields::entries(Self) -> Array[(String, FixedArray[Byte])]
+fn Fields::fields() -> Self
+fn Fields::from_list(Array[(String, FixedArray[Byte])]) -> Result[Self, HeaderError]
+fn Fields::get(Self, String) -> Array[FixedArray[Byte]]
+fn Fields::has(Self, String) -> Bool
+fn Fields::set(Self, String, Array[FixedArray[Byte]]) -> Result[Unit, HeaderError]
 impl Eq for Fields
 impl Show for Fields
 
 pub(all) type FutureIncomingResponse Int
-impl FutureIncomingResponse {
-  drop(Self) -> Unit
-  get(Self) -> Result[Result[IncomingResponse, ErrorCode], Unit]?
-  subscribe(Self) -> @poll.Pollable
-}
+fn FutureIncomingResponse::drop(Self) -> Unit
+fn FutureIncomingResponse::get(Self) -> Result[Result[IncomingResponse, ErrorCode], Unit]?
+fn FutureIncomingResponse::subscribe(Self) -> @poll.Pollable
 impl Eq for FutureIncomingResponse
 impl Show for FutureIncomingResponse
 
 pub(all) type FutureTrailers Int
-impl FutureTrailers {
-  drop(Self) -> Unit
-  get(Self) -> Result[Result[Fields?, ErrorCode], Unit]?
-  subscribe(Self) -> @poll.Pollable
-}
+fn FutureTrailers::drop(Self) -> Unit
+fn FutureTrailers::get(Self) -> Result[Result[Fields?, ErrorCode], Unit]?
+fn FutureTrailers::subscribe(Self) -> @poll.Pollable
 impl Eq for FutureTrailers
 impl Show for FutureTrailers
 
@@ -111,34 +105,28 @@ impl Eq for HeaderError
 impl Show for HeaderError
 
 pub(all) type IncomingBody Int
-impl IncomingBody {
-  drop(Self) -> Unit
-  finish(Self) -> FutureTrailers
-  stream(Self) -> Result[@streams.InputStream, Unit]
-}
+fn IncomingBody::drop(Self) -> Unit
+fn IncomingBody::finish(Self) -> FutureTrailers
+fn IncomingBody::stream(Self) -> Result[@streams.InputStream, Unit]
 impl Eq for IncomingBody
 impl Show for IncomingBody
 
 pub(all) type IncomingRequest Int
-impl IncomingRequest {
-  authority(Self) -> String?
-  consume(Self) -> Result[IncomingBody, Unit]
-  drop(Self) -> Unit
-  headers(Self) -> Fields
-  method_(Self) -> Method
-  path_with_query(Self) -> String?
-  scheme(Self) -> Scheme?
-}
+fn IncomingRequest::authority(Self) -> String?
+fn IncomingRequest::consume(Self) -> Result[IncomingBody, Unit]
+fn IncomingRequest::drop(Self) -> Unit
+fn IncomingRequest::headers(Self) -> Fields
+fn IncomingRequest::method_(Self) -> Method
+fn IncomingRequest::path_with_query(Self) -> String?
+fn IncomingRequest::scheme(Self) -> Scheme?
 impl Eq for IncomingRequest
 impl Show for IncomingRequest
 
 pub(all) type IncomingResponse Int
-impl IncomingResponse {
-  consume(Self) -> Result[IncomingBody, Unit]
-  drop(Self) -> Unit
-  headers(Self) -> Fields
-  status(Self) -> UInt
-}
+fn IncomingResponse::consume(Self) -> Result[IncomingBody, Unit]
+fn IncomingResponse::drop(Self) -> Unit
+fn IncomingResponse::headers(Self) -> Fields
+fn IncomingResponse::status(Self) -> UInt
 impl Eq for IncomingResponse
 impl Show for IncomingResponse
 
@@ -158,63 +146,53 @@ impl Eq for Method
 impl Show for Method
 
 pub(all) type OutgoingBody Int
-impl OutgoingBody {
-  drop(Self) -> Unit
-  finish(Self, Fields?) -> Result[Unit, ErrorCode]
-  write(Self) -> Result[@streams.OutputStream, Unit]
-}
+fn OutgoingBody::drop(Self) -> Unit
+fn OutgoingBody::finish(Self, Fields?) -> Result[Unit, ErrorCode]
+fn OutgoingBody::write(Self) -> Result[@streams.OutputStream, Unit]
 impl Eq for OutgoingBody
 impl Show for OutgoingBody
 
 pub(all) type OutgoingRequest Int
-impl OutgoingRequest {
-  authority(Self) -> String?
-  body(Self) -> Result[OutgoingBody, Unit]
-  drop(Self) -> Unit
-  headers(Self) -> Fields
-  method_(Self) -> Method
-  outgoing_request(Fields) -> Self
-  path_with_query(Self) -> String?
-  scheme(Self) -> Scheme?
-  set_authority(Self, String?) -> Result[Unit, Unit]
-  set_method(Self, Method) -> Result[Unit, Unit]
-  set_path_with_query(Self, String?) -> Result[Unit, Unit]
-  set_scheme(Self, Scheme?) -> Result[Unit, Unit]
-}
+fn OutgoingRequest::authority(Self) -> String?
+fn OutgoingRequest::body(Self) -> Result[OutgoingBody, Unit]
+fn OutgoingRequest::drop(Self) -> Unit
+fn OutgoingRequest::headers(Self) -> Fields
+fn OutgoingRequest::method_(Self) -> Method
+fn OutgoingRequest::outgoing_request(Fields) -> Self
+fn OutgoingRequest::path_with_query(Self) -> String?
+fn OutgoingRequest::scheme(Self) -> Scheme?
+fn OutgoingRequest::set_authority(Self, String?) -> Result[Unit, Unit]
+fn OutgoingRequest::set_method(Self, Method) -> Result[Unit, Unit]
+fn OutgoingRequest::set_path_with_query(Self, String?) -> Result[Unit, Unit]
+fn OutgoingRequest::set_scheme(Self, Scheme?) -> Result[Unit, Unit]
 impl Eq for OutgoingRequest
 impl Show for OutgoingRequest
 
 pub(all) type OutgoingResponse Int
-impl OutgoingResponse {
-  body(Self) -> Result[OutgoingBody, Unit]
-  drop(Self) -> Unit
-  headers(Self) -> Fields
-  outgoing_response(Fields) -> Self
-  set_status_code(Self, UInt) -> Result[Unit, Unit]
-  status_code(Self) -> UInt
-}
+fn OutgoingResponse::body(Self) -> Result[OutgoingBody, Unit]
+fn OutgoingResponse::drop(Self) -> Unit
+fn OutgoingResponse::headers(Self) -> Fields
+fn OutgoingResponse::outgoing_response(Fields) -> Self
+fn OutgoingResponse::set_status_code(Self, UInt) -> Result[Unit, Unit]
+fn OutgoingResponse::status_code(Self) -> UInt
 impl Eq for OutgoingResponse
 impl Show for OutgoingResponse
 
 pub(all) type RequestOptions Int
-impl RequestOptions {
-  between_bytes_timeout(Self) -> UInt64?
-  connect_timeout(Self) -> UInt64?
-  drop(Self) -> Unit
-  first_byte_timeout(Self) -> UInt64?
-  request_options() -> Self
-  set_between_bytes_timeout(Self, UInt64?) -> Result[Unit, Unit]
-  set_connect_timeout(Self, UInt64?) -> Result[Unit, Unit]
-  set_first_byte_timeout(Self, UInt64?) -> Result[Unit, Unit]
-}
+fn RequestOptions::between_bytes_timeout(Self) -> UInt64?
+fn RequestOptions::connect_timeout(Self) -> UInt64?
+fn RequestOptions::drop(Self) -> Unit
+fn RequestOptions::first_byte_timeout(Self) -> UInt64?
+fn RequestOptions::request_options() -> Self
+fn RequestOptions::set_between_bytes_timeout(Self, UInt64?) -> Result[Unit, Unit]
+fn RequestOptions::set_connect_timeout(Self, UInt64?) -> Result[Unit, Unit]
+fn RequestOptions::set_first_byte_timeout(Self, UInt64?) -> Result[Unit, Unit]
 impl Eq for RequestOptions
 impl Show for RequestOptions
 
 pub(all) type ResponseOutparam Int
-impl ResponseOutparam {
-  drop(Self) -> Unit
-  set(Self, Result[OutgoingResponse, ErrorCode]) -> Unit
-}
+fn ResponseOutparam::drop(Self) -> Unit
+fn ResponseOutparam::set(Self, Result[OutgoingResponse, ErrorCode]) -> Unit
 impl Eq for ResponseOutparam
 impl Show for ResponseOutparam
 

@@ -18,54 +18,48 @@ pub(all) enum Advice {
   DONT_NEED
   NO_REUSE
 }
-impl Advice {
-  from(Int) -> Self
-  ordinal(Self) -> Int
-}
+fn Advice::from(Int) -> Self
+fn Advice::ordinal(Self) -> Int
 impl Eq for Advice
 impl Show for Advice
 
 pub(all) type Descriptor Int
-impl Descriptor {
-  advise(Self, UInt64, UInt64, Advice) -> Result[Unit, ErrorCode]
-  append_via_stream(Self) -> Result[@streams.OutputStream, ErrorCode]
-  create_directory_at(Self, String) -> Result[Unit, ErrorCode]
-  drop(Self) -> Unit
-  get_flags(Self) -> Result[DescriptorFlags, ErrorCode]
-  get_type(Self) -> Result[DescriptorType, ErrorCode]
-  is_same_object(Self, Self) -> Bool
-  link_at(Self, PathFlags, String, Self, String) -> Result[Unit, ErrorCode]
-  metadata_hash(Self) -> Result[MetadataHashValue, ErrorCode]
-  metadata_hash_at(Self, PathFlags, String) -> Result[MetadataHashValue, ErrorCode]
-  open_at(Self, PathFlags, String, OpenFlags, DescriptorFlags) -> Result[Self, ErrorCode]
-  read(Self, UInt64, UInt64) -> Result[(FixedArray[Byte], Bool), ErrorCode]
-  read_directory(Self) -> Result[DirectoryEntryStream, ErrorCode]
-  read_via_stream(Self, UInt64) -> Result[@streams.InputStream, ErrorCode]
-  readlink_at(Self, String) -> Result[String, ErrorCode]
-  remove_directory_at(Self, String) -> Result[Unit, ErrorCode]
-  rename_at(Self, String, Self, String) -> Result[Unit, ErrorCode]
-  set_size(Self, UInt64) -> Result[Unit, ErrorCode]
-  set_times(Self, NewTimestamp, NewTimestamp) -> Result[Unit, ErrorCode]
-  set_times_at(Self, PathFlags, String, NewTimestamp, NewTimestamp) -> Result[Unit, ErrorCode]
-  stat(Self) -> Result[DescriptorStat, ErrorCode]
-  stat_at(Self, PathFlags, String) -> Result[DescriptorStat, ErrorCode]
-  symlink_at(Self, String, String) -> Result[Unit, ErrorCode]
-  sync(Self) -> Result[Unit, ErrorCode]
-  sync_data(Self) -> Result[Unit, ErrorCode]
-  unlink_file_at(Self, String) -> Result[Unit, ErrorCode]
-  write(Self, FixedArray[Byte], UInt64) -> Result[UInt64, ErrorCode]
-  write_via_stream(Self, UInt64) -> Result[@streams.OutputStream, ErrorCode]
-}
+fn Descriptor::advise(Self, UInt64, UInt64, Advice) -> Result[Unit, ErrorCode]
+fn Descriptor::append_via_stream(Self) -> Result[@streams.OutputStream, ErrorCode]
+fn Descriptor::create_directory_at(Self, String) -> Result[Unit, ErrorCode]
+fn Descriptor::drop(Self) -> Unit
+fn Descriptor::get_flags(Self) -> Result[DescriptorFlags, ErrorCode]
+fn Descriptor::get_type(Self) -> Result[DescriptorType, ErrorCode]
+fn Descriptor::is_same_object(Self, Self) -> Bool
+fn Descriptor::link_at(Self, PathFlags, String, Self, String) -> Result[Unit, ErrorCode]
+fn Descriptor::metadata_hash(Self) -> Result[MetadataHashValue, ErrorCode]
+fn Descriptor::metadata_hash_at(Self, PathFlags, String) -> Result[MetadataHashValue, ErrorCode]
+fn Descriptor::open_at(Self, PathFlags, String, OpenFlags, DescriptorFlags) -> Result[Self, ErrorCode]
+fn Descriptor::read(Self, UInt64, UInt64) -> Result[(FixedArray[Byte], Bool), ErrorCode]
+fn Descriptor::read_directory(Self) -> Result[DirectoryEntryStream, ErrorCode]
+fn Descriptor::read_via_stream(Self, UInt64) -> Result[@streams.InputStream, ErrorCode]
+fn Descriptor::readlink_at(Self, String) -> Result[String, ErrorCode]
+fn Descriptor::remove_directory_at(Self, String) -> Result[Unit, ErrorCode]
+fn Descriptor::rename_at(Self, String, Self, String) -> Result[Unit, ErrorCode]
+fn Descriptor::set_size(Self, UInt64) -> Result[Unit, ErrorCode]
+fn Descriptor::set_times(Self, NewTimestamp, NewTimestamp) -> Result[Unit, ErrorCode]
+fn Descriptor::set_times_at(Self, PathFlags, String, NewTimestamp, NewTimestamp) -> Result[Unit, ErrorCode]
+fn Descriptor::stat(Self) -> Result[DescriptorStat, ErrorCode]
+fn Descriptor::stat_at(Self, PathFlags, String) -> Result[DescriptorStat, ErrorCode]
+fn Descriptor::symlink_at(Self, String, String) -> Result[Unit, ErrorCode]
+fn Descriptor::sync(Self) -> Result[Unit, ErrorCode]
+fn Descriptor::sync_data(Self) -> Result[Unit, ErrorCode]
+fn Descriptor::unlink_file_at(Self, String) -> Result[Unit, ErrorCode]
+fn Descriptor::write(Self, FixedArray[Byte], UInt64) -> Result[UInt64, ErrorCode]
+fn Descriptor::write_via_stream(Self, UInt64) -> Result[@streams.OutputStream, ErrorCode]
 impl Eq for Descriptor
 impl Show for Descriptor
 
 pub(all) type DescriptorFlags Byte
-impl DescriptorFlags {
-  default() -> Self
-  is_set(Self, DescriptorFlagsFlag) -> Bool
-  set(Self, DescriptorFlagsFlag) -> Self
-  unset(Self, DescriptorFlagsFlag) -> Self
-}
+fn DescriptorFlags::default() -> Self
+fn DescriptorFlags::is_set(Self, DescriptorFlagsFlag) -> Bool
+fn DescriptorFlags::set(Self, DescriptorFlagsFlag) -> Self
+fn DescriptorFlags::unset(Self, DescriptorFlagsFlag) -> Self
 impl Eq for DescriptorFlags
 impl Show for DescriptorFlags
 
@@ -99,10 +93,8 @@ pub(all) enum DescriptorType {
   REGULAR_FILE
   SOCKET
 }
-impl DescriptorType {
-  from(Int) -> Self
-  ordinal(Self) -> Int
-}
+fn DescriptorType::from(Int) -> Self
+fn DescriptorType::ordinal(Self) -> Int
 impl Eq for DescriptorType
 impl Show for DescriptorType
 
@@ -114,10 +106,8 @@ impl Eq for DirectoryEntry
 impl Show for DirectoryEntry
 
 pub(all) type DirectoryEntryStream Int
-impl DirectoryEntryStream {
-  drop(Self) -> Unit
-  read_directory_entry(Self) -> Result[DirectoryEntry?, ErrorCode]
-}
+fn DirectoryEntryStream::drop(Self) -> Unit
+fn DirectoryEntryStream::read_directory_entry(Self) -> Result[DirectoryEntry?, ErrorCode]
 impl Eq for DirectoryEntryStream
 impl Show for DirectoryEntryStream
 
@@ -160,10 +150,8 @@ pub(all) enum ErrorCode {
   TEXT_FILE_BUSY
   CROSS_DEVICE
 }
-impl ErrorCode {
-  from(Int) -> Self
-  ordinal(Self) -> Int
-}
+fn ErrorCode::from(Int) -> Self
+fn ErrorCode::ordinal(Self) -> Int
 impl Eq for ErrorCode
 impl Show for ErrorCode
 
@@ -183,12 +171,10 @@ impl Eq for NewTimestamp
 impl Show for NewTimestamp
 
 pub(all) type OpenFlags Byte
-impl OpenFlags {
-  default() -> Self
-  is_set(Self, OpenFlagsFlag) -> Bool
-  set(Self, OpenFlagsFlag) -> Self
-  unset(Self, OpenFlagsFlag) -> Self
-}
+fn OpenFlags::default() -> Self
+fn OpenFlags::is_set(Self, OpenFlagsFlag) -> Bool
+fn OpenFlags::set(Self, OpenFlagsFlag) -> Self
+fn OpenFlags::unset(Self, OpenFlagsFlag) -> Self
 impl Eq for OpenFlags
 impl Show for OpenFlags
 
@@ -200,12 +186,10 @@ pub(all) enum OpenFlagsFlag {
 }
 
 pub(all) type PathFlags Byte
-impl PathFlags {
-  default() -> Self
-  is_set(Self, PathFlagsFlag) -> Bool
-  set(Self, PathFlagsFlag) -> Self
-  unset(Self, PathFlagsFlag) -> Self
-}
+fn PathFlags::default() -> Self
+fn PathFlags::is_set(Self, PathFlagsFlag) -> Bool
+fn PathFlags::set(Self, PathFlagsFlag) -> Self
+fn PathFlags::unset(Self, PathFlagsFlag) -> Self
 impl Eq for PathFlags
 impl Show for PathFlags
 

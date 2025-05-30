@@ -9,31 +9,27 @@ import(
 
 // Types and methods
 pub(all) type InputStream Int
-impl InputStream {
-  blocking_read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]
-  blocking_skip(Self, UInt64) -> Result[UInt64, StreamError]
-  drop(Self) -> Unit
-  read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]
-  skip(Self, UInt64) -> Result[UInt64, StreamError]
-  subscribe(Self) -> @poll.Pollable
-}
+fn InputStream::blocking_read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]
+fn InputStream::blocking_skip(Self, UInt64) -> Result[UInt64, StreamError]
+fn InputStream::drop(Self) -> Unit
+fn InputStream::read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]
+fn InputStream::skip(Self, UInt64) -> Result[UInt64, StreamError]
+fn InputStream::subscribe(Self) -> @poll.Pollable
 impl Eq for InputStream
 impl Show for InputStream
 
 pub(all) type OutputStream Int
-impl OutputStream {
-  blocking_flush(Self) -> Result[Unit, StreamError]
-  blocking_splice(Self, InputStream, UInt64) -> Result[UInt64, StreamError]
-  blocking_write_and_flush(Self, FixedArray[Byte]) -> Result[Unit, StreamError]
-  blocking_write_zeroes_and_flush(Self, UInt64) -> Result[Unit, StreamError]
-  check_write(Self) -> Result[UInt64, StreamError]
-  drop(Self) -> Unit
-  flush(Self) -> Result[Unit, StreamError]
-  splice(Self, InputStream, UInt64) -> Result[UInt64, StreamError]
-  subscribe(Self) -> @poll.Pollable
-  write(Self, FixedArray[Byte]) -> Result[Unit, StreamError]
-  write_zeroes(Self, UInt64) -> Result[Unit, StreamError]
-}
+fn OutputStream::blocking_flush(Self) -> Result[Unit, StreamError]
+fn OutputStream::blocking_splice(Self, InputStream, UInt64) -> Result[UInt64, StreamError]
+fn OutputStream::blocking_write_and_flush(Self, FixedArray[Byte]) -> Result[Unit, StreamError]
+fn OutputStream::blocking_write_zeroes_and_flush(Self, UInt64) -> Result[Unit, StreamError]
+fn OutputStream::check_write(Self) -> Result[UInt64, StreamError]
+fn OutputStream::drop(Self) -> Unit
+fn OutputStream::flush(Self) -> Result[Unit, StreamError]
+fn OutputStream::splice(Self, InputStream, UInt64) -> Result[UInt64, StreamError]
+fn OutputStream::subscribe(Self) -> @poll.Pollable
+fn OutputStream::write(Self, FixedArray[Byte]) -> Result[Unit, StreamError]
+fn OutputStream::write_zeroes(Self, UInt64) -> Result[Unit, StreamError]
 impl Eq for OutputStream
 impl Show for OutputStream
 

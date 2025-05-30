@@ -4,10 +4,8 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/io/error"
 
 // Types and methods
 pub(all) type Error_ Int
-impl Error_ {
-  drop(Self) -> Unit
-  to_debug_string(Self) -> String
-}
+fn Error_::drop(Self) -> Unit
+fn Error_::to_debug_string(Self) -> String
 impl Eq for Error_
 impl Show for Error_
 

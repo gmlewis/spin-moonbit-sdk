@@ -4,9 +4,7 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalInput"
 
 // Types and methods
 pub(all) type TerminalInput Int
-impl TerminalInput {
-  drop(Self) -> Unit
-}
+fn TerminalInput::drop(Self) -> Unit
 impl Eq for TerminalInput
 impl Show for TerminalInput
 
