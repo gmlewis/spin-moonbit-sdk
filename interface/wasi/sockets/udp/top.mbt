@@ -189,11 +189,10 @@ pub fn UdpSocket::finish_bind(
 pub fn UdpSocket::stream(
   self : UdpSocket,
   remote_address : @network.IpSocketAddress?
-) ->
-     Result[
-       (IncomingDatagramStream, OutgoingDatagramStream),
-       @network.ErrorCode,
-     ] {
+) -> Result[
+  (IncomingDatagramStream, OutgoingDatagramStream),
+  @network.ErrorCode,
+] {
   let UdpSocket(handle) = self
   let (
     lowered20,

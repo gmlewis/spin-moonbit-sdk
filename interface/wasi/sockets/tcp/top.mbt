@@ -389,11 +389,10 @@ pub fn TcpSocket::finish_listen(
 /// - <https://man.freebsd.org/cgi/man.cgi?query=accept&sektion=2>
 pub fn TcpSocket::accept(
   self : TcpSocket
-) ->
-     Result[
-       (TcpSocket, @streams.InputStream, @streams.OutputStream),
-       @network.ErrorCode,
-     ] {
+) -> Result[
+  (TcpSocket, @streams.InputStream, @streams.OutputStream),
+  @network.ErrorCode,
+] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketAccept(handle, return_area)
