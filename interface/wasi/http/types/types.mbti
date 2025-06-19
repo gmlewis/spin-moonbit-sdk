@@ -78,6 +78,7 @@ fn Fields::fields() -> Self
 fn Fields::from_list(Array[(String, FixedArray[Byte])]) -> Result[Self, HeaderError]
 fn Fields::get(Self, String) -> Array[FixedArray[Byte]]
 fn Fields::has(Self, String) -> Bool
+fn Fields::inner(Self) -> Int
 fn Fields::set(Self, String, Array[FixedArray[Byte]]) -> Result[Unit, HeaderError]
 impl Eq for Fields
 impl Show for Fields
@@ -85,6 +86,7 @@ impl Show for Fields
 pub(all) type FutureIncomingResponse Int
 fn FutureIncomingResponse::drop(Self) -> Unit
 fn FutureIncomingResponse::get(Self) -> Result[Result[IncomingResponse, ErrorCode], Unit]?
+fn FutureIncomingResponse::inner(Self) -> Int
 fn FutureIncomingResponse::subscribe(Self) -> @poll.Pollable
 impl Eq for FutureIncomingResponse
 impl Show for FutureIncomingResponse
@@ -92,6 +94,7 @@ impl Show for FutureIncomingResponse
 pub(all) type FutureTrailers Int
 fn FutureTrailers::drop(Self) -> Unit
 fn FutureTrailers::get(Self) -> Result[Result[Fields?, ErrorCode], Unit]?
+fn FutureTrailers::inner(Self) -> Int
 fn FutureTrailers::subscribe(Self) -> @poll.Pollable
 impl Eq for FutureTrailers
 impl Show for FutureTrailers
@@ -107,6 +110,7 @@ impl Show for HeaderError
 pub(all) type IncomingBody Int
 fn IncomingBody::drop(Self) -> Unit
 fn IncomingBody::finish(Self) -> FutureTrailers
+fn IncomingBody::inner(Self) -> Int
 fn IncomingBody::stream(Self) -> Result[@streams.InputStream, Unit]
 impl Eq for IncomingBody
 impl Show for IncomingBody
@@ -116,6 +120,7 @@ fn IncomingRequest::authority(Self) -> String?
 fn IncomingRequest::consume(Self) -> Result[IncomingBody, Unit]
 fn IncomingRequest::drop(Self) -> Unit
 fn IncomingRequest::headers(Self) -> Fields
+fn IncomingRequest::inner(Self) -> Int
 fn IncomingRequest::method_(Self) -> Method
 fn IncomingRequest::path_with_query(Self) -> String?
 fn IncomingRequest::scheme(Self) -> Scheme?
@@ -126,6 +131,7 @@ pub(all) type IncomingResponse Int
 fn IncomingResponse::consume(Self) -> Result[IncomingBody, Unit]
 fn IncomingResponse::drop(Self) -> Unit
 fn IncomingResponse::headers(Self) -> Fields
+fn IncomingResponse::inner(Self) -> Int
 fn IncomingResponse::status(Self) -> UInt
 impl Eq for IncomingResponse
 impl Show for IncomingResponse
@@ -148,6 +154,7 @@ impl Show for Method
 pub(all) type OutgoingBody Int
 fn OutgoingBody::drop(Self) -> Unit
 fn OutgoingBody::finish(Self, Fields?) -> Result[Unit, ErrorCode]
+fn OutgoingBody::inner(Self) -> Int
 fn OutgoingBody::write(Self) -> Result[@streams.OutputStream, Unit]
 impl Eq for OutgoingBody
 impl Show for OutgoingBody
@@ -157,6 +164,7 @@ fn OutgoingRequest::authority(Self) -> String?
 fn OutgoingRequest::body(Self) -> Result[OutgoingBody, Unit]
 fn OutgoingRequest::drop(Self) -> Unit
 fn OutgoingRequest::headers(Self) -> Fields
+fn OutgoingRequest::inner(Self) -> Int
 fn OutgoingRequest::method_(Self) -> Method
 fn OutgoingRequest::outgoing_request(Fields) -> Self
 fn OutgoingRequest::path_with_query(Self) -> String?
@@ -172,6 +180,7 @@ pub(all) type OutgoingResponse Int
 fn OutgoingResponse::body(Self) -> Result[OutgoingBody, Unit]
 fn OutgoingResponse::drop(Self) -> Unit
 fn OutgoingResponse::headers(Self) -> Fields
+fn OutgoingResponse::inner(Self) -> Int
 fn OutgoingResponse::outgoing_response(Fields) -> Self
 fn OutgoingResponse::set_status_code(Self, UInt) -> Result[Unit, Unit]
 fn OutgoingResponse::status_code(Self) -> UInt
@@ -183,6 +192,7 @@ fn RequestOptions::between_bytes_timeout(Self) -> UInt64?
 fn RequestOptions::connect_timeout(Self) -> UInt64?
 fn RequestOptions::drop(Self) -> Unit
 fn RequestOptions::first_byte_timeout(Self) -> UInt64?
+fn RequestOptions::inner(Self) -> Int
 fn RequestOptions::request_options() -> Self
 fn RequestOptions::set_between_bytes_timeout(Self, UInt64?) -> Result[Unit, Unit]
 fn RequestOptions::set_connect_timeout(Self, UInt64?) -> Result[Unit, Unit]
@@ -192,6 +202,7 @@ impl Show for RequestOptions
 
 pub(all) type ResponseOutparam Int
 fn ResponseOutparam::drop(Self) -> Unit
+fn ResponseOutparam::inner(Self) -> Int
 fn ResponseOutparam::set(Self, Result[OutgoingResponse, ErrorCode]) -> Unit
 impl Eq for ResponseOutparam
 impl Show for ResponseOutparam

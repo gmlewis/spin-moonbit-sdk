@@ -9,6 +9,7 @@ fn Connection::drop(Self) -> Unit
 fn Connection::execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]
 fn Connection::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
 fn Connection::incr(Self, String) -> Result[Int64, Error_]
+fn Connection::inner(Self) -> Int
 fn Connection::open(String) -> Result[Self, Error_]
 fn Connection::publish(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
 fn Connection::sadd(Self, String, Array[String]) -> Result[UInt, Error_]

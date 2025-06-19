@@ -12,6 +12,7 @@ pub(all) type InputStream Int
 fn InputStream::blocking_read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]
 fn InputStream::blocking_skip(Self, UInt64) -> Result[UInt64, StreamError]
 fn InputStream::drop(Self) -> Unit
+fn InputStream::inner(Self) -> Int
 fn InputStream::read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]
 fn InputStream::skip(Self, UInt64) -> Result[UInt64, StreamError]
 fn InputStream::subscribe(Self) -> @poll.Pollable
@@ -26,6 +27,7 @@ fn OutputStream::blocking_write_zeroes_and_flush(Self, UInt64) -> Result[Unit, S
 fn OutputStream::check_write(Self) -> Result[UInt64, StreamError]
 fn OutputStream::drop(Self) -> Unit
 fn OutputStream::flush(Self) -> Result[Unit, StreamError]
+fn OutputStream::inner(Self) -> Int
 fn OutputStream::splice(Self, InputStream, UInt64) -> Result[UInt64, StreamError]
 fn OutputStream::subscribe(Self) -> @poll.Pollable
 fn OutputStream::write(Self, FixedArray[Byte]) -> Result[Unit, StreamError]

@@ -17,6 +17,7 @@ impl Show for IncomingDatagram
 
 pub(all) type IncomingDatagramStream Int
 fn IncomingDatagramStream::drop(Self) -> Unit
+fn IncomingDatagramStream::inner(Self) -> Int
 fn IncomingDatagramStream::receive(Self, UInt64) -> Result[Array[IncomingDatagram], @network.ErrorCode]
 fn IncomingDatagramStream::subscribe(Self) -> @poll.Pollable
 impl Eq for IncomingDatagramStream
@@ -32,6 +33,7 @@ impl Show for OutgoingDatagram
 pub(all) type OutgoingDatagramStream Int
 fn OutgoingDatagramStream::check_send(Self) -> Result[UInt64, @network.ErrorCode]
 fn OutgoingDatagramStream::drop(Self) -> Unit
+fn OutgoingDatagramStream::inner(Self) -> Int
 fn OutgoingDatagramStream::send(Self, Array[OutgoingDatagram]) -> Result[UInt64, @network.ErrorCode]
 fn OutgoingDatagramStream::subscribe(Self) -> @poll.Pollable
 impl Eq for OutgoingDatagramStream
@@ -41,6 +43,7 @@ pub(all) type UdpSocket Int
 fn UdpSocket::address_family(Self) -> @network.IpAddressFamily
 fn UdpSocket::drop(Self) -> Unit
 fn UdpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
+fn UdpSocket::inner(Self) -> Int
 fn UdpSocket::local_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
 fn UdpSocket::receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
 fn UdpSocket::remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]

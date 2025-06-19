@@ -7,6 +7,7 @@ fn poll(Array[Pollable]) -> FixedArray[UInt]
 pub(all) type Pollable Int
 fn Pollable::block(Self) -> Unit
 fn Pollable::drop(Self) -> Unit
+fn Pollable::inner(Self) -> Int
 fn Pollable::ready(Self) -> Bool
 impl Eq for Pollable
 impl Show for Pollable

@@ -87,7 +87,7 @@ pub fn consume_func(
     match byte_func {
       Some(f) =>
         for b in buf {
-          (f._)(b)
+          f.inner()(b)
         }
       _ => ()
     }
