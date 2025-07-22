@@ -13,7 +13,7 @@ fn wasmImportInfer(
   p8 : Float,
   p9 : Int,
   p10 : Float,
-  p11 : Int
+  p11 : Int,
 ) = "fermyon:spin/llm@2.0.0" "infer"
 
 ///|
@@ -22,5 +22,5 @@ fn wasmImportGenerateEmbeddings(
   p1 : Int,
   p2 : Int,
   p3 : Int,
-  p4 : Int
+  p4 : Int,
 ) = "fermyon:spin/llm@2.0.0" "generate-embeddings"

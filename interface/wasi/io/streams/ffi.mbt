@@ -32,7 +32,7 @@ fn wasmImportMethodOutputStreamBlockingWriteAndFlush(
   p0 : Int,
   p1 : Int,
   p2 : Int,
-  p3 : Int
+  p3 : Int,
 ) = "wasi:io/streams@0.2.0" "[method]output-stream.blocking-write-and-flush"
 
 ///|
@@ -51,7 +51,7 @@ fn wasmImportMethodOutputStreamWriteZeroes(p0 : Int, p1 : Int64, p2 : Int) = "wa
 fn wasmImportMethodOutputStreamBlockingWriteZeroesAndFlush(
   p0 : Int,
   p1 : Int64,
-  p2 : Int
+  p2 : Int,
 ) = "wasi:io/streams@0.2.0" "[method]output-stream.blocking-write-zeroes-and-flush"
 
 ///|
@@ -62,5 +62,5 @@ fn wasmImportMethodOutputStreamBlockingSplice(
   p0 : Int,
   p1 : Int,
   p2 : Int64,
-  p3 : Int
+  p3 : Int,
 ) = "wasi:io/streams@0.2.0" "[method]output-stream.blocking-splice"

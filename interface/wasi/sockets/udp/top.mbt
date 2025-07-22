@@ -68,7 +68,7 @@ pub fn OutgoingDatagramStream::drop(self : OutgoingDatagramStream) -> Unit {
 pub fn UdpSocket::start_bind(
   self : UdpSocket,
   network : @network.Network,
-  local_address : @network.IpSocketAddress
+  local_address : @network.IpSocketAddress,
 ) -> Result[Unit, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let @network.Network(handle0) = network
@@ -133,7 +133,7 @@ pub fn UdpSocket::start_bind(
 
 ///|
 pub fn UdpSocket::finish_bind(
-  self : UdpSocket
+  self : UdpSocket,
 ) -> Result[Unit, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -189,7 +189,7 @@ pub fn UdpSocket::finish_bind(
 /// - <https://man.freebsd.org/cgi/man.cgi?connect>
 pub fn UdpSocket::stream(
   self : UdpSocket,
-  remote_address : @network.IpSocketAddress?
+  remote_address : @network.IpSocketAddress?,
 ) -> Result[
   (IncomingDatagramStream, OutgoingDatagramStream),
   @network.ErrorCode,
@@ -304,7 +304,7 @@ pub fn UdpSocket::stream(
 /// - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-getsockname>
 /// - <https://man.freebsd.org/cgi/man.cgi?getsockname>
 pub fn UdpSocket::local_address(
-  self : UdpSocket
+  self : UdpSocket,
 ) -> Result[@network.IpSocketAddress, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(36)
@@ -364,7 +364,7 @@ pub fn UdpSocket::local_address(
 /// - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-getpeername>
 /// - <https://man.freebsd.org/cgi/man.cgi?query=getpeername&sektion=2&n=1>
 pub fn UdpSocket::remote_address(
-  self : UdpSocket
+  self : UdpSocket,
 ) -> Result[@network.IpSocketAddress, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(36)
@@ -429,7 +429,7 @@ pub fn UdpSocket::address_family(self : UdpSocket) -> @network.IpAddressFamily {
 /// # Typical errors
 /// - `invalid-argument`:     (set) The TTL value must be 1 or higher.
 pub fn UdpSocket::unicast_hop_limit(
-  self : UdpSocket
+  self : UdpSocket,
 ) -> Result[Byte, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -446,7 +446,7 @@ pub fn UdpSocket::unicast_hop_limit(
 ///|
 pub fn UdpSocket::set_unicast_hop_limit(
   self : UdpSocket,
-  value : Byte
+  value : Byte,
 ) -> Result[Unit, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -475,7 +475,7 @@ pub fn UdpSocket::set_unicast_hop_limit(
 /// # Typical errors
 /// - `invalid-argument`:     (set) The provided value was 0.
 pub fn UdpSocket::receive_buffer_size(
-  self : UdpSocket
+  self : UdpSocket,
 ) -> Result[UInt64, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(16)
@@ -492,7 +492,7 @@ pub fn UdpSocket::receive_buffer_size(
 ///|
 pub fn UdpSocket::set_receive_buffer_size(
   self : UdpSocket,
-  value : UInt64
+  value : UInt64,
 ) -> Result[Unit, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -512,7 +512,7 @@ pub fn UdpSocket::set_receive_buffer_size(
 
 ///|
 pub fn UdpSocket::send_buffer_size(
-  self : UdpSocket
+  self : UdpSocket,
 ) -> Result[UInt64, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(16)
@@ -529,7 +529,7 @@ pub fn UdpSocket::send_buffer_size(
 ///|
 pub fn UdpSocket::set_send_buffer_size(
   self : UdpSocket,
-  value : UInt64
+  value : UInt64,
 ) -> Result[Unit, @network.ErrorCode] {
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -582,7 +582,7 @@ pub fn UdpSocket::subscribe(self : UdpSocket) -> @poll.Pollable {
 /// - <https://man.freebsd.org/cgi/man.cgi?query=recv&sektion=2>
 pub fn IncomingDatagramStream::receive(
   self : IncomingDatagramStream,
-  max_results : UInt64
+  max_results : UInt64,
 ) -> Result[Array[IncomingDatagram], @network.ErrorCode] {
   let IncomingDatagramStream(handle) = self
   let return_area = @ffi.malloc(12)
@@ -646,7 +646,7 @@ pub fn IncomingDatagramStream::receive(
 /// Note: this function is here for WASI Preview2 only.
 /// It's planned to be removed when `future` is natively supported in Preview3.
 pub fn IncomingDatagramStream::subscribe(
-  self : IncomingDatagramStream
+  self : IncomingDatagramStream,
 ) -> @poll.Pollable {
   let IncomingDatagramStream(handle) = self
   let result : Int = wasmImportMethodIncomingDatagramStreamSubscribe(handle)
@@ -665,7 +665,7 @@ pub fn IncomingDatagramStream::subscribe(
 ///
 /// Never returns `would-block`.
 pub fn OutgoingDatagramStream::check_send(
-  self : OutgoingDatagramStream
+  self : OutgoingDatagramStream,
 ) -> Result[UInt64, @network.ErrorCode] {
   let OutgoingDatagramStream(handle) = self
   let return_area = @ffi.malloc(16)
@@ -715,7 +715,7 @@ pub fn OutgoingDatagramStream::check_send(
 /// - <https://man.freebsd.org/cgi/man.cgi?query=send&sektion=2>
 pub fn OutgoingDatagramStream::send(
   self : OutgoingDatagramStream,
-  datagrams : Array[OutgoingDatagram]
+  datagrams : Array[OutgoingDatagram],
 ) -> Result[UInt64, @network.ErrorCode] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -788,7 +788,7 @@ pub fn OutgoingDatagramStream::send(
 /// Note: this function is here for WASI Preview2 only.
 /// It's planned to be removed when `future` is natively supported in Preview3.
 pub fn OutgoingDatagramStream::subscribe(
-  self : OutgoingDatagramStream
+  self : OutgoingDatagramStream,
 ) -> @poll.Pollable {
   let OutgoingDatagramStream(handle) = self
   let result : Int = wasmImportMethodOutgoingDatagramStreamSubscribe(handle)

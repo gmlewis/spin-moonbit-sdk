@@ -16,7 +16,7 @@ fn wasmImportMethodStoreSet(
   p2 : Int,
   p3 : Int,
   p4 : Int,
-  p5 : Int
+  p5 : Int,
 ) = "fermyon:spin/key-value@2.0.0" "[method]store.set"
 
 ///|

@@ -66,7 +66,7 @@ pub fn Connection::open(address : String) -> Result[Connection, Error_] {
 pub fn Connection::publish(
   self : Connection,
   channel : String,
-  payload : FixedArray[Byte]
+  payload : FixedArray[Byte],
 ) -> Result[Unit, Error_] {
   let Connection(handle) = self
   let return_area = @ffi.malloc(16)
@@ -105,7 +105,7 @@ pub fn Connection::publish(
 ///| Get the value of a key.
 pub fn Connection::get(
   self : Connection,
-  key : String
+  key : String,
 ) -> Result[FixedArray[Byte]?, Error_] {
   let Connection(handle) = self
   let return_area = @ffi.malloc(16)
@@ -157,7 +157,7 @@ pub fn Connection::get(
 pub fn Connection::set(
   self : Connection,
   key : String,
-  value : FixedArray[Byte]
+  value : FixedArray[Byte],
 ) -> Result[Unit, Error_] {
   let Connection(handle) = self
   let return_area = @ffi.malloc(16)
@@ -200,7 +200,7 @@ pub fn Connection::set(
 /// or contains a string that can not be represented as integer.
 pub fn Connection::incr(
   self : Connection,
-  key : String
+  key : String,
 ) -> Result[Int64, Error_] {
   let Connection(handle) = self
   let return_area = @ffi.malloc(24)
@@ -238,7 +238,7 @@ pub fn Connection::incr(
 /// A key is ignored if it does not exist. Returns the number of keys deleted.
 pub fn Connection::del(
   self : Connection,
-  keys : Array[String]
+  keys : Array[String],
 ) -> Result[UInt, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -282,7 +282,7 @@ pub fn Connection::del(
 pub fn Connection::sadd(
   self : Connection,
   key : String,
-  values : Array[String]
+  values : Array[String],
 ) -> Result[UInt, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -333,7 +333,7 @@ pub fn Connection::sadd(
 ///| Retrieve the contents of the set named `key`.
 pub fn Connection::smembers(
   self : Connection,
-  key : String
+  key : String,
 ) -> Result[Array[String], Error_] {
   let Connection(handle) = self
   let return_area = @ffi.malloc(16)
@@ -380,7 +380,7 @@ pub fn Connection::smembers(
 pub fn Connection::srem(
   self : Connection,
   key : String,
-  values : Array[String]
+  values : Array[String],
 ) -> Result[UInt, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -432,7 +432,7 @@ pub fn Connection::srem(
 pub fn Connection::execute(
   self : Connection,
   command : String,
-  arguments : Array[RedisParameter]
+  arguments : Array[RedisParameter],
 ) -> Result[Array[RedisResult], Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []

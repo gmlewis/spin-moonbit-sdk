@@ -21,7 +21,7 @@ fn wasmImportMethodDescriptorAdvise(
   p1 : Int64,
   p2 : Int64,
   p3 : Int,
-  p4 : Int
+  p4 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.advise"
 
 ///|
@@ -45,7 +45,7 @@ fn wasmImportMethodDescriptorSetTimes(
   p4 : Int,
   p5 : Int64,
   p6 : Int,
-  p7 : Int
+  p7 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.set-times"
 
 ///|
@@ -57,7 +57,7 @@ fn wasmImportMethodDescriptorWrite(
   p1 : Int,
   p2 : Int,
   p3 : Int64,
-  p4 : Int
+  p4 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.write"
 
 ///|
@@ -71,7 +71,7 @@ fn wasmImportMethodDescriptorCreateDirectoryAt(
   p0 : Int,
   p1 : Int,
   p2 : Int,
-  p3 : Int
+  p3 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.create-directory-at"
 
 ///|
@@ -83,7 +83,7 @@ fn wasmImportMethodDescriptorStatAt(
   p1 : Int,
   p2 : Int,
   p3 : Int,
-  p4 : Int
+  p4 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.stat-at"
 
 ///|
@@ -98,7 +98,7 @@ fn wasmImportMethodDescriptorSetTimesAt(
   p7 : Int,
   p8 : Int64,
   p9 : Int,
-  p10 : Int
+  p10 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.set-times-at"
 
 ///|
@@ -110,7 +110,7 @@ fn wasmImportMethodDescriptorLinkAt(
   p4 : Int,
   p5 : Int,
   p6 : Int,
-  p7 : Int
+  p7 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.link-at"
 
 ///|
@@ -121,7 +121,7 @@ fn wasmImportMethodDescriptorOpenAt(
   p3 : Int,
   p4 : Int,
   p5 : Int,
-  p6 : Int
+  p6 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.open-at"
 
 ///|
@@ -132,7 +132,7 @@ fn wasmImportMethodDescriptorRemoveDirectoryAt(
   p0 : Int,
   p1 : Int,
   p2 : Int,
-  p3 : Int
+  p3 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.remove-directory-at"
 
 ///|
@@ -143,7 +143,7 @@ fn wasmImportMethodDescriptorRenameAt(
   p3 : Int,
   p4 : Int,
   p5 : Int,
-  p6 : Int
+  p6 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.rename-at"
 
 ///|
@@ -153,7 +153,7 @@ fn wasmImportMethodDescriptorSymlinkAt(
   p2 : Int,
   p3 : Int,
   p4 : Int,
-  p5 : Int
+  p5 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.symlink-at"
 
 ///|
@@ -161,7 +161,7 @@ fn wasmImportMethodDescriptorUnlinkFileAt(
   p0 : Int,
   p1 : Int,
   p2 : Int,
-  p3 : Int
+  p3 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.unlink-file-at"
 
 ///|
@@ -176,7 +176,7 @@ fn wasmImportMethodDescriptorMetadataHashAt(
   p1 : Int,
   p2 : Int,
   p3 : Int,
-  p4 : Int
+  p4 : Int,
 ) = "wasi:filesystem/types@0.2.0" "[method]descriptor.metadata-hash-at"
 
 ///|

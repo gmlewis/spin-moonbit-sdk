@@ -96,7 +96,7 @@ pub fn TcpSocket::drop(self : TcpSocket) -> Unit {
 pub fn TcpSocket::start_bind(
   self : TcpSocket,
   network : @network.Network,
-  local_address : @network.IpSocketAddress
+  local_address : @network.IpSocketAddress,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let @network.Network(handle0) = network
@@ -161,7 +161,7 @@ pub fn TcpSocket::start_bind(
 
 ///|
 pub fn TcpSocket::finish_bind(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -220,7 +220,7 @@ pub fn TcpSocket::finish_bind(
 pub fn TcpSocket::start_connect(
   self : TcpSocket,
   network : @network.Network,
-  remote_address : @network.IpSocketAddress
+  remote_address : @network.IpSocketAddress,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let @network.Network(handle0) = network
@@ -285,7 +285,7 @@ pub fn TcpSocket::start_connect(
 
 ///|
 pub fn TcpSocket::finish_connect(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[(@streams.InputStream, @streams.OutputStream), @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(12)
@@ -331,7 +331,7 @@ pub fn TcpSocket::finish_connect(
 /// - <https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-listen>
 /// - <https://man.freebsd.org/cgi/man.cgi?query=listen&sektion=2>
 pub fn TcpSocket::start_listen(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -347,7 +347,7 @@ pub fn TcpSocket::start_listen(
 
 ///|
 pub fn TcpSocket::finish_listen(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -388,7 +388,7 @@ pub fn TcpSocket::finish_listen(
 /// - <https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-accept>
 /// - <https://man.freebsd.org/cgi/man.cgi?query=accept&sektion=2>
 pub fn TcpSocket::accept(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[
   (TcpSocket, @streams.InputStream, @streams.OutputStream),
   @network.ErrorCode,
@@ -429,7 +429,7 @@ pub fn TcpSocket::accept(
 /// - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-getsockname>
 /// - <https://man.freebsd.org/cgi/man.cgi?getsockname>
 pub fn TcpSocket::local_address(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[@network.IpSocketAddress, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(36)
@@ -489,7 +489,7 @@ pub fn TcpSocket::local_address(
 /// - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-getpeername>
 /// - <https://man.freebsd.org/cgi/man.cgi?query=getpeername&sektion=2&n=1>
 pub fn TcpSocket::remote_address(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[@network.IpSocketAddress, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(36)
@@ -567,7 +567,7 @@ pub fn TcpSocket::address_family(self : TcpSocket) -> @network.IpAddressFamily {
 /// - `invalid-state`:        (set) The socket is in the `connect-in-progress` or `connected` state.
 pub fn TcpSocket::set_listen_backlog_size(
   self : TcpSocket,
-  value : UInt64
+  value : UInt64,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -595,7 +595,7 @@ pub fn TcpSocket::set_listen_backlog_size(
 ///
 /// Equivalent to the SO_KEEPALIVE socket option.
 pub fn TcpSocket::keep_alive_enabled(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[Bool, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -612,7 +612,7 @@ pub fn TcpSocket::keep_alive_enabled(
 ///|
 pub fn TcpSocket::set_keep_alive_enabled(
   self : TcpSocket,
-  value : Bool
+  value : Bool,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -645,7 +645,7 @@ pub fn TcpSocket::set_keep_alive_enabled(
 /// # Typical errors
 /// - `invalid-argument`:     (set) The provided value was 0.
 pub fn TcpSocket::keep_alive_idle_time(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[UInt64, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
@@ -662,7 +662,7 @@ pub fn TcpSocket::keep_alive_idle_time(
 ///|
 pub fn TcpSocket::set_keep_alive_idle_time(
   self : TcpSocket,
-  value : UInt64
+  value : UInt64,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -691,7 +691,7 @@ pub fn TcpSocket::set_keep_alive_idle_time(
 /// # Typical errors
 /// - `invalid-argument`:     (set) The provided value was 0.
 pub fn TcpSocket::keep_alive_interval(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[UInt64, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
@@ -708,7 +708,7 @@ pub fn TcpSocket::keep_alive_interval(
 ///|
 pub fn TcpSocket::set_keep_alive_interval(
   self : TcpSocket,
-  value : UInt64
+  value : UInt64,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -737,7 +737,7 @@ pub fn TcpSocket::set_keep_alive_interval(
 /// # Typical errors
 /// - `invalid-argument`:     (set) The provided value was 0.
 pub fn TcpSocket::keep_alive_count(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[UInt, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(8)
@@ -754,7 +754,7 @@ pub fn TcpSocket::keep_alive_count(
 ///|
 pub fn TcpSocket::set_keep_alive_count(
   self : TcpSocket,
-  value : UInt
+  value : UInt,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -779,7 +779,7 @@ pub fn TcpSocket::set_keep_alive_count(
 /// # Typical errors
 /// - `invalid-argument`:     (set) The TTL value must be 1 or higher.
 pub fn TcpSocket::hop_limit(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[Byte, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -796,7 +796,7 @@ pub fn TcpSocket::hop_limit(
 ///|
 pub fn TcpSocket::set_hop_limit(
   self : TcpSocket,
-  value : Byte
+  value : Byte,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -821,7 +821,7 @@ pub fn TcpSocket::set_hop_limit(
 /// # Typical errors
 /// - `invalid-argument`:     (set) The provided value was 0.
 pub fn TcpSocket::receive_buffer_size(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[UInt64, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
@@ -838,7 +838,7 @@ pub fn TcpSocket::receive_buffer_size(
 ///|
 pub fn TcpSocket::set_receive_buffer_size(
   self : TcpSocket,
-  value : UInt64
+  value : UInt64,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -858,7 +858,7 @@ pub fn TcpSocket::set_receive_buffer_size(
 
 ///|
 pub fn TcpSocket::send_buffer_size(
-  self : TcpSocket
+  self : TcpSocket,
 ) -> Result[UInt64, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
@@ -875,7 +875,7 @@ pub fn TcpSocket::send_buffer_size(
 ///|
 pub fn TcpSocket::set_send_buffer_size(
   self : TcpSocket,
-  value : UInt64
+  value : UInt64,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -941,7 +941,7 @@ pub fn TcpSocket::subscribe(self : TcpSocket) -> @poll.Pollable {
 /// - <https://man.freebsd.org/cgi/man.cgi?query=shutdown&sektion=2>
 pub fn TcpSocket::shutdown(
   self : TcpSocket,
-  shutdown_type : ShutdownType
+  shutdown_type : ShutdownType,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)

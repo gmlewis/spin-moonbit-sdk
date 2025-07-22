@@ -78,7 +78,7 @@ pub fn Connection::open(database : String) -> Result[Connection, Error_] {
 pub fn Connection::execute(
   self : Connection,
   statement : String,
-  parameters : Array[Value]
+  parameters : Array[Value],
 ) -> Result[QueryResult, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []

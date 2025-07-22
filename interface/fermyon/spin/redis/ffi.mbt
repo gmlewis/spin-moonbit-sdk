@@ -13,7 +13,7 @@ fn wasmImportMethodConnectionPublish(
   p2 : Int,
   p3 : Int,
   p4 : Int,
-  p5 : Int
+  p5 : Int,
 ) = "fermyon:spin/redis@2.0.0" "[method]connection.publish"
 
 ///|
@@ -26,7 +26,7 @@ fn wasmImportMethodConnectionSet(
   p2 : Int,
   p3 : Int,
   p4 : Int,
-  p5 : Int
+  p5 : Int,
 ) = "fermyon:spin/redis@2.0.0" "[method]connection.set"
 
 ///|
@@ -42,7 +42,7 @@ fn wasmImportMethodConnectionSadd(
   p2 : Int,
   p3 : Int,
   p4 : Int,
-  p5 : Int
+  p5 : Int,
 ) = "fermyon:spin/redis@2.0.0" "[method]connection.sadd"
 
 ///|
@@ -55,7 +55,7 @@ fn wasmImportMethodConnectionSrem(
   p2 : Int,
   p3 : Int,
   p4 : Int,
-  p5 : Int
+  p5 : Int,
 ) = "fermyon:spin/redis@2.0.0" "[method]connection.srem"
 
 ///|
@@ -65,5 +65,5 @@ fn wasmImportMethodConnectionExecute(
   p2 : Int,
   p3 : Int,
   p4 : Int,
-  p5 : Int
+  p5 : Int,
 ) = "fermyon:spin/redis@2.0.0" "[method]connection.execute"

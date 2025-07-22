@@ -5,7 +5,7 @@ pub fn cabi_realloc(
   src_offset : Int,
   src_size : Int,
   dst_alignment : Int,
-  dst_size : Int
+  dst_size : Int,
 ) -> Int {
   @ffi.cabi_realloc(src_offset, src_size, dst_alignment, dst_size)
 }

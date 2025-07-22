@@ -1,7 +1,7 @@
 ///|
 /// `get_body_bytes` returns the incoming request body as `Bytes`.
 pub fn get_body_bytes(
-  request : @types.IncomingRequest
+  request : @types.IncomingRequest,
 ) -> Result[Bytes, @streams.StreamError] {
   let in_stream = match request.consume() {
     Ok(body) => body.stream()

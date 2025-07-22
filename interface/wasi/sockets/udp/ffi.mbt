@@ -25,7 +25,7 @@ fn wasmImportMethodUdpSocketStartBind(
   p11 : Int,
   p12 : Int,
   p13 : Int,
-  p14 : Int
+  p14 : Int,
 ) = "wasi:sockets/udp@0.2.0" "[method]udp-socket.start-bind"
 
 ///|
@@ -47,7 +47,7 @@ fn wasmImportMethodUdpSocketStream(
   p11 : Int,
   p12 : Int,
   p13 : Int,
-  p14 : Int
+  p14 : Int,
 ) = "wasi:sockets/udp@0.2.0" "[method]udp-socket.stream"
 
 ///|
@@ -72,7 +72,7 @@ fn wasmImportMethodUdpSocketReceiveBufferSize(p0 : Int, p1 : Int) = "wasi:socket
 fn wasmImportMethodUdpSocketSetReceiveBufferSize(
   p0 : Int,
   p1 : Int64,
-  p2 : Int
+  p2 : Int,
 ) = "wasi:sockets/udp@0.2.0" "[method]udp-socket.set-receive-buffer-size"
 
 ///|
@@ -88,7 +88,7 @@ fn wasmImportMethodUdpSocketSubscribe(p0 : Int) -> Int = "wasi:sockets/udp@0.2.0
 fn wasmImportMethodIncomingDatagramStreamReceive(
   p0 : Int,
   p1 : Int64,
-  p2 : Int
+  p2 : Int,
 ) = "wasi:sockets/udp@0.2.0" "[method]incoming-datagram-stream.receive"
 
 ///|
@@ -102,7 +102,7 @@ fn wasmImportMethodOutgoingDatagramStreamSend(
   p0 : Int,
   p1 : Int,
   p2 : Int,
-  p3 : Int
+  p3 : Int,
 ) = "wasi:sockets/udp@0.2.0" "[method]outgoing-datagram-stream.send"
 
 ///|

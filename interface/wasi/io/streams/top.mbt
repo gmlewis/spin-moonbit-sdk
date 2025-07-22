@@ -66,7 +66,7 @@ pub fn OutputStream::drop(self : OutputStream) -> Unit {
 /// less than `len` in size while more bytes are available for reading.
 pub fn InputStream::read(
   self : InputStream,
-  len : UInt64
+  len : UInt64,
 ) -> Result[FixedArray[Byte], StreamError] {
   let InputStream(handle) = self
   let return_area = @ffi.malloc(12)
@@ -104,7 +104,7 @@ pub fn InputStream::read(
 /// be read. Except for blocking, behavior is identical to `read`.
 pub fn InputStream::blocking_read(
   self : InputStream,
-  len : UInt64
+  len : UInt64,
 ) -> Result[FixedArray[Byte], StreamError] {
   let InputStream(handle) = self
   let return_area = @ffi.malloc(12)
@@ -144,7 +144,7 @@ pub fn InputStream::blocking_read(
 /// of bytes, returns the number of bytes consumed from the stream.
 pub fn InputStream::skip(
   self : InputStream,
-  len : UInt64
+  len : UInt64,
 ) -> Result[UInt64, StreamError] {
   let InputStream(handle) = self
   let return_area = @ffi.malloc(16)
@@ -176,7 +176,7 @@ pub fn InputStream::skip(
 /// can be skipped. Except for blocking behavior, identical to `skip`.
 pub fn InputStream::blocking_skip(
   self : InputStream,
-  len : UInt64
+  len : UInt64,
 ) -> Result[UInt64, StreamError] {
   let InputStream(handle) = self
   let return_area = @ffi.malloc(16)
@@ -226,7 +226,7 @@ pub fn InputStream::subscribe(self : InputStream) -> @poll.Pollable {
 /// become ready when this function will report at least 1 byte, or an
 /// error.
 pub fn OutputStream::check_write(
-  self : OutputStream
+  self : OutputStream,
 ) -> Result[UInt64, StreamError] {
   let OutputStream(handle) = self
   let return_area = @ffi.malloc(16)
@@ -265,7 +265,7 @@ pub fn OutputStream::check_write(
 /// the last call to check-write provided a permit.
 pub fn OutputStream::write(
   self : OutputStream,
-  contents : FixedArray[Byte]
+  contents : FixedArray[Byte],
 ) -> Result[Unit, StreamError] {
   let OutputStream(handle) = self
   let return_area = @ffi.malloc(12)
@@ -321,7 +321,7 @@ pub fn OutputStream::write(
 /// ```
 pub fn OutputStream::blocking_write_and_flush(
   self : OutputStream,
-  contents : FixedArray[Byte]
+  contents : FixedArray[Byte],
 ) -> Result[Unit, StreamError] {
   let OutputStream(handle) = self
   let return_area = @ffi.malloc(12)
@@ -387,7 +387,7 @@ pub fn OutputStream::flush(self : OutputStream) -> Result[Unit, StreamError] {
 ///| Request to flush buffered output, and block until flush completes
 /// and stream is ready for writing again.
 pub fn OutputStream::blocking_flush(
-  self : OutputStream
+  self : OutputStream,
 ) -> Result[Unit, StreamError] {
   let OutputStream(handle) = self
   let return_area = @ffi.malloc(12)
@@ -435,7 +435,7 @@ pub fn OutputStream::subscribe(self : OutputStream) -> @poll.Pollable {
 /// that should be written.
 pub fn OutputStream::write_zeroes(
   self : OutputStream,
-  len : UInt64
+  len : UInt64,
 ) -> Result[Unit, StreamError] {
   let OutputStream(handle) = self
   let return_area = @ffi.malloc(12)
@@ -489,7 +489,7 @@ pub fn OutputStream::write_zeroes(
 /// ```
 pub fn OutputStream::blocking_write_zeroes_and_flush(
   self : OutputStream,
-  len : UInt64
+  len : UInt64,
 ) -> Result[Unit, StreamError] {
   let OutputStream(handle) = self
   let return_area = @ffi.malloc(12)
@@ -533,7 +533,7 @@ pub fn OutputStream::blocking_write_zeroes_and_flush(
 pub fn OutputStream::splice(
   self : OutputStream,
   src : InputStream,
-  len : UInt64
+  len : UInt64,
 ) -> Result[UInt64, StreamError] {
   let OutputStream(handle) = self
   let InputStream(handle0) = src
@@ -571,7 +571,7 @@ pub fn OutputStream::splice(
 pub fn OutputStream::blocking_splice(
   self : OutputStream,
   src : InputStream,
-  len : UInt64
+  len : UInt64,
 ) -> Result[UInt64, StreamError] {
   let OutputStream(handle) = self
   let InputStream(handle0) = src

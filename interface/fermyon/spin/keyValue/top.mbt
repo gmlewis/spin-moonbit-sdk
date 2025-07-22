@@ -57,7 +57,7 @@ pub fn Store::open(label : String) -> Result[Store, Error_] {
 /// Returns `ok(none)` if the key does not exist.
 pub fn Store::get(
   self : Store,
-  key : String
+  key : String,
 ) -> Result[FixedArray[Byte]?, Error_] {
   let Store(handle) = self
   let return_area = @ffi.malloc(16)
@@ -107,7 +107,7 @@ pub fn Store::get(
 pub fn Store::set(
   self : Store,
   key : String,
-  value : FixedArray[Byte]
+  value : FixedArray[Byte],
 ) -> Result[Unit, Error_] {
   let Store(handle) = self
   let return_area = @ffi.malloc(16)

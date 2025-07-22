@@ -548,7 +548,7 @@ pub fn Fields::fields() -> Fields {
 /// An error result will be returned if any header or value was
 /// syntactically invalid, or if a header was forbidden.
 pub fn Fields::from_list(
-  entries : Array[(String, FixedArray[Byte])]
+  entries : Array[(String, FixedArray[Byte])],
 ) -> Result[Fields, HeaderError] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -630,7 +630,7 @@ pub fn Fields::has(self : Fields, name : String) -> Bool {
 pub fn Fields::set(
   self : Fields,
   name : String,
-  value : Array[FixedArray[Byte]]
+  value : Array[FixedArray[Byte]],
 ) -> Result[Unit, HeaderError] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -679,7 +679,7 @@ pub fn Fields::set(
 /// Fails with `header-error.immutable` if the `fields` are immutable.
 pub fn Fields::delete(
   self : Fields,
-  name : String
+  name : String,
 ) -> Result[Unit, HeaderError] {
   let Fields(handle) = self
   let return_area = @ffi.malloc(2)
@@ -714,7 +714,7 @@ pub fn Fields::delete(
 pub fn Fields::append(
   self : Fields,
   name : String,
-  value : FixedArray[Byte]
+  value : FixedArray[Byte],
 ) -> Result[Unit, HeaderError] {
   let Fields(handle) = self
   let return_area = @ffi.malloc(2)
@@ -882,7 +882,7 @@ pub fn IncomingRequest::headers(self : IncomingRequest) -> Fields {
 ///| Gives the `incoming-body` associated with this request. Will only
 /// return success at most once, and subsequent calls will return error.
 pub fn IncomingRequest::consume(
-  self : IncomingRequest
+  self : IncomingRequest,
 ) -> Result[IncomingBody, Unit] {
   let IncomingRequest(handle) = self
   let return_area = @ffi.malloc(8)
@@ -919,7 +919,7 @@ pub fn OutgoingRequest::outgoing_request(headers : Fields) -> OutgoingRequest {
 /// this `outgoing-request` can be retrieved at most once. Subsequent
 /// calls will return error.
 pub fn OutgoingRequest::body(
-  self : OutgoingRequest
+  self : OutgoingRequest,
 ) -> Result[OutgoingBody, Unit] {
   let OutgoingRequest(handle) = self
   let return_area = @ffi.malloc(8)
@@ -963,7 +963,7 @@ pub fn OutgoingRequest::method_(self : OutgoingRequest) -> Method {
 /// `method.other` argument is not a syntactically valid method.
 pub fn OutgoingRequest::set_method(
   self : OutgoingRequest,
-  method_ : Method
+  method_ : Method,
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -1020,7 +1020,7 @@ pub fn OutgoingRequest::path_with_query(self : OutgoingRequest) -> String? {
 /// string given is not a syntactically valid path and query uri component.
 pub fn OutgoingRequest::set_path_with_query(
   self : OutgoingRequest,
-  path_with_query : String?
+  path_with_query : String?,
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -1077,7 +1077,7 @@ pub fn OutgoingRequest::scheme(self : OutgoingRequest) -> Scheme? {
 /// string given is not a syntactically valid uri scheme.
 pub fn OutgoingRequest::set_scheme(
   self : OutgoingRequest,
-  scheme : Scheme?
+  scheme : Scheme?,
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -1135,7 +1135,7 @@ pub fn OutgoingRequest::authority(self : OutgoingRequest) -> String? {
 /// not a syntactically valid uri authority.
 pub fn OutgoingRequest::set_authority(
   self : OutgoingRequest,
-  authority : String?
+  authority : String?,
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -1198,7 +1198,7 @@ pub fn RequestOptions::connect_timeout(self : RequestOptions) -> UInt64? {
 /// return value indicates that this timeout is not supported.
 pub fn RequestOptions::set_connect_timeout(
   self : RequestOptions,
-  duration : UInt64?
+  duration : UInt64?,
 ) -> Result[Unit, Unit] {
   let RequestOptions(handle) = self
   let (lowered, lowered3) = match duration {
@@ -1234,7 +1234,7 @@ pub fn RequestOptions::first_byte_timeout(self : RequestOptions) -> UInt64? {
 /// error return value indicates that this timeout is not supported.
 pub fn RequestOptions::set_first_byte_timeout(
   self : RequestOptions,
-  duration : UInt64?
+  duration : UInt64?,
 ) -> Result[Unit, Unit] {
   let RequestOptions(handle) = self
   let (lowered, lowered3) = match duration {
@@ -1272,7 +1272,7 @@ pub fn RequestOptions::between_bytes_timeout(self : RequestOptions) -> UInt64? {
 /// supported.
 pub fn RequestOptions::set_between_bytes_timeout(
   self : RequestOptions,
-  duration : UInt64?
+  duration : UInt64?,
 ) -> Result[Unit, Unit] {
   let RequestOptions(handle) = self
   let (lowered, lowered3) = match duration {
@@ -1301,7 +1301,7 @@ pub fn RequestOptions::set_between_bytes_timeout(
 /// implementation determine how to respond with an HTTP error response.
 pub fn ResponseOutparam::set(
   param : ResponseOutparam,
-  response : Result[OutgoingResponse, ErrorCode]
+  response : Result[OutgoingResponse, ErrorCode],
 ) -> Unit {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -1614,7 +1614,7 @@ pub fn IncomingResponse::headers(self : IncomingResponse) -> Fields {
 ///| Returns the incoming body. May be called at most once. Returns error
 /// if called additional times.
 pub fn IncomingResponse::consume(
-  self : IncomingResponse
+  self : IncomingResponse,
 ) -> Result[IncomingBody, Unit] {
   let IncomingResponse(handle) = self
   let return_area = @ffi.malloc(8)
@@ -1644,7 +1644,7 @@ pub fn IncomingResponse::consume(
 /// and for that backpressure to not inhibit delivery of the trailers if
 /// the user does not read the entire body.
 pub fn IncomingBody::stream(
-  self : IncomingBody
+  self : IncomingBody,
 ) -> Result[@streams.InputStream, Unit] {
   let IncomingBody(handle) = self
   let return_area = @ffi.malloc(8)
@@ -1698,7 +1698,7 @@ pub fn FutureTrailers::subscribe(self : FutureTrailers) -> @poll.Pollable {
 /// `delete` methods will return an error, and the resource must be
 /// dropped before the parent `future-trailers` is dropped.
 pub fn FutureTrailers::get(
-  self : FutureTrailers
+  self : FutureTrailers,
 ) -> Result[Result[Fields?, ErrorCode], Unit]? {
   let FutureTrailers(handle) = self
   let return_area = @ffi.malloc(56)
@@ -2042,7 +2042,7 @@ pub fn FutureTrailers::get(
 ///
 /// * `headers` is the HTTP Headers for the Response.
 pub fn OutgoingResponse::outgoing_response(
-  headers : Fields
+  headers : Fields,
 ) -> OutgoingResponse {
   let Fields(handle) = headers
   let result : Int = wasmImportConstructorOutgoingResponse(handle)
@@ -2060,7 +2060,7 @@ pub fn OutgoingResponse::status_code(self : OutgoingResponse) -> UInt {
 /// given is not a valid http status code.
 pub fn OutgoingResponse::set_status_code(
   self : OutgoingResponse,
-  status_code : UInt
+  status_code : UInt,
 ) -> Result[Unit, Unit] {
   let OutgoingResponse(handle) = self
   let result : Int = wasmImportMethodOutgoingResponseSetStatusCode(
@@ -2095,7 +2095,7 @@ pub fn OutgoingResponse::headers(self : OutgoingResponse) -> Fields {
 /// this `outgoing-response` can be retrieved at most once. Subsequent
 /// calls will return error.
 pub fn OutgoingResponse::body(
-  self : OutgoingResponse
+  self : OutgoingResponse,
 ) -> Result[OutgoingBody, Unit] {
   let OutgoingResponse(handle) = self
   let return_area = @ffi.malloc(8)
@@ -2119,7 +2119,7 @@ pub fn OutgoingResponse::body(
 /// this `outgoing-body` may be retrieved at most once. Subsequent calls
 /// will return error.
 pub fn OutgoingBody::write(
-  self : OutgoingBody
+  self : OutgoingBody,
 ) -> Result[@streams.OutputStream, Unit] {
   let OutgoingBody(handle) = self
   let return_area = @ffi.malloc(8)
@@ -2147,7 +2147,7 @@ pub fn OutgoingBody::write(
 /// Content-Length.
 pub fn OutgoingBody::finish(
   this : OutgoingBody,
-  trailers : Fields?
+  trailers : Fields?,
 ) -> Result[Unit, ErrorCode] {
   let OutgoingBody(handle) = this
   let (lowered, lowered4) = match trailers {
@@ -2434,7 +2434,7 @@ pub fn OutgoingBody::finish(
 /// been received, or an error has occured. When this pollable is ready,
 /// the `get` method will return `some`.
 pub fn FutureIncomingResponse::subscribe(
-  self : FutureIncomingResponse
+  self : FutureIncomingResponse,
 ) -> @poll.Pollable {
   let FutureIncomingResponse(handle) = self
   let result : Int = wasmImportMethodFutureIncomingResponseSubscribe(handle)
@@ -2456,7 +2456,7 @@ pub fn FutureIncomingResponse::subscribe(
 /// but those will be reported by the `incoming-body` and its
 /// `output-stream` child.
 pub fn FutureIncomingResponse::get(
-  self : FutureIncomingResponse
+  self : FutureIncomingResponse,
 ) -> Result[Result[IncomingResponse, ErrorCode], Unit]? {
   let FutureIncomingResponse(handle) = self
   let return_area = @ffi.malloc(56)

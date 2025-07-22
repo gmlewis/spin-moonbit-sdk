@@ -6,7 +6,7 @@ pub fn stream(
   request : @types.OutgoingRequest,
   response_out : @types.ResponseOutparam,
   hash : &@common.HashFunc?,
-  debug~ : Bool = false
+  debug~ : Bool = false,
 ) -> Result[(Int64, String), @types.ErrorCode] {
   let (byte_func, sum_func) = match hash {
     Some(hash) => {
@@ -32,7 +32,7 @@ pub fn stream_func(
   request : @types.OutgoingRequest,
   response_out : @types.ResponseOutparam,
   byte_func : ByteFunc?,
-  debug~ : Bool = false
+  debug~ : Bool = false,
 ) -> Result[Int64, @types.ErrorCode] {
   let future = match @outgoingHandler.handle(request, None) {
     Ok(result) => result

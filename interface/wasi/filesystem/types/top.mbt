@@ -78,7 +78,7 @@ fn DescriptorFlagsFlag::value(self : DescriptorFlagsFlag) -> Byte {
 ///|
 pub fn DescriptorFlags::set(
   self : DescriptorFlags,
-  other : DescriptorFlagsFlag
+  other : DescriptorFlagsFlag,
 ) -> DescriptorFlags {
   let DescriptorFlags(flag) = self
   flag | other.value()
@@ -87,7 +87,7 @@ pub fn DescriptorFlags::set(
 ///|
 pub fn DescriptorFlags::unset(
   self : DescriptorFlags,
-  other : DescriptorFlagsFlag
+  other : DescriptorFlagsFlag,
 ) -> DescriptorFlags {
   let DescriptorFlags(flag) = self
   flag & other.value().lnot()
@@ -96,7 +96,7 @@ pub fn DescriptorFlags::unset(
 ///|
 pub fn DescriptorFlags::is_set(
   self : DescriptorFlags,
-  other : DescriptorFlagsFlag
+  other : DescriptorFlagsFlag,
 ) -> Bool {
   let DescriptorFlags(flag) = self
   (flag & other.value()) == other.value()
@@ -412,7 +412,7 @@ pub fn DirectoryEntryStream::drop(self : DirectoryEntryStream) -> Unit {
 /// Note: This allows using `read-stream`, which is similar to `read` in POSIX.
 pub fn Descriptor::read_via_stream(
   self : Descriptor,
-  offset : UInt64
+  offset : UInt64,
 ) -> Result[@streams.InputStream, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(8)
@@ -441,7 +441,7 @@ pub fn Descriptor::read_via_stream(
 /// POSIX.
 pub fn Descriptor::write_via_stream(
   self : Descriptor,
-  offset : UInt64
+  offset : UInt64,
 ) -> Result[@streams.OutputStream, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(8)
@@ -469,7 +469,7 @@ pub fn Descriptor::write_via_stream(
 /// Note: This allows using `write-stream`, which is similar to `write` with
 /// `O_APPEND` in in POSIX.
 pub fn Descriptor::append_via_stream(
-  self : Descriptor
+  self : Descriptor,
 ) -> Result[@streams.OutputStream, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(8)
@@ -493,7 +493,7 @@ pub fn Descriptor::advise(
   self : Descriptor,
   offset : UInt64,
   length : UInt64,
-  advice : Advice
+  advice : Advice,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
@@ -539,7 +539,7 @@ pub fn Descriptor::sync_data(self : Descriptor) -> Result[Unit, ErrorCode] {
 /// Note: This returns the value that was the `fs_flags` value returned
 /// from `fdstat_get` in earlier versions of WASI.
 pub fn Descriptor::get_flags(
-  self : Descriptor
+  self : Descriptor,
 ) -> Result[DescriptorFlags, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
@@ -564,7 +564,7 @@ pub fn Descriptor::get_flags(
 /// Note: This returns the value that was the `fs_filetype` value returned
 /// from `fdstat_get` in earlier versions of WASI.
 pub fn Descriptor::get_type(
-  self : Descriptor
+  self : Descriptor,
 ) -> Result[DescriptorType, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
@@ -584,7 +584,7 @@ pub fn Descriptor::get_type(
 /// Note: This was called `fd_filestat_set_size` in earlier versions of WASI.
 pub fn Descriptor::set_size(
   self : Descriptor,
-  size : UInt64
+  size : UInt64,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
@@ -610,7 +610,7 @@ pub fn Descriptor::set_size(
 pub fn Descriptor::set_times(
   self : Descriptor,
   data_access_timestamp : NewTimestamp,
-  data_modification_timestamp : NewTimestamp
+  data_modification_timestamp : NewTimestamp,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let (lowered, lowered6, lowered7) = match data_access_timestamp {
@@ -660,7 +660,7 @@ pub fn Descriptor::set_times(
 pub fn Descriptor::read(
   self : Descriptor,
   length : UInt64,
-  offset : UInt64
+  offset : UInt64,
 ) -> Result[(FixedArray[Byte], Bool), ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(16)
@@ -697,7 +697,7 @@ pub fn Descriptor::read(
 pub fn Descriptor::write(
   self : Descriptor,
   buffer : FixedArray[Byte],
-  offset : UInt64
+  offset : UInt64,
 ) -> Result[UInt64, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(16)
@@ -728,7 +728,7 @@ pub fn Descriptor::write(
 /// directory. Multiple streams may be active on the same directory, and they
 /// do not interfere with each other.
 pub fn Descriptor::read_directory(
-  self : Descriptor
+  self : Descriptor,
 ) -> Result[DirectoryEntryStream, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(8)
@@ -769,7 +769,7 @@ pub fn Descriptor::sync(self : Descriptor) -> Result[Unit, ErrorCode] {
 /// Note: This is similar to `mkdirat` in POSIX.
 pub fn Descriptor::create_directory_at(
   self : Descriptor,
-  path : String
+  path : String,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
@@ -859,7 +859,7 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
 pub fn Descriptor::stat_at(
   self : Descriptor,
   path_flags : PathFlags,
-  path : String
+  path : String,
 ) -> Result[DescriptorStat, ErrorCode] {
   let Descriptor(handle) = self
   let PathFlags(flag) = path_flags
@@ -930,7 +930,7 @@ pub fn Descriptor::set_times_at(
   path_flags : PathFlags,
   path : String,
   data_access_timestamp : NewTimestamp,
-  data_modification_timestamp : NewTimestamp
+  data_modification_timestamp : NewTimestamp,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let PathFlags(flag) = path_flags
@@ -986,7 +986,7 @@ pub fn Descriptor::link_at(
   old_path_flags : PathFlags,
   old_path : String,
   new_descriptor : Descriptor,
-  new_path : String
+  new_path : String,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let PathFlags(flag) = old_path_flags
@@ -1036,7 +1036,7 @@ pub fn Descriptor::open_at(
   path_flags : PathFlags,
   path : String,
   open_flags : OpenFlags,
-  flags : DescriptorFlags
+  flags : DescriptorFlags,
 ) -> Result[Descriptor, ErrorCode] {
   let Descriptor(handle) = self
   let PathFlags(flag) = path_flags
@@ -1070,7 +1070,7 @@ pub fn Descriptor::open_at(
 /// Note: This is similar to `readlinkat` in POSIX.
 pub fn Descriptor::readlink_at(
   self : Descriptor,
-  path : String
+  path : String,
 ) -> Result[String, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(12)
@@ -1101,7 +1101,7 @@ pub fn Descriptor::readlink_at(
 /// Note: This is similar to `unlinkat(fd, path, AT_REMOVEDIR)` in POSIX.
 pub fn Descriptor::remove_directory_at(
   self : Descriptor,
-  path : String
+  path : String,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
@@ -1128,7 +1128,7 @@ pub fn Descriptor::rename_at(
   self : Descriptor,
   old_path : String,
   new_descriptor : Descriptor,
-  new_path : String
+  new_path : String,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let Descriptor(handle0) = new_descriptor
@@ -1162,7 +1162,7 @@ pub fn Descriptor::rename_at(
 pub fn Descriptor::symlink_at(
   self : Descriptor,
   old_path : String,
-  new_path : String
+  new_path : String,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
@@ -1191,7 +1191,7 @@ pub fn Descriptor::symlink_at(
 /// Note: This is similar to `unlinkat(fd, path, 0)` in POSIX.
 pub fn Descriptor::unlink_file_at(
   self : Descriptor,
-  path : String
+  path : String,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
@@ -1219,7 +1219,7 @@ pub fn Descriptor::unlink_file_at(
 /// may be used instead.
 pub fn Descriptor::is_same_object(
   self : Descriptor,
-  other : Descriptor
+  other : Descriptor,
 ) -> Bool {
   let Descriptor(handle) = self
   let Descriptor(handle0) = other
@@ -1247,7 +1247,7 @@ pub fn Descriptor::is_same_object(
 ///
 /// However, none of these is required.
 pub fn Descriptor::metadata_hash(
-  self : Descriptor
+  self : Descriptor,
 ) -> Result[MetadataHashValue, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(24)
@@ -1272,7 +1272,7 @@ pub fn Descriptor::metadata_hash(
 pub fn Descriptor::metadata_hash_at(
   self : Descriptor,
   path_flags : PathFlags,
-  path : String
+  path : String,
 ) -> Result[MetadataHashValue, ErrorCode] {
   let Descriptor(handle) = self
   let PathFlags(flag) = path_flags
@@ -1300,7 +1300,7 @@ pub fn Descriptor::metadata_hash_at(
 
 ///| Read a single directory entry from a `directory-entry-stream`.
 pub fn DirectoryEntryStream::read_directory_entry(
-  self : DirectoryEntryStream
+  self : DirectoryEntryStream,
 ) -> Result[DirectoryEntry?, ErrorCode] {
   let DirectoryEntryStream(handle) = self
   let return_area = @ffi.malloc(20)

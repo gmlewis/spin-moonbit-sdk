@@ -1,7 +1,7 @@
 ///|
 /// `split_path` splits an incoming request into its method and path parts by splitting on "/".
 pub fn split_path(
-  request : @types.IncomingRequest
+  request : @types.IncomingRequest,
 ) -> (@types.Method, Array[String]) {
   split_method_and_path(request.method_(), request.path_with_query())
 }
@@ -9,7 +9,7 @@ pub fn split_path(
 ///|
 fn split_method_and_path(
   method_ : @types.Method,
-  path : String?
+  path : String?,
 ) -> (@types.Method, Array[String]) {
   let result = match path {
     Some(s) =>

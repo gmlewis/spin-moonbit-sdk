@@ -3,7 +3,7 @@
 pub fn new_request(
   method_ : @types.Method,
   url : String,
-  fields~ : Array[(String, Bytes)] = []
+  fields~ : Array[(String, Bytes)] = [],
 ) -> @types.OutgoingRequest {
   let req = @types.OutgoingRequest::outgoing_request(
     @types.Fields::from_list(fields.map(fn(p) { (p.0, p.1.to_fixedarray()) })).unwrap(),

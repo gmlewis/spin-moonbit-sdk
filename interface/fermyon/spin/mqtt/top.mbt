@@ -48,7 +48,7 @@ pub fn Connection::open(
   address : String,
   username : String,
   password : String,
-  keep_alive_interval_in_secs : UInt64
+  keep_alive_interval_in_secs : UInt64,
 ) -> Result[Connection, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportStaticConnectionOpen(
@@ -95,7 +95,7 @@ pub fn Connection::publish(
   self : Connection,
   topic : String,
   payload : FixedArray[Byte],
-  qos : Qos
+  qos : Qos,
 ) -> Result[Unit, Error_] {
   let Connection(handle) = self
   let return_area = @ffi.malloc(16)

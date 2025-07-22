@@ -31,7 +31,7 @@ pub fn ResolveAddressStream::drop(self : ResolveAddressStream) -> Unit {
 /// - <https://man.freebsd.org/cgi/man.cgi?query=getaddrinfo&sektion=3>
 pub fn resolve_addresses(
   network : @network.Network,
-  name : String
+  name : String,
 ) -> Result[ResolveAddressStream, @network.ErrorCode] {
   let @network.Network(handle) = network
   let return_area = @ffi.malloc(8)
@@ -68,7 +68,7 @@ pub fn resolve_addresses(
 /// - `permanent-resolver-failure`: A permanent failure in name resolution occurred. (EAI_FAIL)
 /// - `would-block`:                A result is not available yet. (EWOULDBLOCK, EAGAIN)
 pub fn ResolveAddressStream::resolve_next_address(
-  self : ResolveAddressStream
+  self : ResolveAddressStream,
 ) -> Result[@network.IpAddress?, @network.ErrorCode] {
   let ResolveAddressStream(handle) = self
   let return_area = @ffi.malloc(22)
@@ -137,7 +137,7 @@ pub fn ResolveAddressStream::resolve_next_address(
 /// Note: this function is here for WASI Preview2 only.
 /// It's planned to be removed when `future` is natively supported in Preview3.
 pub fn ResolveAddressStream::subscribe(
-  self : ResolveAddressStream
+  self : ResolveAddressStream,
 ) -> @poll.Pollable {
   let ResolveAddressStream(handle) = self
   let result : Int = wasmImportMethodResolveAddressStreamSubscribe(handle)

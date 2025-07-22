@@ -12,7 +12,7 @@
 /// through the `future-incoming-response`.
 pub fn handle(
   request : @types.OutgoingRequest,
-  options : @types.RequestOptions?
+  options : @types.RequestOptions?,
 ) -> Result[@types.FutureIncomingResponse, @types.ErrorCode] {
   let @types.OutgoingRequest(handle) = request
   let (lowered, lowered4) = match options {

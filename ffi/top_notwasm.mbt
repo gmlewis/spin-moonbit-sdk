@@ -190,7 +190,7 @@ pub fn cabi_realloc(
   _src_offset : Int,
   _src_size : Int,
   __dst_alignment : Int,
-  _dst_size : Int
+  _dst_size : Int,
 ) -> Int {
   abort("not wasm")
 }

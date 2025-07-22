@@ -12,7 +12,7 @@ fn wasmImportStaticConnectionOpen(
   p4 : Int,
   p5 : Int,
   p6 : Int64,
-  p7 : Int
+  p7 : Int,
 ) = "fermyon:spin/mqtt@2.0.0" "[static]connection.open"
 
 ///|
@@ -23,5 +23,5 @@ fn wasmImportMethodConnectionPublish(
   p3 : Int,
   p4 : Int,
   p5 : Int,
-  p6 : Int
+  p6 : Int,
 ) = "fermyon:spin/mqtt@2.0.0" "[method]connection.publish"

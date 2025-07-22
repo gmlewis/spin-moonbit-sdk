@@ -212,7 +212,7 @@ pub fn cabi_realloc(
   src_offset : Int,
   src_size : Int,
   _dst_alignment : Int,
-  dst_size : Int
+  dst_size : Int,
 ) -> Int {
   // malloc
   if src_offset == 0 && src_size == 0 {

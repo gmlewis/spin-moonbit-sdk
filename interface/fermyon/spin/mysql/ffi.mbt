@@ -13,7 +13,7 @@ fn wasmImportMethodConnectionQuery(
   p2 : Int,
   p3 : Int,
   p4 : Int,
-  p5 : Int
+  p5 : Int,
 ) = "fermyon:spin/mysql@2.0.0" "[method]connection.query"
 
 ///|
@@ -23,5 +23,5 @@ fn wasmImportMethodConnectionExecute(
   p2 : Int,
   p3 : Int,
   p4 : Int,
-  p5 : Int
+  p5 : Int,
 ) = "fermyon:spin/mysql@2.0.0" "[method]connection.execute"

@@ -2,7 +2,7 @@
 /// `send_request` sends an outgoing request and waits for the response.
 pub fn send_request(
   request : @types.OutgoingRequest,
-  debug~ : Bool = false
+  debug~ : Bool = false,
 ) -> Result[Bytes, @types.ErrorCode] {
   let future = match @outgoingHandler.handle(request, None) {
     Ok(result) => result

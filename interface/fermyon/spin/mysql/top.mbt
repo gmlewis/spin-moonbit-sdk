@@ -11,7 +11,7 @@ pub fn Connection::drop(self : Connection) -> Unit {
 
 ///| Open a connection to the MySQL instance at `address`.
 pub fn Connection::open(
-  address : String
+  address : String,
 ) -> Result[Connection, @rdbmsTypes.Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportStaticConnectionOpen(
@@ -63,7 +63,7 @@ pub fn Connection::open(
 pub fn Connection::query(
   self : Connection,
   statement : String,
-  params : Array[@rdbmsTypes.ParameterValue]
+  params : Array[@rdbmsTypes.ParameterValue],
 ) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
@@ -272,7 +272,7 @@ pub fn Connection::query(
 pub fn Connection::execute(
   self : Connection,
   statement : String,
-  params : Array[@rdbmsTypes.ParameterValue]
+  params : Array[@rdbmsTypes.ParameterValue],
 ) -> Result[Unit, @rdbmsTypes.Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []

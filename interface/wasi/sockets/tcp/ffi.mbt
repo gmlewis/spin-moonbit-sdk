@@ -19,7 +19,7 @@ fn wasmImportMethodTcpSocketStartBind(
   p11 : Int,
   p12 : Int,
   p13 : Int,
-  p14 : Int
+  p14 : Int,
 ) = "wasi:sockets/tcp@0.2.0" "[method]tcp-socket.start-bind"
 
 ///|
@@ -41,7 +41,7 @@ fn wasmImportMethodTcpSocketStartConnect(
   p11 : Int,
   p12 : Int,
   p13 : Int,
-  p14 : Int
+  p14 : Int,
 ) = "wasi:sockets/tcp@0.2.0" "[method]tcp-socket.start-connect"
 
 ///|
@@ -72,7 +72,7 @@ fn wasmImportMethodTcpSocketAddressFamily(p0 : Int) -> Int = "wasi:sockets/tcp@0
 fn wasmImportMethodTcpSocketSetListenBacklogSize(
   p0 : Int,
   p1 : Int64,
-  p2 : Int
+  p2 : Int,
 ) = "wasi:sockets/tcp@0.2.0" "[method]tcp-socket.set-listen-backlog-size"
 
 ///|
@@ -88,7 +88,7 @@ fn wasmImportMethodTcpSocketKeepAliveIdleTime(p0 : Int, p1 : Int) = "wasi:socket
 fn wasmImportMethodTcpSocketSetKeepAliveIdleTime(
   p0 : Int,
   p1 : Int64,
-  p2 : Int
+  p2 : Int,
 ) = "wasi:sockets/tcp@0.2.0" "[method]tcp-socket.set-keep-alive-idle-time"
 
 ///|
@@ -98,7 +98,7 @@ fn wasmImportMethodTcpSocketKeepAliveInterval(p0 : Int, p1 : Int) = "wasi:socket
 fn wasmImportMethodTcpSocketSetKeepAliveInterval(
   p0 : Int,
   p1 : Int64,
-  p2 : Int
+  p2 : Int,
 ) = "wasi:sockets/tcp@0.2.0" "[method]tcp-socket.set-keep-alive-interval"
 
 ///|
@@ -120,7 +120,7 @@ fn wasmImportMethodTcpSocketReceiveBufferSize(p0 : Int, p1 : Int) = "wasi:socket
 fn wasmImportMethodTcpSocketSetReceiveBufferSize(
   p0 : Int,
   p1 : Int64,
-  p2 : Int
+  p2 : Int,
 ) = "wasi:sockets/tcp@0.2.0" "[method]tcp-socket.set-receive-buffer-size"
 
 ///|

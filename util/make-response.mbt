@@ -3,7 +3,7 @@
 pub fn make_response(
   body : Bytes,
   content_type~ : Bytes = b"text/plain",
-  status_code~ : UInt = 200
+  status_code~ : UInt = 200,
 ) -> @types.OutgoingResponse {
   let fields = @types.Fields::from_list([
     ("Content-Type", content_type.to_fixedarray()),
@@ -26,7 +26,7 @@ pub fn respond_bytes(
   response_out : @types.ResponseOutparam,
   body : Bytes,
   content_type~ : Bytes = b"text/plain",
-  status_code~ : UInt = 200
+  status_code~ : UInt = 200,
 ) -> Unit {
   response_out.set(make_response(body, content_type~, status_code~) |> Ok)
 }
@@ -36,7 +36,7 @@ pub fn respond_bytes(
 pub fn make_response_str(
   body : String,
   content_type~ : Bytes = b"text/plain",
-  status_code~ : UInt = 200
+  status_code~ : UInt = 200,
 ) -> @types.OutgoingResponse {
   let body = @base64.str2bytes(body)
   make_response(body, content_type~, status_code~)
@@ -48,7 +48,7 @@ pub fn respond_str(
   response_out : @types.ResponseOutparam,
   body : String,
   content_type~ : Bytes = b"text/plain",
-  status_code~ : UInt = 200
+  status_code~ : UInt = 200,
 ) -> Unit {
   response_out.set(make_response_str(body, content_type~, status_code~) |> Ok)
 }

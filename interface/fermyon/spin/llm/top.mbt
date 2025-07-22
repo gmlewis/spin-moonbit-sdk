@@ -44,7 +44,7 @@ pub(all) struct EmbeddingsResult {
 pub fn infer(
   model : String,
   prompt : String,
-  params : InferencingParams?
+  params : InferencingParams?,
 ) -> Result[InferencingResult, Error_] {
   let (lowered, lowered3, lowered4, lowered5, lowered6, lowered7, lowered8) = match
     params {
@@ -115,7 +115,7 @@ pub fn infer(
 ///| Generate embeddings for the supplied list of text
 pub fn generate_embeddings(
   model : String,
-  text : Array[String]
+  text : Array[String],
 ) -> Result[EmbeddingsResult, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []

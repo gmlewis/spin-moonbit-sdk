@@ -21,7 +21,7 @@
 /// - <https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsasocketw>
 /// - <https://man.freebsd.org/cgi/man.cgi?query=socket&sektion=2>
 pub fn create_tcp_socket(
-  address_family : @network.IpAddressFamily
+  address_family : @network.IpAddressFamily,
 ) -> Result[@tcp.TcpSocket, @network.ErrorCode] {
   let return_area = @ffi.malloc(8)
   wasmImportCreateTcpSocket(address_family.ordinal(), return_area)
