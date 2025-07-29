@@ -8,6 +8,8 @@ import(
 // Values
 fn get_terminal_stderr() -> @terminalOutput.TerminalOutput?
 
+// Errors
+
 // Types and methods
 
 // Type aliases

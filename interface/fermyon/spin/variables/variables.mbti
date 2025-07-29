@@ -4,6 +4,8 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/variables"
 // Values
 fn get(String) -> Result[String, Error_]
 
+// Errors
+
 // Types and methods
 pub(all) enum Error_ {
   InvalidName(String)

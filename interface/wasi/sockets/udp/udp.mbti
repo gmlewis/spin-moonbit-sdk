@@ -8,6 +8,8 @@ import(
 
 // Values
 
+// Errors
+
 // Types and methods
 pub(all) struct IncomingDatagram {
   data : FixedArray[Byte]

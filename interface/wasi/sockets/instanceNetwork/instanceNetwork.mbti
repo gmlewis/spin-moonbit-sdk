@@ -8,6 +8,8 @@ import(
 // Values
 fn instance_network() -> @network.Network
 
+// Errors
+
 // Types and methods
 
 // Type aliases

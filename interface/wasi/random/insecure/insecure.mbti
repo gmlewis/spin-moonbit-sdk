@@ -6,6 +6,8 @@ fn get_insecure_random_bytes(UInt64) -> FixedArray[Byte]
 
 fn get_insecure_random_u64() -> UInt64
 
+// Errors
+
 // Types and methods
 
 // Type aliases

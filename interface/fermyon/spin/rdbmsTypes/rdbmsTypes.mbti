@@ -3,6 +3,8 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes"
 
 // Values
 
+// Errors
+
 // Types and methods
 pub(all) struct Column {
   name : String

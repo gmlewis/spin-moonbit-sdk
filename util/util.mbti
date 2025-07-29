@@ -48,6 +48,8 @@ fn stream(@types.OutgoingRequest, @types.ResponseOutparam, &@common.HashFunc?, d
 
 fn stream_func(@types.OutgoingRequest, @types.ResponseOutparam, ByteFunc?, debug~ : Bool = ..) -> Result[Int64, @types.ErrorCode]
 
+// Errors
+
 // Types and methods
 type ByteFunc
 

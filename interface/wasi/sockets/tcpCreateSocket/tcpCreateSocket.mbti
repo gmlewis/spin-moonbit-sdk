@@ -9,6 +9,8 @@ import(
 // Values
 fn create_tcp_socket(@network.IpAddressFamily) -> Result[@tcp.TcpSocket, @network.ErrorCode]
 
+// Errors
+
 // Types and methods
 
 // Type aliases

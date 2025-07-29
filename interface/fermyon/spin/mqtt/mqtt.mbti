@@ -3,6 +3,8 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/mqtt"
 
 // Values
 
+// Errors
+
 // Types and methods
 pub(all) type Connection Int
 fn Connection::drop(Self) -> Unit

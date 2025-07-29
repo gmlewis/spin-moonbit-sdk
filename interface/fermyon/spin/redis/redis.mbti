@@ -3,6 +3,8 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/redis"
 
 // Values
 
+// Errors
+
 // Types and methods
 pub(all) type Connection Int
 fn Connection::del(Self, Array[String]) -> Result[UInt, Error_]

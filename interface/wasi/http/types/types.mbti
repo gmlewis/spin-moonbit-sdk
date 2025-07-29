@@ -10,6 +10,8 @@ import(
 // Values
 fn http_error_code(@error.Error_) -> ErrorCode?
 
+// Errors
+
 // Types and methods
 pub(all) struct DnsErrorPayload {
   rcode : String?

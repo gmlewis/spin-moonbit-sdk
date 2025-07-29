@@ -4,6 +4,8 @@ package "gmlewis/spin-moonbit-sdk/gen"
 // Values
 fn cabi_realloc(Int, Int, Int, Int) -> Int
 
+// Errors
+
 // Types and methods
 
 // Type aliases

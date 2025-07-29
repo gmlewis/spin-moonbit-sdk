@@ -14,6 +14,8 @@ fn subscribe_duration(UInt64) -> @poll.Pollable
 
 fn subscribe_instant(UInt64) -> @poll.Pollable
 
+// Errors
+
 // Types and methods
 
 // Type aliases

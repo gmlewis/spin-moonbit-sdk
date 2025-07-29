@@ -10,6 +10,8 @@ import(
 // Values
 fn filesystem_error_code(@error.Error_) -> ErrorCode?
 
+// Errors
+
 // Types and methods
 pub(all) enum Advice {
   NORMAL

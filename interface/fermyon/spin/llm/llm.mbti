@@ -6,6 +6,8 @@ fn generate_embeddings(String, Array[String]) -> Result[EmbeddingsResult, Error_
 
 fn infer(String, String, InferencingParams?) -> Result[InferencingResult, Error_]
 
+// Errors
+
 // Types and methods
 pub(all) struct EmbeddingsResult {
   embeddings : Array[FixedArray[Float]]

@@ -8,6 +8,8 @@ fn get_environment() -> Array[(String, String)]
 
 fn initial_cwd() -> String?
 
+// Errors
+
 // Types and methods
 
 // Type aliases

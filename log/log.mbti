@@ -10,6 +10,8 @@ fn info(String, leading_blank_line~ : Bool = ..) -> Unit
 
 fn warn(String, leading_blank_line~ : Bool = ..) -> Unit
 
+// Errors
+
 // Types and methods
 
 // Type aliases

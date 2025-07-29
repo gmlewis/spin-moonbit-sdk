@@ -8,6 +8,8 @@ import(
 
 // Values
 
+// Errors
+
 // Types and methods
 pub(all) type InputStream Int
 fn InputStream::blocking_read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]

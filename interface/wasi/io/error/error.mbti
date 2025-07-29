@@ -3,6 +3,8 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/io/error"
 
 // Values
 
+// Errors
+
 // Types and methods
 pub(all) type Error_ Int
 fn Error_::drop(Self) -> Unit

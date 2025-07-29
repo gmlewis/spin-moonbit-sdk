@@ -9,6 +9,8 @@ import(
 // Values
 fn resolve_addresses(@network.Network, String) -> Result[ResolveAddressStream, @network.ErrorCode]
 
+// Errors
+
 // Types and methods
 pub(all) type ResolveAddressStream Int
 fn ResolveAddressStream::drop(Self) -> Unit

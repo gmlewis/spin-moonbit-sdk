@@ -9,6 +9,8 @@ import(
 // Values
 fn create_udp_socket(@network.IpAddressFamily) -> Result[@udp.UdpSocket, @network.ErrorCode]
 
+// Errors
+
 // Types and methods
 
 // Type aliases

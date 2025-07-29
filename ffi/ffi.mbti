@@ -78,6 +78,8 @@ fn uint64_array2ptr(FixedArray[UInt64]) -> Int
 
 fn uint_array2ptr(FixedArray[UInt]) -> Int
 
+// Errors
+
 // Types and methods
 pub(all) struct Cleanup {
   address : Int
