@@ -18,4 +18,4 @@ mv interface/fermyon ../interface
 rm -rf interface
 
 # last step:
-moon fmt
+moon fmt && moon info

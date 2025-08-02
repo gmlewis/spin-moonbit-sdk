@@ -24,11 +24,7 @@ pub(all) enum Error_ {
 /// `error::no-such-store` will be raised if the `label` is not recognized.
 pub fn Store::open(label : String) -> Result[Store, Error_] {
   let return_area = @ffi.malloc(16)
-  wasmImportStaticStoreOpen(
-    @ffi.str2ptr(label),
-    label.iter().count(),
-    return_area,
-  )
+  wasmImportStaticStoreOpen(@ffi.str2ptr(label), label.length(), return_area)
   let lifted10 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(Store::Store(@ffi.load32(return_area + 4)))
     1 => {
@@ -37,8 +33,10 @@ pub fn Store::open(label : String) -> Result[Store, Error_] {
         1 => Error_::NoSuchStore
         2 => Error_::AccessDenied
         3 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Other(result)
         }
         _ => panic()
@@ -61,12 +59,7 @@ pub fn Store::get(
 ) -> Result[FixedArray[Byte]?, Error_] {
   let Store(handle) = self
   let return_area = @ffi.malloc(16)
-  wasmImportMethodStoreGet(
-    handle,
-    @ffi.str2ptr(key),
-    key.iter().count(),
-    return_area,
-  )
+  wasmImportMethodStoreGet(handle, @ffi.str2ptr(key), key.length(), return_area)
   let lifted16 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted : FixedArray[Byte]? = match @ffi.load8_u(return_area + 4) {
@@ -88,8 +81,10 @@ pub fn Store::get(
         1 => Error_::NoSuchStore
         2 => Error_::AccessDenied
         3 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result14 = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result14 = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Other(result14)
         }
         _ => panic()
@@ -114,7 +109,7 @@ pub fn Store::set(
   wasmImportMethodStoreSet(
     handle,
     @ffi.str2ptr(key),
-    key.iter().count(),
+    key.length(),
     @ffi.bytes2ptr(value),
     value.length(),
     return_area,
@@ -127,8 +122,10 @@ pub fn Store::set(
         1 => Error_::NoSuchStore
         2 => Error_::AccessDenied
         3 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Other(result)
         }
         _ => panic()
@@ -152,7 +149,7 @@ pub fn Store::delete(self : Store, key : String) -> Result[Unit, Error_] {
   wasmImportMethodStoreDelete(
     handle,
     @ffi.str2ptr(key),
-    key.iter().count(),
+    key.length(),
     return_area,
   )
   let lifted10 = match @ffi.load8_u(return_area + 0) {
@@ -163,8 +160,10 @@ pub fn Store::delete(self : Store, key : String) -> Result[Unit, Error_] {
         1 => Error_::NoSuchStore
         2 => Error_::AccessDenied
         3 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Other(result)
         }
         _ => panic()
@@ -185,7 +184,7 @@ pub fn Store::exists(self : Store, key : String) -> Result[Bool, Error_] {
   wasmImportMethodStoreExists(
     handle,
     @ffi.str2ptr(key),
-    key.iter().count(),
+    key.length(),
     return_area,
   )
   let lifted10 = match @ffi.load8_u(return_area + 0) {
@@ -196,8 +195,10 @@ pub fn Store::exists(self : Store, key : String) -> Result[Bool, Error_] {
         1 => Error_::NoSuchStore
         2 => Error_::AccessDenied
         3 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Other(result)
         }
         _ => panic()
@@ -221,8 +222,10 @@ pub fn Store::get_keys(self : Store) -> Result[Array[String], Error_] {
       let array : Array[String] = []
       for index = 0; index < @ffi.load32(return_area + 8); index = index + 1 {
         let base1 = @ffi.load32(return_area + 4) + index * 8
-        ignore(@ffi.load32(base1 + 4))
-        let result = @ffi.ptr2str(@ffi.load32(base1 + 0))
+        let result = @ffi.ptr2str(
+          @ffi.load32(base1 + 0),
+          @ffi.load32(base1 + 4),
+        )
         array.push(result)
       }
       @ffi.free(@ffi.load32(return_area + 4))
@@ -234,8 +237,10 @@ pub fn Store::get_keys(self : Store) -> Result[Array[String], Error_] {
         1 => Error_::NoSuchStore
         2 => Error_::AccessDenied
         3 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result12 = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result12 = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Other(result12)
         }
         _ => panic()

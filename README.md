@@ -13,10 +13,17 @@ and this GitHub example: https://github.com/moonbitlang/moonbit-docs/tree/464356
 ## Build
 
 Before building, you must have already installed the MoonBit programming language
-and the [Spin CLI tool]. You also need version `v1.222.0` or later of [wasm-tools].
+and the [Spin CLI tool]. You also need version `v1.236.0` or later of [wasm-tools].
 
-To install MoonBit, follow the instructions here (it is super-easy with VSCode):
+To install [MoonBit], follow the instructions here (it is super-easy with VSCode):
 https://www.moonbitlang.com/download/
+
+If you already have the [Rust] programming language installed, you can install
+[wasm-tools] by typing:
+
+```bash
+cargo install --locked wasm-tools
+```
 
 Then, to build this SDK, clone the repo, and type:
 
@@ -25,8 +32,9 @@ moon update && moon install
 moon build
 ```
 
-[Spin CLI tool]: https://developer.fermyon.com/spin
+[Spin CLI tool]: https://spinframework.dev/v3/install
 [wasm-tools]: https://github.com/bytecodealliance/wasm-tools
+[Rust]: https://www.rust-lang.org/tools/install
 
 ## Run
 
@@ -35,7 +43,7 @@ Examples can be found at: https://github.com/gmlewis/spin-moonbit-sdk-examples
 To run an example, type:
 
 ```bash
-$ cd hello-world
+$ cd examples/hello-world
 $ spin up --build
 ```
 
@@ -51,7 +59,8 @@ date: Sat, 17 Aug 2024 00:15:14 GMT
 Hello, World!
 ```
 
-Each example contains a README. Please refer to the README for additional commands and setup instructions. It might also be required to issue an update command: `moon update` to retrieve the latest dependencies.
+Each example contains a README. Please refer to the README for additional commands and setup instructions.
+It might also be required to issue an update command: `moon update` to retrieve the latest dependencies.
 
 ## Status
 

@@ -90,6 +90,8 @@ pub fn f32_to_i64(_value : Float) -> Int64 {
   abort("not wasm")
 }
 
+// set pseudo header; allocate extra bytes for string
+
 ///|
 pub fn malloc(_size : Int) -> Int {
   abort("not wasm")
@@ -101,17 +103,12 @@ pub fn free(_position : Int) -> Unit {
 }
 
 ///|
-pub fn copy(_dest : Int, _src : Int) -> Unit {
-  abort("not wasm")
-}
-
-///|
 pub fn str2ptr(_str : String) -> Int {
   abort("not wasm")
 }
 
 ///|
-pub fn ptr2str(_ptr : Int) -> String {
+pub fn ptr2str(_ptr : Int, _len : Int) -> String {
   abort("not wasm")
 }
 
@@ -121,7 +118,7 @@ pub fn bytes2ptr(_bytes : FixedArray[Byte]) -> Int {
 }
 
 ///|
-pub fn ptr2bytes(_ptr : Int, __len : Int) -> FixedArray[Byte] {
+pub fn ptr2bytes(_ptr : Int, _len : Int) -> FixedArray[Byte] {
   abort("not wasm")
 }
 

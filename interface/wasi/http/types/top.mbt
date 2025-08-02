@@ -262,8 +262,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
           let lifted : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result)
             }
             _ => panic()
@@ -304,8 +306,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
           let lifted51 : String? = match @ffi.load8_u(return_area + 20) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 28))
-              let result50 = @ffi.ptr2str(@ffi.load32(return_area + 24))
+              let result50 = @ffi.ptr2str(
+                @ffi.load32(return_area + 24),
+                @ffi.load32(return_area + 28),
+              )
               Option::Some(result50)
             }
             _ => panic()
@@ -348,8 +352,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               let lifted87 : String? = match @ffi.load8_u(return_area + 20) {
                 0 => Option::None
                 1 => {
-                  ignore(@ffi.load32(return_area + 28))
-                  let result86 = @ffi.ptr2str(@ffi.load32(return_area + 24))
+                  let result86 = @ffi.ptr2str(
+                    @ffi.load32(return_area + 24),
+                    @ffi.load32(return_area + 28),
+                  )
                   Option::Some(result86)
                 }
                 _ => panic()
@@ -384,8 +390,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
           let lifted108 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result107 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result107 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result107)
             }
             _ => panic()
@@ -415,8 +423,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
           let lifted130 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result129 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result129 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result129)
             }
             _ => panic()
@@ -456,8 +466,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
           let lifted157 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result156 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result156 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result156)
             }
             _ => panic()
@@ -477,8 +489,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
           let lifted170 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result169 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result169 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result169)
             }
             _ => panic()
@@ -489,8 +503,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
           let lifted178 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result177 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result177 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result177)
             }
             _ => panic()
@@ -506,8 +522,10 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
           let lifted196 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result195 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result195 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result195)
             }
             _ => panic()
@@ -556,7 +574,7 @@ pub fn Fields::from_list(
   for index = 0; index < entries.length(); index = index + 1 {
     let element : (String, FixedArray[Byte]) = entries[index]
     let base = address + index * 16
-    @ffi.store32(base + 4, element.0.iter().count())
+    @ffi.store32(base + 4, element.0.length())
     @ffi.store32(base + 0, @ffi.str2ptr(element.0))
     @ffi.store32(base + 12, element.1.length())
     @ffi.store32(base + 8, @ffi.bytes2ptr(element.1))
@@ -595,7 +613,7 @@ pub fn Fields::get(self : Fields, name : String) -> Array[FixedArray[Byte]] {
   wasmImportMethodFieldsGet(
     handle,
     @ffi.str2ptr(name),
-    name.iter().count(),
+    name.length(),
     return_area,
   )
   let array : Array[FixedArray[Byte]] = []
@@ -617,7 +635,7 @@ pub fn Fields::has(self : Fields, name : String) -> Bool {
   let result : Int = wasmImportMethodFieldsHas(
     handle,
     @ffi.str2ptr(name),
-    name.iter().count(),
+    name.length(),
   )
   ignore(name)
   return result != 0
@@ -647,7 +665,7 @@ pub fn Fields::set(
   wasmImportMethodFieldsSet(
     handle,
     @ffi.str2ptr(name),
-    name.iter().count(),
+    name.length(),
     address,
     value.length(),
     return_area,
@@ -686,7 +704,7 @@ pub fn Fields::delete(
   wasmImportMethodFieldsDelete(
     handle,
     @ffi.str2ptr(name),
-    name.iter().count(),
+    name.length(),
     return_area,
   )
   let lifted8 = match @ffi.load8_u(return_area + 0) {
@@ -721,7 +739,7 @@ pub fn Fields::append(
   wasmImportMethodFieldsAppend(
     handle,
     @ffi.str2ptr(name),
-    name.iter().count(),
+    name.length(),
     @ffi.bytes2ptr(value),
     value.length(),
     return_area,
@@ -758,8 +776,7 @@ pub fn Fields::entries(self : Fields) -> Array[(String, FixedArray[Byte])] {
   let array : Array[(String, FixedArray[Byte])] = []
   for index = 0; index < @ffi.load32(return_area + 4); index = index + 1 {
     let base = @ffi.load32(return_area + 0) + index * 16
-    ignore(@ffi.load32(base + 4))
-    let result = @ffi.ptr2str(@ffi.load32(base + 0))
+    let result = @ffi.ptr2str(@ffi.load32(base + 0), @ffi.load32(base + 4))
     let result0 = @ffi.ptr2bytes(@ffi.load32(base + 8), @ffi.load32(base + 12))
     array.push((result, result0))
   }
@@ -793,8 +810,10 @@ pub fn IncomingRequest::method_(self : IncomingRequest) -> Method {
     7 => Method::Trace
     8 => Method::Patch
     9 => {
-      ignore(@ffi.load32(return_area + 8))
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
+      let result = @ffi.ptr2str(
+        @ffi.load32(return_area + 4),
+        @ffi.load32(return_area + 8),
+      )
       Method::Other(result)
     }
     _ => panic()
@@ -811,8 +830,10 @@ pub fn IncomingRequest::path_with_query(self : IncomingRequest) -> String? {
   let lifted : String? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
-      ignore(@ffi.load32(return_area + 8))
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
+      let result = @ffi.ptr2str(
+        @ffi.load32(return_area + 4),
+        @ffi.load32(return_area + 8),
+      )
       Option::Some(result)
     }
     _ => panic()
@@ -833,8 +854,10 @@ pub fn IncomingRequest::scheme(self : IncomingRequest) -> Scheme? {
         0 => Scheme::Http
         1 => Scheme::Https
         2 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Scheme::Other(result)
         }
         _ => panic()
@@ -855,8 +878,10 @@ pub fn IncomingRequest::authority(self : IncomingRequest) -> String? {
   let lifted : String? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
-      ignore(@ffi.load32(return_area + 8))
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
+      let result = @ffi.ptr2str(
+        @ffi.load32(return_area + 4),
+        @ffi.load32(return_area + 8),
+      )
       Option::Some(result)
     }
     _ => panic()
@@ -949,8 +974,10 @@ pub fn OutgoingRequest::method_(self : OutgoingRequest) -> Method {
     7 => Method::Trace
     8 => Method::Patch
     9 => {
-      ignore(@ffi.load32(return_area + 8))
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
+      let result = @ffi.ptr2str(
+        @ffi.load32(return_area + 4),
+        @ffi.load32(return_area + 8),
+      )
       Method::Other(result)
     }
     _ => panic()
@@ -980,7 +1007,7 @@ pub fn OutgoingRequest::set_method(
     Patch => (8, 0, 0)
     Other(payload26) => {
       ignoreList.push(payload26)
-      (9, @ffi.str2ptr(payload26), payload26.iter().count())
+      (9, @ffi.str2ptr(payload26), payload26.length())
     }
   }
   let result : Int = wasmImportMethodOutgoingRequestSetMethod(
@@ -1005,8 +1032,10 @@ pub fn OutgoingRequest::path_with_query(self : OutgoingRequest) -> String? {
   let lifted : String? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
-      ignore(@ffi.load32(return_area + 8))
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
+      let result = @ffi.ptr2str(
+        @ffi.load32(return_area + 4),
+        @ffi.load32(return_area + 8),
+      )
       Option::Some(result)
     }
     _ => panic()
@@ -1029,7 +1058,7 @@ pub fn OutgoingRequest::set_path_with_query(
     None => (0, 0, 0)
     Some(payload2) => {
       ignoreList.push(payload2)
-      (1, @ffi.str2ptr(payload2), payload2.iter().count())
+      (1, @ffi.str2ptr(payload2), payload2.length())
     }
   }
   let result : Int = wasmImportMethodOutgoingRequestSetPathWithQuery(
@@ -1058,8 +1087,10 @@ pub fn OutgoingRequest::scheme(self : OutgoingRequest) -> Scheme? {
         0 => Scheme::Http
         1 => Scheme::Https
         2 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Scheme::Other(result)
         }
         _ => panic()
@@ -1090,7 +1121,7 @@ pub fn OutgoingRequest::set_scheme(
         Https => (1, 0, 0)
         Other(payload11) => {
           ignoreList.push(payload11)
-          (2, @ffi.str2ptr(payload11), payload11.iter().count())
+          (2, @ffi.str2ptr(payload11), payload11.length())
         }
       }
       (1, lowered, lowered12, lowered13)
@@ -1119,8 +1150,10 @@ pub fn OutgoingRequest::authority(self : OutgoingRequest) -> String? {
   let lifted : String? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
-      ignore(@ffi.load32(return_area + 8))
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
+      let result = @ffi.ptr2str(
+        @ffi.load32(return_area + 4),
+        @ffi.load32(return_area + 8),
+      )
       Option::Some(result)
     }
     _ => panic()
@@ -1144,7 +1177,7 @@ pub fn OutgoingRequest::set_authority(
     None => (0, 0, 0)
     Some(payload2) => {
       ignoreList.push(payload2)
-      (1, @ffi.str2ptr(payload2), payload2.iter().count())
+      (1, @ffi.str2ptr(payload2), payload2.length())
     }
   }
   let result : Int = wasmImportMethodOutgoingRequestSetAuthority(
@@ -1336,7 +1369,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload15) => {
               ignoreList.push(payload15)
-              (1, @ffi.str2ptr(payload15), payload15.iter().count())
+              (1, @ffi.str2ptr(payload15), payload15.length())
             }
           }
           let (lowered24, lowered25) = match payload9.info_code {
@@ -1375,7 +1408,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload78) => {
               ignoreList.push(payload78)
-              (1, @ffi.str2ptr(payload78), payload78.iter().count())
+              (1, @ffi.str2ptr(payload78), payload78.length())
             }
           }
           (
@@ -1423,7 +1456,7 @@ pub fn ResponseOutparam::set(
                 None => (0, 0, 0)
                 Some(payload133) => {
                   ignoreList.push(payload133)
-                  (1, @ffi.str2ptr(payload133), payload133.iter().count())
+                  (1, @ffi.str2ptr(payload133), payload133.length())
                 }
               }
               let (lowered143, lowered144) = match payload127.field_size {
@@ -1456,7 +1489,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload170) => {
               ignoreList.push(payload170)
-              (1, @ffi.str2ptr(payload170), payload170.iter().count())
+              (1, @ffi.str2ptr(payload170), payload170.length())
             }
           }
           let (lowered180, lowered181) = match payload164.field_size {
@@ -1487,7 +1520,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload204) => {
               ignoreList.push(payload204)
-              (1, @ffi.str2ptr(payload204), payload204.iter().count())
+              (1, @ffi.str2ptr(payload204), payload204.length())
             }
           }
           let (lowered214, lowered215) = match payload198.field_size {
@@ -1524,7 +1557,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload246) => {
               ignoreList.push(payload246)
-              (1, @ffi.str2ptr(payload246), payload246.iter().count())
+              (1, @ffi.str2ptr(payload246), payload246.length())
             }
           }
           let (lowered256, lowered257) = match payload240.field_size {
@@ -1546,7 +1579,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload266) => {
               ignoreList.push(payload266)
-              (1, @ffi.str2ptr(payload266), payload266.iter().count())
+              (1, @ffi.str2ptr(payload266), payload266.length())
             }
           }
           (31, lowered267, Int::to_int64(lowered268), lowered269, 0, 0, 0)
@@ -1556,7 +1589,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload278) => {
               ignoreList.push(payload278)
-              (1, @ffi.str2ptr(payload278), payload278.iter().count())
+              (1, @ffi.str2ptr(payload278), payload278.length())
             }
           }
           (32, lowered279, Int::to_int64(lowered280), lowered281, 0, 0, 0)
@@ -1571,7 +1604,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload305) => {
               ignoreList.push(payload305)
-              (1, @ffi.str2ptr(payload305), payload305.iter().count())
+              (1, @ffi.str2ptr(payload305), payload305.length())
             }
           }
           (38, lowered306, Int::to_int64(lowered307), lowered308, 0, 0, 0)
@@ -1726,8 +1759,10 @@ pub fn FutureTrailers::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
-                      let result = @ffi.ptr2str(@ffi.load32(return_area + 36))
+                      let result = @ffi.ptr2str(
+                        @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
+                      )
                       Option::Some(result)
                     }
                     _ => panic()
@@ -1769,8 +1804,10 @@ pub fn FutureTrailers::get(
                     @ffi.load8_u(return_area + 36) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 44))
-                      let result61 = @ffi.ptr2str(@ffi.load32(return_area + 40))
+                      let result61 = @ffi.ptr2str(
+                        @ffi.load32(return_area + 40),
+                        @ffi.load32(return_area + 44),
+                      )
                       Option::Some(result61)
                     }
                     _ => panic()
@@ -1817,9 +1854,9 @@ pub fn FutureTrailers::get(
                         @ffi.load8_u(return_area + 36) {
                         0 => Option::None
                         1 => {
-                          ignore(@ffi.load32(return_area + 44))
                           let result97 = @ffi.ptr2str(
                             @ffi.load32(return_area + 40),
+                            @ffi.load32(return_area + 44),
                           )
                           Option::Some(result97)
                         }
@@ -1859,9 +1896,9 @@ pub fn FutureTrailers::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result118 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result118)
                     }
@@ -1897,9 +1934,9 @@ pub fn FutureTrailers::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result140 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result140)
                     }
@@ -1946,9 +1983,9 @@ pub fn FutureTrailers::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result167 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result167)
                     }
@@ -1972,9 +2009,9 @@ pub fn FutureTrailers::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result180 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result180)
                     }
@@ -1987,9 +2024,9 @@ pub fn FutureTrailers::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result188 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result188)
                     }
@@ -2007,9 +2044,9 @@ pub fn FutureTrailers::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result206 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result206)
                     }
@@ -2168,8 +2205,10 @@ pub fn OutgoingBody::finish(
           let lifted : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result)
             }
             _ => panic()
@@ -2210,8 +2249,10 @@ pub fn OutgoingBody::finish(
           let lifted58 : String? = match @ffi.load8_u(return_area + 20) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 28))
-              let result57 = @ffi.ptr2str(@ffi.load32(return_area + 24))
+              let result57 = @ffi.ptr2str(
+                @ffi.load32(return_area + 24),
+                @ffi.load32(return_area + 28),
+              )
               Option::Some(result57)
             }
             _ => panic()
@@ -2254,8 +2295,10 @@ pub fn OutgoingBody::finish(
               let lifted94 : String? = match @ffi.load8_u(return_area + 20) {
                 0 => Option::None
                 1 => {
-                  ignore(@ffi.load32(return_area + 28))
-                  let result93 = @ffi.ptr2str(@ffi.load32(return_area + 24))
+                  let result93 = @ffi.ptr2str(
+                    @ffi.load32(return_area + 24),
+                    @ffi.load32(return_area + 28),
+                  )
                   Option::Some(result93)
                 }
                 _ => panic()
@@ -2290,8 +2333,10 @@ pub fn OutgoingBody::finish(
           let lifted115 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result114 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result114 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result114)
             }
             _ => panic()
@@ -2321,8 +2366,10 @@ pub fn OutgoingBody::finish(
           let lifted137 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result136 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result136 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result136)
             }
             _ => panic()
@@ -2362,8 +2409,10 @@ pub fn OutgoingBody::finish(
           let lifted164 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result163 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result163 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result163)
             }
             _ => panic()
@@ -2383,8 +2432,10 @@ pub fn OutgoingBody::finish(
           let lifted177 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result176 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result176 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result176)
             }
             _ => panic()
@@ -2395,8 +2446,10 @@ pub fn OutgoingBody::finish(
           let lifted185 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result184 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result184 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result184)
             }
             _ => panic()
@@ -2412,8 +2465,10 @@ pub fn OutgoingBody::finish(
           let lifted203 : String? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 => {
-              ignore(@ffi.load32(return_area + 24))
-              let result202 = @ffi.ptr2str(@ffi.load32(return_area + 20))
+              let result202 = @ffi.ptr2str(
+                @ffi.load32(return_area + 20),
+                @ffi.load32(return_area + 24),
+              )
               Option::Some(result202)
             }
             _ => panic()
@@ -2481,8 +2536,10 @@ pub fn FutureIncomingResponse::get(
                   let lifted : String? = match @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
-                      let result = @ffi.ptr2str(@ffi.load32(return_area + 36))
+                      let result = @ffi.ptr2str(
+                        @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
+                      )
                       Option::Some(result)
                     }
                     _ => panic()
@@ -2524,8 +2581,10 @@ pub fn FutureIncomingResponse::get(
                     @ffi.load8_u(return_area + 36) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 44))
-                      let result56 = @ffi.ptr2str(@ffi.load32(return_area + 40))
+                      let result56 = @ffi.ptr2str(
+                        @ffi.load32(return_area + 40),
+                        @ffi.load32(return_area + 44),
+                      )
                       Option::Some(result56)
                     }
                     _ => panic()
@@ -2572,9 +2631,9 @@ pub fn FutureIncomingResponse::get(
                         @ffi.load8_u(return_area + 36) {
                         0 => Option::None
                         1 => {
-                          ignore(@ffi.load32(return_area + 44))
                           let result92 = @ffi.ptr2str(
                             @ffi.load32(return_area + 40),
+                            @ffi.load32(return_area + 44),
                           )
                           Option::Some(result92)
                         }
@@ -2614,9 +2673,9 @@ pub fn FutureIncomingResponse::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result113 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result113)
                     }
@@ -2652,9 +2711,9 @@ pub fn FutureIncomingResponse::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result135 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result135)
                     }
@@ -2701,9 +2760,9 @@ pub fn FutureIncomingResponse::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result162 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result162)
                     }
@@ -2727,9 +2786,9 @@ pub fn FutureIncomingResponse::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result175 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result175)
                     }
@@ -2742,9 +2801,9 @@ pub fn FutureIncomingResponse::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result183 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result183)
                     }
@@ -2762,9 +2821,9 @@ pub fn FutureIncomingResponse::get(
                     @ffi.load8_u(return_area + 32) {
                     0 => Option::None
                     1 => {
-                      ignore(@ffi.load32(return_area + 40))
                       let result201 = @ffi.ptr2str(
                         @ffi.load32(return_area + 36),
+                        @ffi.load32(return_area + 40),
                       )
                       Option::Some(result201)
                     }

@@ -14,10 +14,8 @@ pub fn get_environment() -> Array[(String, String)] {
   let array : Array[(String, String)] = []
   for index = 0; index < @ffi.load32(return_area + 4); index = index + 1 {
     let base = @ffi.load32(return_area + 0) + index * 16
-    ignore(@ffi.load32(base + 4))
-    let result = @ffi.ptr2str(@ffi.load32(base + 0))
-    ignore(@ffi.load32(base + 12))
-    let result0 = @ffi.ptr2str(@ffi.load32(base + 8))
+    let result = @ffi.ptr2str(@ffi.load32(base + 0), @ffi.load32(base + 4))
+    let result0 = @ffi.ptr2str(@ffi.load32(base + 8), @ffi.load32(base + 12))
     array.push((result, result0))
   }
   @ffi.free(@ffi.load32(return_area + 0))
@@ -32,8 +30,7 @@ pub fn get_arguments() -> Array[String] {
   let array : Array[String] = []
   for index = 0; index < @ffi.load32(return_area + 4); index = index + 1 {
     let base = @ffi.load32(return_area + 0) + index * 8
-    ignore(@ffi.load32(base + 4))
-    let result = @ffi.ptr2str(@ffi.load32(base + 0))
+    let result = @ffi.ptr2str(@ffi.load32(base + 0), @ffi.load32(base + 4))
     array.push(result)
   }
   @ffi.free(@ffi.load32(return_area + 0))
@@ -49,8 +46,10 @@ pub fn initial_cwd() -> String? {
   let lifted : String? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
-      ignore(@ffi.load32(return_area + 8))
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
+      let result = @ffi.ptr2str(
+        @ffi.load32(return_area + 4),
+        @ffi.load32(return_area + 8),
+      )
       Option::Some(result)
     }
     _ => panic()

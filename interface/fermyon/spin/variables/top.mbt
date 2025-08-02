@@ -13,33 +13,43 @@ pub(all) enum Error_ {
 /// The name must match one defined in in the component manifest.
 pub fn get(name : String) -> Result[String, Error_] {
   let return_area = @ffi.malloc(16)
-  wasmImportGet(@ffi.str2ptr(name), name.iter().count(), return_area)
+  wasmImportGet(@ffi.str2ptr(name), name.length(), return_area)
   let lifted14 = match @ffi.load8_u(return_area + 0) {
     0 => {
-      ignore(@ffi.load32(return_area + 8))
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
+      let result = @ffi.ptr2str(
+        @ffi.load32(return_area + 4),
+        @ffi.load32(return_area + 8),
+      )
       Result::Ok(result)
     }
     1 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
         0 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result4 = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result4 = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::InvalidName(result4)
         }
         1 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result7 = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result7 = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Undefined(result7)
         }
         2 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result10 = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result10 = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Provider(result10)
         }
         3 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result13 = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result13 = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Other(result13)
         }
         _ => panic()

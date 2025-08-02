@@ -53,11 +53,11 @@ pub fn Connection::open(
   let return_area = @ffi.malloc(16)
   wasmImportStaticConnectionOpen(
     @ffi.str2ptr(address),
-    address.iter().count(),
+    address.length(),
     @ffi.str2ptr(username),
-    username.iter().count(),
+    username.length(),
     @ffi.str2ptr(password),
-    password.iter().count(),
+    password.length(),
     keep_alive_interval_in_secs.reinterpret_as_int64(),
     return_area,
   )
@@ -68,13 +68,17 @@ pub fn Connection::open(
         0 => Error_::InvalidAddress
         1 => Error_::TooManyConnections
         2 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::ConnectionFailed(result)
         }
         3 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result10 = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result10 = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Other(result10)
         }
         _ => panic()
@@ -102,7 +106,7 @@ pub fn Connection::publish(
   wasmImportMethodConnectionPublish(
     handle,
     @ffi.str2ptr(topic),
-    topic.iter().count(),
+    topic.length(),
     @ffi.bytes2ptr(payload),
     payload.length(),
     qos.ordinal(),
@@ -115,13 +119,17 @@ pub fn Connection::publish(
         0 => Error_::InvalidAddress
         1 => Error_::TooManyConnections
         2 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::ConnectionFailed(result)
         }
         3 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result10 = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result10 = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Other(result10)
         }
         _ => panic()

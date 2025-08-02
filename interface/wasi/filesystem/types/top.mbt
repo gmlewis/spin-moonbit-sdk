@@ -776,7 +776,7 @@ pub fn Descriptor::create_directory_at(
   wasmImportMethodDescriptorCreateDirectoryAt(
     handle,
     @ffi.str2ptr(path),
-    path.iter().count(),
+    path.length(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -868,7 +868,7 @@ pub fn Descriptor::stat_at(
     handle,
     flag.to_int(),
     @ffi.str2ptr(path),
-    path.iter().count(),
+    path.length(),
     return_area,
   )
   let lifted16 = match @ffi.load8_u(return_area + 0) {
@@ -959,7 +959,7 @@ pub fn Descriptor::set_times_at(
     handle,
     flag.to_int(),
     @ffi.str2ptr(path),
-    path.iter().count(),
+    path.length(),
     lowered,
     lowered6,
     lowered7,
@@ -996,10 +996,10 @@ pub fn Descriptor::link_at(
     handle,
     flag.to_int(),
     @ffi.str2ptr(old_path),
-    old_path.iter().count(),
+    old_path.length(),
     handle0,
     @ffi.str2ptr(new_path),
-    new_path.iter().count(),
+    new_path.length(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -1047,7 +1047,7 @@ pub fn Descriptor::open_at(
     handle,
     flag.to_int(),
     @ffi.str2ptr(path),
-    path.iter().count(),
+    path.length(),
     flag0.to_int(),
     flag1.to_int(),
     return_area,
@@ -1077,13 +1077,15 @@ pub fn Descriptor::readlink_at(
   wasmImportMethodDescriptorReadlinkAt(
     handle,
     @ffi.str2ptr(path),
-    path.iter().count(),
+    path.length(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => {
-      ignore(@ffi.load32(return_area + 8))
-      let result = @ffi.ptr2str(@ffi.load32(return_area + 4))
+      let result = @ffi.ptr2str(
+        @ffi.load32(return_area + 4),
+        @ffi.load32(return_area + 8),
+      )
       Result::Ok(result)
     }
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -1108,7 +1110,7 @@ pub fn Descriptor::remove_directory_at(
   wasmImportMethodDescriptorRemoveDirectoryAt(
     handle,
     @ffi.str2ptr(path),
-    path.iter().count(),
+    path.length(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -1136,10 +1138,10 @@ pub fn Descriptor::rename_at(
   wasmImportMethodDescriptorRenameAt(
     handle,
     @ffi.str2ptr(old_path),
-    old_path.iter().count(),
+    old_path.length(),
     handle0,
     @ffi.str2ptr(new_path),
-    new_path.iter().count(),
+    new_path.length(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -1169,9 +1171,9 @@ pub fn Descriptor::symlink_at(
   wasmImportMethodDescriptorSymlinkAt(
     handle,
     @ffi.str2ptr(old_path),
-    old_path.iter().count(),
+    old_path.length(),
     @ffi.str2ptr(new_path),
-    new_path.iter().count(),
+    new_path.length(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -1198,7 +1200,7 @@ pub fn Descriptor::unlink_file_at(
   wasmImportMethodDescriptorUnlinkFileAt(
     handle,
     @ffi.str2ptr(path),
-    path.iter().count(),
+    path.length(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -1281,7 +1283,7 @@ pub fn Descriptor::metadata_hash_at(
     handle,
     flag.to_int(),
     @ffi.str2ptr(path),
-    path.iter().count(),
+    path.length(),
     return_area,
   )
   let lifted = match @ffi.load8_u(return_area + 0) {
@@ -1310,8 +1312,10 @@ pub fn DirectoryEntryStream::read_directory_entry(
       let lifted : DirectoryEntry? = match @ffi.load8_u(return_area + 4) {
         0 => Option::None
         1 => {
-          ignore(@ffi.load32(return_area + 16))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 12))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 12),
+            @ffi.load32(return_area + 16),
+          )
           Option::Some(DirectoryEntry::{
             type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
             name: result,

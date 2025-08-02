@@ -7,8 +7,7 @@ pub fn get_directories() -> Array[(@types.Descriptor, String)] {
   let array : Array[(@types.Descriptor, String)] = []
   for index = 0; index < @ffi.load32(return_area + 4); index = index + 1 {
     let base = @ffi.load32(return_area + 0) + index * 12
-    ignore(@ffi.load32(base + 8))
-    let result = @ffi.ptr2str(@ffi.load32(base + 4))
+    let result = @ffi.ptr2str(@ffi.load32(base + 4), @ffi.load32(base + 8))
     array.push((@types.Descriptor::Descriptor(@ffi.load32(base + 0)), result))
   }
   @ffi.free(@ffi.load32(return_area + 0))

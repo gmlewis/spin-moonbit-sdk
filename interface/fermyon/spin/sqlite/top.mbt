@@ -47,7 +47,7 @@ pub fn Connection::open(database : String) -> Result[Connection, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportStaticConnectionOpen(
     @ffi.str2ptr(database),
-    database.iter().count(),
+    database.length(),
     return_area,
   )
   let lifted12 = match @ffi.load8_u(return_area + 0) {
@@ -59,8 +59,10 @@ pub fn Connection::open(database : String) -> Result[Connection, Error_] {
         2 => Error_::InvalidConnection
         3 => Error_::DatabaseFull
         4 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Io(result)
         }
         _ => panic()
@@ -100,7 +102,7 @@ pub fn Connection::execute(
       }
       Text(payload7) => {
         @ffi.store8(base + 0, 2)
-        @ffi.store32(base + 12, payload7.iter().count())
+        @ffi.store32(base + 12, payload7.length())
         @ffi.store32(base + 8, @ffi.str2ptr(payload7))
         ignoreList.push(payload7)
         ()
@@ -122,7 +124,7 @@ pub fn Connection::execute(
   wasmImportMethodConnectionExecute(
     handle,
     @ffi.str2ptr(statement),
-    statement.iter().count(),
+    statement.length(),
     address,
     parameters.length(),
     return_area,
@@ -134,8 +136,10 @@ pub fn Connection::execute(
           index18 < @ffi.load32(return_area + 8)
           index18 = index18 + 1 {
         let base17 = @ffi.load32(return_area + 4) + index18 * 8
-        ignore(@ffi.load32(base17 + 4))
-        let result = @ffi.ptr2str(@ffi.load32(base17 + 0))
+        let result = @ffi.ptr2str(
+          @ffi.load32(base17 + 0),
+          @ffi.load32(base17 + 4),
+        )
         array.push(result)
       }
       @ffi.free(@ffi.load32(return_area + 4))
@@ -153,8 +157,10 @@ pub fn Connection::execute(
             0 => Value::Integer(@ffi.load64(base22 + 8))
             1 => Value::Real(@ffi.loadf64(base22 + 8))
             2 => {
-              ignore(@ffi.load32(base22 + 12))
-              let result29 = @ffi.ptr2str(@ffi.load32(base22 + 8))
+              let result29 = @ffi.ptr2str(
+                @ffi.load32(base22 + 8),
+                @ffi.load32(base22 + 12),
+              )
               Value::Text(result29)
             }
             3 => {
@@ -182,8 +188,10 @@ pub fn Connection::execute(
         2 => Error_::InvalidConnection
         3 => Error_::DatabaseFull
         4 => {
-          ignore(@ffi.load32(return_area + 12))
-          let result51 = @ffi.ptr2str(@ffi.load32(return_area + 8))
+          let result51 = @ffi.ptr2str(
+            @ffi.load32(return_area + 8),
+            @ffi.load32(return_area + 12),
+          )
           Error_::Io(result51)
         }
         _ => panic()
