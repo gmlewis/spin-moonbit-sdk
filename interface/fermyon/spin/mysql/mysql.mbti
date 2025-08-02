@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/mysql"
+
+import(
+  "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes"
+)
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) type Connection Int
+fn Connection::drop(Self) -> Unit
+fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[Unit, @rdbmsTypes.Error_]
+fn Connection::inner(Self) -> Int
+fn Connection::open(String) -> Result[Self, @rdbmsTypes.Error_]
+fn Connection::query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]
+impl Eq for Connection
+impl Show for Connection
+
+// Type aliases
+
+// Traits
+

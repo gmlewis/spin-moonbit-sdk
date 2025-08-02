@@ -6,8 +6,6 @@ fn bytes2ptr(FixedArray[Byte]) -> Int
 
 fn cabi_realloc(Int, Int, Int, Int) -> Int
 
-fn copy(Int, Int) -> Unit
-
 fn double_array2ptr(FixedArray[Double]) -> Int
 
 fn extend16(Int) -> Int
@@ -54,7 +52,7 @@ fn ptr2int64_array(Int, Int) -> FixedArray[Int64]
 
 fn ptr2int_array(Int, Int) -> FixedArray[Int]
 
-fn ptr2str(Int) -> String
+fn ptr2str(Int, Int) -> String
 
 fn ptr2uint64_array(Int, Int) -> FixedArray[UInt64]
 

@@ -1,0 +1,18 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalOutput"
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) type TerminalOutput Int
+fn TerminalOutput::drop(Self) -> Unit
+fn TerminalOutput::inner(Self) -> Int
+impl Eq for TerminalOutput
+impl Show for TerminalOutput
+
+// Type aliases
+
+// Traits
+

@@ -1,0 +1,18 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalStdin"
+
+import(
+  "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalInput"
+)
+
+// Values
+fn get_terminal_stdin() -> @terminalInput.TerminalInput?
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
