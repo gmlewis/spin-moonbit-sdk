@@ -32,7 +32,7 @@ moon update && moon install
 moon build
 ```
 
-[Spin CLI tool]: https://developer.fermyon.com/spin
+[Spin CLI tool]: https://spinframework.dev/v3/install
 [wasm-tools]: https://github.com/bytecodealliance/wasm-tools
 [Rust]: https://www.rust-lang.org/tools/install
 
