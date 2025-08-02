@@ -13,7 +13,7 @@ and this GitHub example: https://github.com/moonbitlang/moonbit-docs/tree/464356
 ## Build
 
 Before building, you must have already installed the MoonBit programming language
-and the [Spin CLI tool]. You also need version `v1.227.0` or later of [wasm-tools].
+and the [Spin CLI tool]. You also need version `v1.236.0` or later of [wasm-tools].
 
 To install [MoonBit], follow the instructions here (it is super-easy with VSCode):
 https://www.moonbitlang.com/download/
