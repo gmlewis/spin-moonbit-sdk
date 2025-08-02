@@ -1,7 +1,10 @@
-// -*- compile-command: "go run ."; -*-
+// -*- compile-command: "cd ../../wit && ./run-wit-bindgen.sh"; -*-
 
 // gen-ffi-top-notwasm generates the `ffi/top_notwasm.mbt` file
 // by parsing `ffi/top_wasm.mbt` and making stubs for all the `pub` functions.
+//
+// NOTE that this must be run before `moon fmt` to work properly, so it
+// should only be run from the "./run-wit-bindgen.sh" script in the "wit" folder.
 package main
 
 import (
@@ -51,6 +54,7 @@ var (
 	stringArgRE      = regexp.MustCompile(`([a-z_]+ : String)`)
 	fixedArrayArgRE  = regexp.MustCompile(`([a-z_]+ : FixedArray)`)
 	privateFnRE      = regexp.MustCompile(`(?sm)^(fn .*?)$`)
+	remainingWatRE   = regexp.MustCompile(`(?sm)^(#\|.*?)$`)
 )
 
 func processSource(src string, outBuf *bytes.Buffer) {
@@ -69,6 +73,8 @@ func processSource(src string, outBuf *bytes.Buffer) {
 	src = stringArgRE.ReplaceAllString(src, "_$1")
 	src = fixedArrayArgRE.ReplaceAllString(src, "_$1")
 	src = privateFnRE.ReplaceAllString(src, "")
+	// Now remove any remaining lines that start with `#|` caused by multi-line WAT.
+	src = remainingWatRE.ReplaceAllString(src, "")
 	src = strings.Replace(src, `Cleanup { abort("not wasm") }`, cleanup, 1)
 	outBuf.WriteString(src)
 }
