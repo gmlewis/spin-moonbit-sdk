@@ -1,0 +1,15 @@
+[[trigger.http]]
+route = "{{http-path}}"
+component = "{{project-name | kebab_case}}"
+
+[component.{{project-name | kebab_case}}]
+source = "{{ output-path }}/main.wasm"
+allowed_outbound_hosts = []
+[component.{{project-name | kebab_case}}.build]
+command = """\
+  moon build --target wasm && \
+  wasm-tools component embed .mooncakes/gmlewis/spin-moonbit-sdk/wit ./target/wasm/release/build/main.wasm -o main.wasm --encoding utf16 -w http-trigger && \
+  wasm-tools component new main.wasm -o main.wasm
+  """
+workdir = "{{ output-path }}"
+watch = ["**/*.mbt", "moon.mod.json", "moon.pkg.json"]

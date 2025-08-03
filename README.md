@@ -10,7 +10,17 @@ and this GitHub example: https://github.com/moonbitlang/moonbit-docs/tree/464356
 [Spin SDK]: https://www.fermyon.com/spin
 [MoonBit]: https://www.moonbitlang.com/
 
-## Build
+## Templates
+
+If you wish to install MoonBit templates for the [Spin CLI tool] (v3), you can run:
+
+```bash
+spin templates install --git https://github.com/gmlewis/spin-moonbit-sdk
+```
+
+The templates are located in the `templates` folder.
+
+## Build (SDK Development)
 
 Before building, you must have already installed the MoonBit programming language
 and the [Spin CLI tool]. You also need version `v1.236.0` or later of [wasm-tools].
@@ -36,7 +46,7 @@ moon build
 [wasm-tools]: https://github.com/bytecodealliance/wasm-tools
 [Rust]: https://www.rust-lang.org/tools/install
 
-## Run
+## Examples
 
 Examples can be found at: https://github.com/gmlewis/spin-moonbit-sdk-examples
 

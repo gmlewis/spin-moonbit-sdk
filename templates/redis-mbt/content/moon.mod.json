@@ -1,0 +1,6 @@
+{
+  "name" : "username/{{project-name | kebab_case}}",
+  "deps" : {
+    "gmlewis/spin-moonbit-sdk" : "0.54.0"
+  }
+}
