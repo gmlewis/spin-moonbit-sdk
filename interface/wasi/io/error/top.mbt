@@ -19,7 +19,7 @@
 ///
 /// The set of functions which can "downcast" an `error` into a more
 /// concrete type is open.
-pub(all) type Error_ Int derive(Show, Eq)
+pub(all) struct Error_(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn Error_::drop(self : Error_) -> Unit {

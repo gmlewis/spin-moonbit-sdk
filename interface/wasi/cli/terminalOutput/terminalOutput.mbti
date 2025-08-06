@@ -6,7 +6,7 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalOutput"
 // Errors
 
 // Types and methods
-pub(all) type TerminalOutput Int
+pub(all) struct TerminalOutput(Int)
 fn TerminalOutput::drop(Self) -> Unit
 fn TerminalOutput::inner(Self) -> Int
 impl Eq for TerminalOutput

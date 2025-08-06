@@ -47,7 +47,7 @@ pub fn ShutdownType::from(self : Int) -> ShutdownType {
 /// In addition to the general error codes documented on the
 /// `network::error-code` type, TCP socket methods may always return
 /// `error(invalid-state)` when in the `closed` state.
-pub(all) type TcpSocket Int derive(Show, Eq)
+pub(all) struct TcpSocket(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn TcpSocket::drop(self : TcpSocket) -> Unit {

@@ -101,7 +101,7 @@ pub(all) enum HeaderError {
 /// `incoming-request.headers`, `outgoing-request.headers`) might be be
 /// immutable. In an immutable fields, the `set`, `append`, and `delete`
 /// operations will fail with `header-error.immutable`.
-pub(all) type Fields Int derive(Show, Eq)
+pub(all) struct Fields(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn Fields::drop(self : Fields) -> Unit {
@@ -110,7 +110,7 @@ pub fn Fields::drop(self : Fields) -> Unit {
 }
 
 ///| Represents an incoming HTTP Request.
-pub(all) type IncomingRequest Int derive(Show, Eq)
+pub(all) struct IncomingRequest(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn IncomingRequest::drop(self : IncomingRequest) -> Unit {
@@ -119,7 +119,7 @@ pub fn IncomingRequest::drop(self : IncomingRequest) -> Unit {
 }
 
 ///| Represents an outgoing HTTP Request.
-pub(all) type OutgoingRequest Int derive(Show, Eq)
+pub(all) struct OutgoingRequest(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn OutgoingRequest::drop(self : OutgoingRequest) -> Unit {
@@ -133,7 +133,7 @@ pub fn OutgoingRequest::drop(self : OutgoingRequest) -> Unit {
 ///
 /// These timeouts are separate from any the user may use to bound a
 /// blocking call to `wasi:io/poll.poll`.
-pub(all) type RequestOptions Int derive(Show, Eq)
+pub(all) struct RequestOptions(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn RequestOptions::drop(self : RequestOptions) -> Unit {
@@ -146,7 +146,7 @@ pub fn RequestOptions::drop(self : RequestOptions) -> Unit {
 /// This resource is used by the `wasi:http/incoming-handler` interface to
 /// allow a Response to be sent corresponding to the Request provided as the
 /// other argument to `incoming-handler.handle`.
-pub(all) type ResponseOutparam Int derive(Show, Eq)
+pub(all) struct ResponseOutparam(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn ResponseOutparam::drop(self : ResponseOutparam) -> Unit {
@@ -155,7 +155,7 @@ pub fn ResponseOutparam::drop(self : ResponseOutparam) -> Unit {
 }
 
 ///| Represents an incoming HTTP Response.
-pub(all) type IncomingResponse Int derive(Show, Eq)
+pub(all) struct IncomingResponse(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn IncomingResponse::drop(self : IncomingResponse) -> Unit {
@@ -171,7 +171,7 @@ pub fn IncomingResponse::drop(self : IncomingResponse) -> Unit {
 /// an `input-stream` and the delivery of trailers as a `future-trailers`,
 /// and ensures that the user of this interface may only be consuming either
 /// the body contents or waiting on trailers at any given time.
-pub(all) type IncomingBody Int derive(Show, Eq)
+pub(all) struct IncomingBody(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn IncomingBody::drop(self : IncomingBody) -> Unit {
@@ -184,7 +184,7 @@ pub fn IncomingBody::drop(self : IncomingBody) -> Unit {
 /// In the case that the incoming HTTP Request or Response did not have any
 /// trailers, this future will resolve to the empty set of trailers once the
 /// complete Request or Response body has been received.
-pub(all) type FutureTrailers Int derive(Show, Eq)
+pub(all) struct FutureTrailers(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn FutureTrailers::drop(self : FutureTrailers) -> Unit {
@@ -193,7 +193,7 @@ pub fn FutureTrailers::drop(self : FutureTrailers) -> Unit {
 }
 
 ///| Represents an outgoing HTTP Response.
-pub(all) type OutgoingResponse Int derive(Show, Eq)
+pub(all) struct OutgoingResponse(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn OutgoingResponse::drop(self : OutgoingResponse) -> Unit {
@@ -217,7 +217,7 @@ pub fn OutgoingResponse::drop(self : OutgoingResponse) -> Unit {
 /// error to the HTTP protocol by whatever means it has available,
 /// including: corrupting the body on the wire, aborting the associated
 /// Request, or sending a late status code for the Response.
-pub(all) type OutgoingBody Int derive(Show, Eq)
+pub(all) struct OutgoingBody(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn OutgoingBody::drop(self : OutgoingBody) -> Unit {
@@ -230,7 +230,7 @@ pub fn OutgoingBody::drop(self : OutgoingBody) -> Unit {
 ///
 /// This resource is returned by the `wasi:http/outgoing-handler` interface to
 /// provide the HTTP Response corresponding to the sent Request.
-pub(all) type FutureIncomingResponse Int derive(Show, Eq)
+pub(all) struct FutureIncomingResponse(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn FutureIncomingResponse::drop(self : FutureIncomingResponse) -> Unit {

@@ -1,6 +1,6 @@
 ///|
 /// `ByteFunc` is a function that operates on a stream of bytes, one byte at a time.
-type ByteFunc (Byte) -> Unit
+struct ByteFunc((Byte) -> Unit)
 
 ///|
 let max_buf_size = 4096UL

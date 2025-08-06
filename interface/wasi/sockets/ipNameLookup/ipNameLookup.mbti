@@ -12,7 +12,7 @@ fn resolve_addresses(@network.Network, String) -> Result[ResolveAddressStream, @
 // Errors
 
 // Types and methods
-pub(all) type ResolveAddressStream Int
+pub(all) struct ResolveAddressStream(Int)
 fn ResolveAddressStream::drop(Self) -> Unit
 fn ResolveAddressStream::inner(Self) -> Int
 fn ResolveAddressStream::resolve_next_address(Self) -> Result[@network.IpAddress?, @network.ErrorCode]

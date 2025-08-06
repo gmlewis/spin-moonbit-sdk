@@ -46,7 +46,7 @@ pub fn DescriptorType::from(self : Int) -> DescriptorType {
 ///| Descriptor flags.
 ///
 /// Note: This was called `fdflags` in earlier versions of WASI.
-pub(all) type DescriptorFlags Byte derive(Show, Eq)
+pub(all) struct DescriptorFlags(Byte) derive(Show, Eq)
 
 ///|
 pub fn DescriptorFlags::default() -> DescriptorFlags {
@@ -103,7 +103,7 @@ pub fn DescriptorFlags::is_set(
 }
 
 ///| Flags determining the method of how paths are resolved.
-pub(all) type PathFlags Byte derive(Show, Eq)
+pub(all) struct PathFlags(Byte) derive(Show, Eq)
 
 ///|
 pub fn PathFlags::default() -> PathFlags {
@@ -141,7 +141,7 @@ pub fn PathFlags::is_set(self : PathFlags, other : PathFlagsFlag) -> Bool {
 }
 
 ///| Open flags used by `open-at`.
-pub(all) type OpenFlags Byte derive(Show, Eq)
+pub(all) struct OpenFlags(Byte) derive(Show, Eq)
 
 ///|
 pub fn OpenFlags::default() -> OpenFlags {
@@ -385,7 +385,7 @@ pub(all) struct MetadataHashValue {
 ///| A descriptor is a reference to a filesystem object, which may be a file,
 /// directory, named pipe, special file, or other object on which filesystem
 /// calls may be made.
-pub(all) type Descriptor Int derive(Show, Eq)
+pub(all) struct Descriptor(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn Descriptor::drop(self : Descriptor) -> Unit {
@@ -394,7 +394,7 @@ pub fn Descriptor::drop(self : Descriptor) -> Unit {
 }
 
 ///| A stream of directory entries.
-pub(all) type DirectoryEntryStream Int derive(Show, Eq)
+pub(all) struct DirectoryEntryStream(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn DirectoryEntryStream::drop(self : DirectoryEntryStream) -> Unit {

@@ -6,7 +6,7 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/redis"
 // Errors
 
 // Types and methods
-pub(all) type Connection Int
+pub(all) struct Connection(Int)
 fn Connection::del(Self, Array[String]) -> Result[UInt, Error_]
 fn Connection::drop(Self) -> Unit
 fn Connection::execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]

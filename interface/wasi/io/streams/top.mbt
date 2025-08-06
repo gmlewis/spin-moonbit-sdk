@@ -14,7 +14,7 @@ pub(all) enum StreamError {
 /// available, which could even be zero. To wait for data to be available,
 /// use the `subscribe` function to obtain a `pollable` which can be polled
 /// for using `wasi:io/poll`.
-pub(all) type InputStream Int derive(Show, Eq)
+pub(all) struct InputStream(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn InputStream::drop(self : InputStream) -> Unit {
@@ -30,7 +30,7 @@ pub fn InputStream::drop(self : InputStream) -> Unit {
 /// promptly, which could even be zero. To wait for the stream to be ready to
 /// accept data, the `subscribe` function to obtain a `pollable` which can be
 /// polled for using `wasi:io/poll`.
-pub(all) type OutputStream Int derive(Show, Eq)
+pub(all) struct OutputStream(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn OutputStream::drop(self : OutputStream) -> Unit {

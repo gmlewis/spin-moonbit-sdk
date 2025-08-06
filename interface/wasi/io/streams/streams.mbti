@@ -11,7 +11,7 @@ import(
 // Errors
 
 // Types and methods
-pub(all) type InputStream Int
+pub(all) struct InputStream(Int)
 fn InputStream::blocking_read(Self, UInt64) -> Result[FixedArray[Byte], StreamError]
 fn InputStream::blocking_skip(Self, UInt64) -> Result[UInt64, StreamError]
 fn InputStream::drop(Self) -> Unit
@@ -22,7 +22,7 @@ fn InputStream::subscribe(Self) -> @poll.Pollable
 impl Eq for InputStream
 impl Show for InputStream
 
-pub(all) type OutputStream Int
+pub(all) struct OutputStream(Int)
 fn OutputStream::blocking_flush(Self) -> Result[Unit, StreamError]
 fn OutputStream::blocking_splice(Self, InputStream, UInt64) -> Result[UInt64, StreamError]
 fn OutputStream::blocking_write_and_flush(Self, FixedArray[Byte]) -> Result[Unit, StreamError]

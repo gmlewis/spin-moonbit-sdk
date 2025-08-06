@@ -3,7 +3,7 @@
 ///| An opaque resource that represents access to (a subset of) the network.
 /// This enables context-based security for networking.
 /// There is no need for this to map 1:1 to a physical network interface.
-pub(all) type Network Int derive(Show, Eq)
+pub(all) struct Network(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn Network::drop(self : Network) -> Unit {

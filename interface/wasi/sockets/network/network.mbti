@@ -73,7 +73,7 @@ pub(all) struct Ipv6SocketAddress {
 impl Eq for Ipv6SocketAddress
 impl Show for Ipv6SocketAddress
 
-pub(all) type Network Int
+pub(all) struct Network(Int)
 fn Network::drop(Self) -> Unit
 fn Network::inner(Self) -> Int
 impl Eq for Network

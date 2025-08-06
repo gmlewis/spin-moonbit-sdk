@@ -9,7 +9,7 @@ pub(all) enum Error_ {
 } derive(Show, Eq)
 
 ///|
-pub(all) type Connection Int derive(Show, Eq)
+pub(all) struct Connection(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn Connection::drop(self : Connection) -> Unit {

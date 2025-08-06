@@ -7,7 +7,7 @@ fn poll(Array[Pollable]) -> FixedArray[UInt]
 // Errors
 
 // Types and methods
-pub(all) type Pollable Int
+pub(all) struct Pollable(Int)
 fn Pollable::block(Self) -> Unit
 fn Pollable::drop(Self) -> Unit
 fn Pollable::inner(Self) -> Int

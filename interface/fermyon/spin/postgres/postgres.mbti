@@ -10,7 +10,7 @@ import(
 // Errors
 
 // Types and methods
-pub(all) type Connection Int
+pub(all) struct Connection(Int)
 fn Connection::drop(Self) -> Unit
 fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[UInt64, @rdbmsTypes.Error_]
 fn Connection::inner(Self) -> Int

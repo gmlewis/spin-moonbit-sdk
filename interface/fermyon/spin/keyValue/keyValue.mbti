@@ -15,7 +15,7 @@ pub(all) enum Error_ {
 impl Eq for Error_
 impl Show for Error_
 
-pub(all) type Store Int
+pub(all) struct Store(Int)
 fn Store::delete(Self, String) -> Result[Unit, Error_]
 fn Store::drop(Self) -> Unit
 fn Store::exists(Self, String) -> Result[Bool, Error_]

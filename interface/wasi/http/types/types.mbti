@@ -71,7 +71,7 @@ pub(all) struct FieldSizePayload {
 impl Eq for FieldSizePayload
 impl Show for FieldSizePayload
 
-pub(all) type Fields Int
+pub(all) struct Fields(Int)
 fn Fields::append(Self, String, FixedArray[Byte]) -> Result[Unit, HeaderError]
 fn Fields::clone(Self) -> Self
 fn Fields::delete(Self, String) -> Result[Unit, HeaderError]
@@ -86,7 +86,7 @@ fn Fields::set(Self, String, Array[FixedArray[Byte]]) -> Result[Unit, HeaderErro
 impl Eq for Fields
 impl Show for Fields
 
-pub(all) type FutureIncomingResponse Int
+pub(all) struct FutureIncomingResponse(Int)
 fn FutureIncomingResponse::drop(Self) -> Unit
 fn FutureIncomingResponse::get(Self) -> Result[Result[IncomingResponse, ErrorCode], Unit]?
 fn FutureIncomingResponse::inner(Self) -> Int
@@ -94,7 +94,7 @@ fn FutureIncomingResponse::subscribe(Self) -> @poll.Pollable
 impl Eq for FutureIncomingResponse
 impl Show for FutureIncomingResponse
 
-pub(all) type FutureTrailers Int
+pub(all) struct FutureTrailers(Int)
 fn FutureTrailers::drop(Self) -> Unit
 fn FutureTrailers::get(Self) -> Result[Result[Fields?, ErrorCode], Unit]?
 fn FutureTrailers::inner(Self) -> Int
@@ -110,7 +110,7 @@ pub(all) enum HeaderError {
 impl Eq for HeaderError
 impl Show for HeaderError
 
-pub(all) type IncomingBody Int
+pub(all) struct IncomingBody(Int)
 fn IncomingBody::drop(Self) -> Unit
 fn IncomingBody::finish(Self) -> FutureTrailers
 fn IncomingBody::inner(Self) -> Int
@@ -118,7 +118,7 @@ fn IncomingBody::stream(Self) -> Result[@streams.InputStream, Unit]
 impl Eq for IncomingBody
 impl Show for IncomingBody
 
-pub(all) type IncomingRequest Int
+pub(all) struct IncomingRequest(Int)
 fn IncomingRequest::authority(Self) -> String?
 fn IncomingRequest::consume(Self) -> Result[IncomingBody, Unit]
 fn IncomingRequest::drop(Self) -> Unit
@@ -130,7 +130,7 @@ fn IncomingRequest::scheme(Self) -> Scheme?
 impl Eq for IncomingRequest
 impl Show for IncomingRequest
 
-pub(all) type IncomingResponse Int
+pub(all) struct IncomingResponse(Int)
 fn IncomingResponse::consume(Self) -> Result[IncomingBody, Unit]
 fn IncomingResponse::drop(Self) -> Unit
 fn IncomingResponse::headers(Self) -> Fields
@@ -154,7 +154,7 @@ pub(all) enum Method {
 impl Eq for Method
 impl Show for Method
 
-pub(all) type OutgoingBody Int
+pub(all) struct OutgoingBody(Int)
 fn OutgoingBody::drop(Self) -> Unit
 fn OutgoingBody::finish(Self, Fields?) -> Result[Unit, ErrorCode]
 fn OutgoingBody::inner(Self) -> Int
@@ -162,7 +162,7 @@ fn OutgoingBody::write(Self) -> Result[@streams.OutputStream, Unit]
 impl Eq for OutgoingBody
 impl Show for OutgoingBody
 
-pub(all) type OutgoingRequest Int
+pub(all) struct OutgoingRequest(Int)
 fn OutgoingRequest::authority(Self) -> String?
 fn OutgoingRequest::body(Self) -> Result[OutgoingBody, Unit]
 fn OutgoingRequest::drop(Self) -> Unit
@@ -179,7 +179,7 @@ fn OutgoingRequest::set_scheme(Self, Scheme?) -> Result[Unit, Unit]
 impl Eq for OutgoingRequest
 impl Show for OutgoingRequest
 
-pub(all) type OutgoingResponse Int
+pub(all) struct OutgoingResponse(Int)
 fn OutgoingResponse::body(Self) -> Result[OutgoingBody, Unit]
 fn OutgoingResponse::drop(Self) -> Unit
 fn OutgoingResponse::headers(Self) -> Fields
@@ -190,7 +190,7 @@ fn OutgoingResponse::status_code(Self) -> UInt
 impl Eq for OutgoingResponse
 impl Show for OutgoingResponse
 
-pub(all) type RequestOptions Int
+pub(all) struct RequestOptions(Int)
 fn RequestOptions::between_bytes_timeout(Self) -> UInt64?
 fn RequestOptions::connect_timeout(Self) -> UInt64?
 fn RequestOptions::drop(Self) -> Unit
@@ -203,7 +203,7 @@ fn RequestOptions::set_first_byte_timeout(Self, UInt64?) -> Result[Unit, Unit]
 impl Eq for RequestOptions
 impl Show for RequestOptions
 
-pub(all) type ResponseOutparam Int
+pub(all) struct ResponseOutparam(Int)
 fn ResponseOutparam::drop(Self) -> Unit
 fn ResponseOutparam::inner(Self) -> Int
 fn ResponseOutparam::set(Self, Result[OutgoingResponse, ErrorCode]) -> Unit

@@ -26,7 +26,7 @@ fn Advice::ordinal(Self) -> Int
 impl Eq for Advice
 impl Show for Advice
 
-pub(all) type Descriptor Int
+pub(all) struct Descriptor(Int)
 fn Descriptor::advise(Self, UInt64, UInt64, Advice) -> Result[Unit, ErrorCode]
 fn Descriptor::append_via_stream(Self) -> Result[@streams.OutputStream, ErrorCode]
 fn Descriptor::create_directory_at(Self, String) -> Result[Unit, ErrorCode]
@@ -59,7 +59,7 @@ fn Descriptor::write_via_stream(Self, UInt64) -> Result[@streams.OutputStream, E
 impl Eq for Descriptor
 impl Show for Descriptor
 
-pub(all) type DescriptorFlags Byte
+pub(all) struct DescriptorFlags(Byte)
 fn DescriptorFlags::default() -> Self
 fn DescriptorFlags::inner(Self) -> Byte
 fn DescriptorFlags::is_set(Self, DescriptorFlagsFlag) -> Bool
@@ -110,7 +110,7 @@ pub(all) struct DirectoryEntry {
 impl Eq for DirectoryEntry
 impl Show for DirectoryEntry
 
-pub(all) type DirectoryEntryStream Int
+pub(all) struct DirectoryEntryStream(Int)
 fn DirectoryEntryStream::drop(Self) -> Unit
 fn DirectoryEntryStream::inner(Self) -> Int
 fn DirectoryEntryStream::read_directory_entry(Self) -> Result[DirectoryEntry?, ErrorCode]
@@ -176,7 +176,7 @@ pub(all) enum NewTimestamp {
 impl Eq for NewTimestamp
 impl Show for NewTimestamp
 
-pub(all) type OpenFlags Byte
+pub(all) struct OpenFlags(Byte)
 fn OpenFlags::default() -> Self
 fn OpenFlags::inner(Self) -> Byte
 fn OpenFlags::is_set(Self, OpenFlagsFlag) -> Bool
@@ -192,7 +192,7 @@ pub(all) enum OpenFlagsFlag {
   TRUNCATE
 }
 
-pub(all) type PathFlags Byte
+pub(all) struct PathFlags(Byte)
 fn PathFlags::default() -> Self
 fn PathFlags::inner(Self) -> Byte
 fn PathFlags::is_set(Self, PathFlagsFlag) -> Bool

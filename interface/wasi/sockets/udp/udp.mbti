@@ -18,7 +18,7 @@ pub(all) struct IncomingDatagram {
 impl Eq for IncomingDatagram
 impl Show for IncomingDatagram
 
-pub(all) type IncomingDatagramStream Int
+pub(all) struct IncomingDatagramStream(Int)
 fn IncomingDatagramStream::drop(Self) -> Unit
 fn IncomingDatagramStream::inner(Self) -> Int
 fn IncomingDatagramStream::receive(Self, UInt64) -> Result[Array[IncomingDatagram], @network.ErrorCode]
@@ -33,7 +33,7 @@ pub(all) struct OutgoingDatagram {
 impl Eq for OutgoingDatagram
 impl Show for OutgoingDatagram
 
-pub(all) type OutgoingDatagramStream Int
+pub(all) struct OutgoingDatagramStream(Int)
 fn OutgoingDatagramStream::check_send(Self) -> Result[UInt64, @network.ErrorCode]
 fn OutgoingDatagramStream::drop(Self) -> Unit
 fn OutgoingDatagramStream::inner(Self) -> Int
@@ -42,7 +42,7 @@ fn OutgoingDatagramStream::subscribe(Self) -> @poll.Pollable
 impl Eq for OutgoingDatagramStream
 impl Show for OutgoingDatagramStream
 
-pub(all) type UdpSocket Int
+pub(all) struct UdpSocket(Int)
 fn UdpSocket::address_family(Self) -> @network.IpAddressFamily
 fn UdpSocket::drop(Self) -> Unit
 fn UdpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]

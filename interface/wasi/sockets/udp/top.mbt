@@ -13,7 +13,7 @@ pub(all) struct OutgoingDatagram {
 } derive(Show, Eq)
 
 ///| A UDP socket handle.
-pub(all) type UdpSocket Int derive(Show, Eq)
+pub(all) struct UdpSocket(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn UdpSocket::drop(self : UdpSocket) -> Unit {
@@ -22,7 +22,7 @@ pub fn UdpSocket::drop(self : UdpSocket) -> Unit {
 }
 
 ///|
-pub(all) type IncomingDatagramStream Int derive(Show, Eq)
+pub(all) struct IncomingDatagramStream(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn IncomingDatagramStream::drop(self : IncomingDatagramStream) -> Unit {
@@ -31,7 +31,7 @@ pub fn IncomingDatagramStream::drop(self : IncomingDatagramStream) -> Unit {
 }
 
 ///|
-pub(all) type OutgoingDatagramStream Int derive(Show, Eq)
+pub(all) struct OutgoingDatagramStream(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn OutgoingDatagramStream::drop(self : OutgoingDatagramStream) -> Unit {

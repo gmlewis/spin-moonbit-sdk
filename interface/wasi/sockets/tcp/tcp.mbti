@@ -22,7 +22,7 @@ fn ShutdownType::ordinal(Self) -> Int
 impl Eq for ShutdownType
 impl Show for ShutdownType
 
-pub(all) type TcpSocket Int
+pub(all) struct TcpSocket(Int)
 fn TcpSocket::accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 fn TcpSocket::address_family(Self) -> @network.IpAddressFamily
 fn TcpSocket::drop(Self) -> Unit

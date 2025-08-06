@@ -6,7 +6,7 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/sqlite"
 // Errors
 
 // Types and methods
-pub(all) type Connection Int
+pub(all) struct Connection(Int)
 fn Connection::drop(Self) -> Unit
 fn Connection::execute(Self, String, Array[Value]) -> Result[QueryResult, Error_]
 fn Connection::inner(Self) -> Int

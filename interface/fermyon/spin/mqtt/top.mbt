@@ -35,7 +35,7 @@ pub fn Qos::from(self : Int) -> Qos {
 }
 
 ///|
-pub(all) type Connection Int derive(Show, Eq)
+pub(all) struct Connection(Int) derive(Show, Eq)
 
 ///| Drops a resource handle.
 pub fn Connection::drop(self : Connection) -> Unit {
