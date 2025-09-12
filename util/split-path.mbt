@@ -16,12 +16,8 @@ fn split_method_and_path(
       if s.length() > 1 {
         // s.substring(start=1).split("/").collect()
         // Is this map really necessary?!?
-        s
-        .substring(start=1)
-        .trim_end("/")
-        .split("/")
-        .map(@string.View::to_string)
-        .collect()
+        let s = s.unsafe_substring(start=1, end=s.length())
+        s.trim_end("/").split("/").map(@string.View::to_string).collect()
       } else {
         []
       }

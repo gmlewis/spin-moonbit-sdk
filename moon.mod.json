@@ -1,6 +1,6 @@
 {
   "name": "gmlewis/spin-moonbit-sdk",
-  "version": "0.54.3",
+  "version": "0.54.4",
   "deps": {
     "gmlewis/base64": "0.14.13",
     "gmlewis/md5": "0.19.17",

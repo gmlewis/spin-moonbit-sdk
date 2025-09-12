@@ -11,13 +11,13 @@ pub fn new_request(
   req.set_method(method_).unwrap()
   let i = url.find("://")
   if i is Some(i) {
-    let scheme = match url.substring(end=i) {
+    let scheme = match url.unsafe_substring(start=0, end=i) {
       "http" => @types.Http
       "https" => @types.Https
       other => @types.Scheme::Other(other)
     }
     req.set_scheme(Some(scheme)).unwrap()
-    let without_scheme = url.substring(start=i + 3)
+    let without_scheme = url.unsafe_substring(start=i + 3, end=url.length())
     let parts = without_scheme.split("/").collect()
     match parts {
       [authority, .. remainder] => {
