@@ -14,6 +14,7 @@ fn resolve_addresses(@network.Network, String) -> Result[ResolveAddressStream, @
 // Types and methods
 pub(all) struct ResolveAddressStream(Int)
 fn ResolveAddressStream::drop(Self) -> Unit
+#deprecated
 fn ResolveAddressStream::inner(Self) -> Int
 fn ResolveAddressStream::resolve_next_address(Self) -> Result[@network.IpAddress?, @network.ErrorCode]
 fn ResolveAddressStream::subscribe(Self) -> @poll.Pollable

@@ -1,10 +1,10 @@
 {
   "name": "gmlewis/spin-moonbit-sdk",
-  "version": "0.54.4",
+  "version": "0.54.5",
   "deps": {
-    "gmlewis/base64": "0.14.13",
-    "gmlewis/md5": "0.19.17",
-    "gmlewis/sha256": "0.17.15"
+    "gmlewis/base64": "0.15.0",
+    "gmlewis/md5": "0.19.18",
+    "gmlewis/sha256": "0.17.16"
   },
   "readme": "README.md",
   "repository": "https://github.com/gmlewis/spin-moonbit-sdk",

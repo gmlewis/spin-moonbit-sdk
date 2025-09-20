@@ -8,6 +8,7 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/mqtt"
 // Types and methods
 pub(all) struct Connection(Int)
 fn Connection::drop(Self) -> Unit
+#deprecated
 fn Connection::inner(Self) -> Int
 fn Connection::open(String, String, String, UInt64) -> Result[Self, Error_]
 fn Connection::publish(Self, String, FixedArray[Byte], Qos) -> Result[Unit, Error_]

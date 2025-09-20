@@ -30,6 +30,7 @@ fn TcpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
 fn TcpSocket::finish_connect(Self) -> Result[(@streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 fn TcpSocket::finish_listen(Self) -> Result[Unit, @network.ErrorCode]
 fn TcpSocket::hop_limit(Self) -> Result[Byte, @network.ErrorCode]
+#deprecated
 fn TcpSocket::inner(Self) -> Int
 fn TcpSocket::is_listening(Self) -> Bool
 fn TcpSocket::keep_alive_count(Self) -> Result[UInt, @network.ErrorCode]

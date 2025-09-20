@@ -13,6 +13,7 @@ import(
 pub(all) struct Connection(Int)
 fn Connection::drop(Self) -> Unit
 fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[UInt64, @rdbmsTypes.Error_]
+#deprecated
 fn Connection::inner(Self) -> Int
 fn Connection::open(String) -> Result[Self, @rdbmsTypes.Error_]
 fn Connection::query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]

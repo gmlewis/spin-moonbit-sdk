@@ -33,6 +33,7 @@ fn Descriptor::create_directory_at(Self, String) -> Result[Unit, ErrorCode]
 fn Descriptor::drop(Self) -> Unit
 fn Descriptor::get_flags(Self) -> Result[DescriptorFlags, ErrorCode]
 fn Descriptor::get_type(Self) -> Result[DescriptorType, ErrorCode]
+#deprecated
 fn Descriptor::inner(Self) -> Int
 fn Descriptor::is_same_object(Self, Self) -> Bool
 fn Descriptor::link_at(Self, PathFlags, String, Self, String) -> Result[Unit, ErrorCode]
@@ -61,6 +62,7 @@ impl Show for Descriptor
 
 pub(all) struct DescriptorFlags(Byte)
 fn DescriptorFlags::default() -> Self
+#deprecated
 fn DescriptorFlags::inner(Self) -> Byte
 fn DescriptorFlags::is_set(Self, DescriptorFlagsFlag) -> Bool
 fn DescriptorFlags::set(Self, DescriptorFlagsFlag) -> Self
@@ -112,6 +114,7 @@ impl Show for DirectoryEntry
 
 pub(all) struct DirectoryEntryStream(Int)
 fn DirectoryEntryStream::drop(Self) -> Unit
+#deprecated
 fn DirectoryEntryStream::inner(Self) -> Int
 fn DirectoryEntryStream::read_directory_entry(Self) -> Result[DirectoryEntry?, ErrorCode]
 impl Eq for DirectoryEntryStream
@@ -178,6 +181,7 @@ impl Show for NewTimestamp
 
 pub(all) struct OpenFlags(Byte)
 fn OpenFlags::default() -> Self
+#deprecated
 fn OpenFlags::inner(Self) -> Byte
 fn OpenFlags::is_set(Self, OpenFlagsFlag) -> Bool
 fn OpenFlags::set(Self, OpenFlagsFlag) -> Self
@@ -194,6 +198,7 @@ pub(all) enum OpenFlagsFlag {
 
 pub(all) struct PathFlags(Byte)
 fn PathFlags::default() -> Self
+#deprecated
 fn PathFlags::inner(Self) -> Byte
 fn PathFlags::is_set(Self, PathFlagsFlag) -> Bool
 fn PathFlags::set(Self, PathFlagsFlag) -> Self

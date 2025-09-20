@@ -75,6 +75,7 @@ impl Show for Ipv6SocketAddress
 
 pub(all) struct Network(Int)
 fn Network::drop(Self) -> Unit
+#deprecated
 fn Network::inner(Self) -> Int
 impl Eq for Network
 impl Show for Network

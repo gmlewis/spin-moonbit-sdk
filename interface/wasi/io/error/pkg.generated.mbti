@@ -8,6 +8,7 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/io/error"
 // Types and methods
 pub(all) struct Error_(Int)
 fn Error_::drop(Self) -> Unit
+#deprecated
 fn Error_::inner(Self) -> Int
 fn Error_::to_debug_string(Self) -> String
 impl Eq for Error_

@@ -21,6 +21,7 @@ fn Store::drop(Self) -> Unit
 fn Store::exists(Self, String) -> Result[Bool, Error_]
 fn Store::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
 fn Store::get_keys(Self) -> Result[Array[String], Error_]
+#deprecated
 fn Store::inner(Self) -> Int
 fn Store::open(String) -> Result[Self, Error_]
 fn Store::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
