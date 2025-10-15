@@ -10,6 +10,11 @@ pub(all) struct Column {
   name : String
   data_type : DbDataType
 }
+fn Column::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn Column::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn Column::output(Self, &Logger) -> Unit // from trait `Show`
+fn Column::to_string(Self) -> String // from trait `Show`
 impl Eq for Column
 impl Show for Column
 
@@ -29,8 +34,13 @@ pub(all) enum DbDataType {
   BINARY
   OTHER
 }
+fn DbDataType::equal(Self, Self) -> Bool // from trait `Eq`
 fn DbDataType::from(Int) -> Self
+#deprecated
+fn DbDataType::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn DbDataType::ordinal(Self) -> Int
+fn DbDataType::output(Self, &Logger) -> Unit // from trait `Show`
+fn DbDataType::to_string(Self) -> String // from trait `Show`
 impl Eq for DbDataType
 impl Show for DbDataType
 
@@ -51,6 +61,11 @@ pub(all) enum DbValue {
   DbNull
   Unsupported
 }
+fn DbValue::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn DbValue::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn DbValue::output(Self, &Logger) -> Unit // from trait `Show`
+fn DbValue::to_string(Self) -> String // from trait `Show`
 impl Eq for DbValue
 impl Show for DbValue
 
@@ -61,6 +76,11 @@ pub(all) enum Error_ {
   ValueConversionFailed(String)
   Other(String)
 }
+fn Error_::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn Error_::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn Error_::output(Self, &Logger) -> Unit // from trait `Show`
+fn Error_::to_string(Self) -> String // from trait `Show`
 impl Eq for Error_
 impl Show for Error_
 
@@ -80,6 +100,11 @@ pub(all) enum ParameterValue {
   Binary(FixedArray[Byte])
   DbNull
 }
+fn ParameterValue::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn ParameterValue::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn ParameterValue::output(Self, &Logger) -> Unit // from trait `Show`
+fn ParameterValue::to_string(Self) -> String // from trait `Show`
 impl Eq for ParameterValue
 impl Show for ParameterValue
 
@@ -87,6 +112,11 @@ pub(all) struct RowSet {
   columns : Array[Column]
   rows : Array[Array[DbValue]]
 }
+fn RowSet::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn RowSet::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn RowSet::output(Self, &Logger) -> Unit // from trait `Show`
+fn RowSet::to_string(Self) -> String // from trait `Show`
 impl Eq for RowSet
 impl Show for RowSet
 

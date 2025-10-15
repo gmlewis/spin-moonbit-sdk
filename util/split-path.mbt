@@ -17,7 +17,7 @@ fn split_method_and_path(
         // s.substring(start=1).split("/").collect()
         // Is this map really necessary?!?
         let s = s.unsafe_substring(start=1, end=s.length())
-        s.trim_end("/").split("/").map(@string.View::to_string).collect()
+        s.trim_end(char_set="/").split("/").map(StringView::to_string).collect()
       } else {
         []
       }

@@ -9,17 +9,22 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/redis"
 pub(all) struct Connection(Int)
 fn Connection::del(Self, Array[String]) -> Result[UInt, Error_]
 fn Connection::drop(Self) -> Unit
+fn Connection::equal(Self, Self) -> Bool // from trait `Eq`
 fn Connection::execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]
 fn Connection::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
 fn Connection::incr(Self, String) -> Result[Int64, Error_]
 #deprecated
 fn Connection::inner(Self) -> Int
+#deprecated
+fn Connection::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Connection::open(String) -> Result[Self, Error_]
+fn Connection::output(Self, &Logger) -> Unit // from trait `Show`
 fn Connection::publish(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
 fn Connection::sadd(Self, String, Array[String]) -> Result[UInt, Error_]
 fn Connection::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
 fn Connection::smembers(Self, String) -> Result[Array[String], Error_]
 fn Connection::srem(Self, String, Array[String]) -> Result[UInt, Error_]
+fn Connection::to_string(Self) -> String // from trait `Show`
 impl Eq for Connection
 impl Show for Connection
 
@@ -29,6 +34,11 @@ pub(all) enum Error_ {
   TypeError
   Other(String)
 }
+fn Error_::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn Error_::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn Error_::output(Self, &Logger) -> Unit // from trait `Show`
+fn Error_::to_string(Self) -> String // from trait `Show`
 impl Eq for Error_
 impl Show for Error_
 
@@ -36,6 +46,11 @@ pub(all) enum RedisParameter {
   Int64(Int64)
   Binary(FixedArray[Byte])
 }
+fn RedisParameter::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn RedisParameter::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn RedisParameter::output(Self, &Logger) -> Unit // from trait `Show`
+fn RedisParameter::to_string(Self) -> String // from trait `Show`
 impl Eq for RedisParameter
 impl Show for RedisParameter
 
@@ -45,6 +60,11 @@ pub(all) enum RedisResult {
   Int64(Int64)
   Binary(FixedArray[Byte])
 }
+fn RedisResult::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn RedisResult::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn RedisResult::output(Self, &Logger) -> Unit // from trait `Show`
+fn RedisResult::to_string(Self) -> String // from trait `Show`
 impl Eq for RedisResult
 impl Show for RedisResult
 

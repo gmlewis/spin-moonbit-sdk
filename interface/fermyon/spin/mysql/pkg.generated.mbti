@@ -12,11 +12,16 @@ import(
 // Types and methods
 pub(all) struct Connection(Int)
 fn Connection::drop(Self) -> Unit
+fn Connection::equal(Self, Self) -> Bool // from trait `Eq`
 fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[Unit, @rdbmsTypes.Error_]
 #deprecated
 fn Connection::inner(Self) -> Int
+#deprecated
+fn Connection::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Connection::open(String) -> Result[Self, @rdbmsTypes.Error_]
+fn Connection::output(Self, &Logger) -> Unit // from trait `Show`
 fn Connection::query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]
+fn Connection::to_string(Self) -> String // from trait `Show`
 impl Eq for Connection
 impl Show for Connection
 

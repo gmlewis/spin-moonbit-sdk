@@ -15,15 +15,25 @@ pub(all) struct IncomingDatagram {
   data : FixedArray[Byte]
   remote_address : @network.IpSocketAddress
 }
+fn IncomingDatagram::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn IncomingDatagram::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn IncomingDatagram::output(Self, &Logger) -> Unit // from trait `Show`
+fn IncomingDatagram::to_string(Self) -> String // from trait `Show`
 impl Eq for IncomingDatagram
 impl Show for IncomingDatagram
 
 pub(all) struct IncomingDatagramStream(Int)
 fn IncomingDatagramStream::drop(Self) -> Unit
+fn IncomingDatagramStream::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn IncomingDatagramStream::inner(Self) -> Int
+#deprecated
+fn IncomingDatagramStream::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn IncomingDatagramStream::output(Self, &Logger) -> Unit // from trait `Show`
 fn IncomingDatagramStream::receive(Self, UInt64) -> Result[Array[IncomingDatagram], @network.ErrorCode]
 fn IncomingDatagramStream::subscribe(Self) -> @poll.Pollable
+fn IncomingDatagramStream::to_string(Self) -> String // from trait `Show`
 impl Eq for IncomingDatagramStream
 impl Show for IncomingDatagramStream
 
@@ -31,26 +41,40 @@ pub(all) struct OutgoingDatagram {
   data : FixedArray[Byte]
   remote_address : @network.IpSocketAddress?
 }
+fn OutgoingDatagram::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn OutgoingDatagram::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn OutgoingDatagram::output(Self, &Logger) -> Unit // from trait `Show`
+fn OutgoingDatagram::to_string(Self) -> String // from trait `Show`
 impl Eq for OutgoingDatagram
 impl Show for OutgoingDatagram
 
 pub(all) struct OutgoingDatagramStream(Int)
 fn OutgoingDatagramStream::check_send(Self) -> Result[UInt64, @network.ErrorCode]
 fn OutgoingDatagramStream::drop(Self) -> Unit
+fn OutgoingDatagramStream::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn OutgoingDatagramStream::inner(Self) -> Int
+#deprecated
+fn OutgoingDatagramStream::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn OutgoingDatagramStream::output(Self, &Logger) -> Unit // from trait `Show`
 fn OutgoingDatagramStream::send(Self, Array[OutgoingDatagram]) -> Result[UInt64, @network.ErrorCode]
 fn OutgoingDatagramStream::subscribe(Self) -> @poll.Pollable
+fn OutgoingDatagramStream::to_string(Self) -> String // from trait `Show`
 impl Eq for OutgoingDatagramStream
 impl Show for OutgoingDatagramStream
 
 pub(all) struct UdpSocket(Int)
 fn UdpSocket::address_family(Self) -> @network.IpAddressFamily
 fn UdpSocket::drop(Self) -> Unit
+fn UdpSocket::equal(Self, Self) -> Bool // from trait `Eq`
 fn UdpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
 #deprecated
 fn UdpSocket::inner(Self) -> Int
 fn UdpSocket::local_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
+#deprecated
+fn UdpSocket::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn UdpSocket::output(Self, &Logger) -> Unit // from trait `Show`
 fn UdpSocket::receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
 fn UdpSocket::remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
 fn UdpSocket::send_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
@@ -60,6 +84,7 @@ fn UdpSocket::set_unicast_hop_limit(Self, Byte) -> Result[Unit, @network.ErrorCo
 fn UdpSocket::start_bind(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
 fn UdpSocket::stream(Self, @network.IpSocketAddress?) -> Result[(IncomingDatagramStream, OutgoingDatagramStream), @network.ErrorCode]
 fn UdpSocket::subscribe(Self) -> @poll.Pollable
+fn UdpSocket::to_string(Self) -> String // from trait `Show`
 fn UdpSocket::unicast_hop_limit(Self) -> Result[Byte, @network.ErrorCode]
 impl Eq for UdpSocket
 impl Show for UdpSocket
