@@ -29,13 +29,8 @@ pub(all) enum ErrorCode {
   TEMPORARY_RESOLVER_FAILURE
   PERMANENT_RESOLVER_FAILURE
 }
-fn ErrorCode::equal(Self, Self) -> Bool // from trait `Eq`
 fn ErrorCode::from(Int) -> Self
-#deprecated
-fn ErrorCode::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn ErrorCode::ordinal(Self) -> Int
-fn ErrorCode::output(Self, &Logger) -> Unit // from trait `Show`
-fn ErrorCode::to_string(Self) -> String // from trait `Show`
 impl Eq for ErrorCode
 impl Show for ErrorCode
 
@@ -43,11 +38,6 @@ pub(all) enum IpAddress {
   Ipv4((Byte, Byte, Byte, Byte))
   Ipv6((UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt))
 }
-fn IpAddress::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn IpAddress::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn IpAddress::output(Self, &Logger) -> Unit // from trait `Show`
-fn IpAddress::to_string(Self) -> String // from trait `Show`
 impl Eq for IpAddress
 impl Show for IpAddress
 
@@ -55,13 +45,8 @@ pub(all) enum IpAddressFamily {
   IPV4
   IPV6
 }
-fn IpAddressFamily::equal(Self, Self) -> Bool // from trait `Eq`
 fn IpAddressFamily::from(Int) -> Self
-#deprecated
-fn IpAddressFamily::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn IpAddressFamily::ordinal(Self) -> Int
-fn IpAddressFamily::output(Self, &Logger) -> Unit // from trait `Show`
-fn IpAddressFamily::to_string(Self) -> String // from trait `Show`
 impl Eq for IpAddressFamily
 impl Show for IpAddressFamily
 
@@ -69,11 +54,6 @@ pub(all) enum IpSocketAddress {
   Ipv4(Ipv4SocketAddress)
   Ipv6(Ipv6SocketAddress)
 }
-fn IpSocketAddress::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn IpSocketAddress::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn IpSocketAddress::output(Self, &Logger) -> Unit // from trait `Show`
-fn IpSocketAddress::to_string(Self) -> String // from trait `Show`
 impl Eq for IpSocketAddress
 impl Show for IpSocketAddress
 
@@ -81,11 +61,6 @@ pub(all) struct Ipv4SocketAddress {
   port : UInt
   address : (Byte, Byte, Byte, Byte)
 }
-fn Ipv4SocketAddress::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Ipv4SocketAddress::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Ipv4SocketAddress::output(Self, &Logger) -> Unit // from trait `Show`
-fn Ipv4SocketAddress::to_string(Self) -> String // from trait `Show`
 impl Eq for Ipv4SocketAddress
 impl Show for Ipv4SocketAddress
 
@@ -95,23 +70,13 @@ pub(all) struct Ipv6SocketAddress {
   address : (UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt)
   scope_id : UInt
 }
-fn Ipv6SocketAddress::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Ipv6SocketAddress::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Ipv6SocketAddress::output(Self, &Logger) -> Unit // from trait `Show`
-fn Ipv6SocketAddress::to_string(Self) -> String // from trait `Show`
 impl Eq for Ipv6SocketAddress
 impl Show for Ipv6SocketAddress
 
 pub(all) struct Network(Int)
 fn Network::drop(Self) -> Unit
-fn Network::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn Network::inner(Self) -> Int
-#deprecated
-fn Network::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Network::output(Self, &Logger) -> Unit // from trait `Show`
-fn Network::to_string(Self) -> String // from trait `Show`
 impl Eq for Network
 impl Show for Network
 

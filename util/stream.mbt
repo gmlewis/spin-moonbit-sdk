@@ -111,7 +111,7 @@ pub fn stream_func(
     match byte_func {
       Some(f) =>
         for b in buf {
-          f.inner()(b)
+          (f.0)(b)
         }
       _ => ()
     }

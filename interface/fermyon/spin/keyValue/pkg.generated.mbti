@@ -12,29 +12,19 @@ pub(all) enum Error_ {
   AccessDenied
   Other(String)
 }
-fn Error_::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Error_::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Error_::output(Self, &Logger) -> Unit // from trait `Show`
-fn Error_::to_string(Self) -> String // from trait `Show`
 impl Eq for Error_
 impl Show for Error_
 
 pub(all) struct Store(Int)
 fn Store::delete(Self, String) -> Result[Unit, Error_]
 fn Store::drop(Self) -> Unit
-fn Store::equal(Self, Self) -> Bool // from trait `Eq`
 fn Store::exists(Self, String) -> Result[Bool, Error_]
 fn Store::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
 fn Store::get_keys(Self) -> Result[Array[String], Error_]
 #deprecated
 fn Store::inner(Self) -> Int
-#deprecated
-fn Store::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Store::open(String) -> Result[Self, Error_]
-fn Store::output(Self, &Logger) -> Unit // from trait `Show`
 fn Store::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
-fn Store::to_string(Self) -> String // from trait `Show`
 impl Eq for Store
 impl Show for Store
 

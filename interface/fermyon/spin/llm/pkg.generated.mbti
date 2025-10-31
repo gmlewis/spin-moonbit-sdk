@@ -13,22 +13,12 @@ pub(all) struct EmbeddingsResult {
   embeddings : Array[FixedArray[Float]]
   usage : EmbeddingsUsage
 }
-fn EmbeddingsResult::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn EmbeddingsResult::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn EmbeddingsResult::output(Self, &Logger) -> Unit // from trait `Show`
-fn EmbeddingsResult::to_string(Self) -> String // from trait `Show`
 impl Eq for EmbeddingsResult
 impl Show for EmbeddingsResult
 
 pub(all) struct EmbeddingsUsage {
   prompt_token_count : UInt
 }
-fn EmbeddingsUsage::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn EmbeddingsUsage::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn EmbeddingsUsage::output(Self, &Logger) -> Unit // from trait `Show`
-fn EmbeddingsUsage::to_string(Self) -> String // from trait `Show`
 impl Eq for EmbeddingsUsage
 impl Show for EmbeddingsUsage
 
@@ -37,11 +27,6 @@ pub(all) enum Error_ {
   RuntimeError(String)
   InvalidInput(String)
 }
-fn Error_::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Error_::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Error_::output(Self, &Logger) -> Unit // from trait `Show`
-fn Error_::to_string(Self) -> String // from trait `Show`
 impl Eq for Error_
 impl Show for Error_
 
@@ -53,11 +38,6 @@ pub(all) struct InferencingParams {
   top_k : UInt
   top_p : Float
 }
-fn InferencingParams::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn InferencingParams::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn InferencingParams::output(Self, &Logger) -> Unit // from trait `Show`
-fn InferencingParams::to_string(Self) -> String // from trait `Show`
 impl Eq for InferencingParams
 impl Show for InferencingParams
 
@@ -65,11 +45,6 @@ pub(all) struct InferencingResult {
   text : String
   usage : InferencingUsage
 }
-fn InferencingResult::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn InferencingResult::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn InferencingResult::output(Self, &Logger) -> Unit // from trait `Show`
-fn InferencingResult::to_string(Self) -> String // from trait `Show`
 impl Eq for InferencingResult
 impl Show for InferencingResult
 
@@ -77,11 +52,6 @@ pub(all) struct InferencingUsage {
   prompt_token_count : UInt
   generated_token_count : UInt
 }
-fn InferencingUsage::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn InferencingUsage::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn InferencingUsage::output(Self, &Logger) -> Unit // from trait `Show`
-fn InferencingUsage::to_string(Self) -> String // from trait `Show`
 impl Eq for InferencingUsage
 impl Show for InferencingUsage
 

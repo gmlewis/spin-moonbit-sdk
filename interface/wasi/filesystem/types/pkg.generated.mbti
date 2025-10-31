@@ -21,13 +21,8 @@ pub(all) enum Advice {
   DONT_NEED
   NO_REUSE
 }
-fn Advice::equal(Self, Self) -> Bool // from trait `Eq`
 fn Advice::from(Int) -> Self
-#deprecated
-fn Advice::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Advice::ordinal(Self) -> Int
-fn Advice::output(Self, &Logger) -> Unit // from trait `Show`
-fn Advice::to_string(Self) -> String // from trait `Show`
 impl Eq for Advice
 impl Show for Advice
 
@@ -36,7 +31,6 @@ fn Descriptor::advise(Self, UInt64, UInt64, Advice) -> Result[Unit, ErrorCode]
 fn Descriptor::append_via_stream(Self) -> Result[@streams.OutputStream, ErrorCode]
 fn Descriptor::create_directory_at(Self, String) -> Result[Unit, ErrorCode]
 fn Descriptor::drop(Self) -> Unit
-fn Descriptor::equal(Self, Self) -> Bool // from trait `Eq`
 fn Descriptor::get_flags(Self) -> Result[DescriptorFlags, ErrorCode]
 fn Descriptor::get_type(Self) -> Result[DescriptorType, ErrorCode]
 #deprecated
@@ -45,10 +39,7 @@ fn Descriptor::is_same_object(Self, Self) -> Bool
 fn Descriptor::link_at(Self, PathFlags, String, Self, String) -> Result[Unit, ErrorCode]
 fn Descriptor::metadata_hash(Self) -> Result[MetadataHashValue, ErrorCode]
 fn Descriptor::metadata_hash_at(Self, PathFlags, String) -> Result[MetadataHashValue, ErrorCode]
-#deprecated
-fn Descriptor::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Descriptor::open_at(Self, PathFlags, String, OpenFlags, DescriptorFlags) -> Result[Self, ErrorCode]
-fn Descriptor::output(Self, &Logger) -> Unit // from trait `Show`
 fn Descriptor::read(Self, UInt64, UInt64) -> Result[(FixedArray[Byte], Bool), ErrorCode]
 fn Descriptor::read_directory(Self) -> Result[DirectoryEntryStream, ErrorCode]
 fn Descriptor::read_via_stream(Self, UInt64) -> Result[@streams.InputStream, ErrorCode]
@@ -63,7 +54,6 @@ fn Descriptor::stat_at(Self, PathFlags, String) -> Result[DescriptorStat, ErrorC
 fn Descriptor::symlink_at(Self, String, String) -> Result[Unit, ErrorCode]
 fn Descriptor::sync(Self) -> Result[Unit, ErrorCode]
 fn Descriptor::sync_data(Self) -> Result[Unit, ErrorCode]
-fn Descriptor::to_string(Self) -> String // from trait `Show`
 fn Descriptor::unlink_file_at(Self, String) -> Result[Unit, ErrorCode]
 fn Descriptor::write(Self, FixedArray[Byte], UInt64) -> Result[UInt64, ErrorCode]
 fn Descriptor::write_via_stream(Self, UInt64) -> Result[@streams.OutputStream, ErrorCode]
@@ -72,15 +62,10 @@ impl Show for Descriptor
 
 pub(all) struct DescriptorFlags(Byte)
 fn DescriptorFlags::default() -> Self
-fn DescriptorFlags::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn DescriptorFlags::inner(Self) -> Byte
 fn DescriptorFlags::is_set(Self, DescriptorFlagsFlag) -> Bool
-#deprecated
-fn DescriptorFlags::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn DescriptorFlags::output(Self, &Logger) -> Unit // from trait `Show`
 fn DescriptorFlags::set(Self, DescriptorFlagsFlag) -> Self
-fn DescriptorFlags::to_string(Self) -> String // from trait `Show`
 fn DescriptorFlags::unset(Self, DescriptorFlagsFlag) -> Self
 impl Eq for DescriptorFlags
 impl Show for DescriptorFlags
@@ -102,11 +87,6 @@ pub(all) struct DescriptorStat {
   data_modification_timestamp : @wallClock.Datetime?
   status_change_timestamp : @wallClock.Datetime?
 }
-fn DescriptorStat::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn DescriptorStat::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn DescriptorStat::output(Self, &Logger) -> Unit // from trait `Show`
-fn DescriptorStat::to_string(Self) -> String // from trait `Show`
 impl Eq for DescriptorStat
 impl Show for DescriptorStat
 
@@ -120,13 +100,8 @@ pub(all) enum DescriptorType {
   REGULAR_FILE
   SOCKET
 }
-fn DescriptorType::equal(Self, Self) -> Bool // from trait `Eq`
 fn DescriptorType::from(Int) -> Self
-#deprecated
-fn DescriptorType::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn DescriptorType::ordinal(Self) -> Int
-fn DescriptorType::output(Self, &Logger) -> Unit // from trait `Show`
-fn DescriptorType::to_string(Self) -> String // from trait `Show`
 impl Eq for DescriptorType
 impl Show for DescriptorType
 
@@ -134,24 +109,14 @@ pub(all) struct DirectoryEntry {
   type_ : DescriptorType
   name : String
 }
-fn DirectoryEntry::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn DirectoryEntry::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn DirectoryEntry::output(Self, &Logger) -> Unit // from trait `Show`
-fn DirectoryEntry::to_string(Self) -> String // from trait `Show`
 impl Eq for DirectoryEntry
 impl Show for DirectoryEntry
 
 pub(all) struct DirectoryEntryStream(Int)
 fn DirectoryEntryStream::drop(Self) -> Unit
-fn DirectoryEntryStream::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn DirectoryEntryStream::inner(Self) -> Int
-#deprecated
-fn DirectoryEntryStream::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn DirectoryEntryStream::output(Self, &Logger) -> Unit // from trait `Show`
 fn DirectoryEntryStream::read_directory_entry(Self) -> Result[DirectoryEntry?, ErrorCode]
-fn DirectoryEntryStream::to_string(Self) -> String // from trait `Show`
 impl Eq for DirectoryEntryStream
 impl Show for DirectoryEntryStream
 
@@ -194,13 +159,8 @@ pub(all) enum ErrorCode {
   TEXT_FILE_BUSY
   CROSS_DEVICE
 }
-fn ErrorCode::equal(Self, Self) -> Bool // from trait `Eq`
 fn ErrorCode::from(Int) -> Self
-#deprecated
-fn ErrorCode::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn ErrorCode::ordinal(Self) -> Int
-fn ErrorCode::output(Self, &Logger) -> Unit // from trait `Show`
-fn ErrorCode::to_string(Self) -> String // from trait `Show`
 impl Eq for ErrorCode
 impl Show for ErrorCode
 
@@ -208,11 +168,6 @@ pub(all) struct MetadataHashValue {
   lower : UInt64
   upper : UInt64
 }
-fn MetadataHashValue::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn MetadataHashValue::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn MetadataHashValue::output(Self, &Logger) -> Unit // from trait `Show`
-fn MetadataHashValue::to_string(Self) -> String // from trait `Show`
 impl Eq for MetadataHashValue
 impl Show for MetadataHashValue
 
@@ -221,25 +176,15 @@ pub(all) enum NewTimestamp {
   Now
   Timestamp(@wallClock.Datetime)
 }
-fn NewTimestamp::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn NewTimestamp::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn NewTimestamp::output(Self, &Logger) -> Unit // from trait `Show`
-fn NewTimestamp::to_string(Self) -> String // from trait `Show`
 impl Eq for NewTimestamp
 impl Show for NewTimestamp
 
 pub(all) struct OpenFlags(Byte)
 fn OpenFlags::default() -> Self
-fn OpenFlags::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn OpenFlags::inner(Self) -> Byte
 fn OpenFlags::is_set(Self, OpenFlagsFlag) -> Bool
-#deprecated
-fn OpenFlags::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn OpenFlags::output(Self, &Logger) -> Unit // from trait `Show`
 fn OpenFlags::set(Self, OpenFlagsFlag) -> Self
-fn OpenFlags::to_string(Self) -> String // from trait `Show`
 fn OpenFlags::unset(Self, OpenFlagsFlag) -> Self
 impl Eq for OpenFlags
 impl Show for OpenFlags
@@ -253,15 +198,10 @@ pub(all) enum OpenFlagsFlag {
 
 pub(all) struct PathFlags(Byte)
 fn PathFlags::default() -> Self
-fn PathFlags::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn PathFlags::inner(Self) -> Byte
 fn PathFlags::is_set(Self, PathFlagsFlag) -> Bool
-#deprecated
-fn PathFlags::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn PathFlags::output(Self, &Logger) -> Unit // from trait `Show`
 fn PathFlags::set(Self, PathFlagsFlag) -> Self
-fn PathFlags::to_string(Self) -> String // from trait `Show`
 fn PathFlags::unset(Self, PathFlagsFlag) -> Self
 impl Eq for PathFlags
 impl Show for PathFlags

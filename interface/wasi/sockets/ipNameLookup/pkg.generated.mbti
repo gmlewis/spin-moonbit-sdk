@@ -14,15 +14,10 @@ fn resolve_addresses(@network.Network, String) -> Result[ResolveAddressStream, @
 // Types and methods
 pub(all) struct ResolveAddressStream(Int)
 fn ResolveAddressStream::drop(Self) -> Unit
-fn ResolveAddressStream::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn ResolveAddressStream::inner(Self) -> Int
-#deprecated
-fn ResolveAddressStream::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn ResolveAddressStream::output(Self, &Logger) -> Unit // from trait `Show`
 fn ResolveAddressStream::resolve_next_address(Self) -> Result[@network.IpAddress?, @network.ErrorCode]
 fn ResolveAddressStream::subscribe(Self) -> @poll.Pollable
-fn ResolveAddressStream::to_string(Self) -> String // from trait `Show`
 impl Eq for ResolveAddressStream
 impl Show for ResolveAddressStream
 

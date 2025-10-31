@@ -17,11 +17,6 @@ pub(all) struct DnsErrorPayload {
   rcode : String?
   info_code : UInt?
 }
-fn DnsErrorPayload::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn DnsErrorPayload::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn DnsErrorPayload::output(Self, &Logger) -> Unit // from trait `Show`
-fn DnsErrorPayload::to_string(Self) -> String // from trait `Show`
 impl Eq for DnsErrorPayload
 impl Show for DnsErrorPayload
 
@@ -66,11 +61,6 @@ pub(all) enum ErrorCode {
   ConfigurationError
   InternalError(String?)
 }
-fn ErrorCode::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn ErrorCode::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn ErrorCode::output(Self, &Logger) -> Unit // from trait `Show`
-fn ErrorCode::to_string(Self) -> String // from trait `Show`
 impl Eq for ErrorCode
 impl Show for ErrorCode
 
@@ -78,11 +68,6 @@ pub(all) struct FieldSizePayload {
   field_name : String?
   field_size : UInt?
 }
-fn FieldSizePayload::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn FieldSizePayload::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn FieldSizePayload::output(Self, &Logger) -> Unit // from trait `Show`
-fn FieldSizePayload::to_string(Self) -> String // from trait `Show`
 impl Eq for FieldSizePayload
 impl Show for FieldSizePayload
 
@@ -92,46 +77,31 @@ fn Fields::clone(Self) -> Self
 fn Fields::delete(Self, String) -> Result[Unit, HeaderError]
 fn Fields::drop(Self) -> Unit
 fn Fields::entries(Self) -> Array[(String, FixedArray[Byte])]
-fn Fields::equal(Self, Self) -> Bool // from trait `Eq`
 fn Fields::fields() -> Self
 fn Fields::from_list(Array[(String, FixedArray[Byte])]) -> Result[Self, HeaderError]
 fn Fields::get(Self, String) -> Array[FixedArray[Byte]]
 fn Fields::has(Self, String) -> Bool
 #deprecated
 fn Fields::inner(Self) -> Int
-#deprecated
-fn Fields::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Fields::output(Self, &Logger) -> Unit // from trait `Show`
 fn Fields::set(Self, String, Array[FixedArray[Byte]]) -> Result[Unit, HeaderError]
-fn Fields::to_string(Self) -> String // from trait `Show`
 impl Eq for Fields
 impl Show for Fields
 
 pub(all) struct FutureIncomingResponse(Int)
 fn FutureIncomingResponse::drop(Self) -> Unit
-fn FutureIncomingResponse::equal(Self, Self) -> Bool // from trait `Eq`
 fn FutureIncomingResponse::get(Self) -> Result[Result[IncomingResponse, ErrorCode], Unit]?
 #deprecated
 fn FutureIncomingResponse::inner(Self) -> Int
-#deprecated
-fn FutureIncomingResponse::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn FutureIncomingResponse::output(Self, &Logger) -> Unit // from trait `Show`
 fn FutureIncomingResponse::subscribe(Self) -> @poll.Pollable
-fn FutureIncomingResponse::to_string(Self) -> String // from trait `Show`
 impl Eq for FutureIncomingResponse
 impl Show for FutureIncomingResponse
 
 pub(all) struct FutureTrailers(Int)
 fn FutureTrailers::drop(Self) -> Unit
-fn FutureTrailers::equal(Self, Self) -> Bool // from trait `Eq`
 fn FutureTrailers::get(Self) -> Result[Result[Fields?, ErrorCode], Unit]?
 #deprecated
 fn FutureTrailers::inner(Self) -> Int
-#deprecated
-fn FutureTrailers::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn FutureTrailers::output(Self, &Logger) -> Unit // from trait `Show`
 fn FutureTrailers::subscribe(Self) -> @poll.Pollable
-fn FutureTrailers::to_string(Self) -> String // from trait `Show`
 impl Eq for FutureTrailers
 impl Show for FutureTrailers
 
@@ -140,25 +110,15 @@ pub(all) enum HeaderError {
   Forbidden
   Immutable
 }
-fn HeaderError::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn HeaderError::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn HeaderError::output(Self, &Logger) -> Unit // from trait `Show`
-fn HeaderError::to_string(Self) -> String // from trait `Show`
 impl Eq for HeaderError
 impl Show for HeaderError
 
 pub(all) struct IncomingBody(Int)
 fn IncomingBody::drop(Self) -> Unit
-fn IncomingBody::equal(Self, Self) -> Bool // from trait `Eq`
 fn IncomingBody::finish(Self) -> FutureTrailers
 #deprecated
 fn IncomingBody::inner(Self) -> Int
-#deprecated
-fn IncomingBody::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn IncomingBody::output(Self, &Logger) -> Unit // from trait `Show`
 fn IncomingBody::stream(Self) -> Result[@streams.InputStream, Unit]
-fn IncomingBody::to_string(Self) -> String // from trait `Show`
 impl Eq for IncomingBody
 impl Show for IncomingBody
 
@@ -166,32 +126,22 @@ pub(all) struct IncomingRequest(Int)
 fn IncomingRequest::authority(Self) -> String?
 fn IncomingRequest::consume(Self) -> Result[IncomingBody, Unit]
 fn IncomingRequest::drop(Self) -> Unit
-fn IncomingRequest::equal(Self, Self) -> Bool // from trait `Eq`
 fn IncomingRequest::headers(Self) -> Fields
 #deprecated
 fn IncomingRequest::inner(Self) -> Int
 fn IncomingRequest::method_(Self) -> Method
-#deprecated
-fn IncomingRequest::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn IncomingRequest::output(Self, &Logger) -> Unit // from trait `Show`
 fn IncomingRequest::path_with_query(Self) -> String?
 fn IncomingRequest::scheme(Self) -> Scheme?
-fn IncomingRequest::to_string(Self) -> String // from trait `Show`
 impl Eq for IncomingRequest
 impl Show for IncomingRequest
 
 pub(all) struct IncomingResponse(Int)
 fn IncomingResponse::consume(Self) -> Result[IncomingBody, Unit]
 fn IncomingResponse::drop(Self) -> Unit
-fn IncomingResponse::equal(Self, Self) -> Bool // from trait `Eq`
 fn IncomingResponse::headers(Self) -> Fields
 #deprecated
 fn IncomingResponse::inner(Self) -> Int
-#deprecated
-fn IncomingResponse::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn IncomingResponse::output(Self, &Logger) -> Unit // from trait `Show`
 fn IncomingResponse::status(Self) -> UInt
-fn IncomingResponse::to_string(Self) -> String // from trait `Show`
 impl Eq for IncomingResponse
 impl Show for IncomingResponse
 
@@ -207,24 +157,14 @@ pub(all) enum Method {
   Patch
   Other(String)
 }
-fn Method::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Method::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Method::output(Self, &Logger) -> Unit // from trait `Show`
-fn Method::to_string(Self) -> String // from trait `Show`
 impl Eq for Method
 impl Show for Method
 
 pub(all) struct OutgoingBody(Int)
 fn OutgoingBody::drop(Self) -> Unit
-fn OutgoingBody::equal(Self, Self) -> Bool // from trait `Eq`
 fn OutgoingBody::finish(Self, Fields?) -> Result[Unit, ErrorCode]
 #deprecated
 fn OutgoingBody::inner(Self) -> Int
-#deprecated
-fn OutgoingBody::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn OutgoingBody::output(Self, &Logger) -> Unit // from trait `Show`
-fn OutgoingBody::to_string(Self) -> String // from trait `Show`
 fn OutgoingBody::write(Self) -> Result[@streams.OutputStream, Unit]
 impl Eq for OutgoingBody
 impl Show for OutgoingBody
@@ -233,39 +173,29 @@ pub(all) struct OutgoingRequest(Int)
 fn OutgoingRequest::authority(Self) -> String?
 fn OutgoingRequest::body(Self) -> Result[OutgoingBody, Unit]
 fn OutgoingRequest::drop(Self) -> Unit
-fn OutgoingRequest::equal(Self, Self) -> Bool // from trait `Eq`
 fn OutgoingRequest::headers(Self) -> Fields
 #deprecated
 fn OutgoingRequest::inner(Self) -> Int
 fn OutgoingRequest::method_(Self) -> Method
-#deprecated
-fn OutgoingRequest::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn OutgoingRequest::outgoing_request(Fields) -> Self
-fn OutgoingRequest::output(Self, &Logger) -> Unit // from trait `Show`
 fn OutgoingRequest::path_with_query(Self) -> String?
 fn OutgoingRequest::scheme(Self) -> Scheme?
 fn OutgoingRequest::set_authority(Self, String?) -> Result[Unit, Unit]
 fn OutgoingRequest::set_method(Self, Method) -> Result[Unit, Unit]
 fn OutgoingRequest::set_path_with_query(Self, String?) -> Result[Unit, Unit]
 fn OutgoingRequest::set_scheme(Self, Scheme?) -> Result[Unit, Unit]
-fn OutgoingRequest::to_string(Self) -> String // from trait `Show`
 impl Eq for OutgoingRequest
 impl Show for OutgoingRequest
 
 pub(all) struct OutgoingResponse(Int)
 fn OutgoingResponse::body(Self) -> Result[OutgoingBody, Unit]
 fn OutgoingResponse::drop(Self) -> Unit
-fn OutgoingResponse::equal(Self, Self) -> Bool // from trait `Eq`
 fn OutgoingResponse::headers(Self) -> Fields
 #deprecated
 fn OutgoingResponse::inner(Self) -> Int
-#deprecated
-fn OutgoingResponse::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn OutgoingResponse::outgoing_response(Fields) -> Self
-fn OutgoingResponse::output(Self, &Logger) -> Unit // from trait `Show`
 fn OutgoingResponse::set_status_code(Self, UInt) -> Result[Unit, Unit]
 fn OutgoingResponse::status_code(Self) -> UInt
-fn OutgoingResponse::to_string(Self) -> String // from trait `Show`
 impl Eq for OutgoingResponse
 impl Show for OutgoingResponse
 
@@ -273,31 +203,21 @@ pub(all) struct RequestOptions(Int)
 fn RequestOptions::between_bytes_timeout(Self) -> UInt64?
 fn RequestOptions::connect_timeout(Self) -> UInt64?
 fn RequestOptions::drop(Self) -> Unit
-fn RequestOptions::equal(Self, Self) -> Bool // from trait `Eq`
 fn RequestOptions::first_byte_timeout(Self) -> UInt64?
 #deprecated
 fn RequestOptions::inner(Self) -> Int
-#deprecated
-fn RequestOptions::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn RequestOptions::output(Self, &Logger) -> Unit // from trait `Show`
 fn RequestOptions::request_options() -> Self
 fn RequestOptions::set_between_bytes_timeout(Self, UInt64?) -> Result[Unit, Unit]
 fn RequestOptions::set_connect_timeout(Self, UInt64?) -> Result[Unit, Unit]
 fn RequestOptions::set_first_byte_timeout(Self, UInt64?) -> Result[Unit, Unit]
-fn RequestOptions::to_string(Self) -> String // from trait `Show`
 impl Eq for RequestOptions
 impl Show for RequestOptions
 
 pub(all) struct ResponseOutparam(Int)
 fn ResponseOutparam::drop(Self) -> Unit
-fn ResponseOutparam::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn ResponseOutparam::inner(Self) -> Int
-#deprecated
-fn ResponseOutparam::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn ResponseOutparam::output(Self, &Logger) -> Unit // from trait `Show`
 fn ResponseOutparam::set(Self, Result[OutgoingResponse, ErrorCode]) -> Unit
-fn ResponseOutparam::to_string(Self) -> String // from trait `Show`
 impl Eq for ResponseOutparam
 impl Show for ResponseOutparam
 
@@ -306,11 +226,6 @@ pub(all) enum Scheme {
   Https
   Other(String)
 }
-fn Scheme::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Scheme::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Scheme::output(Self, &Logger) -> Unit // from trait `Show`
-fn Scheme::to_string(Self) -> String // from trait `Show`
 impl Eq for Scheme
 impl Show for Scheme
 
@@ -318,11 +233,6 @@ pub(all) struct TlsAlertReceivedPayload {
   alert_id : Byte?
   alert_message : String?
 }
-fn TlsAlertReceivedPayload::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn TlsAlertReceivedPayload::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn TlsAlertReceivedPayload::output(Self, &Logger) -> Unit // from trait `Show`
-fn TlsAlertReceivedPayload::to_string(Self) -> String // from trait `Show`
 impl Eq for TlsAlertReceivedPayload
 impl Show for TlsAlertReceivedPayload
 

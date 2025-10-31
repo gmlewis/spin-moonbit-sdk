@@ -17,13 +17,8 @@ pub(all) enum ShutdownType {
   SEND
   BOTH
 }
-fn ShutdownType::equal(Self, Self) -> Bool // from trait `Eq`
 fn ShutdownType::from(Int) -> Self
-#deprecated
-fn ShutdownType::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn ShutdownType::ordinal(Self) -> Int
-fn ShutdownType::output(Self, &Logger) -> Unit // from trait `Show`
-fn ShutdownType::to_string(Self) -> String // from trait `Show`
 impl Eq for ShutdownType
 impl Show for ShutdownType
 
@@ -31,7 +26,6 @@ pub(all) struct TcpSocket(Int)
 fn TcpSocket::accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 fn TcpSocket::address_family(Self) -> @network.IpAddressFamily
 fn TcpSocket::drop(Self) -> Unit
-fn TcpSocket::equal(Self, Self) -> Bool // from trait `Eq`
 fn TcpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
 fn TcpSocket::finish_connect(Self) -> Result[(@streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 fn TcpSocket::finish_listen(Self) -> Result[Unit, @network.ErrorCode]
@@ -44,9 +38,6 @@ fn TcpSocket::keep_alive_enabled(Self) -> Result[Bool, @network.ErrorCode]
 fn TcpSocket::keep_alive_idle_time(Self) -> Result[UInt64, @network.ErrorCode]
 fn TcpSocket::keep_alive_interval(Self) -> Result[UInt64, @network.ErrorCode]
 fn TcpSocket::local_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
-#deprecated
-fn TcpSocket::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn TcpSocket::output(Self, &Logger) -> Unit // from trait `Show`
 fn TcpSocket::receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
 fn TcpSocket::remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
 fn TcpSocket::send_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
@@ -63,7 +54,6 @@ fn TcpSocket::start_bind(Self, @network.Network, @network.IpSocketAddress) -> Re
 fn TcpSocket::start_connect(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
 fn TcpSocket::start_listen(Self) -> Result[Unit, @network.ErrorCode]
 fn TcpSocket::subscribe(Self) -> @poll.Pollable
-fn TcpSocket::to_string(Self) -> String // from trait `Show`
 impl Eq for TcpSocket
 impl Show for TcpSocket
 

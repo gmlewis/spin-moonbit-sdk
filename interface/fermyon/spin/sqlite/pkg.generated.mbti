@@ -8,15 +8,10 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/sqlite"
 // Types and methods
 pub(all) struct Connection(Int)
 fn Connection::drop(Self) -> Unit
-fn Connection::equal(Self, Self) -> Bool // from trait `Eq`
 fn Connection::execute(Self, String, Array[Value]) -> Result[QueryResult, Error_]
 #deprecated
 fn Connection::inner(Self) -> Int
-#deprecated
-fn Connection::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Connection::open(String) -> Result[Self, Error_]
-fn Connection::output(Self, &Logger) -> Unit // from trait `Show`
-fn Connection::to_string(Self) -> String // from trait `Show`
 impl Eq for Connection
 impl Show for Connection
 
@@ -27,11 +22,6 @@ pub(all) enum Error_ {
   DatabaseFull
   Io(String)
 }
-fn Error_::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Error_::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Error_::output(Self, &Logger) -> Unit // from trait `Show`
-fn Error_::to_string(Self) -> String // from trait `Show`
 impl Eq for Error_
 impl Show for Error_
 
@@ -39,22 +29,12 @@ pub(all) struct QueryResult {
   columns : Array[String]
   rows : Array[RowResult]
 }
-fn QueryResult::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn QueryResult::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn QueryResult::output(Self, &Logger) -> Unit // from trait `Show`
-fn QueryResult::to_string(Self) -> String // from trait `Show`
 impl Eq for QueryResult
 impl Show for QueryResult
 
 pub(all) struct RowResult {
   values : Array[Value]
 }
-fn RowResult::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn RowResult::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn RowResult::output(Self, &Logger) -> Unit // from trait `Show`
-fn RowResult::to_string(Self) -> String // from trait `Show`
 impl Eq for RowResult
 impl Show for RowResult
 
@@ -65,11 +45,6 @@ pub(all) enum Value {
   Blob(FixedArray[Byte])
   Null
 }
-fn Value::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Value::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Value::output(Self, &Logger) -> Unit // from trait `Show`
-fn Value::to_string(Self) -> String // from trait `Show`
 impl Eq for Value
 impl Show for Value
 

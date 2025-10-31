@@ -8,15 +8,10 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/mqtt"
 // Types and methods
 pub(all) struct Connection(Int)
 fn Connection::drop(Self) -> Unit
-fn Connection::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn Connection::inner(Self) -> Int
-#deprecated
-fn Connection::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Connection::open(String, String, String, UInt64) -> Result[Self, Error_]
-fn Connection::output(Self, &Logger) -> Unit // from trait `Show`
 fn Connection::publish(Self, String, FixedArray[Byte], Qos) -> Result[Unit, Error_]
-fn Connection::to_string(Self) -> String // from trait `Show`
 impl Eq for Connection
 impl Show for Connection
 
@@ -26,11 +21,6 @@ pub(all) enum Error_ {
   ConnectionFailed(String)
   Other(String)
 }
-fn Error_::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Error_::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Error_::output(Self, &Logger) -> Unit // from trait `Show`
-fn Error_::to_string(Self) -> String // from trait `Show`
 impl Eq for Error_
 impl Show for Error_
 
@@ -39,13 +29,8 @@ pub(all) enum Qos {
   AT_LEAST_ONCE
   EXACTLY_ONCE
 }
-fn Qos::equal(Self, Self) -> Bool // from trait `Eq`
 fn Qos::from(Int) -> Self
-#deprecated
-fn Qos::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Qos::ordinal(Self) -> Int
-fn Qos::output(Self, &Logger) -> Unit // from trait `Show`
-fn Qos::to_string(Self) -> String // from trait `Show`
 impl Eq for Qos
 impl Show for Qos
 

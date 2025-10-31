@@ -10,14 +10,9 @@ fn poll(Array[Pollable]) -> FixedArray[UInt]
 pub(all) struct Pollable(Int)
 fn Pollable::block(Self) -> Unit
 fn Pollable::drop(Self) -> Unit
-fn Pollable::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn Pollable::inner(Self) -> Int
-#deprecated
-fn Pollable::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Pollable::output(Self, &Logger) -> Unit // from trait `Show`
 fn Pollable::ready(Self) -> Bool
-fn Pollable::to_string(Self) -> String // from trait `Show`
 impl Eq for Pollable
 impl Show for Pollable
 

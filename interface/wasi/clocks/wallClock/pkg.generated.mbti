@@ -13,11 +13,6 @@ pub(all) struct Datetime {
   seconds : UInt64
   nanoseconds : UInt
 }
-fn Datetime::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Datetime::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Datetime::output(Self, &Logger) -> Unit // from trait `Show`
-fn Datetime::to_string(Self) -> String // from trait `Show`
 impl Eq for Datetime
 impl Show for Datetime
 

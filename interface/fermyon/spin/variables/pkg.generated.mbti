@@ -13,11 +13,6 @@ pub(all) enum Error_ {
   Provider(String)
   Other(String)
 }
-fn Error_::equal(Self, Self) -> Bool // from trait `Eq`
-#deprecated
-fn Error_::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Error_::output(Self, &Logger) -> Unit // from trait `Show`
-fn Error_::to_string(Self) -> String // from trait `Show`
 impl Eq for Error_
 impl Show for Error_
 

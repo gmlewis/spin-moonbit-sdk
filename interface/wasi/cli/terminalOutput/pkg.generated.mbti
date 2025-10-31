@@ -8,13 +8,8 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalOutput"
 // Types and methods
 pub(all) struct TerminalOutput(Int)
 fn TerminalOutput::drop(Self) -> Unit
-fn TerminalOutput::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn TerminalOutput::inner(Self) -> Int
-#deprecated
-fn TerminalOutput::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn TerminalOutput::output(Self, &Logger) -> Unit // from trait `Show`
-fn TerminalOutput::to_string(Self) -> String // from trait `Show`
 impl Eq for TerminalOutput
 impl Show for TerminalOutput
 
