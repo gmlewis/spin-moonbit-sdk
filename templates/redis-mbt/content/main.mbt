@@ -27,7 +27,7 @@ fn handle_get(conn : @redis.Connection) -> @types.OutgoingResponse {
     _ => return @util.make_500_response()
   }
   match conn.get("test") {
-    Ok(Some(result)) => @util.make_response(Bytes::from_fixedarray(result))
+    Ok(Some(result)) => @util.make_response(Bytes::from_array(result))
     _ => @util.make_404_response()
   }
 }
