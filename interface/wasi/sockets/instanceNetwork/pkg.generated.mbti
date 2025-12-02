@@ -6,7 +6,7 @@ import(
 )
 
 // Values
-fn instance_network() -> @network.Network
+pub fn instance_network() -> @network.Network
 
 // Errors
 

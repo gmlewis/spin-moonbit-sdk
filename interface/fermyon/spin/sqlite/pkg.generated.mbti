@@ -7,13 +7,13 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/sqlite"
 
 // Types and methods
 pub(all) struct Connection(Int)
-fn Connection::drop(Self) -> Unit
-fn Connection::execute(Self, String, Array[Value]) -> Result[QueryResult, Error_]
+pub fn Connection::drop(Self) -> Unit
+pub fn Connection::execute(Self, String, Array[Value]) -> Result[QueryResult, Error_]
 #deprecated
-fn Connection::inner(Self) -> Int
-fn Connection::open(String) -> Result[Self, Error_]
-impl Eq for Connection
-impl Show for Connection
+pub fn Connection::inner(Self) -> Int
+pub fn Connection::open(String) -> Result[Self, Error_]
+pub impl Eq for Connection
+pub impl Show for Connection
 
 pub(all) enum Error_ {
   NoSuchDatabase
@@ -22,21 +22,21 @@ pub(all) enum Error_ {
   DatabaseFull
   Io(String)
 }
-impl Eq for Error_
-impl Show for Error_
+pub impl Eq for Error_
+pub impl Show for Error_
 
 pub(all) struct QueryResult {
   columns : Array[String]
   rows : Array[RowResult]
 }
-impl Eq for QueryResult
-impl Show for QueryResult
+pub impl Eq for QueryResult
+pub impl Show for QueryResult
 
 pub(all) struct RowResult {
   values : Array[Value]
 }
-impl Eq for RowResult
-impl Show for RowResult
+pub impl Eq for RowResult
+pub impl Show for RowResult
 
 pub(all) enum Value {
   Integer(Int64)
@@ -45,8 +45,8 @@ pub(all) enum Value {
   Blob(FixedArray[Byte])
   Null
 }
-impl Eq for Value
-impl Show for Value
+pub impl Eq for Value
+pub impl Show for Value
 
 // Type aliases
 

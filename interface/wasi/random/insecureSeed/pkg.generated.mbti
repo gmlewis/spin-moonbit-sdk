@@ -2,7 +2,7 @@
 package "gmlewis/spin-moonbit-sdk/interface/wasi/random/insecureSeed"
 
 // Values
-fn insecure_seed() -> (UInt64, UInt64)
+pub fn insecure_seed() -> (UInt64, UInt64)
 
 // Errors
 

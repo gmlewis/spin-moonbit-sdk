@@ -11,14 +11,14 @@ import(
 
 // Types and methods
 pub(all) struct Connection(Int)
-fn Connection::drop(Self) -> Unit
-fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[UInt64, @rdbmsTypes.Error_]
+pub fn Connection::drop(Self) -> Unit
+pub fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[UInt64, @rdbmsTypes.Error_]
 #deprecated
-fn Connection::inner(Self) -> Int
-fn Connection::open(String) -> Result[Self, @rdbmsTypes.Error_]
-fn Connection::query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]
-impl Eq for Connection
-impl Show for Connection
+pub fn Connection::inner(Self) -> Int
+pub fn Connection::open(String) -> Result[Self, @rdbmsTypes.Error_]
+pub fn Connection::query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]
+pub impl Eq for Connection
+pub impl Show for Connection
 
 // Type aliases
 

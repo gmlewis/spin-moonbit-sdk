@@ -10,8 +10,8 @@ pub(all) struct Column {
   name : String
   data_type : DbDataType
 }
-impl Eq for Column
-impl Show for Column
+pub impl Eq for Column
+pub impl Show for Column
 
 pub(all) enum DbDataType {
   BOOLEAN
@@ -29,10 +29,10 @@ pub(all) enum DbDataType {
   BINARY
   OTHER
 }
-fn DbDataType::from(Int) -> Self
-fn DbDataType::ordinal(Self) -> Int
-impl Eq for DbDataType
-impl Show for DbDataType
+pub fn DbDataType::from(Int) -> Self
+pub fn DbDataType::ordinal(Self) -> Int
+pub impl Eq for DbDataType
+pub impl Show for DbDataType
 
 pub(all) enum DbValue {
   Boolean(Bool)
@@ -51,8 +51,8 @@ pub(all) enum DbValue {
   DbNull
   Unsupported
 }
-impl Eq for DbValue
-impl Show for DbValue
+pub impl Eq for DbValue
+pub impl Show for DbValue
 
 pub(all) enum Error_ {
   ConnectionFailed(String)
@@ -61,8 +61,8 @@ pub(all) enum Error_ {
   ValueConversionFailed(String)
   Other(String)
 }
-impl Eq for Error_
-impl Show for Error_
+pub impl Eq for Error_
+pub impl Show for Error_
 
 pub(all) enum ParameterValue {
   Boolean(Bool)
@@ -80,15 +80,15 @@ pub(all) enum ParameterValue {
   Binary(FixedArray[Byte])
   DbNull
 }
-impl Eq for ParameterValue
-impl Show for ParameterValue
+pub impl Eq for ParameterValue
+pub impl Show for ParameterValue
 
 pub(all) struct RowSet {
   columns : Array[Column]
   rows : Array[Array[DbValue]]
 }
-impl Eq for RowSet
-impl Show for RowSet
+pub impl Eq for RowSet
+pub impl Show for RowSet
 
 // Type aliases
 

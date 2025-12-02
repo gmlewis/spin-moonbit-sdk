@@ -7,11 +7,11 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalInput"
 
 // Types and methods
 pub(all) struct TerminalInput(Int)
-fn TerminalInput::drop(Self) -> Unit
+pub fn TerminalInput::drop(Self) -> Unit
 #deprecated
-fn TerminalInput::inner(Self) -> Int
-impl Eq for TerminalInput
-impl Show for TerminalInput
+pub fn TerminalInput::inner(Self) -> Int
+pub impl Eq for TerminalInput
+pub impl Show for TerminalInput
 
 // Type aliases
 

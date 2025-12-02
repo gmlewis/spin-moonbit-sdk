@@ -2,9 +2,9 @@
 package "gmlewis/spin-moonbit-sdk/interface/wasi/random/random"
 
 // Values
-fn get_random_bytes(UInt64) -> FixedArray[Byte]
+pub fn get_random_bytes(UInt64) -> FixedArray[Byte]
 
-fn get_random_u64() -> UInt64
+pub fn get_random_u64() -> UInt64
 
 // Errors
 

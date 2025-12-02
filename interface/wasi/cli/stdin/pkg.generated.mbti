@@ -6,7 +6,7 @@ import(
 )
 
 // Values
-fn get_stdin() -> @streams.InputStream
+pub fn get_stdin() -> @streams.InputStream
 
 // Errors
 

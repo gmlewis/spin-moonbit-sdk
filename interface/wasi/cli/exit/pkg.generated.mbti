@@ -2,7 +2,7 @@
 package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/exit"
 
 // Values
-fn exit(Result[Unit, Unit]) -> Unit
+pub fn exit(Result[Unit, Unit]) -> Unit
 
 // Errors
 

@@ -17,45 +17,45 @@ pub(all) enum ShutdownType {
   SEND
   BOTH
 }
-fn ShutdownType::from(Int) -> Self
-fn ShutdownType::ordinal(Self) -> Int
-impl Eq for ShutdownType
-impl Show for ShutdownType
+pub fn ShutdownType::from(Int) -> Self
+pub fn ShutdownType::ordinal(Self) -> Int
+pub impl Eq for ShutdownType
+pub impl Show for ShutdownType
 
 pub(all) struct TcpSocket(Int)
-fn TcpSocket::accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
-fn TcpSocket::address_family(Self) -> @network.IpAddressFamily
-fn TcpSocket::drop(Self) -> Unit
-fn TcpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::finish_connect(Self) -> Result[(@streams.InputStream, @streams.OutputStream), @network.ErrorCode]
-fn TcpSocket::finish_listen(Self) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::hop_limit(Self) -> Result[Byte, @network.ErrorCode]
+pub fn TcpSocket::accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
+pub fn TcpSocket::address_family(Self) -> @network.IpAddressFamily
+pub fn TcpSocket::drop(Self) -> Unit
+pub fn TcpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::finish_connect(Self) -> Result[(@streams.InputStream, @streams.OutputStream), @network.ErrorCode]
+pub fn TcpSocket::finish_listen(Self) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::hop_limit(Self) -> Result[Byte, @network.ErrorCode]
 #deprecated
-fn TcpSocket::inner(Self) -> Int
-fn TcpSocket::is_listening(Self) -> Bool
-fn TcpSocket::keep_alive_count(Self) -> Result[UInt, @network.ErrorCode]
-fn TcpSocket::keep_alive_enabled(Self) -> Result[Bool, @network.ErrorCode]
-fn TcpSocket::keep_alive_idle_time(Self) -> Result[UInt64, @network.ErrorCode]
-fn TcpSocket::keep_alive_interval(Self) -> Result[UInt64, @network.ErrorCode]
-fn TcpSocket::local_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
-fn TcpSocket::receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
-fn TcpSocket::remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
-fn TcpSocket::send_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
-fn TcpSocket::set_hop_limit(Self, Byte) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::set_keep_alive_count(Self, UInt) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::set_keep_alive_enabled(Self, Bool) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::set_keep_alive_idle_time(Self, UInt64) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::set_keep_alive_interval(Self, UInt64) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::set_listen_backlog_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::set_receive_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::set_send_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::shutdown(Self, ShutdownType) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::start_bind(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::start_connect(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::start_listen(Self) -> Result[Unit, @network.ErrorCode]
-fn TcpSocket::subscribe(Self) -> @poll.Pollable
-impl Eq for TcpSocket
-impl Show for TcpSocket
+pub fn TcpSocket::inner(Self) -> Int
+pub fn TcpSocket::is_listening(Self) -> Bool
+pub fn TcpSocket::keep_alive_count(Self) -> Result[UInt, @network.ErrorCode]
+pub fn TcpSocket::keep_alive_enabled(Self) -> Result[Bool, @network.ErrorCode]
+pub fn TcpSocket::keep_alive_idle_time(Self) -> Result[UInt64, @network.ErrorCode]
+pub fn TcpSocket::keep_alive_interval(Self) -> Result[UInt64, @network.ErrorCode]
+pub fn TcpSocket::local_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
+pub fn TcpSocket::receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
+pub fn TcpSocket::remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
+pub fn TcpSocket::send_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
+pub fn TcpSocket::set_hop_limit(Self, Byte) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::set_keep_alive_count(Self, UInt) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::set_keep_alive_enabled(Self, Bool) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::set_keep_alive_idle_time(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::set_keep_alive_interval(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::set_listen_backlog_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::set_receive_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::set_send_buffer_size(Self, UInt64) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::shutdown(Self, ShutdownType) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::start_bind(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::start_connect(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::start_listen(Self) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::subscribe(Self) -> @poll.Pollable
+pub impl Eq for TcpSocket
+pub impl Show for TcpSocket
 
 // Type aliases
 

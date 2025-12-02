@@ -6,7 +6,7 @@ import(
 )
 
 // Values
-fn get_stderr() -> @streams.OutputStream
+pub fn get_stderr() -> @streams.OutputStream
 
 // Errors
 

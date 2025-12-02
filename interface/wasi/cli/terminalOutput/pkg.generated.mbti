@@ -7,11 +7,11 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalOutput"
 
 // Types and methods
 pub(all) struct TerminalOutput(Int)
-fn TerminalOutput::drop(Self) -> Unit
+pub fn TerminalOutput::drop(Self) -> Unit
 #deprecated
-fn TerminalOutput::inner(Self) -> Int
-impl Eq for TerminalOutput
-impl Show for TerminalOutput
+pub fn TerminalOutput::inner(Self) -> Int
+pub impl Eq for TerminalOutput
+pub impl Show for TerminalOutput
 
 // Type aliases
 

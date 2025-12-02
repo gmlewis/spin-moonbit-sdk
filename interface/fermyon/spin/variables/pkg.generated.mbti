@@ -2,7 +2,7 @@
 package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/variables"
 
 // Values
-fn get(String) -> Result[String, Error_]
+pub fn get(String) -> Result[String, Error_]
 
 // Errors
 
@@ -13,8 +13,8 @@ pub(all) enum Error_ {
   Provider(String)
   Other(String)
 }
-impl Eq for Error_
-impl Show for Error_
+pub impl Eq for Error_
+pub impl Show for Error_
 
 // Type aliases
 

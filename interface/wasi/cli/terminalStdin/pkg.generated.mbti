@@ -6,7 +6,7 @@ import(
 )
 
 // Values
-fn get_terminal_stdin() -> @terminalInput.TerminalInput?
+pub fn get_terminal_stdin() -> @terminalInput.TerminalInput?
 
 // Errors
 

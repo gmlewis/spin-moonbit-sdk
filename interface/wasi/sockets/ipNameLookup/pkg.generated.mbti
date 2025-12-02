@@ -7,19 +7,19 @@ import(
 )
 
 // Values
-fn resolve_addresses(@network.Network, String) -> Result[ResolveAddressStream, @network.ErrorCode]
+pub fn resolve_addresses(@network.Network, String) -> Result[ResolveAddressStream, @network.ErrorCode]
 
 // Errors
 
 // Types and methods
 pub(all) struct ResolveAddressStream(Int)
-fn ResolveAddressStream::drop(Self) -> Unit
+pub fn ResolveAddressStream::drop(Self) -> Unit
 #deprecated
-fn ResolveAddressStream::inner(Self) -> Int
-fn ResolveAddressStream::resolve_next_address(Self) -> Result[@network.IpAddress?, @network.ErrorCode]
-fn ResolveAddressStream::subscribe(Self) -> @poll.Pollable
-impl Eq for ResolveAddressStream
-impl Show for ResolveAddressStream
+pub fn ResolveAddressStream::inner(Self) -> Int
+pub fn ResolveAddressStream::resolve_next_address(Self) -> Result[@network.IpAddress?, @network.ErrorCode]
+pub fn ResolveAddressStream::subscribe(Self) -> @poll.Pollable
+pub impl Eq for ResolveAddressStream
+pub impl Show for ResolveAddressStream
 
 // Type aliases
 

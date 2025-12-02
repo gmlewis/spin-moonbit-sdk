@@ -2,13 +2,13 @@
 package "gmlewis/spin-moonbit-sdk/log"
 
 // Values
-fn debug(String, leading_blank_line? : Bool) -> Unit
+pub fn debug(String, leading_blank_line? : Bool) -> Unit
 
-fn error(String, leading_blank_line? : Bool) -> Unit
+pub fn error(String, leading_blank_line? : Bool) -> Unit
 
-fn info(String, leading_blank_line? : Bool) -> Unit
+pub fn info(String, leading_blank_line? : Bool) -> Unit
 
-fn warn(String, leading_blank_line? : Bool) -> Unit
+pub fn warn(String, leading_blank_line? : Bool) -> Unit
 
 // Errors
 

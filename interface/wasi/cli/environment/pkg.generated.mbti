@@ -2,11 +2,11 @@
 package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/environment"
 
 // Values
-fn get_arguments() -> Array[String]
+pub fn get_arguments() -> Array[String]
 
-fn get_environment() -> Array[(String, String)]
+pub fn get_environment() -> Array[(String, String)]
 
-fn initial_cwd() -> String?
+pub fn initial_cwd() -> String?
 
 // Errors
 

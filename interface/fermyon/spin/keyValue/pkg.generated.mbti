@@ -12,21 +12,21 @@ pub(all) enum Error_ {
   AccessDenied
   Other(String)
 }
-impl Eq for Error_
-impl Show for Error_
+pub impl Eq for Error_
+pub impl Show for Error_
 
 pub(all) struct Store(Int)
-fn Store::delete(Self, String) -> Result[Unit, Error_]
-fn Store::drop(Self) -> Unit
-fn Store::exists(Self, String) -> Result[Bool, Error_]
-fn Store::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
-fn Store::get_keys(Self) -> Result[Array[String], Error_]
+pub fn Store::delete(Self, String) -> Result[Unit, Error_]
+pub fn Store::drop(Self) -> Unit
+pub fn Store::exists(Self, String) -> Result[Bool, Error_]
+pub fn Store::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
+pub fn Store::get_keys(Self) -> Result[Array[String], Error_]
 #deprecated
-fn Store::inner(Self) -> Int
-fn Store::open(String) -> Result[Self, Error_]
-fn Store::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
-impl Eq for Store
-impl Show for Store
+pub fn Store::inner(Self) -> Int
+pub fn Store::open(String) -> Result[Self, Error_]
+pub fn Store::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
+pub impl Eq for Store
+pub impl Show for Store
 
 // Type aliases
 

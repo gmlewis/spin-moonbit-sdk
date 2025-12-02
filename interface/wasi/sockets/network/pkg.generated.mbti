@@ -29,40 +29,40 @@ pub(all) enum ErrorCode {
   TEMPORARY_RESOLVER_FAILURE
   PERMANENT_RESOLVER_FAILURE
 }
-fn ErrorCode::from(Int) -> Self
-fn ErrorCode::ordinal(Self) -> Int
-impl Eq for ErrorCode
-impl Show for ErrorCode
+pub fn ErrorCode::from(Int) -> Self
+pub fn ErrorCode::ordinal(Self) -> Int
+pub impl Eq for ErrorCode
+pub impl Show for ErrorCode
 
 pub(all) enum IpAddress {
   Ipv4((Byte, Byte, Byte, Byte))
   Ipv6((UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt))
 }
-impl Eq for IpAddress
-impl Show for IpAddress
+pub impl Eq for IpAddress
+pub impl Show for IpAddress
 
 pub(all) enum IpAddressFamily {
   IPV4
   IPV6
 }
-fn IpAddressFamily::from(Int) -> Self
-fn IpAddressFamily::ordinal(Self) -> Int
-impl Eq for IpAddressFamily
-impl Show for IpAddressFamily
+pub fn IpAddressFamily::from(Int) -> Self
+pub fn IpAddressFamily::ordinal(Self) -> Int
+pub impl Eq for IpAddressFamily
+pub impl Show for IpAddressFamily
 
 pub(all) enum IpSocketAddress {
   Ipv4(Ipv4SocketAddress)
   Ipv6(Ipv6SocketAddress)
 }
-impl Eq for IpSocketAddress
-impl Show for IpSocketAddress
+pub impl Eq for IpSocketAddress
+pub impl Show for IpSocketAddress
 
 pub(all) struct Ipv4SocketAddress {
   port : UInt
   address : (Byte, Byte, Byte, Byte)
 }
-impl Eq for Ipv4SocketAddress
-impl Show for Ipv4SocketAddress
+pub impl Eq for Ipv4SocketAddress
+pub impl Show for Ipv4SocketAddress
 
 pub(all) struct Ipv6SocketAddress {
   port : UInt
@@ -70,15 +70,15 @@ pub(all) struct Ipv6SocketAddress {
   address : (UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt)
   scope_id : UInt
 }
-impl Eq for Ipv6SocketAddress
-impl Show for Ipv6SocketAddress
+pub impl Eq for Ipv6SocketAddress
+pub impl Show for Ipv6SocketAddress
 
 pub(all) struct Network(Int)
-fn Network::drop(Self) -> Unit
+pub fn Network::drop(Self) -> Unit
 #deprecated
-fn Network::inner(Self) -> Int
-impl Eq for Network
-impl Show for Network
+pub fn Network::inner(Self) -> Int
+pub impl Eq for Network
+pub impl Show for Network
 
 // Type aliases
 

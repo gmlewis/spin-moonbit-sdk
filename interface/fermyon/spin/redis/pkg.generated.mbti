@@ -7,21 +7,21 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/redis"
 
 // Types and methods
 pub(all) struct Connection(Int)
-fn Connection::del(Self, Array[String]) -> Result[UInt, Error_]
-fn Connection::drop(Self) -> Unit
-fn Connection::execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]
-fn Connection::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
-fn Connection::incr(Self, String) -> Result[Int64, Error_]
+pub fn Connection::del(Self, Array[String]) -> Result[UInt, Error_]
+pub fn Connection::drop(Self) -> Unit
+pub fn Connection::execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]
+pub fn Connection::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
+pub fn Connection::incr(Self, String) -> Result[Int64, Error_]
 #deprecated
-fn Connection::inner(Self) -> Int
-fn Connection::open(String) -> Result[Self, Error_]
-fn Connection::publish(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
-fn Connection::sadd(Self, String, Array[String]) -> Result[UInt, Error_]
-fn Connection::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
-fn Connection::smembers(Self, String) -> Result[Array[String], Error_]
-fn Connection::srem(Self, String, Array[String]) -> Result[UInt, Error_]
-impl Eq for Connection
-impl Show for Connection
+pub fn Connection::inner(Self) -> Int
+pub fn Connection::open(String) -> Result[Self, Error_]
+pub fn Connection::publish(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
+pub fn Connection::sadd(Self, String, Array[String]) -> Result[UInt, Error_]
+pub fn Connection::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
+pub fn Connection::smembers(Self, String) -> Result[Array[String], Error_]
+pub fn Connection::srem(Self, String, Array[String]) -> Result[UInt, Error_]
+pub impl Eq for Connection
+pub impl Show for Connection
 
 pub(all) enum Error_ {
   InvalidAddress
@@ -29,15 +29,15 @@ pub(all) enum Error_ {
   TypeError
   Other(String)
 }
-impl Eq for Error_
-impl Show for Error_
+pub impl Eq for Error_
+pub impl Show for Error_
 
 pub(all) enum RedisParameter {
   Int64(Int64)
   Binary(FixedArray[Byte])
 }
-impl Eq for RedisParameter
-impl Show for RedisParameter
+pub impl Eq for RedisParameter
+pub impl Show for RedisParameter
 
 pub(all) enum RedisResult {
   Nil
@@ -45,8 +45,8 @@ pub(all) enum RedisResult {
   Int64(Int64)
   Binary(FixedArray[Byte])
 }
-impl Eq for RedisResult
-impl Show for RedisResult
+pub impl Eq for RedisResult
+pub impl Show for RedisResult
 
 // Type aliases
 

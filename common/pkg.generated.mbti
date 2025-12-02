@@ -20,6 +20,6 @@ pub(open) trait HashFunc {
   write(Self, Byte) -> Unit
   check_sum(Self) -> String
 }
-impl HashFunc for @md5.Digest
-impl HashFunc for @sha256.Digest
+pub impl HashFunc for @md5.Digest
+pub impl HashFunc for @sha256.Digest
 

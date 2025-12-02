@@ -6,7 +6,7 @@ import(
 )
 
 // Values
-fn handle(@types.OutgoingRequest, @types.RequestOptions?) -> Result[@types.FutureIncomingResponse, @types.ErrorCode]
+pub fn handle(@types.OutgoingRequest, @types.RequestOptions?) -> Result[@types.FutureIncomingResponse, @types.ErrorCode]
 
 // Errors
 
