@@ -78,8 +78,8 @@ The code has been updated to support compiler:
 
 ```bash
 $ moon version --all
-moon 0.1.20251202 (1a59800 2025-12-02) ~/.moon/bin/moon
-moonc v0.6.33+b989ba000 (2025-12-02) ~/.moon/bin/moonc
-moonrun 0.1.20251202 (1a59800 2025-12-02) ~/.moon/bin/moonrun
-moon-pilot 0.0.1-df92511 (2025-12-02) ~/.moon/bin/moon-pilot
+moon 0.1.20260110 (0e584ac 2026-01-10) ~/.moon/bin/moon
+moonc v0.7.1+adb125543 (2026-01-10) ~/.moon/bin/moonc
+moonrun 0.1.20260110 (0e584ac 2026-01-10) ~/.moon/bin/moonrun
+moon-pilot 0.0.1-df92511 (2026-01-10) ~/.moon/bin/moon-pilot
 ```

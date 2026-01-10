@@ -1,4 +1,6 @@
-target/
+.DS_Store
+_build/
+target
 .mooncakes/
+.moonagent/
 .spin/
-.DS_Store/
