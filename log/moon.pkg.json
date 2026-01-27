@@ -1,7 +1,0 @@
-{
-  "import": [
-    "gmlewis/base64",
-    "gmlewis/spin-moonbit-sdk/interface/wasi/cli/stderr",
-    "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams"
-  ]
-}

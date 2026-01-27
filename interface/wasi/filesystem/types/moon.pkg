@@ -1,0 +1,6 @@
+import {
+  "gmlewis/spin-moonbit-sdk/ffi" as @ffi,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/clocks/wallClock" as @wallClock,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/error" as @error,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams" as @streams,
+}

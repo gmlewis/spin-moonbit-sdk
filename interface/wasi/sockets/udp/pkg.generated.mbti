@@ -1,10 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/udp"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll"
-  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll",
+  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network",
+}
 
 // Values
 

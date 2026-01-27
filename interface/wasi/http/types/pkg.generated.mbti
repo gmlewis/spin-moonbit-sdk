@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/http/types"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/error"
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll"
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/error",
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll",
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams",
+}
 
 // Values
 pub fn http_error_code(@error.Error_) -> ErrorCode?

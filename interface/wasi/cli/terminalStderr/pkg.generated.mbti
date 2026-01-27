@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalStderr"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalOutput"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalOutput",
+}
 
 // Values
 pub fn get_terminal_stderr() -> @terminalOutput.TerminalOutput?

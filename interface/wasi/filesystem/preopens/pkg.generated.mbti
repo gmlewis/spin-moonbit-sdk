@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/filesystem/preopens"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/wasi/filesystem/types"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/filesystem/types",
+}
 
 // Values
 pub fn get_directories() -> Array[(@types.Descriptor, String)]

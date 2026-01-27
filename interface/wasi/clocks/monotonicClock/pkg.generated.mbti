@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/clocks/monotonicClock"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll",
+}
 
 // Values
 pub fn now() -> UInt64

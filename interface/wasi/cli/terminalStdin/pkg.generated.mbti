@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalStdin"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalInput"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalInput",
+}
 
 // Values
 pub fn get_terminal_stdin() -> @terminalInput.TerminalInput?

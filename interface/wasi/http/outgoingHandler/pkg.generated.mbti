@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/http/outgoingHandler"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/wasi/http/types"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/http/types",
+}
 
 // Values
 pub fn handle(@types.OutgoingRequest, @types.RequestOptions?) -> Result[@types.FutureIncomingResponse, @types.ErrorCode]

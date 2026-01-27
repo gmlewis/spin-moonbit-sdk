@@ -1,1 +1,0 @@
-{ "import": [{ "path" : "gmlewis/spin-moonbit-sdk/ffi", "alias" : "ffi" }, { "path" : "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network", "alias" : "network" }, { "path" : "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/tcp", "alias" : "tcp" }] }

@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/util"
 
-import(
-  "gmlewis/spin-moonbit-sdk/common"
-  "gmlewis/spin-moonbit-sdk/interface/wasi/http/types"
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/common",
+  "gmlewis/spin-moonbit-sdk/interface/wasi/http/types",
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams",
+}
 
 // Values
 pub fn consume(@types.OutgoingRequest, &@common.HashFunc?, debug? : Bool) -> Result[(Int64, String), @types.ErrorCode]

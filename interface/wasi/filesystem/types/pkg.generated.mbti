@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/filesystem/types"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/wasi/clocks/wallClock"
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/error"
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/clocks/wallClock",
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/error",
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams",
+}
 
 // Values
 pub fn filesystem_error_code(@error.Error_) -> ErrorCode?

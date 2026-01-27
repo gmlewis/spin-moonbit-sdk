@@ -1,0 +1,3 @@
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network" as @network,
+}

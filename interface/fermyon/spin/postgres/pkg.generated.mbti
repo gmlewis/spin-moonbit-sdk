@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/postgres"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes",
+}
 
 // Values
 

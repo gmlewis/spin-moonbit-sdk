@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/stdout"
 
-import(
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams"
-)
+import {
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams",
+}
 
 // Values
 pub fn get_stdout() -> @streams.OutputStream
