@@ -1,4 +1,4 @@
 import {
-  "gmlewis/spin-moonbit-sdk/ffi" as @ffi,
-  "gmlewis/spin-moonbit-sdk/interface/wasi/filesystem/types" as @types,
+  "gmlewis/spin-moonbit-sdk/ffi" @ffi,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/filesystem/types" @types,
 }

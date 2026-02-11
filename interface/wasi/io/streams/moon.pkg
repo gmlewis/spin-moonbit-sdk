@@ -1,5 +1,5 @@
 import {
-  "gmlewis/spin-moonbit-sdk/ffi" as @ffi,
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/error" as @error,
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll" as @poll,
+  "gmlewis/spin-moonbit-sdk/ffi" @ffi,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/error" @error,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll" @poll,
 }

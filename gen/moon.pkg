@@ -1,5 +1,5 @@
 import {
-  "gmlewis/spin-moonbit-sdk/ffi" as @ffi,
+  "gmlewis/spin-moonbit-sdk/ffi" @ffi,
 }
 
 options(

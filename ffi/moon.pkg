@@ -1,5 +1,6 @@
+warnings = "-44"
+
 options(
   "supported-targets": [ "wasm" ],
   targets: { "top_notwasm.mbt": [ "not", "wasm" ], "top_wasm.mbt": [ "wasm" ] },
-  "warn-list": "-44",
 )

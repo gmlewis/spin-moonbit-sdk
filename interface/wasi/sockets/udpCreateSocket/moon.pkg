@@ -1,5 +1,5 @@
 import {
-  "gmlewis/spin-moonbit-sdk/ffi" as @ffi,
-  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network" as @network,
-  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/udp" as @udp,
+  "gmlewis/spin-moonbit-sdk/ffi" @ffi,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network" @network,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/udp" @udp,
 }

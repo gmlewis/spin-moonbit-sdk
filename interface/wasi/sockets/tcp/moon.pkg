@@ -1,6 +1,6 @@
 import {
-  "gmlewis/spin-moonbit-sdk/ffi" as @ffi,
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll" as @poll,
-  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams" as @streams,
-  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network" as @network,
+  "gmlewis/spin-moonbit-sdk/ffi" @ffi,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll" @poll,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams" @streams,
+  "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network" @network,
 }
