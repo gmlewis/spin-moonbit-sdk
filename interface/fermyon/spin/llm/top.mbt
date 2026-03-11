@@ -82,12 +82,14 @@ pub fn infer(
     lowered8,
     return_area,
   )
+
   let lifted21 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2str(
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Result::Ok(InferencingResult::{
         text: result,
         usage: InferencingUsage::{
@@ -104,6 +106,7 @@ pub fn infer(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::RuntimeError(result17)
         }
         2 => {
@@ -111,10 +114,12 @@ pub fn infer(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::InvalidInput(result20)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -133,6 +138,7 @@ pub fn generate_embeddings(
 ) -> Result[EmbeddingsResult, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let address = @ffi.malloc(text.length() * 8)
   for index = 0; index < text.length(); index = index + 1 {
     let element : String = text[index]
@@ -149,18 +155,22 @@ pub fn generate_embeddings(
     text.length(),
     return_area,
   )
+
   let lifted15 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let array : Array[FixedArray[Float]] = []
       for index4 = 0; index4 < @ffi.load32(return_area + 8); index4 = index4 + 1 {
         let base3 = @ffi.load32(return_area + 4) + index4 * 8
+
         let result = @ffi.ptr2float_array(
           @ffi.load32(base3 + 0),
           @ffi.load32(base3 + 4),
         )
+
         array.push(result)
       }
       @ffi.free(@ffi.load32(return_area + 4))
+
       Result::Ok(EmbeddingsResult::{
         embeddings: array,
         usage: EmbeddingsUsage::{
@@ -176,6 +186,7 @@ pub fn generate_embeddings(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::RuntimeError(result11)
         }
         2 => {
@@ -183,10 +194,12 @@ pub fn generate_embeddings(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::InvalidInput(result14)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -194,6 +207,7 @@ pub fn generate_embeddings(
   ignore(model)
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted15

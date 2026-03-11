@@ -81,12 +81,14 @@ pub fn InputStream::read(
     len.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2bytes(
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Result::Ok(result)
     }
     1 => {
@@ -98,6 +100,7 @@ pub fn InputStream::read(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -120,12 +123,14 @@ pub fn InputStream::blocking_read(
     len.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2bytes(
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Result::Ok(result)
     }
     1 => {
@@ -137,6 +142,7 @@ pub fn InputStream::blocking_read(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -161,6 +167,7 @@ pub fn InputStream::skip(
     len.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
@@ -172,6 +179,7 @@ pub fn InputStream::skip(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -194,6 +202,7 @@ pub fn InputStream::blocking_skip(
     len.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
@@ -205,6 +214,7 @@ pub fn InputStream::blocking_skip(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -242,6 +252,7 @@ pub fn OutputStream::check_write(
   let OutputStream(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutputStreamCheckWrite(handle, return_area)
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
@@ -253,6 +264,7 @@ pub fn OutputStream::check_write(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -287,6 +299,7 @@ pub fn OutputStream::write(
     contents.length(),
     return_area,
   )
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -298,6 +311,7 @@ pub fn OutputStream::write(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -344,6 +358,7 @@ pub fn OutputStream::blocking_write_and_flush(
     contents.length(),
     return_area,
   )
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -355,6 +370,7 @@ pub fn OutputStream::blocking_write_and_flush(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -379,6 +395,7 @@ pub fn OutputStream::flush(self : OutputStream) -> Result[Unit, StreamError] {
   let OutputStream(handle) = self
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutputStreamFlush(handle, return_area)
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -390,6 +407,7 @@ pub fn OutputStream::flush(self : OutputStream) -> Result[Unit, StreamError] {
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -407,6 +425,7 @@ pub fn OutputStream::blocking_flush(
   let OutputStream(handle) = self
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutputStreamBlockingFlush(handle, return_area)
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -418,6 +437,7 @@ pub fn OutputStream::blocking_flush(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -461,6 +481,7 @@ pub fn OutputStream::write_zeroes(
     len.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -472,6 +493,7 @@ pub fn OutputStream::write_zeroes(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -516,6 +538,7 @@ pub fn OutputStream::blocking_write_zeroes_and_flush(
     len.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -527,6 +550,7 @@ pub fn OutputStream::blocking_write_zeroes_and_flush(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -555,6 +579,7 @@ pub fn OutputStream::splice(
   len : UInt64,
 ) -> Result[UInt64, StreamError] {
   let OutputStream(handle) = self
+
   let InputStream(handle0) = src
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutputStreamSplice(
@@ -563,6 +588,7 @@ pub fn OutputStream::splice(
     len.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted7 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
@@ -574,6 +600,7 @@ pub fn OutputStream::splice(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -594,6 +621,7 @@ pub fn OutputStream::blocking_splice(
   len : UInt64,
 ) -> Result[UInt64, StreamError] {
   let OutputStream(handle) = self
+
   let InputStream(handle0) = src
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutputStreamBlockingSplice(
@@ -602,6 +630,7 @@ pub fn OutputStream::blocking_splice(
     len.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted7 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => {
@@ -613,6 +642,7 @@ pub fn OutputStream::blocking_splice(
         1 => StreamError::Closed
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()

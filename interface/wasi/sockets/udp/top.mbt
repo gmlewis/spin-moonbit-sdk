@@ -78,7 +78,9 @@ pub fn UdpSocket::start_bind(
   local_address : @network.IpSocketAddress,
 ) -> Result[Unit, @network.ErrorCode] {
   let UdpSocket(handle) = self
+
   let @network.Network(handle0) = network
+
   let (
     lowered,
     lowered4,
@@ -129,6 +131,7 @@ pub fn UdpSocket::start_bind(
     handle, handle0, lowered, lowered4, lowered5, lowered6, lowered7, lowered8, lowered9,
     lowered10, lowered11, lowered12, lowered13, lowered14, return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -145,6 +148,7 @@ pub fn UdpSocket::finish_bind(
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodUdpSocketFinishBind(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -203,6 +207,7 @@ pub fn UdpSocket::stream(
   @network.ErrorCode,
 ] {
   let UdpSocket(handle) = self
+
   let (
     lowered20,
     lowered21,
@@ -265,6 +270,7 @@ pub fn UdpSocket::stream(
             payload8.scope_id.reinterpret_as_int(),
           )
       }
+
       (
         1, lowered, lowered9, lowered10, lowered11, lowered12, lowered13, lowered14,
         lowered15, lowered16, lowered17, lowered18, lowered19,
@@ -276,6 +282,7 @@ pub fn UdpSocket::stream(
     handle, lowered20, lowered21, lowered22, lowered23, lowered24, lowered25, lowered26,
     lowered27, lowered28, lowered29, lowered30, lowered31, lowered32, return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -318,6 +325,7 @@ pub fn UdpSocket::local_address(
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(36)
   wasmImportMethodUdpSocketLocalAddress(handle, return_area)
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
@@ -353,6 +361,7 @@ pub fn UdpSocket::local_address(
           })
         _ => panic()
       }
+
       Result::Ok(lifted)
     }
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -379,6 +388,7 @@ pub fn UdpSocket::remote_address(
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(36)
   wasmImportMethodUdpSocketRemoteAddress(handle, return_area)
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
@@ -414,6 +424,7 @@ pub fn UdpSocket::remote_address(
           })
         _ => panic()
       }
+
       Result::Ok(lifted)
     }
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -446,6 +457,7 @@ pub fn UdpSocket::unicast_hop_limit(
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodUdpSocketUnicastHopLimit(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load8_u(return_area + 1).to_byte())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -467,6 +479,7 @@ pub fn UdpSocket::set_unicast_hop_limit(
     value.to_int(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -493,6 +506,7 @@ pub fn UdpSocket::receive_buffer_size(
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodUdpSocketReceiveBufferSize(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -514,6 +528,7 @@ pub fn UdpSocket::set_receive_buffer_size(
     value.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -530,6 +545,7 @@ pub fn UdpSocket::send_buffer_size(
   let UdpSocket(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodUdpSocketSendBufferSize(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -551,6 +567,7 @@ pub fn UdpSocket::set_send_buffer_size(
     value.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -606,15 +623,18 @@ pub fn IncomingDatagramStream::receive(
     max_results.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted8 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let array : Array[IncomingDatagram] = []
       for index = 0; index < @ffi.load32(return_area + 8); index = index + 1 {
         let base1 = @ffi.load32(return_area + 4) + index * 40
+
         let result = @ffi.ptr2bytes(
           @ffi.load32(base1 + 0),
           @ffi.load32(base1 + 4),
         )
+
         let lifted = match @ffi.load8_u(base1 + 8) {
           0 =>
             @network.IpSocketAddress::Ipv4(@network.Ipv4SocketAddress::{
@@ -644,9 +664,11 @@ pub fn IncomingDatagramStream::receive(
             })
           _ => panic()
         }
+
         array.push(IncomingDatagram::{ data: result, remote_address: lifted })
       }
       @ffi.free(@ffi.load32(return_area + 4))
+
       Result::Ok(array)
     }
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -687,6 +709,7 @@ pub fn OutgoingDatagramStream::check_send(
   let OutgoingDatagramStream(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutgoingDatagramStreamCheckSend(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -737,20 +760,25 @@ pub fn OutgoingDatagramStream::send(
 ) -> Result[UInt64, @network.ErrorCode] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let OutgoingDatagramStream(handle) = self
+
   let address = @ffi.malloc(datagrams.length() * 44)
   for index = 0; index < datagrams.length(); index = index + 1 {
     let element : OutgoingDatagram = datagrams[index]
     let base = address + index * 44
     @ffi.store32(base + 4, element.data.length())
     @ffi.store32(base + 0, @ffi.bytes2ptr(element.data))
+
     match element.remote_address {
       None => {
         @ffi.store8(base + 8, 0)
+
         ()
       }
       Some(payload4) => {
         @ffi.store8(base + 8, 1)
+
         match payload4 {
           Ipv4(payload7) => {
             @ffi.store8(base + 12, 0)
@@ -759,6 +787,7 @@ pub fn OutgoingDatagramStream::send(
             @ffi.store8(base + 19, payload7.address.1.to_int())
             @ffi.store8(base + 20, payload7.address.2.to_int())
             @ffi.store8(base + 21, payload7.address.3.to_int())
+
             ()
           }
           Ipv6(payload10) => {
@@ -774,9 +803,11 @@ pub fn OutgoingDatagramStream::send(
             @ffi.store16(base + 36, payload10.address.6.reinterpret_as_int())
             @ffi.store16(base + 38, payload10.address.7.reinterpret_as_int())
             @ffi.store32(base + 40, payload10.scope_id.reinterpret_as_int())
+
             ()
           }
         }
+
         ()
       }
     }
@@ -789,6 +820,7 @@ pub fn OutgoingDatagramStream::send(
     datagrams.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -796,6 +828,7 @@ pub fn OutgoingDatagramStream::send(
   }
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted

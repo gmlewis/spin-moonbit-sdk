@@ -12,6 +12,7 @@
 pub fn get_insecure_random_bytes(len : UInt64) -> FixedArray[Byte] {
   let return_area = @ffi.malloc(8)
   wasmImportGetInsecureRandomBytes(len.reinterpret_as_int64(), return_area)
+
   let result = @ffi.ptr2bytes(
     @ffi.load32(return_area + 0),
     @ffi.load32(return_area + 4),

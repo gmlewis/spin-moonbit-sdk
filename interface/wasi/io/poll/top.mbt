@@ -56,11 +56,13 @@ pub fn poll(in_ : Array[Pollable]) -> FixedArray[UInt] {
   for index = 0; index < in_.length(); index = index + 1 {
     let element : Pollable = in_[index]
     let base = address + index * 4
+
     let Pollable(handle) = element
     @ffi.store32(base + 0, handle)
   }
   let return_area = @ffi.malloc(8)
   wasmImportPoll(address, in_.length(), return_area)
+
   let result = @ffi.ptr2uint_array(
     @ffi.load32(return_area + 0),
     @ffi.load32(return_area + 4),

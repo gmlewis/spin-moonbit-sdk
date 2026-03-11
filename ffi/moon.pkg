@@ -1,6 +1,8 @@
 warnings = "-44"
 
 options(
-  "supported-targets": [ "wasm" ],
-  targets: { "top_notwasm.mbt": [ "not", "wasm" ], "top_wasm.mbt": [ "wasm" ] },
+  targets: {
+    "top_notwasm.mbt": [ "js", "native" ],
+    "top_wasm.mbt": [ "wasm", "wasm-gc" ],
+  },
 )

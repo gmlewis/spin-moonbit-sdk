@@ -102,7 +102,9 @@ pub fn TcpSocket::start_bind(
   local_address : @network.IpSocketAddress,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
+
   let @network.Network(handle0) = network
+
   let (
     lowered,
     lowered4,
@@ -153,6 +155,7 @@ pub fn TcpSocket::start_bind(
     handle, handle0, lowered, lowered4, lowered5, lowered6, lowered7, lowered8, lowered9,
     lowered10, lowered11, lowered12, lowered13, lowered14, return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -169,6 +172,7 @@ pub fn TcpSocket::finish_bind(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketFinishBind(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -227,7 +231,9 @@ pub fn TcpSocket::start_connect(
   remote_address : @network.IpSocketAddress,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
+
   let @network.Network(handle0) = network
+
   let (
     lowered,
     lowered4,
@@ -278,6 +284,7 @@ pub fn TcpSocket::start_connect(
     handle, handle0, lowered, lowered4, lowered5, lowered6, lowered7, lowered8, lowered9,
     lowered10, lowered11, lowered12, lowered13, lowered14, return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -294,6 +301,7 @@ pub fn TcpSocket::finish_connect(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(12)
   wasmImportMethodTcpSocketFinishConnect(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -341,6 +349,7 @@ pub fn TcpSocket::start_listen(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketStartListen(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -357,6 +366,7 @@ pub fn TcpSocket::finish_listen(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketFinishListen(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -402,6 +412,7 @@ pub fn TcpSocket::accept(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketAccept(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -441,6 +452,7 @@ pub fn TcpSocket::local_address(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(36)
   wasmImportMethodTcpSocketLocalAddress(handle, return_area)
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
@@ -476,6 +488,7 @@ pub fn TcpSocket::local_address(
           })
         _ => panic()
       }
+
       Result::Ok(lifted)
     }
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -502,6 +515,7 @@ pub fn TcpSocket::remote_address(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(36)
   wasmImportMethodTcpSocketRemoteAddress(handle, return_area)
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted = match @ffi.load8_u(return_area + 4) {
@@ -537,6 +551,7 @@ pub fn TcpSocket::remote_address(
           })
         _ => panic()
       }
+
       Result::Ok(lifted)
     }
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -587,6 +602,7 @@ pub fn TcpSocket::set_listen_backlog_size(
     value.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -612,6 +628,7 @@ pub fn TcpSocket::keep_alive_enabled(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketKeepAliveEnabled(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load8_u(return_area + 1) != 0)
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -637,6 +654,7 @@ pub fn TcpSocket::set_keep_alive_enabled(
     },
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -663,6 +681,7 @@ pub fn TcpSocket::keep_alive_idle_time(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketKeepAliveIdleTime(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -684,6 +703,7 @@ pub fn TcpSocket::set_keep_alive_idle_time(
     value.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -710,6 +730,7 @@ pub fn TcpSocket::keep_alive_interval(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketKeepAliveInterval(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -731,6 +752,7 @@ pub fn TcpSocket::set_keep_alive_interval(
     value.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -757,6 +779,7 @@ pub fn TcpSocket::keep_alive_count(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodTcpSocketKeepAliveCount(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load32(return_area + 4).reinterpret_as_uint())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -778,6 +801,7 @@ pub fn TcpSocket::set_keep_alive_count(
     value.reinterpret_as_int(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -800,6 +824,7 @@ pub fn TcpSocket::hop_limit(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketHopLimit(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load8_u(return_area + 1).to_byte())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -817,6 +842,7 @@ pub fn TcpSocket::set_hop_limit(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodTcpSocketSetHopLimit(handle, value.to_int(), return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -843,6 +869,7 @@ pub fn TcpSocket::receive_buffer_size(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketReceiveBufferSize(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -864,6 +891,7 @@ pub fn TcpSocket::set_receive_buffer_size(
     value.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -880,6 +908,7 @@ pub fn TcpSocket::send_buffer_size(
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodTcpSocketSendBufferSize(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -901,6 +930,7 @@ pub fn TcpSocket::set_send_buffer_size(
     value.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -969,6 +999,7 @@ pub fn TcpSocket::shutdown(
     shutdown_type.ordinal(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 1)))

@@ -22,6 +22,7 @@ pub fn Connection::open(
     address.length(),
     return_area,
   )
+
   let lifted16 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(Connection::Connection(@ffi.load32(return_area + 4)))
     1 => {
@@ -31,6 +32,7 @@ pub fn Connection::open(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::ConnectionFailed(result)
         }
         1 => {
@@ -38,6 +40,7 @@ pub fn Connection::open(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::BadParameter(result6)
         }
         2 => {
@@ -45,6 +48,7 @@ pub fn Connection::open(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::QueryFailed(result9)
         }
         3 => {
@@ -52,6 +56,7 @@ pub fn Connection::open(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::ValueConversionFailed(result12)
         }
         4 => {
@@ -59,10 +64,12 @@ pub fn Connection::open(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::Other(result15)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -81,65 +88,79 @@ pub fn Connection::query(
 ) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let Connection(handle) = self
+
   let address = @ffi.malloc(params.length() * 16)
   for index = 0; index < params.length(); index = index + 1 {
     let element : @rdbmsTypes.ParameterValue = params[index]
     let base = address + index * 16
+
     match element {
       Boolean(payload) => {
         @ffi.store8(base + 0, 0)
         @ffi.store8(base + 8, if payload { 1 } else { 0 })
+
         ()
       }
       Int8(payload4) => {
         @ffi.store8(base + 0, 1)
         @ffi.store8(base + 8, @ffi.extend8(payload4))
+
         ()
       }
       Int16(payload7) => {
         @ffi.store8(base + 0, 2)
         @ffi.store16(base + 8, @ffi.extend16(payload7))
+
         ()
       }
       Int32(payload10) => {
         @ffi.store8(base + 0, 3)
         @ffi.store32(base + 8, payload10)
+
         ()
       }
       Int64(payload13) => {
         @ffi.store8(base + 0, 4)
         @ffi.store64(base + 8, payload13)
+
         ()
       }
       Uint8(payload16) => {
         @ffi.store8(base + 0, 5)
         @ffi.store8(base + 8, payload16.to_int())
+
         ()
       }
       Uint16(payload19) => {
         @ffi.store8(base + 0, 6)
         @ffi.store16(base + 8, payload19.reinterpret_as_int())
+
         ()
       }
       Uint32(payload22) => {
         @ffi.store8(base + 0, 7)
         @ffi.store32(base + 8, payload22.reinterpret_as_int())
+
         ()
       }
       Uint64(payload25) => {
         @ffi.store8(base + 0, 8)
         @ffi.store64(base + 8, payload25.reinterpret_as_int64())
+
         ()
       }
       Floating32(payload28) => {
         @ffi.store8(base + 0, 9)
         @ffi.storef32(base + 8, payload28)
+
         ()
       }
       Floating64(payload31) => {
         @ffi.store8(base + 0, 10)
         @ffi.storef64(base + 8, payload31)
+
         ()
       }
       Str(payload34) => {
@@ -147,6 +168,7 @@ pub fn Connection::query(
         @ffi.store32(base + 12, payload34.length())
         @ffi.store32(base + 8, @ffi.str2ptr(payload34))
         ignoreList.push(payload34)
+
         ()
       }
       Binary(payload37) => {
@@ -154,10 +176,12 @@ pub fn Connection::query(
         @ffi.store32(base + 12, payload37.length())
         @ffi.store32(base + 8, @ffi.bytes2ptr(payload37))
         ignoreList.push(payload37)
+
         ()
       }
       DbNull => {
         @ffi.store8(base + 0, 13)
+
         ()
       }
     }
@@ -171,6 +195,7 @@ pub fn Connection::query(
     params.length(),
     return_area,
   )
+
   let lifted104 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let array : Array[@rdbmsTypes.Column] = []
@@ -178,26 +203,31 @@ pub fn Connection::query(
           index45 < @ffi.load32(return_area + 8)
           index45 = index45 + 1 {
         let base44 = @ffi.load32(return_area + 4) + index45 * 12
+
         let result = @ffi.ptr2str(
           @ffi.load32(base44 + 0),
           @ffi.load32(base44 + 4),
         )
+
         array.push(@rdbmsTypes.Column::{
           name: result,
           data_type: @rdbmsTypes.DbDataType::from(@ffi.load8_u(base44 + 8)),
         })
       }
       @ffi.free(@ffi.load32(return_area + 4))
+
       let array84 : Array[Array[@rdbmsTypes.DbValue]] = []
       for index85 = 0
           index85 < @ffi.load32(return_area + 16)
           index85 = index85 + 1 {
         let base47 = @ffi.load32(return_area + 12) + index85 * 8
+
         let array82 : Array[@rdbmsTypes.DbValue] = []
         for index83 = 0
             index83 < @ffi.load32(base47 + 4)
             index83 = index83 + 1 {
           let base49 = @ffi.load32(base47 + 0) + index83 * 16
+
           let lifted = match @ffi.load8_u(base49 + 0) {
             0 => @rdbmsTypes.DbValue::Boolean(@ffi.load8_u(base49 + 8) != 0)
             1 => @rdbmsTypes.DbValue::Int8(@ffi.load8(base49 + 8) - 0x100)
@@ -224,6 +254,7 @@ pub fn Connection::query(
                 @ffi.load32(base49 + 8),
                 @ffi.load32(base49 + 12),
               )
+
               @rdbmsTypes.DbValue::Str(result74)
             }
             12 => {
@@ -231,18 +262,22 @@ pub fn Connection::query(
                 @ffi.load32(base49 + 8),
                 @ffi.load32(base49 + 12),
               )
+
               @rdbmsTypes.DbValue::Binary(result77)
             }
             13 => @rdbmsTypes.DbValue::DbNull
             14 => @rdbmsTypes.DbValue::Unsupported
             _ => panic()
           }
+
           array82.push(lifted)
         }
         @ffi.free(@ffi.load32(base47 + 0))
+
         array84.push(array82)
       }
       @ffi.free(@ffi.load32(return_area + 12))
+
       Result::Ok(@rdbmsTypes.RowSet::{ columns: array, rows: array84 })
     }
     1 => {
@@ -252,6 +287,7 @@ pub fn Connection::query(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::ConnectionFailed(result90)
         }
         1 => {
@@ -259,6 +295,7 @@ pub fn Connection::query(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::BadParameter(result93)
         }
         2 => {
@@ -266,6 +303,7 @@ pub fn Connection::query(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::QueryFailed(result96)
         }
         3 => {
@@ -273,6 +311,7 @@ pub fn Connection::query(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::ValueConversionFailed(result99)
         }
         4 => {
@@ -280,10 +319,12 @@ pub fn Connection::query(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::Other(result102)
         }
         _ => panic()
       }
+
       Result::Err(lifted103)
     }
     _ => panic()
@@ -291,6 +332,7 @@ pub fn Connection::query(
   ignore(statement)
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted104
@@ -305,65 +347,79 @@ pub fn Connection::execute(
 ) -> Result[Unit, @rdbmsTypes.Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let Connection(handle) = self
+
   let address = @ffi.malloc(params.length() * 16)
   for index = 0; index < params.length(); index = index + 1 {
     let element : @rdbmsTypes.ParameterValue = params[index]
     let base = address + index * 16
+
     match element {
       Boolean(payload) => {
         @ffi.store8(base + 0, 0)
         @ffi.store8(base + 8, if payload { 1 } else { 0 })
+
         ()
       }
       Int8(payload4) => {
         @ffi.store8(base + 0, 1)
         @ffi.store8(base + 8, @ffi.extend8(payload4))
+
         ()
       }
       Int16(payload7) => {
         @ffi.store8(base + 0, 2)
         @ffi.store16(base + 8, @ffi.extend16(payload7))
+
         ()
       }
       Int32(payload10) => {
         @ffi.store8(base + 0, 3)
         @ffi.store32(base + 8, payload10)
+
         ()
       }
       Int64(payload13) => {
         @ffi.store8(base + 0, 4)
         @ffi.store64(base + 8, payload13)
+
         ()
       }
       Uint8(payload16) => {
         @ffi.store8(base + 0, 5)
         @ffi.store8(base + 8, payload16.to_int())
+
         ()
       }
       Uint16(payload19) => {
         @ffi.store8(base + 0, 6)
         @ffi.store16(base + 8, payload19.reinterpret_as_int())
+
         ()
       }
       Uint32(payload22) => {
         @ffi.store8(base + 0, 7)
         @ffi.store32(base + 8, payload22.reinterpret_as_int())
+
         ()
       }
       Uint64(payload25) => {
         @ffi.store8(base + 0, 8)
         @ffi.store64(base + 8, payload25.reinterpret_as_int64())
+
         ()
       }
       Floating32(payload28) => {
         @ffi.store8(base + 0, 9)
         @ffi.storef32(base + 8, payload28)
+
         ()
       }
       Floating64(payload31) => {
         @ffi.store8(base + 0, 10)
         @ffi.storef64(base + 8, payload31)
+
         ()
       }
       Str(payload34) => {
@@ -371,6 +427,7 @@ pub fn Connection::execute(
         @ffi.store32(base + 12, payload34.length())
         @ffi.store32(base + 8, @ffi.str2ptr(payload34))
         ignoreList.push(payload34)
+
         ()
       }
       Binary(payload37) => {
@@ -378,10 +435,12 @@ pub fn Connection::execute(
         @ffi.store32(base + 12, payload37.length())
         @ffi.store32(base + 8, @ffi.bytes2ptr(payload37))
         ignoreList.push(payload37)
+
         ()
       }
       DbNull => {
         @ffi.store8(base + 0, 13)
+
         ()
       }
     }
@@ -395,6 +454,7 @@ pub fn Connection::execute(
     params.length(),
     return_area,
   )
+
   let lifted59 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -404,6 +464,7 @@ pub fn Connection::execute(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::ConnectionFailed(result)
         }
         1 => {
@@ -411,6 +472,7 @@ pub fn Connection::execute(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::BadParameter(result49)
         }
         2 => {
@@ -418,6 +480,7 @@ pub fn Connection::execute(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::QueryFailed(result52)
         }
         3 => {
@@ -425,6 +488,7 @@ pub fn Connection::execute(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::ValueConversionFailed(result55)
         }
         4 => {
@@ -432,10 +496,12 @@ pub fn Connection::execute(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           @rdbmsTypes.Error_::Other(result58)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -443,6 +509,7 @@ pub fn Connection::execute(
   ignore(statement)
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted59

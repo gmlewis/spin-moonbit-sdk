@@ -65,6 +65,7 @@ pub fn Connection::open(
     keep_alive_interval_in_secs.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted11 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(Connection::Connection(@ffi.load32(return_area + 4)))
     1 => {
@@ -76,6 +77,7 @@ pub fn Connection::open(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::ConnectionFailed(result)
         }
         3 => {
@@ -83,10 +85,12 @@ pub fn Connection::open(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result10)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -117,6 +121,7 @@ pub fn Connection::publish(
     qos.ordinal(),
     return_area,
   )
+
   let lifted11 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -128,6 +133,7 @@ pub fn Connection::publish(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::ConnectionFailed(result)
         }
         3 => {
@@ -135,10 +141,12 @@ pub fn Connection::publish(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result10)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()

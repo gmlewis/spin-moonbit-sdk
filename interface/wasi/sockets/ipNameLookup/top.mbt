@@ -43,6 +43,7 @@ pub fn resolve_addresses(
     name.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -76,6 +77,7 @@ pub fn ResolveAddressStream::resolve_next_address(
   let ResolveAddressStream(handle) = self
   let return_area = @ffi.malloc(22)
   wasmImportMethodResolveAddressStreamResolveNextAddress(handle, return_area)
+
   let lifted11 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted8 : @network.IpAddress? = match @ffi.load8_u(return_area + 2) {
@@ -122,10 +124,12 @@ pub fn ResolveAddressStream::resolve_next_address(
               )
             _ => panic()
           }
+
           Option::Some(lifted)
         }
         _ => panic()
       }
+
       Result::Ok(lifted8)
     }
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 2)))

@@ -6,6 +6,7 @@
 pub fn get_terminal_stdin() -> @terminalInput.TerminalInput? {
   let return_area = @ffi.malloc(8)
   wasmImportGetTerminalStdin(return_area)
+
   let lifted : @terminalInput.TerminalInput? = match
     @ffi.load8_u(return_area + 0) {
     0 => Option::None

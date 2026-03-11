@@ -16,12 +16,14 @@ pub(all) enum Error_ {
 pub fn get(name : String) -> Result[String, Error_] {
   let return_area = @ffi.malloc(16)
   wasmImportGet(@ffi.str2ptr(name), name.length(), return_area)
+
   let lifted14 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2str(
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Result::Ok(result)
     }
     1 => {
@@ -31,6 +33,7 @@ pub fn get(name : String) -> Result[String, Error_] {
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::InvalidName(result4)
         }
         1 => {
@@ -38,6 +41,7 @@ pub fn get(name : String) -> Result[String, Error_] {
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Undefined(result7)
         }
         2 => {
@@ -45,6 +49,7 @@ pub fn get(name : String) -> Result[String, Error_] {
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Provider(result10)
         }
         3 => {
@@ -52,10 +57,12 @@ pub fn get(name : String) -> Result[String, Error_] {
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result13)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()

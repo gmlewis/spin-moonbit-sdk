@@ -83,7 +83,7 @@ pub fn DescriptorFlags::set(
   other : DescriptorFlagsFlag,
 ) -> DescriptorFlags {
   let DescriptorFlags(flag) = self
-  flag | other.value()
+  flag.lor(other.value())
 }
 
 ///|
@@ -92,7 +92,7 @@ pub fn DescriptorFlags::unset(
   other : DescriptorFlagsFlag,
 ) -> DescriptorFlags {
   let DescriptorFlags(flag) = self
-  flag & other.value().lnot()
+  flag.land(other.value().lnot())
 }
 
 ///|
@@ -101,7 +101,7 @@ pub fn DescriptorFlags::is_set(
   other : DescriptorFlagsFlag,
 ) -> Bool {
   let DescriptorFlags(flag) = self
-  (flag & other.value()) == other.value()
+  flag.land(other.value()) == other.value()
 }
 
 ///|
@@ -128,19 +128,19 @@ fn PathFlagsFlag::value(self : PathFlagsFlag) -> Byte {
 ///|
 pub fn PathFlags::set(self : Self, other : PathFlagsFlag) -> PathFlags {
   let PathFlags(flag) = self
-  flag | other.value()
+  flag.lor(other.value())
 }
 
 ///|
 pub fn PathFlags::unset(self : Self, other : PathFlagsFlag) -> PathFlags {
   let PathFlags(flag) = self
-  flag & other.value().lnot()
+  flag.land(other.value().lnot())
 }
 
 ///|
 pub fn PathFlags::is_set(self : Self, other : PathFlagsFlag) -> Bool {
   let PathFlags(flag) = self
-  (flag & other.value()) == other.value()
+  flag.land(other.value()) == other.value()
 }
 
 ///|
@@ -173,19 +173,19 @@ fn OpenFlagsFlag::value(self : OpenFlagsFlag) -> Byte {
 ///|
 pub fn OpenFlags::set(self : Self, other : OpenFlagsFlag) -> OpenFlags {
   let OpenFlags(flag) = self
-  flag | other.value()
+  flag.lor(other.value())
 }
 
 ///|
 pub fn OpenFlags::unset(self : Self, other : OpenFlagsFlag) -> OpenFlags {
   let OpenFlags(flag) = self
-  flag & other.value().lnot()
+  flag.land(other.value().lnot())
 }
 
 ///|
 pub fn OpenFlags::is_set(self : Self, other : OpenFlagsFlag) -> Bool {
   let OpenFlags(flag) = self
-  (flag & other.value()) == other.value()
+  flag.land(other.value()) == other.value()
 }
 
 ///|
@@ -436,6 +436,7 @@ pub fn Descriptor::read_via_stream(
     offset.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -466,6 +467,7 @@ pub fn Descriptor::write_via_stream(
     offset.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -491,6 +493,7 @@ pub fn Descriptor::append_via_stream(
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodDescriptorAppendViaStream(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -522,6 +525,7 @@ pub fn Descriptor::advise(
     advice.ordinal(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -542,6 +546,7 @@ pub fn Descriptor::sync_data(self : Descriptor) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodDescriptorSyncData(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -564,6 +569,7 @@ pub fn Descriptor::get_flags(
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodDescriptorGetFlags(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(DescriptorFlags(@ffi.load8_u(return_area + 1).to_byte()))
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -590,6 +596,7 @@ pub fn Descriptor::get_type(
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodDescriptorGetType(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(DescriptorType::from(@ffi.load8_u(return_area + 1)))
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -615,6 +622,7 @@ pub fn Descriptor::set_size(
     size.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -636,6 +644,7 @@ pub fn Descriptor::set_times(
   data_modification_timestamp : NewTimestamp,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
+
   let (lowered, lowered6, lowered7) = match data_access_timestamp {
     NoChange => (0, 0L, 0)
     Now => (1, 0L, 0)
@@ -646,6 +655,7 @@ pub fn Descriptor::set_times(
         payload5.nanoseconds.reinterpret_as_int(),
       )
   }
+
   let (lowered17, lowered18, lowered19) = match data_modification_timestamp {
     NoChange => (0, 0L, 0)
     Now => (1, 0L, 0)
@@ -660,6 +670,7 @@ pub fn Descriptor::set_times(
   wasmImportMethodDescriptorSetTimes(
     handle, lowered, lowered6, lowered7, lowered17, lowered18, lowered19, return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -694,12 +705,14 @@ pub fn Descriptor::read(
     offset.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2bytes(
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Result::Ok((result, @ffi.load8_u(return_area + 12) != 0))
     }
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -733,6 +746,7 @@ pub fn Descriptor::write(
     offset.reinterpret_as_int64(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8).reinterpret_as_uint64())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 8)))
@@ -759,6 +773,7 @@ pub fn Descriptor::read_directory(
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodDescriptorReadDirectory(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -782,6 +797,7 @@ pub fn Descriptor::sync(self : Descriptor) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(2)
   wasmImportMethodDescriptorSync(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -807,6 +823,7 @@ pub fn Descriptor::create_directory_at(
     path.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -831,6 +848,7 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(104)
   wasmImportMethodDescriptorStat(handle, return_area)
+
   let lifted16 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted : @wallClock.Datetime? = match @ffi.load8_u(return_area + 32) {
@@ -842,6 +860,7 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
           })
         _ => panic()
       }
+
       let lifted8 : @wallClock.Datetime? = match
         @ffi.load8_u(return_area + 56) {
         0 => Option::None
@@ -852,6 +871,7 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
           })
         _ => panic()
       }
+
       let lifted13 : @wallClock.Datetime? = match
         @ffi.load8_u(return_area + 80) {
         0 => Option::None
@@ -862,6 +882,7 @@ pub fn Descriptor::stat(self : Descriptor) -> Result[DescriptorStat, ErrorCode] 
           })
         _ => panic()
       }
+
       Result::Ok(DescriptorStat::{
         type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
         link_count: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
@@ -892,7 +913,9 @@ pub fn Descriptor::stat_at(
   path : String,
 ) -> Result[DescriptorStat, ErrorCode] {
   let Descriptor(handle) = self
+
   let PathFlags(flag) = path_flags
+
   let return_area = @ffi.malloc(104)
   wasmImportMethodDescriptorStatAt(
     handle,
@@ -901,6 +924,7 @@ pub fn Descriptor::stat_at(
     path.length(),
     return_area,
   )
+
   let lifted16 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted : @wallClock.Datetime? = match @ffi.load8_u(return_area + 32) {
@@ -912,6 +936,7 @@ pub fn Descriptor::stat_at(
           })
         _ => panic()
       }
+
       let lifted8 : @wallClock.Datetime? = match
         @ffi.load8_u(return_area + 56) {
         0 => Option::None
@@ -922,6 +947,7 @@ pub fn Descriptor::stat_at(
           })
         _ => panic()
       }
+
       let lifted13 : @wallClock.Datetime? = match
         @ffi.load8_u(return_area + 80) {
         0 => Option::None
@@ -932,6 +958,7 @@ pub fn Descriptor::stat_at(
           })
         _ => panic()
       }
+
       Result::Ok(DescriptorStat::{
         type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
         link_count: @ffi.load64(return_area + 16).reinterpret_as_uint64(),
@@ -964,7 +991,9 @@ pub fn Descriptor::set_times_at(
   data_modification_timestamp : NewTimestamp,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
+
   let PathFlags(flag) = path_flags
+
   let (lowered, lowered6, lowered7) = match data_access_timestamp {
     NoChange => (0, 0L, 0)
     Now => (1, 0L, 0)
@@ -975,6 +1004,7 @@ pub fn Descriptor::set_times_at(
         payload5.nanoseconds.reinterpret_as_int(),
       )
   }
+
   let (lowered17, lowered18, lowered19) = match data_modification_timestamp {
     NoChange => (0, 0L, 0)
     Now => (1, 0L, 0)
@@ -999,6 +1029,7 @@ pub fn Descriptor::set_times_at(
     lowered19,
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -1021,7 +1052,9 @@ pub fn Descriptor::link_at(
   new_path : String,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
+
   let PathFlags(flag) = old_path_flags
+
   let Descriptor(handle0) = new_descriptor
   let return_area = @ffi.malloc(2)
   wasmImportMethodDescriptorLinkAt(
@@ -1034,6 +1067,7 @@ pub fn Descriptor::link_at(
     new_path.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -1072,9 +1106,13 @@ pub fn Descriptor::open_at(
   flags : DescriptorFlags,
 ) -> Result[Descriptor, ErrorCode] {
   let Descriptor(handle) = self
+
   let PathFlags(flag) = path_flags
+
   let OpenFlags(flag0) = open_flags
+
   let DescriptorFlags(flag1) = flags
+
   let return_area = @ffi.malloc(8)
   wasmImportMethodDescriptorOpenAt(
     handle,
@@ -1085,6 +1123,7 @@ pub fn Descriptor::open_at(
     flag1.to_int(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(Descriptor::Descriptor(@ffi.load32(return_area + 4)))
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -1114,12 +1153,14 @@ pub fn Descriptor::readlink_at(
     path.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => {
       let result = @ffi.ptr2str(
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Result::Ok(result)
     }
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -1148,6 +1189,7 @@ pub fn Descriptor::remove_directory_at(
     path.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -1169,6 +1211,7 @@ pub fn Descriptor::rename_at(
   new_path : String,
 ) -> Result[Unit, ErrorCode] {
   let Descriptor(handle) = self
+
   let Descriptor(handle0) = new_descriptor
   let return_area = @ffi.malloc(2)
   wasmImportMethodDescriptorRenameAt(
@@ -1180,6 +1223,7 @@ pub fn Descriptor::rename_at(
     new_path.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -1213,6 +1257,7 @@ pub fn Descriptor::symlink_at(
     new_path.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -1241,6 +1286,7 @@ pub fn Descriptor::unlink_file_at(
     path.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 1)))
@@ -1263,6 +1309,7 @@ pub fn Descriptor::is_same_object(
   other : Descriptor,
 ) -> Bool {
   let Descriptor(handle) = self
+
   let Descriptor(handle0) = other
   let result : Int = wasmImportMethodDescriptorIsSameObject(handle, handle0)
   return result != 0
@@ -1294,6 +1341,7 @@ pub fn Descriptor::metadata_hash(
   let Descriptor(handle) = self
   let return_area = @ffi.malloc(24)
   wasmImportMethodDescriptorMetadataHash(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(MetadataHashValue::{
@@ -1318,7 +1366,9 @@ pub fn Descriptor::metadata_hash_at(
   path : String,
 ) -> Result[MetadataHashValue, ErrorCode] {
   let Descriptor(handle) = self
+
   let PathFlags(flag) = path_flags
+
   let return_area = @ffi.malloc(24)
   wasmImportMethodDescriptorMetadataHashAt(
     handle,
@@ -1327,6 +1377,7 @@ pub fn Descriptor::metadata_hash_at(
     path.length(),
     return_area,
   )
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(MetadataHashValue::{
@@ -1349,6 +1400,7 @@ pub fn DirectoryEntryStream::read_directory_entry(
   let DirectoryEntryStream(handle) = self
   let return_area = @ffi.malloc(20)
   wasmImportMethodDirectoryEntryStreamReadDirectoryEntry(handle, return_area)
+
   let lifted6 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted : DirectoryEntry? = match @ffi.load8_u(return_area + 4) {
@@ -1358,6 +1410,7 @@ pub fn DirectoryEntryStream::read_directory_entry(
             @ffi.load32(return_area + 12),
             @ffi.load32(return_area + 16),
           )
+
           Option::Some(DirectoryEntry::{
             type_: DescriptorType::from(@ffi.load8_u(return_area + 8)),
             name: result,
@@ -1365,6 +1418,7 @@ pub fn DirectoryEntryStream::read_directory_entry(
         }
         _ => panic()
       }
+
       Result::Ok(lifted)
     }
     1 => Result::Err(ErrorCode::from(@ffi.load8_u(return_area + 4)))
@@ -1389,6 +1443,7 @@ pub fn filesystem_error_code(err : @error.Error_) -> ErrorCode? {
   let @error.Error_(handle) = err
   let return_area = @ffi.malloc(2)
   wasmImportFilesystemErrorCode(handle, return_area)
+
   let lifted : ErrorCode? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => Option::Some(ErrorCode::from(@ffi.load8_u(return_area + 1)))

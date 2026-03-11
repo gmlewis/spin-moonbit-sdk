@@ -44,6 +44,7 @@ pub fn Connection::open(address : String) -> Result[Connection, Error_] {
     address.length(),
     return_area,
   )
+
   let lifted10 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(Connection::Connection(@ffi.load32(return_area + 4)))
     1 => {
@@ -56,10 +57,12 @@ pub fn Connection::open(address : String) -> Result[Connection, Error_] {
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -86,6 +89,7 @@ pub fn Connection::publish(
     payload.length(),
     return_area,
   )
+
   let lifted10 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -98,10 +102,12 @@ pub fn Connection::publish(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -126,6 +132,7 @@ pub fn Connection::get(
     key.length(),
     return_area,
   )
+
   let lifted16 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let lifted : FixedArray[Byte]? = match @ffi.load8_u(return_area + 4) {
@@ -135,10 +142,12 @@ pub fn Connection::get(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Option::Some(result)
         }
         _ => panic()
       }
+
       Result::Ok(lifted)
     }
     1 => {
@@ -151,10 +160,12 @@ pub fn Connection::get(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result14)
         }
         _ => panic()
       }
+
       Result::Err(lifted15)
     }
     _ => panic()
@@ -183,6 +194,7 @@ pub fn Connection::set(
     value.length(),
     return_area,
   )
+
   let lifted10 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -195,10 +207,12 @@ pub fn Connection::set(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -227,6 +241,7 @@ pub fn Connection::incr(
     key.length(),
     return_area,
   )
+
   let lifted10 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load64(return_area + 8))
     1 => {
@@ -239,10 +254,12 @@ pub fn Connection::incr(
             @ffi.load32(return_area + 12),
             @ffi.load32(return_area + 16),
           )
+
           Error_::Other(result)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -262,7 +279,9 @@ pub fn Connection::del(
 ) -> Result[UInt, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let Connection(handle) = self
+
   let address = @ffi.malloc(keys.length() * 8)
   for index = 0; index < keys.length(); index = index + 1 {
     let element : String = keys[index]
@@ -273,6 +292,7 @@ pub fn Connection::del(
   }
   let return_area = @ffi.malloc(16)
   wasmImportMethodConnectionDel(handle, address, keys.length(), return_area)
+
   let lifted12 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load32(return_area + 4).reinterpret_as_uint())
     1 => {
@@ -285,16 +305,19 @@ pub fn Connection::del(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
   }
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted12
@@ -309,7 +332,9 @@ pub fn Connection::sadd(
 ) -> Result[UInt, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let Connection(handle) = self
+
   let address = @ffi.malloc(values.length() * 8)
   for index = 0; index < values.length(); index = index + 1 {
     let element : String = values[index]
@@ -327,6 +352,7 @@ pub fn Connection::sadd(
     values.length(),
     return_area,
   )
+
   let lifted12 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load32(return_area + 4).reinterpret_as_uint())
     1 => {
@@ -339,10 +365,12 @@ pub fn Connection::sadd(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -350,6 +378,7 @@ pub fn Connection::sadd(
   ignore(key)
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted12
@@ -369,18 +398,22 @@ pub fn Connection::smembers(
     key.length(),
     return_area,
   )
+
   let lifted13 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let array : Array[String] = []
       for index = 0; index < @ffi.load32(return_area + 8); index = index + 1 {
         let base1 = @ffi.load32(return_area + 4) + index * 8
+
         let result = @ffi.ptr2str(
           @ffi.load32(base1 + 0),
           @ffi.load32(base1 + 4),
         )
+
         array.push(result)
       }
       @ffi.free(@ffi.load32(return_area + 4))
+
       Result::Ok(array)
     }
     1 => {
@@ -393,10 +426,12 @@ pub fn Connection::smembers(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result12)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -415,7 +450,9 @@ pub fn Connection::srem(
 ) -> Result[UInt, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let Connection(handle) = self
+
   let address = @ffi.malloc(values.length() * 8)
   for index = 0; index < values.length(); index = index + 1 {
     let element : String = values[index]
@@ -433,6 +470,7 @@ pub fn Connection::srem(
     values.length(),
     return_area,
   )
+
   let lifted12 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@ffi.load32(return_area + 4).reinterpret_as_uint())
     1 => {
@@ -445,10 +483,12 @@ pub fn Connection::srem(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -456,6 +496,7 @@ pub fn Connection::srem(
   ignore(key)
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted12
@@ -470,15 +511,19 @@ pub fn Connection::execute(
 ) -> Result[Array[RedisResult], Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let Connection(handle) = self
+
   let address = @ffi.malloc(arguments.length() * 16)
   for index = 0; index < arguments.length(); index = index + 1 {
     let element : RedisParameter = arguments[index]
     let base = address + index * 16
+
     match element {
       Int64(payload) => {
         @ffi.store8(base + 0, 0)
         @ffi.store64(base + 8, payload)
+
         ()
       }
       Binary(payload4) => {
@@ -486,6 +531,7 @@ pub fn Connection::execute(
         @ffi.store32(base + 12, payload4.length())
         @ffi.store32(base + 8, @ffi.bytes2ptr(payload4))
         ignoreList.push(payload4)
+
         ()
       }
     }
@@ -499,6 +545,7 @@ pub fn Connection::execute(
     arguments.length(),
     return_area,
   )
+
   let lifted31 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let array : Array[RedisResult] = []
@@ -506,6 +553,7 @@ pub fn Connection::execute(
           index18 < @ffi.load32(return_area + 8)
           index18 = index18 + 1 {
         let base8 = @ffi.load32(return_area + 4) + index18 * 16
+
         let lifted = match @ffi.load8_u(base8 + 0) {
           0 => RedisResult::Nil
           1 => {
@@ -513,6 +561,7 @@ pub fn Connection::execute(
               @ffi.load32(base8 + 8),
               @ffi.load32(base8 + 12),
             )
+
             RedisResult::Status(result)
           }
           2 => RedisResult::Int64(@ffi.load64(base8 + 8))
@@ -521,13 +570,16 @@ pub fn Connection::execute(
               @ffi.load32(base8 + 8),
               @ffi.load32(base8 + 12),
             )
+
             RedisResult::Binary(result17)
           }
           _ => panic()
         }
+
         array.push(lifted)
       }
       @ffi.free(@ffi.load32(return_area + 4))
+
       Result::Ok(array)
     }
     1 => {
@@ -540,10 +592,12 @@ pub fn Connection::execute(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Other(result29)
         }
         _ => panic()
       }
+
       Result::Err(lifted30)
     }
     _ => panic()
@@ -551,6 +605,7 @@ pub fn Connection::execute(
   ignore(command)
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted31

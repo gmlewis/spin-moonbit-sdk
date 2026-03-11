@@ -218,6 +218,12 @@ pub fn cabi_realloc(
 pub(open) trait Any {}
 
 ///|
+pub impl Any for FixedArray[Byte]
+
+///|
+pub impl Any for String
+
+///|
 pub(all) struct Cleanup {
   address : Int
   size : Int

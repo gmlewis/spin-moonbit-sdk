@@ -41,6 +41,7 @@ pub fn Error_::to_debug_string(self : Error_) -> String {
   let Error_(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodErrorToDebugString(handle, return_area)
+
   let result = @ffi.ptr2str(
     @ffi.load32(return_area + 0),
     @ffi.load32(return_area + 4),

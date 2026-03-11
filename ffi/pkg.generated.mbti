@@ -90,4 +90,6 @@ pub(all) struct Cleanup {
 // Traits
 pub(open) trait Any {
 }
+pub impl Any for String
+pub impl Any for FixedArray[Byte]
 

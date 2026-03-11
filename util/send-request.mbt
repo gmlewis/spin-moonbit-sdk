@@ -37,7 +37,7 @@ pub fn send_request(
     _ => return Err(@types.ErrorCode::InternalError(Some("unknown error 3")))
   }
   //
-  for {
+  for ;; {
     let buf = match in_stream.blocking_read(max_buf_size) {
       Ok(buf) => buf
       Err(e) => {

@@ -283,6 +283,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
   let @error.Error_(handle) = err
   let return_area = @ffi.malloc(40)
   wasmImportHttpErrorCode(handle, return_area)
+
   let lifted198 : ErrorCode? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
@@ -296,10 +297,12 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result)
             }
             _ => panic()
           }
+
           let lifted14 : UInt? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
@@ -310,6 +313,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               )
             _ => panic()
           }
+
           ErrorCode::DnsError(DnsErrorPayload::{
             rcode: lifted,
             info_code: lifted14,
@@ -333,6 +337,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
             1 => Option::Some(@ffi.load8_u(return_area + 17).to_byte())
             _ => panic()
           }
+
           let lifted51 : String? = match @ffi.load8_u(return_area + 20) {
             0 => Option::None
             1 => {
@@ -340,10 +345,12 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                 @ffi.load32(return_area + 24),
                 @ffi.load32(return_area + 28),
               )
+
               Option::Some(result50)
             }
             _ => panic()
           }
+
           ErrorCode::TlsAlertReceived(TlsAlertReceivedPayload::{
             alert_id: lifted45,
             alert_message: lifted51,
@@ -360,6 +367,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               )
             _ => panic()
           }
+
           ErrorCode::HttpRequestBodySize(lifted62)
         }
         18 => ErrorCode::HttpRequestMethodInvalid
@@ -372,6 +380,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpRequestHeaderSectionSize(lifted75)
         }
         22 => {
@@ -386,10 +395,12 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                     @ffi.load32(return_area + 24),
                     @ffi.load32(return_area + 28),
                   )
+
                   Option::Some(result86)
                 }
                 _ => panic()
               }
+
               let lifted92 : UInt? = match @ffi.load8_u(return_area + 32) {
                 0 => Option::None
                 1 =>
@@ -398,6 +409,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                   )
                 _ => panic()
               }
+
               Option::Some(FieldSizePayload::{
                 field_name: lifted87,
                 field_size: lifted92,
@@ -405,6 +417,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
             }
             _ => panic()
           }
+
           ErrorCode::HttpRequestHeaderSize(lifted93)
         }
         23 => {
@@ -414,6 +427,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpRequestTrailerSectionSize(lifted100)
         }
         24 => {
@@ -424,16 +438,19 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result107)
             }
             _ => panic()
           }
+
           let lifted113 : UInt? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpRequestTrailerSize(FieldSizePayload::{
             field_name: lifted108,
             field_size: lifted113,
@@ -447,6 +464,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpResponseHeaderSectionSize(lifted122)
         }
         27 => {
@@ -457,16 +475,19 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result129)
             }
             _ => panic()
           }
+
           let lifted135 : UInt? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpResponseHeaderSize(FieldSizePayload::{
             field_name: lifted130,
             field_size: lifted135,
@@ -481,6 +502,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               )
             _ => panic()
           }
+
           ErrorCode::HttpResponseBodySize(lifted142)
         }
         29 => {
@@ -490,6 +512,7 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpResponseTrailerSectionSize(lifted149)
         }
         30 => {
@@ -500,16 +523,19 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result156)
             }
             _ => panic()
           }
+
           let lifted162 : UInt? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpResponseTrailerSize(FieldSizePayload::{
             field_name: lifted157,
             field_size: lifted162,
@@ -523,10 +549,12 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result169)
             }
             _ => panic()
           }
+
           ErrorCode::HttpResponseTransferCoding(lifted170)
         }
         32 => {
@@ -537,10 +565,12 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result177)
             }
             _ => panic()
           }
+
           ErrorCode::HttpResponseContentCoding(lifted178)
         }
         33 => ErrorCode::HttpResponseTimeout
@@ -556,14 +586,17 @@ pub fn http_error_code(err : @error.Error_) -> ErrorCode? {
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result195)
             }
             _ => panic()
           }
+
           ErrorCode::InternalError(lifted196)
         }
         _ => panic()
       }
+
       Option::Some(lifted197)
     }
     _ => panic()
@@ -602,6 +635,7 @@ pub fn Fields::from_list(
 ) -> Result[Fields, HeaderError] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let address = @ffi.malloc(entries.length() * 16)
   for index = 0; index < entries.length(); index = index + 1 {
     let element : (String, FixedArray[Byte]) = entries[index]
@@ -615,6 +649,7 @@ pub fn Fields::from_list(
   }
   let return_area = @ffi.malloc(8)
   wasmImportStaticFieldsFromList(address, entries.length(), return_area)
+
   let lifted10 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(Fields::Fields(@ffi.load32(return_area + 4)))
     1 => {
@@ -624,12 +659,14 @@ pub fn Fields::from_list(
         2 => HeaderError::Immutable
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
   }
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted10
@@ -649,10 +686,13 @@ pub fn Fields::get(self : Fields, name : String) -> Array[FixedArray[Byte]] {
     name.length(),
     return_area,
   )
+
   let array : Array[FixedArray[Byte]] = []
   for index = 0; index < @ffi.load32(return_area + 4); index = index + 1 {
     let base = @ffi.load32(return_area + 0) + index * 8
+
     let result = @ffi.ptr2bytes(@ffi.load32(base + 0), @ffi.load32(base + 4))
+
     array.push(result)
   }
   @ffi.free(@ffi.load32(return_area + 0))
@@ -687,7 +727,9 @@ pub fn Fields::set(
 ) -> Result[Unit, HeaderError] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let Fields(handle) = self
+
   let address = @ffi.malloc(value.length() * 8)
   for index = 0; index < value.length(); index = index + 1 {
     let element : FixedArray[Byte] = value[index]
@@ -705,6 +747,7 @@ pub fn Fields::set(
     value.length(),
     return_area,
   )
+
   let lifted10 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -714,6 +757,7 @@ pub fn Fields::set(
         2 => HeaderError::Immutable
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -721,6 +765,7 @@ pub fn Fields::set(
   ignore(name)
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted10
@@ -743,6 +788,7 @@ pub fn Fields::delete(
     name.length(),
     return_area,
   )
+
   let lifted8 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -752,6 +798,7 @@ pub fn Fields::delete(
         2 => HeaderError::Immutable
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -781,6 +828,7 @@ pub fn Fields::append(
     value.length(),
     return_area,
   )
+
   let lifted8 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -790,6 +838,7 @@ pub fn Fields::append(
         2 => HeaderError::Immutable
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -811,11 +860,15 @@ pub fn Fields::entries(self : Fields) -> Array[(String, FixedArray[Byte])] {
   let Fields(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodFieldsEntries(handle, return_area)
+
   let array : Array[(String, FixedArray[Byte])] = []
   for index = 0; index < @ffi.load32(return_area + 4); index = index + 1 {
     let base = @ffi.load32(return_area + 0) + index * 16
+
     let result = @ffi.ptr2str(@ffi.load32(base + 0), @ffi.load32(base + 4))
+
     let result0 = @ffi.ptr2bytes(@ffi.load32(base + 8), @ffi.load32(base + 12))
+
     array.push((result, result0))
   }
   @ffi.free(@ffi.load32(return_area + 0))
@@ -839,6 +892,7 @@ pub fn IncomingRequest::method_(self : IncomingRequest) -> Method {
   let IncomingRequest(handle) = self
   let return_area = @ffi.malloc(12)
   wasmImportMethodIncomingRequestMethod(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Method::Get
     1 => Method::Head
@@ -854,6 +908,7 @@ pub fn IncomingRequest::method_(self : IncomingRequest) -> Method {
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Method::Other(result)
     }
     _ => panic()
@@ -868,6 +923,7 @@ pub fn IncomingRequest::path_with_query(self : IncomingRequest) -> String? {
   let IncomingRequest(handle) = self
   let return_area = @ffi.malloc(12)
   wasmImportMethodIncomingRequestPathWithQuery(handle, return_area)
+
   let lifted : String? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
@@ -875,6 +931,7 @@ pub fn IncomingRequest::path_with_query(self : IncomingRequest) -> String? {
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Option::Some(result)
     }
     _ => panic()
@@ -889,6 +946,7 @@ pub fn IncomingRequest::scheme(self : IncomingRequest) -> Scheme? {
   let IncomingRequest(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodIncomingRequestScheme(handle, return_area)
+
   let lifted8 : Scheme? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
@@ -900,10 +958,12 @@ pub fn IncomingRequest::scheme(self : IncomingRequest) -> Scheme? {
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Scheme::Other(result)
         }
         _ => panic()
       }
+
       Option::Some(lifted)
     }
     _ => panic()
@@ -918,6 +978,7 @@ pub fn IncomingRequest::authority(self : IncomingRequest) -> String? {
   let IncomingRequest(handle) = self
   let return_area = @ffi.malloc(12)
   wasmImportMethodIncomingRequestAuthority(handle, return_area)
+
   let lifted : String? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
@@ -925,6 +986,7 @@ pub fn IncomingRequest::authority(self : IncomingRequest) -> String? {
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Option::Some(result)
     }
     _ => panic()
@@ -957,6 +1019,7 @@ pub fn IncomingRequest::consume(
   let IncomingRequest(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodIncomingRequestConsume(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(IncomingBody::IncomingBody(@ffi.load32(return_area + 4)))
     1 => Result::Err(())
@@ -996,6 +1059,7 @@ pub fn OutgoingRequest::body(
   let OutgoingRequest(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodOutgoingRequestBody(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(OutgoingBody::OutgoingBody(@ffi.load32(return_area + 4)))
     1 => Result::Err(())
@@ -1011,6 +1075,7 @@ pub fn OutgoingRequest::method_(self : OutgoingRequest) -> Method {
   let OutgoingRequest(handle) = self
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutgoingRequestMethod(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Method::Get
     1 => Method::Head
@@ -1026,6 +1091,7 @@ pub fn OutgoingRequest::method_(self : OutgoingRequest) -> Method {
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Method::Other(result)
     }
     _ => panic()
@@ -1043,7 +1109,9 @@ pub fn OutgoingRequest::set_method(
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let OutgoingRequest(handle) = self
+
   let (lowered, lowered27, lowered28) = match method_ {
     Get => (0, 0, 0)
     Head => (1, 0, 0)
@@ -1056,17 +1124,20 @@ pub fn OutgoingRequest::set_method(
     Patch => (8, 0, 0)
     Other(payload26) => {
       ignoreList.push(payload26)
+
       (9, @ffi.str2ptr(payload26), payload26.length())
     }
   }
   let result : Int = wasmImportMethodOutgoingRequestSetMethod(
     handle, lowered, lowered27, lowered28,
   )
+
   let lifted = match result {
     0 => Result::Ok(())
     1 => Result::Err(())
     _ => panic()
   }
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted
@@ -1079,6 +1150,7 @@ pub fn OutgoingRequest::path_with_query(self : OutgoingRequest) -> String? {
   let OutgoingRequest(handle) = self
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutgoingRequestPathWithQuery(handle, return_area)
+
   let lifted : String? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
@@ -1086,6 +1158,7 @@ pub fn OutgoingRequest::path_with_query(self : OutgoingRequest) -> String? {
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Option::Some(result)
     }
     _ => panic()
@@ -1104,22 +1177,27 @@ pub fn OutgoingRequest::set_path_with_query(
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let OutgoingRequest(handle) = self
+
   let (lowered, lowered3, lowered4) = match path_with_query {
     None => (0, 0, 0)
     Some(payload2) => {
       ignoreList.push(payload2)
+
       (1, @ffi.str2ptr(payload2), payload2.length())
     }
   }
   let result : Int = wasmImportMethodOutgoingRequestSetPathWithQuery(
     handle, lowered, lowered3, lowered4,
   )
+
   let lifted = match result {
     0 => Result::Ok(())
     1 => Result::Err(())
     _ => panic()
   }
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted
@@ -1132,6 +1210,7 @@ pub fn OutgoingRequest::scheme(self : OutgoingRequest) -> Scheme? {
   let OutgoingRequest(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodOutgoingRequestScheme(handle, return_area)
+
   let lifted8 : Scheme? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
@@ -1143,10 +1222,12 @@ pub fn OutgoingRequest::scheme(self : OutgoingRequest) -> Scheme? {
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Scheme::Other(result)
         }
         _ => panic()
       }
+
       Option::Some(lifted)
     }
     _ => panic()
@@ -1165,7 +1246,9 @@ pub fn OutgoingRequest::set_scheme(
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let OutgoingRequest(handle) = self
+
   let (lowered14, lowered15, lowered16, lowered17) = match scheme {
     None => (0, 0, 0, 0)
     Some(payload2) => {
@@ -1174,20 +1257,24 @@ pub fn OutgoingRequest::set_scheme(
         Https => (1, 0, 0)
         Other(payload11) => {
           ignoreList.push(payload11)
+
           (2, @ffi.str2ptr(payload11), payload11.length())
         }
       }
+
       (1, lowered, lowered12, lowered13)
     }
   }
   let result : Int = wasmImportMethodOutgoingRequestSetScheme(
     handle, lowered14, lowered15, lowered16, lowered17,
   )
+
   let lifted = match result {
     0 => Result::Ok(())
     1 => Result::Err(())
     _ => panic()
   }
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted
@@ -1201,6 +1288,7 @@ pub fn OutgoingRequest::authority(self : OutgoingRequest) -> String? {
   let OutgoingRequest(handle) = self
   let return_area = @ffi.malloc(12)
   wasmImportMethodOutgoingRequestAuthority(handle, return_area)
+
   let lifted : String? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => {
@@ -1208,6 +1296,7 @@ pub fn OutgoingRequest::authority(self : OutgoingRequest) -> String? {
         @ffi.load32(return_area + 4),
         @ffi.load32(return_area + 8),
       )
+
       Option::Some(result)
     }
     _ => panic()
@@ -1227,22 +1316,27 @@ pub fn OutgoingRequest::set_authority(
 ) -> Result[Unit, Unit] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let OutgoingRequest(handle) = self
+
   let (lowered, lowered3, lowered4) = match authority {
     None => (0, 0, 0)
     Some(payload2) => {
       ignoreList.push(payload2)
+
       (1, @ffi.str2ptr(payload2), payload2.length())
     }
   }
   let result : Int = wasmImportMethodOutgoingRequestSetAuthority(
     handle, lowered, lowered3, lowered4,
   )
+
   let lifted = match result {
     0 => Result::Ok(())
     1 => Result::Err(())
     _ => panic()
   }
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted
@@ -1276,6 +1370,7 @@ pub fn RequestOptions::connect_timeout(self : RequestOptions) -> UInt64? {
   let RequestOptions(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodRequestOptionsConnectTimeout(handle, return_area)
+
   let lifted : UInt64? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => Option::Some(@ffi.load64(return_area + 8).reinterpret_as_uint64())
@@ -1293,6 +1388,7 @@ pub fn RequestOptions::set_connect_timeout(
   duration : UInt64?,
 ) -> Result[Unit, Unit] {
   let RequestOptions(handle) = self
+
   let (lowered, lowered3) = match duration {
     None => (0, 0L)
     Some(payload2) => (1, payload2.reinterpret_as_int64())
@@ -1300,6 +1396,7 @@ pub fn RequestOptions::set_connect_timeout(
   let result : Int = wasmImportMethodRequestOptionsSetConnectTimeout(
     handle, lowered, lowered3,
   )
+
   let lifted = match result {
     0 => Result::Ok(())
     1 => Result::Err(())
@@ -1314,6 +1411,7 @@ pub fn RequestOptions::first_byte_timeout(self : RequestOptions) -> UInt64? {
   let RequestOptions(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodRequestOptionsFirstByteTimeout(handle, return_area)
+
   let lifted : UInt64? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => Option::Some(@ffi.load64(return_area + 8).reinterpret_as_uint64())
@@ -1331,6 +1429,7 @@ pub fn RequestOptions::set_first_byte_timeout(
   duration : UInt64?,
 ) -> Result[Unit, Unit] {
   let RequestOptions(handle) = self
+
   let (lowered, lowered3) = match duration {
     None => (0, 0L)
     Some(payload2) => (1, payload2.reinterpret_as_int64())
@@ -1338,6 +1437,7 @@ pub fn RequestOptions::set_first_byte_timeout(
   let result : Int = wasmImportMethodRequestOptionsSetFirstByteTimeout(
     handle, lowered, lowered3,
   )
+
   let lifted = match result {
     0 => Result::Ok(())
     1 => Result::Err(())
@@ -1353,6 +1453,7 @@ pub fn RequestOptions::between_bytes_timeout(self : RequestOptions) -> UInt64? {
   let RequestOptions(handle) = self
   let return_area = @ffi.malloc(16)
   wasmImportMethodRequestOptionsBetweenBytesTimeout(handle, return_area)
+
   let lifted : UInt64? = match @ffi.load8_u(return_area + 0) {
     0 => Option::None
     1 => Option::Some(@ffi.load64(return_area + 8).reinterpret_as_uint64())
@@ -1371,6 +1472,7 @@ pub fn RequestOptions::set_between_bytes_timeout(
   duration : UInt64?,
 ) -> Result[Unit, Unit] {
   let RequestOptions(handle) = self
+
   let (lowered, lowered3) = match duration {
     None => (0, 0L)
     Some(payload2) => (1, payload2.reinterpret_as_int64())
@@ -1378,6 +1480,7 @@ pub fn RequestOptions::set_between_bytes_timeout(
   let result : Int = wasmImportMethodRequestOptionsSetBetweenBytesTimeout(
     handle, lowered, lowered3,
   )
+
   let lifted = match result {
     0 => Result::Ok(())
     1 => Result::Err(())
@@ -1402,7 +1505,9 @@ pub fn ResponseOutparam::set(
 ) -> Unit {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let ResponseOutparam(handle) = param
+
   let (
     lowered316,
     lowered317,
@@ -1415,6 +1520,7 @@ pub fn ResponseOutparam::set(
   ) = match response {
     Ok(payload) => {
       let OutgoingResponse(handle0) = payload
+
       (0, handle0, 0, 0L, 0, 0, 0, 0)
     }
     Err(payload3) => {
@@ -1433,13 +1539,16 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload15) => {
               ignoreList.push(payload15)
+
               (1, @ffi.str2ptr(payload15), payload15.length())
             }
           }
+
           let (lowered24, lowered25) = match payload9.info_code {
             None => (0, 0)
             Some(payload23) => (1, payload23.reinterpret_as_int())
           }
+
           (
             1,
             lowered,
@@ -1467,14 +1576,17 @@ pub fn ResponseOutparam::set(
             None => (0, 0)
             Some(payload70) => (1, payload70.to_int())
           }
+
           let (lowered79, lowered80, lowered81) = match
             payload64.alert_message {
             None => (0, 0, 0)
             Some(payload78) => {
               ignoreList.push(payload78)
+
               (1, @ffi.str2ptr(payload78), payload78.length())
             }
           }
+
           (
             14,
             lowered71,
@@ -1492,6 +1604,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0L)
             Some(payload96) => (1, payload96.reinterpret_as_int64())
           }
+
           (17, lowered97, lowered98, 0, 0, 0, 0)
         }
         HttpRequestMethodInvalid => (18, 0, 0L, 0, 0, 0, 0)
@@ -1502,6 +1615,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0)
             Some(payload116) => (1, payload116.reinterpret_as_int())
           }
+
           (21, lowered117, Int::to_int64(lowered118), 0, 0, 0, 0)
         }
         HttpRequestHeaderSize(payload121) => {
@@ -1520,16 +1634,20 @@ pub fn ResponseOutparam::set(
                 None => (0, 0, 0)
                 Some(payload133) => {
                   ignoreList.push(payload133)
+
                   (1, @ffi.str2ptr(payload133), payload133.length())
                 }
               }
+
               let (lowered143, lowered144) = match payload127.field_size {
                 None => (0, 0)
                 Some(payload142) => (1, payload142.reinterpret_as_int())
               }
+
               (1, lowered134, lowered135, lowered136, lowered143, lowered144)
             }
           }
+
           (
             22,
             lowered145,
@@ -1545,6 +1663,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0)
             Some(payload159) => (1, payload159.reinterpret_as_int())
           }
+
           (23, lowered160, Int::to_int64(lowered161), 0, 0, 0, 0)
         }
         HttpRequestTrailerSize(payload164) => {
@@ -1553,13 +1672,16 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload170) => {
               ignoreList.push(payload170)
+
               (1, @ffi.str2ptr(payload170), payload170.length())
             }
           }
+
           let (lowered180, lowered181) = match payload164.field_size {
             None => (0, 0)
             Some(payload179) => (1, payload179.reinterpret_as_int())
           }
+
           (
             24,
             lowered171,
@@ -1576,6 +1698,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0)
             Some(payload193) => (1, payload193.reinterpret_as_int())
           }
+
           (26, lowered194, Int::to_int64(lowered195), 0, 0, 0, 0)
         }
         HttpResponseHeaderSize(payload198) => {
@@ -1584,13 +1707,16 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload204) => {
               ignoreList.push(payload204)
+
               (1, @ffi.str2ptr(payload204), payload204.length())
             }
           }
+
           let (lowered214, lowered215) = match payload198.field_size {
             None => (0, 0)
             Some(payload213) => (1, payload213.reinterpret_as_int())
           }
+
           (
             27,
             lowered205,
@@ -1606,6 +1732,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0L)
             Some(payload224) => (1, payload224.reinterpret_as_int64())
           }
+
           (28, lowered225, lowered226, 0, 0, 0, 0)
         }
         HttpResponseTrailerSectionSize(payload229) => {
@@ -1613,6 +1740,7 @@ pub fn ResponseOutparam::set(
             None => (0, 0)
             Some(payload235) => (1, payload235.reinterpret_as_int())
           }
+
           (29, lowered236, Int::to_int64(lowered237), 0, 0, 0, 0)
         }
         HttpResponseTrailerSize(payload240) => {
@@ -1621,13 +1749,16 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload246) => {
               ignoreList.push(payload246)
+
               (1, @ffi.str2ptr(payload246), payload246.length())
             }
           }
+
           let (lowered256, lowered257) = match payload240.field_size {
             None => (0, 0)
             Some(payload255) => (1, payload255.reinterpret_as_int())
           }
+
           (
             30,
             lowered247,
@@ -1643,9 +1774,11 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload266) => {
               ignoreList.push(payload266)
+
               (1, @ffi.str2ptr(payload266), payload266.length())
             }
           }
+
           (31, lowered267, Int::to_int64(lowered268), lowered269, 0, 0, 0)
         }
         HttpResponseContentCoding(payload272) => {
@@ -1653,9 +1786,11 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload278) => {
               ignoreList.push(payload278)
+
               (1, @ffi.str2ptr(payload278), payload278.length())
             }
           }
+
           (32, lowered279, Int::to_int64(lowered280), lowered281, 0, 0, 0)
         }
         HttpResponseTimeout => (33, 0, 0L, 0, 0, 0, 0)
@@ -1668,12 +1803,15 @@ pub fn ResponseOutparam::set(
             None => (0, 0, 0)
             Some(payload305) => {
               ignoreList.push(payload305)
+
               (1, @ffi.str2ptr(payload305), payload305.length())
             }
           }
+
           (38, lowered306, Int::to_int64(lowered307), lowered308, 0, 0, 0)
         }
       }
+
       (
         1, lowered309, lowered310, lowered311, lowered312, lowered313, lowered314,
         lowered315,
@@ -1684,6 +1822,7 @@ pub fn ResponseOutparam::set(
     handle, lowered316, lowered317, lowered318, lowered319, lowered320, lowered321,
     lowered322, lowered323,
   )
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
 }
@@ -1719,6 +1858,7 @@ pub fn IncomingResponse::consume(
   let IncomingResponse(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodIncomingResponseConsume(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(IncomingBody::IncomingBody(@ffi.load32(return_area + 4)))
     1 => Result::Err(())
@@ -1750,6 +1890,7 @@ pub fn IncomingBody::stream(
   let IncomingBody(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodIncomingBodyStream(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -1807,6 +1948,7 @@ pub fn FutureTrailers::get(
   let FutureTrailers(handle) = self
   let return_area = @ffi.malloc(56)
   wasmImportMethodFutureTrailersGet(handle, return_area)
+
   let lifted213 : Result[Result[Fields?, ErrorCode], Unit]? = match
     @ffi.load8_u(return_area + 0) {
     0 => Option::None
@@ -1820,6 +1962,7 @@ pub fn FutureTrailers::get(
                 1 => Option::Some(Fields::Fields(@ffi.load32(return_area + 28)))
                 _ => panic()
               }
+
               Result::Ok(lifted)
             }
             1 => {
@@ -1834,10 +1977,12 @@ pub fn FutureTrailers::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result)
                     }
                     _ => panic()
                   }
+
                   let lifted25 : UInt? = match @ffi.load8_u(return_area + 44) {
                     0 => Option::None
                     1 =>
@@ -1848,6 +1993,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::DnsError(DnsErrorPayload::{
                     rcode: lifted20,
                     info_code: lifted25,
@@ -1871,6 +2017,7 @@ pub fn FutureTrailers::get(
                     1 => Option::Some(@ffi.load8_u(return_area + 33).to_byte())
                     _ => panic()
                   }
+
                   let lifted62 : String? = match
                     @ffi.load8_u(return_area + 36) {
                     0 => Option::None
@@ -1879,10 +2026,12 @@ pub fn FutureTrailers::get(
                         @ffi.load32(return_area + 40),
                         @ffi.load32(return_area + 44),
                       )
+
                       Option::Some(result61)
                     }
                     _ => panic()
                   }
+
                   ErrorCode::TlsAlertReceived(TlsAlertReceivedPayload::{
                     alert_id: lifted56,
                     alert_message: lifted62,
@@ -1900,6 +2049,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestBodySize(lifted73)
                 }
                 18 => ErrorCode::HttpRequestMethodInvalid
@@ -1914,6 +2064,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestHeaderSectionSize(lifted86)
                 }
                 22 => {
@@ -1929,10 +2080,12 @@ pub fn FutureTrailers::get(
                             @ffi.load32(return_area + 40),
                             @ffi.load32(return_area + 44),
                           )
+
                           Option::Some(result97)
                         }
                         _ => panic()
                       }
+
                       let lifted103 : UInt? = match
                         @ffi.load8_u(return_area + 48) {
                         0 => Option::None
@@ -1942,6 +2095,7 @@ pub fn FutureTrailers::get(
                           )
                         _ => panic()
                       }
+
                       Option::Some(FieldSizePayload::{
                         field_name: lifted98,
                         field_size: lifted103,
@@ -1949,6 +2103,7 @@ pub fn FutureTrailers::get(
                     }
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestHeaderSize(lifted104)
                 }
                 23 => {
@@ -1960,6 +2115,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestTrailerSectionSize(lifted111)
                 }
                 24 => {
@@ -1971,10 +2127,12 @@ pub fn FutureTrailers::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result118)
                     }
                     _ => panic()
                   }
+
                   let lifted124 : UInt? = match @ffi.load8_u(return_area + 44) {
                     0 => Option::None
                     1 =>
@@ -1983,6 +2141,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestTrailerSize(FieldSizePayload::{
                     field_name: lifted119,
                     field_size: lifted124,
@@ -1998,6 +2157,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseHeaderSectionSize(lifted133)
                 }
                 27 => {
@@ -2009,10 +2169,12 @@ pub fn FutureTrailers::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result140)
                     }
                     _ => panic()
                   }
+
                   let lifted146 : UInt? = match @ffi.load8_u(return_area + 44) {
                     0 => Option::None
                     1 =>
@@ -2021,6 +2183,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseHeaderSize(FieldSizePayload::{
                     field_name: lifted141,
                     field_size: lifted146,
@@ -2036,6 +2199,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseBodySize(lifted153)
                 }
                 29 => {
@@ -2047,6 +2211,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseTrailerSectionSize(lifted160)
                 }
                 30 => {
@@ -2058,10 +2223,12 @@ pub fn FutureTrailers::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result167)
                     }
                     _ => panic()
                   }
+
                   let lifted173 : UInt? = match @ffi.load8_u(return_area + 44) {
                     0 => Option::None
                     1 =>
@@ -2070,6 +2237,7 @@ pub fn FutureTrailers::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseTrailerSize(FieldSizePayload::{
                     field_name: lifted168,
                     field_size: lifted173,
@@ -2084,10 +2252,12 @@ pub fn FutureTrailers::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result180)
                     }
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseTransferCoding(lifted181)
                 }
                 32 => {
@@ -2099,10 +2269,12 @@ pub fn FutureTrailers::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result188)
                     }
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseContentCoding(lifted189)
                 }
                 33 => ErrorCode::HttpResponseTimeout
@@ -2119,23 +2291,28 @@ pub fn FutureTrailers::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result206)
                     }
                     _ => panic()
                   }
+
                   ErrorCode::InternalError(lifted207)
                 }
                 _ => panic()
               }
+
               Result::Err(lifted208)
             }
             _ => panic()
           }
+
           Result::Ok(lifted209)
         }
         1 => Result::Err(())
         _ => panic()
       }
+
       Option::Some(lifted212)
     }
     _ => panic()
@@ -2178,6 +2355,7 @@ pub fn OutgoingResponse::set_status_code(
     handle,
     status_code.reinterpret_as_int(),
   )
+
   let lifted = match result {
     0 => Result::Ok(())
     1 => Result::Err(())
@@ -2213,6 +2391,7 @@ pub fn OutgoingResponse::body(
   let OutgoingResponse(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodOutgoingResponseBody(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(OutgoingBody::OutgoingBody(@ffi.load32(return_area + 4)))
     1 => Result::Err(())
@@ -2238,6 +2417,7 @@ pub fn OutgoingBody::write(
   let OutgoingBody(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodOutgoingBodyWrite(handle, return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 =>
       Result::Ok(
@@ -2265,15 +2445,18 @@ pub fn OutgoingBody::finish(
   trailers : Fields?,
 ) -> Result[Unit, ErrorCode] {
   let OutgoingBody(handle) = this
+
   let (lowered, lowered4) = match trailers {
     None => (0, 0)
     Some(payload2) => {
       let Fields(handle3) = payload2
+
       (1, handle3)
     }
   }
   let return_area = @ffi.malloc(40)
   wasmImportStaticOutgoingBodyFinish(handle, lowered, lowered4, return_area)
+
   let lifted205 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(())
     1 => {
@@ -2287,10 +2470,12 @@ pub fn OutgoingBody::finish(
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result)
             }
             _ => panic()
           }
+
           let lifted21 : UInt? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
@@ -2301,6 +2486,7 @@ pub fn OutgoingBody::finish(
               )
             _ => panic()
           }
+
           ErrorCode::DnsError(DnsErrorPayload::{
             rcode: lifted,
             info_code: lifted21,
@@ -2324,6 +2510,7 @@ pub fn OutgoingBody::finish(
             1 => Option::Some(@ffi.load8_u(return_area + 17).to_byte())
             _ => panic()
           }
+
           let lifted58 : String? = match @ffi.load8_u(return_area + 20) {
             0 => Option::None
             1 => {
@@ -2331,10 +2518,12 @@ pub fn OutgoingBody::finish(
                 @ffi.load32(return_area + 24),
                 @ffi.load32(return_area + 28),
               )
+
               Option::Some(result57)
             }
             _ => panic()
           }
+
           ErrorCode::TlsAlertReceived(TlsAlertReceivedPayload::{
             alert_id: lifted52,
             alert_message: lifted58,
@@ -2351,6 +2540,7 @@ pub fn OutgoingBody::finish(
               )
             _ => panic()
           }
+
           ErrorCode::HttpRequestBodySize(lifted69)
         }
         18 => ErrorCode::HttpRequestMethodInvalid
@@ -2363,6 +2553,7 @@ pub fn OutgoingBody::finish(
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpRequestHeaderSectionSize(lifted82)
         }
         22 => {
@@ -2377,10 +2568,12 @@ pub fn OutgoingBody::finish(
                     @ffi.load32(return_area + 24),
                     @ffi.load32(return_area + 28),
                   )
+
                   Option::Some(result93)
                 }
                 _ => panic()
               }
+
               let lifted99 : UInt? = match @ffi.load8_u(return_area + 32) {
                 0 => Option::None
                 1 =>
@@ -2389,6 +2582,7 @@ pub fn OutgoingBody::finish(
                   )
                 _ => panic()
               }
+
               Option::Some(FieldSizePayload::{
                 field_name: lifted94,
                 field_size: lifted99,
@@ -2396,6 +2590,7 @@ pub fn OutgoingBody::finish(
             }
             _ => panic()
           }
+
           ErrorCode::HttpRequestHeaderSize(lifted100)
         }
         23 => {
@@ -2405,6 +2600,7 @@ pub fn OutgoingBody::finish(
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpRequestTrailerSectionSize(lifted107)
         }
         24 => {
@@ -2415,16 +2611,19 @@ pub fn OutgoingBody::finish(
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result114)
             }
             _ => panic()
           }
+
           let lifted120 : UInt? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpRequestTrailerSize(FieldSizePayload::{
             field_name: lifted115,
             field_size: lifted120,
@@ -2438,6 +2637,7 @@ pub fn OutgoingBody::finish(
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpResponseHeaderSectionSize(lifted129)
         }
         27 => {
@@ -2448,16 +2648,19 @@ pub fn OutgoingBody::finish(
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result136)
             }
             _ => panic()
           }
+
           let lifted142 : UInt? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpResponseHeaderSize(FieldSizePayload::{
             field_name: lifted137,
             field_size: lifted142,
@@ -2472,6 +2675,7 @@ pub fn OutgoingBody::finish(
               )
             _ => panic()
           }
+
           ErrorCode::HttpResponseBodySize(lifted149)
         }
         29 => {
@@ -2481,6 +2685,7 @@ pub fn OutgoingBody::finish(
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpResponseTrailerSectionSize(lifted156)
         }
         30 => {
@@ -2491,16 +2696,19 @@ pub fn OutgoingBody::finish(
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result163)
             }
             _ => panic()
           }
+
           let lifted169 : UInt? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
             _ => panic()
           }
+
           ErrorCode::HttpResponseTrailerSize(FieldSizePayload::{
             field_name: lifted164,
             field_size: lifted169,
@@ -2514,10 +2722,12 @@ pub fn OutgoingBody::finish(
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result176)
             }
             _ => panic()
           }
+
           ErrorCode::HttpResponseTransferCoding(lifted177)
         }
         32 => {
@@ -2528,10 +2738,12 @@ pub fn OutgoingBody::finish(
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result184)
             }
             _ => panic()
           }
+
           ErrorCode::HttpResponseContentCoding(lifted185)
         }
         33 => ErrorCode::HttpResponseTimeout
@@ -2547,14 +2759,17 @@ pub fn OutgoingBody::finish(
                 @ffi.load32(return_area + 20),
                 @ffi.load32(return_area + 24),
               )
+
               Option::Some(result202)
             }
             _ => panic()
           }
+
           ErrorCode::InternalError(lifted203)
         }
         _ => panic()
       }
+
       Result::Err(lifted204)
     }
     _ => panic()
@@ -2596,6 +2811,7 @@ pub fn FutureIncomingResponse::get(
   let FutureIncomingResponse(handle) = self
   let return_area = @ffi.malloc(56)
   wasmImportMethodFutureIncomingResponseGet(handle, return_area)
+
   let lifted208 : Result[Result[IncomingResponse, ErrorCode], Unit]? = match
     @ffi.load8_u(return_area + 0) {
     0 => Option::None
@@ -2620,10 +2836,12 @@ pub fn FutureIncomingResponse::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result)
                     }
                     _ => panic()
                   }
+
                   let lifted20 : UInt? = match @ffi.load8_u(return_area + 44) {
                     0 => Option::None
                     1 =>
@@ -2634,6 +2852,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::DnsError(DnsErrorPayload::{
                     rcode: lifted,
                     info_code: lifted20,
@@ -2657,6 +2876,7 @@ pub fn FutureIncomingResponse::get(
                     1 => Option::Some(@ffi.load8_u(return_area + 33).to_byte())
                     _ => panic()
                   }
+
                   let lifted57 : String? = match
                     @ffi.load8_u(return_area + 36) {
                     0 => Option::None
@@ -2665,10 +2885,12 @@ pub fn FutureIncomingResponse::get(
                         @ffi.load32(return_area + 40),
                         @ffi.load32(return_area + 44),
                       )
+
                       Option::Some(result56)
                     }
                     _ => panic()
                   }
+
                   ErrorCode::TlsAlertReceived(TlsAlertReceivedPayload::{
                     alert_id: lifted51,
                     alert_message: lifted57,
@@ -2686,6 +2908,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestBodySize(lifted68)
                 }
                 18 => ErrorCode::HttpRequestMethodInvalid
@@ -2700,6 +2923,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestHeaderSectionSize(lifted81)
                 }
                 22 => {
@@ -2715,10 +2939,12 @@ pub fn FutureIncomingResponse::get(
                             @ffi.load32(return_area + 40),
                             @ffi.load32(return_area + 44),
                           )
+
                           Option::Some(result92)
                         }
                         _ => panic()
                       }
+
                       let lifted98 : UInt? = match
                         @ffi.load8_u(return_area + 48) {
                         0 => Option::None
@@ -2728,6 +2954,7 @@ pub fn FutureIncomingResponse::get(
                           )
                         _ => panic()
                       }
+
                       Option::Some(FieldSizePayload::{
                         field_name: lifted93,
                         field_size: lifted98,
@@ -2735,6 +2962,7 @@ pub fn FutureIncomingResponse::get(
                     }
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestHeaderSize(lifted99)
                 }
                 23 => {
@@ -2746,6 +2974,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestTrailerSectionSize(lifted106)
                 }
                 24 => {
@@ -2757,10 +2986,12 @@ pub fn FutureIncomingResponse::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result113)
                     }
                     _ => panic()
                   }
+
                   let lifted119 : UInt? = match @ffi.load8_u(return_area + 44) {
                     0 => Option::None
                     1 =>
@@ -2769,6 +3000,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpRequestTrailerSize(FieldSizePayload::{
                     field_name: lifted114,
                     field_size: lifted119,
@@ -2784,6 +3016,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseHeaderSectionSize(lifted128)
                 }
                 27 => {
@@ -2795,10 +3028,12 @@ pub fn FutureIncomingResponse::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result135)
                     }
                     _ => panic()
                   }
+
                   let lifted141 : UInt? = match @ffi.load8_u(return_area + 44) {
                     0 => Option::None
                     1 =>
@@ -2807,6 +3042,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseHeaderSize(FieldSizePayload::{
                     field_name: lifted136,
                     field_size: lifted141,
@@ -2822,6 +3058,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseBodySize(lifted148)
                 }
                 29 => {
@@ -2833,6 +3070,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseTrailerSectionSize(lifted155)
                 }
                 30 => {
@@ -2844,10 +3082,12 @@ pub fn FutureIncomingResponse::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result162)
                     }
                     _ => panic()
                   }
+
                   let lifted168 : UInt? = match @ffi.load8_u(return_area + 44) {
                     0 => Option::None
                     1 =>
@@ -2856,6 +3096,7 @@ pub fn FutureIncomingResponse::get(
                       )
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseTrailerSize(FieldSizePayload::{
                     field_name: lifted163,
                     field_size: lifted168,
@@ -2870,10 +3111,12 @@ pub fn FutureIncomingResponse::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result175)
                     }
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseTransferCoding(lifted176)
                 }
                 32 => {
@@ -2885,10 +3128,12 @@ pub fn FutureIncomingResponse::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result183)
                     }
                     _ => panic()
                   }
+
                   ErrorCode::HttpResponseContentCoding(lifted184)
                 }
                 33 => ErrorCode::HttpResponseTimeout
@@ -2905,23 +3150,28 @@ pub fn FutureIncomingResponse::get(
                         @ffi.load32(return_area + 36),
                         @ffi.load32(return_area + 40),
                       )
+
                       Option::Some(result201)
                     }
                     _ => panic()
                   }
+
                   ErrorCode::InternalError(lifted202)
                 }
                 _ => panic()
               }
+
               Result::Err(lifted203)
             }
             _ => panic()
           }
+
           Result::Ok(lifted204)
         }
         1 => Result::Err(())
         _ => panic()
       }
+
       Option::Some(lifted207)
     }
     _ => panic()

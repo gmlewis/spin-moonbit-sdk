@@ -6,6 +6,7 @@
 pub fn get_terminal_stdout() -> @terminalOutput.TerminalOutput? {
   let return_area = @ffi.malloc(8)
   wasmImportGetTerminalStdout(return_area)
+
   let lifted : @terminalOutput.TerminalOutput? = match
     @ffi.load8_u(return_area + 0) {
     0 => Option::None

@@ -26,6 +26,7 @@ pub fn create_tcp_socket(
 ) -> Result[@tcp.TcpSocket, @network.ErrorCode] {
   let return_area = @ffi.malloc(8)
   wasmImportCreateTcpSocket(address_family.ordinal(), return_area)
+
   let lifted = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(@tcp.TcpSocket::TcpSocket(@ffi.load32(return_area + 4)))
     1 => Result::Err(@network.ErrorCode::from(@ffi.load8_u(return_area + 4)))

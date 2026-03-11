@@ -57,6 +57,7 @@ pub fn Connection::open(database : String) -> Result[Connection, Error_] {
     database.length(),
     return_area,
   )
+
   let lifted12 = match @ffi.load8_u(return_area + 0) {
     0 => Result::Ok(Connection::Connection(@ffi.load32(return_area + 4)))
     1 => {
@@ -70,10 +71,12 @@ pub fn Connection::open(database : String) -> Result[Connection, Error_] {
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Io(result)
         }
         _ => panic()
       }
+
       Result::Err(lifted)
     }
     _ => panic()
@@ -92,20 +95,25 @@ pub fn Connection::execute(
 ) -> Result[QueryResult, Error_] {
   let cleanupList : Array[@ffi.Cleanup] = []
   let ignoreList : Array[&@ffi.Any] = []
+
   let Connection(handle) = self
+
   let address = @ffi.malloc(parameters.length() * 16)
   for index = 0; index < parameters.length(); index = index + 1 {
     let element : Value = parameters[index]
     let base = address + index * 16
+
     match element {
       Integer(payload) => {
         @ffi.store8(base + 0, 0)
         @ffi.store64(base + 8, payload)
+
         ()
       }
       Real(payload4) => {
         @ffi.store8(base + 0, 1)
         @ffi.storef64(base + 8, payload4)
+
         ()
       }
       Text(payload7) => {
@@ -113,6 +121,7 @@ pub fn Connection::execute(
         @ffi.store32(base + 12, payload7.length())
         @ffi.store32(base + 8, @ffi.str2ptr(payload7))
         ignoreList.push(payload7)
+
         ()
       }
       Blob(payload10) => {
@@ -120,10 +129,12 @@ pub fn Connection::execute(
         @ffi.store32(base + 12, payload10.length())
         @ffi.store32(base + 8, @ffi.bytes2ptr(payload10))
         ignoreList.push(payload10)
+
         ()
       }
       Null => {
         @ffi.store8(base + 0, 4)
+
         ()
       }
     }
@@ -137,6 +148,7 @@ pub fn Connection::execute(
     parameters.length(),
     return_area,
   )
+
   let lifted53 = match @ffi.load8_u(return_area + 0) {
     0 => {
       let array : Array[String] = []
@@ -144,23 +156,28 @@ pub fn Connection::execute(
           index18 < @ffi.load32(return_area + 8)
           index18 = index18 + 1 {
         let base17 = @ffi.load32(return_area + 4) + index18 * 8
+
         let result = @ffi.ptr2str(
           @ffi.load32(base17 + 0),
           @ffi.load32(base17 + 4),
         )
+
         array.push(result)
       }
       @ffi.free(@ffi.load32(return_area + 4))
+
       let array37 : Array[RowResult] = []
       for index38 = 0
           index38 < @ffi.load32(return_area + 16)
           index38 = index38 + 1 {
         let base20 = @ffi.load32(return_area + 12) + index38 * 8
+
         let array35 : Array[Value] = []
         for index36 = 0
             index36 < @ffi.load32(base20 + 4)
             index36 = index36 + 1 {
           let base22 = @ffi.load32(base20 + 0) + index36 * 16
+
           let lifted = match @ffi.load8_u(base22 + 0) {
             0 => Value::Integer(@ffi.load64(base22 + 8))
             1 => Value::Real(@ffi.loadf64(base22 + 8))
@@ -169,6 +186,7 @@ pub fn Connection::execute(
                 @ffi.load32(base22 + 8),
                 @ffi.load32(base22 + 12),
               )
+
               Value::Text(result29)
             }
             3 => {
@@ -176,17 +194,21 @@ pub fn Connection::execute(
                 @ffi.load32(base22 + 8),
                 @ffi.load32(base22 + 12),
               )
+
               Value::Blob(result32)
             }
             4 => Value::Null
             _ => panic()
           }
+
           array35.push(lifted)
         }
         @ffi.free(@ffi.load32(base20 + 0))
+
         array37.push(RowResult::{ values: array35 })
       }
       @ffi.free(@ffi.load32(return_area + 12))
+
       Result::Ok(QueryResult::{ columns: array, rows: array37 })
     }
     1 => {
@@ -200,10 +222,12 @@ pub fn Connection::execute(
             @ffi.load32(return_area + 8),
             @ffi.load32(return_area + 12),
           )
+
           Error_::Io(result51)
         }
         _ => panic()
       }
+
       Result::Err(lifted52)
     }
     _ => panic()
@@ -211,6 +235,7 @@ pub fn Connection::execute(
   ignore(statement)
   @ffi.free(address)
   @ffi.free(return_area)
+
   cleanupList.each(fn(cleanup) { @ffi.free(cleanup.address) })
   ignore(ignoreList)
   return lifted53

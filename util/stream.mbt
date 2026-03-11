@@ -92,7 +92,7 @@ pub fn stream_func(
   response_out.set(out_resp |> Ok)
   //
   let mut count = 0L
-  for {
+  for ;; {
     let buf = match in_stream.blocking_read(max_buf_size) {
       Ok(buf) => buf
       Err(e) => {
