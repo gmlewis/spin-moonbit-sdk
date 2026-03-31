@@ -9,9 +9,7 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes"
 pub(all) struct Column {
   name : String
   data_type : DbDataType
-}
-pub impl Eq for Column
-pub impl Show for Column
+} derive(Eq, Show)
 
 pub(all) enum DbDataType {
   BOOLEAN
@@ -28,11 +26,9 @@ pub(all) enum DbDataType {
   STR
   BINARY
   OTHER
-}
+} derive(Eq, Show)
 pub fn DbDataType::from(Int) -> Self
 pub fn DbDataType::ordinal(Self) -> Int
-pub impl Eq for DbDataType
-pub impl Show for DbDataType
 
 pub(all) enum DbValue {
   Boolean(Bool)
@@ -50,9 +46,7 @@ pub(all) enum DbValue {
   Binary(FixedArray[Byte])
   DbNull
   Unsupported
-}
-pub impl Eq for DbValue
-pub impl Show for DbValue
+} derive(Eq, Show)
 
 pub(all) enum Error_ {
   ConnectionFailed(String)
@@ -60,9 +54,7 @@ pub(all) enum Error_ {
   QueryFailed(String)
   ValueConversionFailed(String)
   Other(String)
-}
-pub impl Eq for Error_
-pub impl Show for Error_
+} derive(Eq, Show)
 
 pub(all) enum ParameterValue {
   Boolean(Bool)
@@ -79,16 +71,12 @@ pub(all) enum ParameterValue {
   Str(String)
   Binary(FixedArray[Byte])
   DbNull
-}
-pub impl Eq for ParameterValue
-pub impl Show for ParameterValue
+} derive(Eq, Show)
 
 pub(all) struct RowSet {
   columns : Array[Column]
   rows : Array[Array[DbValue]]
-}
-pub impl Eq for RowSet
-pub impl Show for RowSet
+} derive(Eq, Show)
 
 // Type aliases
 

@@ -6,13 +6,11 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/io/error"
 // Errors
 
 // Types and methods
-pub(all) struct Error_(Int)
+pub(all) struct Error_(Int) derive(Eq, Show)
 pub fn Error_::drop(Self) -> Unit
 #deprecated
 pub fn Error_::inner(Self) -> Int
 pub fn Error_::to_debug_string(Self) -> String
-pub impl Eq for Error_
-pub impl Show for Error_
 
 // Type aliases
 

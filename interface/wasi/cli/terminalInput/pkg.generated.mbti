@@ -6,12 +6,10 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalInput"
 // Errors
 
 // Types and methods
-pub(all) struct TerminalInput(Int)
+pub(all) struct TerminalInput(Int) derive(Eq, Show)
 pub fn TerminalInput::drop(Self) -> Unit
 #deprecated
 pub fn TerminalInput::inner(Self) -> Int
-pub impl Eq for TerminalInput
-pub impl Show for TerminalInput
 
 // Type aliases
 

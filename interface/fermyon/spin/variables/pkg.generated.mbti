@@ -12,9 +12,7 @@ pub(all) enum Error_ {
   Undefined(String)
   Provider(String)
   Other(String)
-}
-pub impl Eq for Error_
-pub impl Show for Error_
+} derive(Eq, Show)
 
 // Type aliases
 

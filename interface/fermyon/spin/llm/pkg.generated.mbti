@@ -12,23 +12,17 @@ pub fn infer(String, String, InferencingParams?) -> Result[InferencingResult, Er
 pub(all) struct EmbeddingsResult {
   embeddings : Array[FixedArray[Float]]
   usage : EmbeddingsUsage
-}
-pub impl Eq for EmbeddingsResult
-pub impl Show for EmbeddingsResult
+} derive(Eq, Show)
 
 pub(all) struct EmbeddingsUsage {
   prompt_token_count : UInt
-}
-pub impl Eq for EmbeddingsUsage
-pub impl Show for EmbeddingsUsage
+} derive(Eq, Show)
 
 pub(all) enum Error_ {
   ModelNotSupported
   RuntimeError(String)
   InvalidInput(String)
-}
-pub impl Eq for Error_
-pub impl Show for Error_
+} derive(Eq, Show)
 
 pub(all) struct InferencingParams {
   max_tokens : UInt
@@ -37,23 +31,17 @@ pub(all) struct InferencingParams {
   temperature : Float
   top_k : UInt
   top_p : Float
-}
-pub impl Eq for InferencingParams
-pub impl Show for InferencingParams
+} derive(Eq, Show)
 
 pub(all) struct InferencingResult {
   text : String
   usage : InferencingUsage
-}
-pub impl Eq for InferencingResult
-pub impl Show for InferencingResult
+} derive(Eq, Show)
 
 pub(all) struct InferencingUsage {
   prompt_token_count : UInt
   generated_token_count : UInt
-}
-pub impl Eq for InferencingUsage
-pub impl Show for InferencingUsage
+} derive(Eq, Show)
 
 // Type aliases
 

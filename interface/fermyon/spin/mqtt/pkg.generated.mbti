@@ -6,33 +6,27 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/mqtt"
 // Errors
 
 // Types and methods
-pub(all) struct Connection(Int)
+pub(all) struct Connection(Int) derive(Eq, Show)
 pub fn Connection::drop(Self) -> Unit
 #deprecated
 pub fn Connection::inner(Self) -> Int
 pub fn Connection::open(String, String, String, UInt64) -> Result[Self, Error_]
 pub fn Connection::publish(Self, String, FixedArray[Byte], Qos) -> Result[Unit, Error_]
-pub impl Eq for Connection
-pub impl Show for Connection
 
 pub(all) enum Error_ {
   InvalidAddress
   TooManyConnections
   ConnectionFailed(String)
   Other(String)
-}
-pub impl Eq for Error_
-pub impl Show for Error_
+} derive(Eq, Show)
 
 pub(all) enum Qos {
   AT_MOST_ONCE
   AT_LEAST_ONCE
   EXACTLY_ONCE
-}
+} derive(Eq, Show)
 pub fn Qos::from(Int) -> Self
 pub fn Qos::ordinal(Self) -> Int
-pub impl Eq for Qos
-pub impl Show for Qos
 
 // Type aliases
 

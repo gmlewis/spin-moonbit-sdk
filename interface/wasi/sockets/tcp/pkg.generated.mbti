@@ -16,13 +16,11 @@ pub(all) enum ShutdownType {
   RECEIVE
   SEND
   BOTH
-}
+} derive(Eq, Show)
 pub fn ShutdownType::from(Int) -> Self
 pub fn ShutdownType::ordinal(Self) -> Int
-pub impl Eq for ShutdownType
-pub impl Show for ShutdownType
 
-pub(all) struct TcpSocket(Int)
+pub(all) struct TcpSocket(Int) derive(Eq, Show)
 pub fn TcpSocket::accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 pub fn TcpSocket::address_family(Self) -> @network.IpAddressFamily
 pub fn TcpSocket::drop(Self) -> Unit
@@ -54,8 +52,6 @@ pub fn TcpSocket::start_bind(Self, @network.Network, @network.IpSocketAddress) -
 pub fn TcpSocket::start_connect(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::start_listen(Self) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::subscribe(Self) -> @poll.Pollable
-pub impl Eq for TcpSocket
-pub impl Show for TcpSocket
 
 // Type aliases
 

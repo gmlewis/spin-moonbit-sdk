@@ -6,14 +6,12 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/sqlite"
 // Errors
 
 // Types and methods
-pub(all) struct Connection(Int)
+pub(all) struct Connection(Int) derive(Eq, Show)
 pub fn Connection::drop(Self) -> Unit
 pub fn Connection::execute(Self, String, Array[Value]) -> Result[QueryResult, Error_]
 #deprecated
 pub fn Connection::inner(Self) -> Int
 pub fn Connection::open(String) -> Result[Self, Error_]
-pub impl Eq for Connection
-pub impl Show for Connection
 
 pub(all) enum Error_ {
   NoSuchDatabase
@@ -21,22 +19,16 @@ pub(all) enum Error_ {
   InvalidConnection
   DatabaseFull
   Io(String)
-}
-pub impl Eq for Error_
-pub impl Show for Error_
+} derive(Eq, Show)
 
 pub(all) struct QueryResult {
   columns : Array[String]
   rows : Array[RowResult]
-}
-pub impl Eq for QueryResult
-pub impl Show for QueryResult
+} derive(Eq, Show)
 
 pub(all) struct RowResult {
   values : Array[Value]
-}
-pub impl Eq for RowResult
-pub impl Show for RowResult
+} derive(Eq, Show)
 
 pub(all) enum Value {
   Integer(Int64)
@@ -44,9 +36,7 @@ pub(all) enum Value {
   Text(String)
   Blob(FixedArray[Byte])
   Null
-}
-pub impl Eq for Value
-pub impl Show for Value
+} derive(Eq, Show)
 
 // Type aliases
 

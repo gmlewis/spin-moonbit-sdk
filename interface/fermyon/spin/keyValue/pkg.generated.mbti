@@ -11,11 +11,9 @@ pub(all) enum Error_ {
   NoSuchStore
   AccessDenied
   Other(String)
-}
-pub impl Eq for Error_
-pub impl Show for Error_
+} derive(Eq, Show)
 
-pub(all) struct Store(Int)
+pub(all) struct Store(Int) derive(Eq, Show)
 pub fn Store::delete(Self, String) -> Result[Unit, Error_]
 pub fn Store::drop(Self) -> Unit
 pub fn Store::exists(Self, String) -> Result[Bool, Error_]
@@ -25,8 +23,6 @@ pub fn Store::get_keys(Self) -> Result[Array[String], Error_]
 pub fn Store::inner(Self) -> Int
 pub fn Store::open(String) -> Result[Self, Error_]
 pub fn Store::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
-pub impl Eq for Store
-pub impl Show for Store
 
 // Type aliases
 

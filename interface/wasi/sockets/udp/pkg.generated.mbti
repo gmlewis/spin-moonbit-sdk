@@ -14,37 +14,29 @@ import {
 pub(all) struct IncomingDatagram {
   data : FixedArray[Byte]
   remote_address : @network.IpSocketAddress
-}
-pub impl Eq for IncomingDatagram
-pub impl Show for IncomingDatagram
+} derive(Eq, Show)
 
-pub(all) struct IncomingDatagramStream(Int)
+pub(all) struct IncomingDatagramStream(Int) derive(Eq, Show)
 pub fn IncomingDatagramStream::drop(Self) -> Unit
 #deprecated
 pub fn IncomingDatagramStream::inner(Self) -> Int
 pub fn IncomingDatagramStream::receive(Self, UInt64) -> Result[Array[IncomingDatagram], @network.ErrorCode]
 pub fn IncomingDatagramStream::subscribe(Self) -> @poll.Pollable
-pub impl Eq for IncomingDatagramStream
-pub impl Show for IncomingDatagramStream
 
 pub(all) struct OutgoingDatagram {
   data : FixedArray[Byte]
   remote_address : @network.IpSocketAddress?
-}
-pub impl Eq for OutgoingDatagram
-pub impl Show for OutgoingDatagram
+} derive(Eq, Show)
 
-pub(all) struct OutgoingDatagramStream(Int)
+pub(all) struct OutgoingDatagramStream(Int) derive(Eq, Show)
 pub fn OutgoingDatagramStream::check_send(Self) -> Result[UInt64, @network.ErrorCode]
 pub fn OutgoingDatagramStream::drop(Self) -> Unit
 #deprecated
 pub fn OutgoingDatagramStream::inner(Self) -> Int
 pub fn OutgoingDatagramStream::send(Self, Array[OutgoingDatagram]) -> Result[UInt64, @network.ErrorCode]
 pub fn OutgoingDatagramStream::subscribe(Self) -> @poll.Pollable
-pub impl Eq for OutgoingDatagramStream
-pub impl Show for OutgoingDatagramStream
 
-pub(all) struct UdpSocket(Int)
+pub(all) struct UdpSocket(Int) derive(Eq, Show)
 pub fn UdpSocket::address_family(Self) -> @network.IpAddressFamily
 pub fn UdpSocket::drop(Self) -> Unit
 pub fn UdpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
@@ -61,8 +53,6 @@ pub fn UdpSocket::start_bind(Self, @network.Network, @network.IpSocketAddress) -
 pub fn UdpSocket::stream(Self, @network.IpSocketAddress?) -> Result[(IncomingDatagramStream, OutgoingDatagramStream), @network.ErrorCode]
 pub fn UdpSocket::subscribe(Self) -> @poll.Pollable
 pub fn UdpSocket::unicast_hop_limit(Self) -> Result[Byte, @network.ErrorCode]
-pub impl Eq for UdpSocket
-pub impl Show for UdpSocket
 
 // Type aliases
 

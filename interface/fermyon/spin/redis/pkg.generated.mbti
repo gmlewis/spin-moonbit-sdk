@@ -6,7 +6,7 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/redis"
 // Errors
 
 // Types and methods
-pub(all) struct Connection(Int)
+pub(all) struct Connection(Int) derive(Eq, Show)
 pub fn Connection::del(Self, Array[String]) -> Result[UInt, Error_]
 pub fn Connection::drop(Self) -> Unit
 pub fn Connection::execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]
@@ -20,33 +20,25 @@ pub fn Connection::sadd(Self, String, Array[String]) -> Result[UInt, Error_]
 pub fn Connection::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
 pub fn Connection::smembers(Self, String) -> Result[Array[String], Error_]
 pub fn Connection::srem(Self, String, Array[String]) -> Result[UInt, Error_]
-pub impl Eq for Connection
-pub impl Show for Connection
 
 pub(all) enum Error_ {
   InvalidAddress
   TooManyConnections
   TypeError
   Other(String)
-}
-pub impl Eq for Error_
-pub impl Show for Error_
+} derive(Eq, Show)
 
 pub(all) enum RedisParameter {
   Int64(Int64)
   Binary(FixedArray[Byte])
-}
-pub impl Eq for RedisParameter
-pub impl Show for RedisParameter
+} derive(Eq, Show)
 
 pub(all) enum RedisResult {
   Nil
   Status(String)
   Int64(Int64)
   Binary(FixedArray[Byte])
-}
-pub impl Eq for RedisResult
-pub impl Show for RedisResult
+} derive(Eq, Show)
 
 // Type aliases
 
