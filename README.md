@@ -38,7 +38,7 @@ cargo install --locked wasm-tools
 Then, to build this SDK, clone the repo, and type:
 
 ```bash
-moon update && moon install
+moon update
 moon build
 ```
 
