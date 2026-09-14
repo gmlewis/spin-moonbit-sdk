@@ -1,16 +1,16 @@
 import {
-  "gmlewis/spin-moonbit-sdk/ffi" @ffi,
+  "gmlewis/spin-moonbit-sdk/ffi",
 }
 
 options(
   link: {
     "wasm": {
       "export-memory-name": "memory",
+      "heap-start-address": 16,
       "exports": [
         "cabi_realloc:cabi_realloc",
         "wasmExportHandle:wasi:http/incoming-handler@0.2.0#handle",
       ],
-      "heap-start-address": 16,
     },
   },
 )

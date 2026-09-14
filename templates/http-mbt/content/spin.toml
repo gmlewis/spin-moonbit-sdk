@@ -15,8 +15,8 @@ source = "{{project-name | kebab_case}}.wasm"
 allowed_outbound_hosts = []
 [component.{{project-name | kebab_case}}.build]
 command = """\
-  moon build --target wasm && \
-  wasm-tools component embed .mooncakes/gmlewis/spin-moonbit-sdk/wit ./target/wasm/release/build/{{project-name | kebab_case}}.wasm -o {{project-name | kebab_case}}.wasm --encoding utf16 -w http-trigger && \
+  moon build --target wasm --release && \
+  wasm-tools component embed .mooncakes/gmlewis/spin-moonbit-sdk/wit ./_build/wasm/release/build/{{project-name | kebab_case}}.wasm -o {{project-name | kebab_case}}.wasm --encoding utf16 -w http-trigger && \
   wasm-tools component new {{project-name | kebab_case}}.wasm -o {{project-name | kebab_case}}.wasm
   """
-watch = ["**/*.mbt", "moon.mod.json", "moon.pkg.json"]
+watch = ["**/*.mbt", "moon.mod", "moon.pkg"]

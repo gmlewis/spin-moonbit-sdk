@@ -21,12 +21,12 @@ pub fn new_request(
     let parts = without_scheme.split("/").collect()
     match parts {
       [authority, .. remainder] => {
-        req.set_authority(Some(authority.to_string())).unwrap()
+        req.set_authority(Some(authority.to_owned())).unwrap()
         // let remainder = remainder.iter().collect().join("/")
         // Is this `map` really necessary?!?
         let remainder = remainder
           .iter()
-          .map(fn(s) { s.to_string() })
+          .map(fn(s) { s.to_owned() })
           .collect()
           .join("/")
         let path_with_query = "/\{remainder}"

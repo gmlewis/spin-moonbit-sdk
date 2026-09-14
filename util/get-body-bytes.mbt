@@ -19,7 +19,7 @@ pub fn get_body_bytes(
       }
     _ => return Err(@streams.StreamError::Closed)
   }
-  let result = @buffer.new(size_hint=content_length)
+  let result = @buffer.Buffer(size_hint=content_length)
   for ;; {
     let buf = match in_stream.blocking_read(max_buf_size) {
       Ok(buf) => buf
@@ -27,7 +27,7 @@ pub fn get_body_bytes(
         if e == @streams.Closed {
           break
         }
-        let msg = e.to_string()
+        let msg = @debug.to_string(e)
         @log.error("in_stream.blocking_read: \{msg}")
         return Err(@streams.StreamError::Closed)
       }

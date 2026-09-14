@@ -4,6 +4,7 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/udp"
 import {
   "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll",
   "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -14,34 +15,28 @@ import {
 pub(all) struct IncomingDatagram {
   data : FixedArray[Byte]
   remote_address : @network.IpSocketAddress
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
-pub(all) struct IncomingDatagramStream(Int) derive(Eq, Show)
+pub(all) struct IncomingDatagramStream(Int) derive(Eq, @debug.Debug)
 pub fn IncomingDatagramStream::drop(Self) -> Unit
-#deprecated
-pub fn IncomingDatagramStream::inner(Self) -> Int
 pub fn IncomingDatagramStream::receive(Self, UInt64) -> Result[Array[IncomingDatagram], @network.ErrorCode]
 pub fn IncomingDatagramStream::subscribe(Self) -> @poll.Pollable
 
 pub(all) struct OutgoingDatagram {
   data : FixedArray[Byte]
   remote_address : @network.IpSocketAddress?
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
-pub(all) struct OutgoingDatagramStream(Int) derive(Eq, Show)
+pub(all) struct OutgoingDatagramStream(Int) derive(Eq, @debug.Debug)
 pub fn OutgoingDatagramStream::check_send(Self) -> Result[UInt64, @network.ErrorCode]
 pub fn OutgoingDatagramStream::drop(Self) -> Unit
-#deprecated
-pub fn OutgoingDatagramStream::inner(Self) -> Int
 pub fn OutgoingDatagramStream::send(Self, Array[OutgoingDatagram]) -> Result[UInt64, @network.ErrorCode]
 pub fn OutgoingDatagramStream::subscribe(Self) -> @poll.Pollable
 
-pub(all) struct UdpSocket(Int) derive(Eq, Show)
+pub(all) struct UdpSocket(Int) derive(Eq, @debug.Debug)
 pub fn UdpSocket::address_family(Self) -> @network.IpAddressFamily
 pub fn UdpSocket::drop(Self) -> Unit
 pub fn UdpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
-#deprecated
-pub fn UdpSocket::inner(Self) -> Int
 pub fn UdpSocket::local_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
 pub fn UdpSocket::receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
 pub fn UdpSocket::remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
@@ -57,4 +52,3 @@ pub fn UdpSocket::unicast_hop_limit(Self) -> Result[Byte, @network.ErrorCode]
 // Type aliases
 
 // Traits
-

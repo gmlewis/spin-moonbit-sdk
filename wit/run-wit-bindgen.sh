@@ -1,21 +1,17 @@
 #!/bin/bash -ex
-wit-bindgen moonbit --derive-show --derive-eq .
-
-rm moon.mod.json
-rm -rf world
-# process ffi
-mv ffi/top.mbt ../ffi/top_wasm.mbt
-rm -rf ffi
-go run ../cmd/gen-ffi-top-notwasm/main.go
-# process gen
-rm gen/world_http_trigger_export.mbt
-mv gen/ffi.mbt ../gen/ffi.mbt
-rm -rf gen
-# process interface
-rm -rf ../interface/wasi ../interface/fermyon
-mv interface/wasi ../interface
-mv interface/fermyon ../interface
-rm -rf interface
-
-# last step:
-moon fmt && moon info
+# Regenerates the WIT bindings for this SDK from the `wit/` directory.
+#
+# `wit-bindgen` still emits the long-deprecated `moon.mod.json` / `moon.pkg.json`
+# manifest format and a directory layout that is not what this SDK wants, so
+# `cmd/wit-translate` runs it into a temporary directory, lets `moon fmt`
+# migrate the manifests to `moon.mod` / `moon.pkg`, and then reshapes the
+# output into the layout this repository uses:
+#
+#   interface/<namespace>/<package>/<interface>/{moon.pkg,ffi.mbt,top.mbt}
+#   gen/                 thin wrappers around the FFI primitives
+#   ffi/top_wasm.mbt     the FFI primitives, all in one shared package
+#   ffi/top_notwasm.mbt  generated from top_wasm.mbt by cmd/gen-ffi-top-notwasm
+#
+# Usage: cd wit && ./run-wit-bindgen.sh
+cd "$(dirname "$0")"
+go run ../cmd/wit-translate/main.go .

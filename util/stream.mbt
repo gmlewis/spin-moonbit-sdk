@@ -99,7 +99,7 @@ pub fn stream_func(
         if e == @streams.Closed {
           break
         }
-        let msg = e.to_string()
+        let msg = @debug.to_string(e)
         @log.error("in_stream.blocking_read: \{msg}")
         return Err(@types.ErrorCode::InternalError(Some(msg)))
       }
@@ -121,7 +121,7 @@ pub fn stream_func(
         if e == @streams.Closed {
           break
         }
-        let msg = e.to_string()
+        let msg = @debug.to_string(e)
         @log.error("outstream.blocking_write_and_flush: \{msg}")
         return Err(@types.ErrorCode::InternalError(Some(msg)))
       }

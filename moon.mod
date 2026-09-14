@@ -1,0 +1,19 @@
+name = "gmlewis/spin-moonbit-sdk"
+
+version = "0.54.14"
+
+import {
+  "gmlewis/base64@0.16.3",
+  "gmlewis/md5@0.19.26",
+  "gmlewis/sha256@0.17.24",
+}
+
+readme = "README.md"
+
+repository = "https://github.com/gmlewis/spin-moonbit-sdk"
+
+license = "Apache-2.0"
+
+keywords = [ "spin", "moonbit", "sdk" ]
+
+description = "Experimental Spin SDK for the MoonBit programming language."

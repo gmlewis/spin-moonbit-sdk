@@ -72,14 +72,37 @@ Hello, World!
 Each example contains a README. Please refer to the README for additional commands and setup instructions.
 It might also be required to issue an update command: `moon update` to retrieve the latest dependencies.
 
+## Regenerating the bindings
+
+The WIT bindings under `interface/`, `gen/`, and `ffi/` are generated, not
+hand-written. To regenerate them after editing anything under `wit/`:
+
+```bash
+$ cd wit
+$ ./run-wit-bindgen.sh
+```
+
+That script is a thin wrapper around `cmd/wit-translate`, which drives
+`wit-bindgen` (installed via `cargo install wit-bindgen-cli`) and then
+reshapes its output into the layout documented inside that Go program. Note
+that `wit-bindgen` still emits the long-deprecated `moon.mod.json` /
+`moon.pkg.json` manifests; the wrapper lets the current `moon` compiler migrate
+those to `moon.mod` / `moon.pkg` rather than reimplementing the migration.
+
 ## Status
 
 The code has been updated to support compiler:
 
 ```bash
 $ moon version --all
-moon 0.1.20260330 (c527f57 2026-03-30) ~/.moon/bin/moon
-moonc v0.8.4+4d98d95d4 (2026-03-30) ~/.moon/bin/moonc
-moonrun 0.1.20260330 (c527f57 2026-03-30) ~/.moon/bin/moonrun
-moon-pilot 0.0.1-df92511 (2026-03-30) ~/.moon/bin/moon-pilot
+moon 0.1.20260904 (94521db 2026-09-04) ~/.moon/bin/moon
+moonc v0.10.12+1634b282e (2026-09-07) ~/.moon/bin/moonc
+moonrun 0.1.20260904 (94521db 2026-09-04) ~/.moon/bin/moonrun
+
+
+and generator:
+
+```bash
+$ wit-bindgen --version
+wit-bindgen-cli 0.62.0 (c604ee01c 2026-09-10)
 ```

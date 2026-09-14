@@ -15,4 +15,3 @@ pub fn get_stderr() -> @streams.OutputStream
 // Type aliases
 
 // Traits
-

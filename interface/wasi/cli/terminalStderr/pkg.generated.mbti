@@ -15,4 +15,3 @@ pub fn get_terminal_stderr() -> @terminalOutput.TerminalOutput?
 // Type aliases
 
 // Traits
-

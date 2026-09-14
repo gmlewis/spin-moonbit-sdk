@@ -24,8 +24,8 @@ pub fn send_request(
     dump_headers(incoming_headers)
   }
   let result = match content_length {
-    0 => @buffer.new()
-    size_hint => @buffer.new(size_hint~)
+    0 => @buffer.Buffer()
+    size_hint => @buffer.Buffer(size_hint~)
   }
   //
   let in_stream = match incoming_response.consume() {
@@ -44,7 +44,7 @@ pub fn send_request(
         if e == @streams.Closed {
           break
         }
-        let msg = e.to_string()
+        let msg = @debug.to_string(e)
         @log.error("in_stream.blocking_read: \{msg}")
         return Err(@types.ErrorCode::InternalError(Some(msg)))
       }

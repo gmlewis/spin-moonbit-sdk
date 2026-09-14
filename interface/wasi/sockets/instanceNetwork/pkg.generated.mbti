@@ -15,4 +15,3 @@ pub fn instance_network() -> @network.Network
 // Type aliases
 
 // Traits
-

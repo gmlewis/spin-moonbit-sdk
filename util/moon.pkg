@@ -10,5 +10,6 @@ import {
   "gmlewis/spin-moonbit-sdk/log",
   "moonbitlang/core/buffer",
   "moonbitlang/core/builtin",
+  "moonbitlang/core/debug",
   "moonbitlang/core/string",
 }

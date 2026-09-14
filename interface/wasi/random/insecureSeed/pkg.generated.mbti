@@ -11,4 +11,3 @@ pub fn insecure_seed() -> (UInt64, UInt64)
 // Type aliases
 
 // Traits
-

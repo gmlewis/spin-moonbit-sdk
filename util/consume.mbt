@@ -75,7 +75,7 @@ pub fn consume_func(
         if e == @streams.Closed {
           break
         }
-        let msg = e.to_string()
+        let msg = @debug.to_string(e)
         @log.error("in_stream.blocking_read: \{msg}")
         return Err(@types.ErrorCode::InternalError(Some(msg)))
       }

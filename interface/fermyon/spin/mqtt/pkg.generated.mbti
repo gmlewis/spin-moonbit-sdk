@@ -1,15 +1,17 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/mqtt"
 
+import {
+  "moonbitlang/core/debug",
+}
+
 // Values
 
 // Errors
 
 // Types and methods
-pub(all) struct Connection(Int) derive(Eq, Show)
+pub(all) struct Connection(Int) derive(Eq, @debug.Debug)
 pub fn Connection::drop(Self) -> Unit
-#deprecated
-pub fn Connection::inner(Self) -> Int
 pub fn Connection::open(String, String, String, UInt64) -> Result[Self, Error_]
 pub fn Connection::publish(Self, String, FixedArray[Byte], Qos) -> Result[Unit, Error_]
 
@@ -18,17 +20,16 @@ pub(all) enum Error_ {
   TooManyConnections
   ConnectionFailed(String)
   Other(String)
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
 pub(all) enum Qos {
   AT_MOST_ONCE
   AT_LEAST_ONCE
   EXACTLY_ONCE
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 pub fn Qos::from(Int) -> Self
 pub fn Qos::ordinal(Self) -> Int
 
 // Type aliases
 
 // Traits
-

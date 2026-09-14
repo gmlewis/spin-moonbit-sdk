@@ -1,3 +1,3 @@
 #!/bin/bash -ex
-rm -rf target *.wasm
+rm -rf _build target *.wasm
 spin build

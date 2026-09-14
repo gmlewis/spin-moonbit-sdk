@@ -15,4 +15,3 @@ pub fn get_terminal_stdin() -> @terminalInput.TerminalInput?
 // Type aliases
 
 // Traits
-

@@ -17,4 +17,3 @@ pub fn warn(String, leading_blank_line? : Bool) -> Unit
 // Type aliases
 
 // Traits
-

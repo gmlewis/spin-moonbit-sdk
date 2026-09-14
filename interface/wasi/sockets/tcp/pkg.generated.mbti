@@ -5,6 +5,7 @@ import {
   "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll",
   "gmlewis/spin-moonbit-sdk/interface/wasi/io/streams",
   "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -16,11 +17,11 @@ pub(all) enum ShutdownType {
   RECEIVE
   SEND
   BOTH
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 pub fn ShutdownType::from(Int) -> Self
 pub fn ShutdownType::ordinal(Self) -> Int
 
-pub(all) struct TcpSocket(Int) derive(Eq, Show)
+pub(all) struct TcpSocket(Int) derive(Eq, @debug.Debug)
 pub fn TcpSocket::accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 pub fn TcpSocket::address_family(Self) -> @network.IpAddressFamily
 pub fn TcpSocket::drop(Self) -> Unit
@@ -28,8 +29,6 @@ pub fn TcpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::finish_connect(Self) -> Result[(@streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 pub fn TcpSocket::finish_listen(Self) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::hop_limit(Self) -> Result[Byte, @network.ErrorCode]
-#deprecated
-pub fn TcpSocket::inner(Self) -> Int
 pub fn TcpSocket::is_listening(Self) -> Bool
 pub fn TcpSocket::keep_alive_count(Self) -> Result[UInt, @network.ErrorCode]
 pub fn TcpSocket::keep_alive_enabled(Self) -> Result[Bool, @network.ErrorCode]
@@ -56,4 +55,3 @@ pub fn TcpSocket::subscribe(Self) -> @poll.Pollable
 // Type aliases
 
 // Traits
-

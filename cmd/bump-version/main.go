@@ -1,4 +1,4 @@
-// bump-version reads the `moon.mod.json` file, parses the "version" line,
+// bump-version reads the `moon.mod` file, parses the `version = "..."` line,
 // bumps the patch (or '-major' or '-minor) version by one, then writes back the file.
 // It also prints the old version and new version on separate lines to stdout.
 package main
@@ -13,10 +13,10 @@ import (
 	"strings"
 )
 
-const filename = "moon.mod.json"
+const filename = "moon.mod"
 
 var (
-	versionRE = regexp.MustCompile(`"version": "(\d+)\.(\d+)\.(\d+)"`)
+	versionRE = regexp.MustCompile(`version = "(\d+)\.(\d+)\.(\d+)"`)
 
 	bumpMajor = flag.Bool("major", false, "Bump major instead of patch")
 	bumpMinor = flag.Bool("minor", false, "Bump minor instead of patch")

@@ -1,8 +1,0 @@
-{
-  "name": "gmlewis/hello-world",
-  "deps": {
-    "gmlewis/spin-moonbit-sdk": {
-      "path": "../../"
-    }
-  }
-}

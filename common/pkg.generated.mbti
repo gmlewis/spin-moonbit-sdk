@@ -16,10 +16,9 @@ import {
 
 // Traits
 pub(open) trait HashFunc {
-  name(Self) -> String
-  write(Self, Byte) -> Unit
-  check_sum(Self) -> String
+  fn name(Self) -> String
+  fn write(Self, Byte) -> Unit
+  fn check_sum(Self) -> String
 }
 pub impl HashFunc for @md5.Digest
 pub impl HashFunc for @sha256.Digest
-

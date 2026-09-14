@@ -15,4 +15,3 @@ pub fn get_stdin() -> @streams.InputStream
 // Type aliases
 
 // Traits
-

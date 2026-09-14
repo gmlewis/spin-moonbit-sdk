@@ -4,6 +4,7 @@ package "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/ipNameLookup"
 import {
   "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll",
   "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -12,14 +13,11 @@ pub fn resolve_addresses(@network.Network, String) -> Result[ResolveAddressStrea
 // Errors
 
 // Types and methods
-pub(all) struct ResolveAddressStream(Int) derive(Eq, Show)
+pub(all) struct ResolveAddressStream(Int) derive(Eq, @debug.Debug)
 pub fn ResolveAddressStream::drop(Self) -> Unit
-#deprecated
-pub fn ResolveAddressStream::inner(Self) -> Int
 pub fn ResolveAddressStream::resolve_next_address(Self) -> Result[@network.IpAddress?, @network.ErrorCode]
 pub fn ResolveAddressStream::subscribe(Self) -> @poll.Pollable
 
 // Type aliases
 
 // Traits
-

@@ -6,23 +6,13 @@ pub fn bytes2ptr(FixedArray[Byte]) -> Int
 
 pub fn cabi_realloc(Int, Int, Int, Int) -> Int
 
-pub fn double_array2ptr(FixedArray[Double]) -> Int
+pub fn copy(Int, Int, Int) -> Unit
 
 pub fn extend16(Int) -> Int
 
 pub fn extend8(Int) -> Int
 
-pub fn f32_to_i32(Float) -> Int
-
-pub fn f32_to_i64(Float) -> Int64
-
-pub fn float_array2ptr(FixedArray[Float]) -> Int
-
 pub fn free(Int) -> Unit
-
-pub fn int64_array2ptr(FixedArray[Int64]) -> Int
-
-pub fn int_array2ptr(FixedArray[Int]) -> Int
 
 pub fn load16(Int) -> Int
 
@@ -44,17 +34,9 @@ pub fn malloc(Int) -> Int
 
 pub fn ptr2bytes(Int, Int) -> FixedArray[Byte]
 
-pub fn ptr2double_array(Int, Int) -> FixedArray[Double]
-
 pub fn ptr2float_array(Int, Int) -> FixedArray[Float]
 
-pub fn ptr2int64_array(Int, Int) -> FixedArray[Int64]
-
-pub fn ptr2int_array(Int, Int) -> FixedArray[Int]
-
 pub fn ptr2str(Int, Int) -> String
-
-pub fn ptr2uint64_array(Int, Int) -> FixedArray[UInt64]
 
 pub fn ptr2uint_array(Int, Int) -> FixedArray[UInt]
 
@@ -72,24 +54,10 @@ pub fn storef64(Int, Double) -> Unit
 
 pub fn str2ptr(String) -> Int
 
-pub fn uint64_array2ptr(FixedArray[UInt64]) -> Int
-
-pub fn uint_array2ptr(FixedArray[UInt]) -> Int
-
 // Errors
 
 // Types and methods
-pub(all) struct Cleanup {
-  address : Int
-  size : Int
-  align : Int
-}
 
 // Type aliases
 
 // Traits
-pub(open) trait Any {
-}
-pub impl Any for String
-pub impl Any for FixedArray[Byte]
-

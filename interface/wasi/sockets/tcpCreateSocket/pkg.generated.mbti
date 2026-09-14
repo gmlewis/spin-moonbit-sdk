@@ -16,4 +16,3 @@ pub fn create_tcp_socket(@network.IpAddressFamily) -> Result[@tcp.TcpSocket, @ne
 // Type aliases
 
 // Traits
-

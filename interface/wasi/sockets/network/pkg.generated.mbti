@@ -1,6 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/wasi/sockets/network"
 
+import {
+  "moonbitlang/core/debug",
+}
+
 // Values
 
 // Errors
@@ -28,45 +32,42 @@ pub(all) enum ErrorCode {
   NAME_UNRESOLVABLE
   TEMPORARY_RESOLVER_FAILURE
   PERMANENT_RESOLVER_FAILURE
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 pub fn ErrorCode::from(Int) -> Self
 pub fn ErrorCode::ordinal(Self) -> Int
 
 pub(all) enum IpAddress {
   Ipv4((Byte, Byte, Byte, Byte))
   Ipv6((UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt))
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
 pub(all) enum IpAddressFamily {
   IPV4
   IPV6
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 pub fn IpAddressFamily::from(Int) -> Self
 pub fn IpAddressFamily::ordinal(Self) -> Int
 
 pub(all) enum IpSocketAddress {
   Ipv4(Ipv4SocketAddress)
   Ipv6(Ipv6SocketAddress)
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
 pub(all) struct Ipv4SocketAddress {
   port : UInt
   address : (Byte, Byte, Byte, Byte)
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
 pub(all) struct Ipv6SocketAddress {
   port : UInt
   flow_info : UInt
   address : (UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt)
   scope_id : UInt
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
-pub(all) struct Network(Int) derive(Eq, Show)
+pub(all) struct Network(Int) derive(Eq, @debug.Debug)
 pub fn Network::drop(Self) -> Unit
-#deprecated
-pub fn Network::inner(Self) -> Int
 
 // Type aliases
 
 // Traits
-

@@ -3,6 +3,7 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/mysql"
 
 import {
   "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -10,15 +11,12 @@ import {
 // Errors
 
 // Types and methods
-pub(all) struct Connection(Int) derive(Eq, Show)
+pub(all) struct Connection(Int) derive(Eq, @debug.Debug)
 pub fn Connection::drop(Self) -> Unit
 pub fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[Unit, @rdbmsTypes.Error_]
-#deprecated
-pub fn Connection::inner(Self) -> Int
 pub fn Connection::open(String) -> Result[Self, @rdbmsTypes.Error_]
 pub fn Connection::query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]
 
 // Type aliases
 
 // Traits
-

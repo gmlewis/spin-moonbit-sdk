@@ -15,4 +15,3 @@ pub fn handle(@types.OutgoingRequest, @types.RequestOptions?) -> Result[@types.F
 // Type aliases
 
 // Traits
-

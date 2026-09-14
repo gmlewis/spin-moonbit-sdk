@@ -1,6 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes"
 
+import {
+  "moonbitlang/core/debug",
+}
+
 // Values
 
 // Errors
@@ -9,7 +13,7 @@ package "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes"
 pub(all) struct Column {
   name : String
   data_type : DbDataType
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
 pub(all) enum DbDataType {
   BOOLEAN
@@ -26,7 +30,7 @@ pub(all) enum DbDataType {
   STR
   BINARY
   OTHER
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 pub fn DbDataType::from(Int) -> Self
 pub fn DbDataType::ordinal(Self) -> Int
 
@@ -46,7 +50,7 @@ pub(all) enum DbValue {
   Binary(FixedArray[Byte])
   DbNull
   Unsupported
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
 pub(all) enum Error_ {
   ConnectionFailed(String)
@@ -54,7 +58,7 @@ pub(all) enum Error_ {
   QueryFailed(String)
   ValueConversionFailed(String)
   Other(String)
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
 pub(all) enum ParameterValue {
   Boolean(Bool)
@@ -71,14 +75,13 @@ pub(all) enum ParameterValue {
   Str(String)
   Binary(FixedArray[Byte])
   DbNull
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
 pub(all) struct RowSet {
   columns : Array[Column]
   rows : Array[Array[DbValue]]
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
 // Type aliases
 
 // Traits
-

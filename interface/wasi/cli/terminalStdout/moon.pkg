@@ -1,4 +1,4 @@
 import {
-  "gmlewis/spin-moonbit-sdk/ffi" @ffi,
-  "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalOutput" @terminalOutput,
+  "gmlewis/spin-moonbit-sdk/ffi",
+  "gmlewis/spin-moonbit-sdk/interface/wasi/cli/terminalOutput",
 }

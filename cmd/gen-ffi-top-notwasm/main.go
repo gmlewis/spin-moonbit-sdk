@@ -44,17 +44,17 @@ func main() {
 }
 
 var (
-	keepCleanupRE    = regexp.MustCompile(`(?sm)(Cleanup {.*?})`)
 	bodyRE           = regexp.MustCompile(`(?sm){\n.*?\n}\n`)
-	externWasmUnitRE = regexp.MustCompile(`(?sm)(\) =\n#\|.*?\n)`)
-	externWasmRE     = regexp.MustCompile(`(?sm)(=\n#\|.*?\n)`)
+	externWasmUnitRE = regexp.MustCompile(`(?sm)(\) =\n[ \t]*#\|.*?\n)`)
+	externWasmRE     = regexp.MustCompile(`(?sm)(=\n[ \t]*#\|.*?\n)`)
 	intArgRE         = regexp.MustCompile(`([a-z_]+ : Int)`)
 	floatArgRE       = regexp.MustCompile(`([a-z_]+ : Float)`)
 	doubleArgRE      = regexp.MustCompile(`([a-z_]+ : Double)`)
 	stringArgRE      = regexp.MustCompile(`([a-z_]+ : String)`)
 	fixedArrayArgRE  = regexp.MustCompile(`([a-z_]+ : FixedArray)`)
 	privateFnRE      = regexp.MustCompile(`(?sm)^(fn .*?)$`)
-	remainingWatRE   = regexp.MustCompile(`(?sm)^(#\|.*?)$`)
+	remainingWatRE   = regexp.MustCompile(`(?sm)^[ \t]*#\|.*?$`)
+	referenceAttrRE  = regexp.MustCompile(`(?m)^#(?:owned|borrow)\([^)]*\)\n`)
 )
 
 func processSource(src string, outBuf *bytes.Buffer) {
@@ -63,7 +63,6 @@ func processSource(src string, outBuf *bytes.Buffer) {
 	// weird but necessary
 	src = strings.ReplaceAll(src, "{{", "{")
 	src = strings.ReplaceAll(src, "}}", "}")
-	cleanup := keepCleanupRE.FindString(src)
 	src = bodyRE.ReplaceAllString(src, `{ abort("not wasm") }`+"\n")
 	src = externWasmUnitRE.ReplaceAllString(src, `) -> Unit { abort("not wasm") }`+"\n")
 	src = externWasmRE.ReplaceAllString(src, `{ abort("not wasm") }`+"\n")
@@ -75,7 +74,10 @@ func processSource(src string, outBuf *bytes.Buffer) {
 	src = privateFnRE.ReplaceAllString(src, "")
 	// Now remove any remaining lines that start with `#|` caused by multi-line WAT.
 	src = remainingWatRE.ReplaceAllString(src, "")
-	src = strings.Replace(src, `Cleanup { abort("not wasm") }`, cleanup, 1)
+	// wit-bindgen >= 0.62 uses `#owned(...)` where < 0.43 used `#borrow(...)`;
+	// neither has any meaning for an `abort("not wasm")` stub, and the original
+	// hand-written stubs omitted them.
+	src = referenceAttrRE.ReplaceAllString(src, "")
 	outBuf.WriteString(src)
 }
 
