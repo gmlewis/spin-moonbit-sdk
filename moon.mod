@@ -1,6 +1,6 @@
 name = "gmlewis/spin-moonbit-sdk"
 
-version = "0.54.14"
+version = "0.55.0"
 
 import {
   "gmlewis/base64@0.16.3",
