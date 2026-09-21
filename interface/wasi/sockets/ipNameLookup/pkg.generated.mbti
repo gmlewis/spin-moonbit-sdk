@@ -15,8 +15,10 @@ pub fn resolve_addresses(@network.Network, String) -> Result[ResolveAddressStrea
 // Types and methods
 pub(all) struct ResolveAddressStream(Int) derive(Eq, @debug.Debug)
 pub fn ResolveAddressStream::drop(Self) -> Unit
+pub fn ResolveAddressStream::equal(Self, Self) -> Bool
 pub fn ResolveAddressStream::resolve_next_address(Self) -> Result[@network.IpAddress?, @network.ErrorCode]
 pub fn ResolveAddressStream::subscribe(Self) -> @poll.Pollable
+pub fn ResolveAddressStream::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

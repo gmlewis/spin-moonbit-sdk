@@ -5,6 +5,17 @@
 pub(all) struct Store(Int) derive(Debug, Eq)
 
 ///|
+pub extend Store with @debug.Debug::{to_repr}
+
+///|
+pub extend Store with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Store with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn Store::drop(self : Store) -> Unit {
   let Store(resource) = self
@@ -19,6 +30,17 @@ pub(all) enum Error_ {
   AccessDenied
   Other(String)
 } derive(Debug, Eq)
+
+///|
+pub extend Error_ with @debug.Debug::{to_repr}
+
+///|
+pub extend Error_ with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Error_ with Eq::{not_equal}
 
 ///|
 /// Open the store with the specified label.

@@ -11,6 +11,17 @@ pub(all) enum Error_ {
 } derive(Debug, Eq)
 
 ///|
+pub extend Error_ with @debug.Debug::{to_repr}
+
+///|
+pub extend Error_ with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Error_ with Eq::{not_equal}
+
+///|
 /// Data types for a database column
 pub(all) enum DbDataType {
   BOOLEAN
@@ -28,6 +39,17 @@ pub(all) enum DbDataType {
   BINARY
   OTHER
 } derive(Debug, Eq)
+
+///|
+pub extend DbDataType with @debug.Debug::{to_repr}
+
+///|
+pub extend DbDataType with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend DbDataType with Eq::{not_equal}
 
 ///|
 pub fn DbDataType::ordinal(self : DbDataType) -> Int {
@@ -91,6 +113,17 @@ pub(all) enum DbValue {
 } derive(Debug, Eq)
 
 ///|
+pub extend DbValue with @debug.Debug::{to_repr}
+
+///|
+pub extend DbValue with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend DbValue with Eq::{not_equal}
+
+///|
 /// Values used in parameterized queries
 pub(all) enum ParameterValue {
   Boolean(Bool)
@@ -110,6 +143,17 @@ pub(all) enum ParameterValue {
 } derive(Debug, Eq)
 
 ///|
+pub extend ParameterValue with @debug.Debug::{to_repr}
+
+///|
+pub extend ParameterValue with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend ParameterValue with Eq::{not_equal}
+
+///|
 /// A database column
 pub(all) struct Column {
   name : String
@@ -117,8 +161,30 @@ pub(all) struct Column {
 } derive(Debug, Eq)
 
 ///|
+pub extend Column with @debug.Debug::{to_repr}
+
+///|
+pub extend Column with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Column with Eq::{not_equal}
+
+///|
 /// A set of database rows
 pub(all) struct RowSet {
   columns : Array[Column]
   rows : Array[Array[DbValue]]
 } derive(Debug, Eq)
+
+///|
+pub extend RowSet with @debug.Debug::{to_repr}
+
+///|
+pub extend RowSet with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend RowSet with Eq::{not_equal}

@@ -12,6 +12,8 @@ import {
 // Types and methods
 pub(all) struct TerminalOutput(Int) derive(Eq, @debug.Debug)
 pub fn TerminalOutput::drop(Self) -> Unit
+pub fn TerminalOutput::equal(Self, Self) -> Bool
+pub fn TerminalOutput::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

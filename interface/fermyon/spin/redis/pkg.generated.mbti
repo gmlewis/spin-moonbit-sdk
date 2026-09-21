@@ -13,6 +13,7 @@ import {
 pub(all) struct Connection(Int) derive(Eq, @debug.Debug)
 pub fn Connection::del(Self, Array[String]) -> Result[UInt, Error_]
 pub fn Connection::drop(Self) -> Unit
+pub fn Connection::equal(Self, Self) -> Bool
 pub fn Connection::execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]
 pub fn Connection::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
 pub fn Connection::incr(Self, String) -> Result[Int64, Error_]
@@ -22,6 +23,7 @@ pub fn Connection::sadd(Self, String, Array[String]) -> Result[UInt, Error_]
 pub fn Connection::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
 pub fn Connection::smembers(Self, String) -> Result[Array[String], Error_]
 pub fn Connection::srem(Self, String, Array[String]) -> Result[UInt, Error_]
+pub fn Connection::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Error_ {
   InvalidAddress
@@ -29,11 +31,15 @@ pub(all) enum Error_ {
   TypeError
   Other(String)
 } derive(Eq, @debug.Debug)
+pub fn Error_::equal(Self, Self) -> Bool
+pub fn Error_::to_repr(Self) -> @debug.Repr
 
 pub(all) enum RedisParameter {
   Int64(Int64)
   Binary(FixedArray[Byte])
 } derive(Eq, @debug.Debug)
+pub fn RedisParameter::equal(Self, Self) -> Bool
+pub fn RedisParameter::to_repr(Self) -> @debug.Repr
 
 pub(all) enum RedisResult {
   Nil
@@ -41,6 +47,8 @@ pub(all) enum RedisResult {
   Int64(Int64)
   Binary(FixedArray[Byte])
 } derive(Eq, @debug.Debug)
+pub fn RedisResult::equal(Self, Self) -> Bool
+pub fn RedisResult::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

@@ -7,6 +7,17 @@
 pub(all) struct Network(Int) derive(Debug, Eq)
 
 ///|
+pub extend Network with @debug.Debug::{to_repr}
+
+///|
+pub extend Network with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Network with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn Network::drop(self : Network) -> Unit {
   let Network(resource) = self
@@ -49,6 +60,17 @@ pub(all) enum ErrorCode {
   TEMPORARY_RESOLVER_FAILURE
   PERMANENT_RESOLVER_FAILURE
 } derive(Debug, Eq)
+
+///|
+pub extend ErrorCode with @debug.Debug::{to_repr}
+
+///|
+pub extend ErrorCode with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend ErrorCode with Eq::{not_equal}
 
 ///|
 pub fn ErrorCode::ordinal(self : ErrorCode) -> Int {
@@ -112,6 +134,17 @@ pub(all) enum IpAddressFamily {
 } derive(Debug, Eq)
 
 ///|
+pub extend IpAddressFamily with @debug.Debug::{to_repr}
+
+///|
+pub extend IpAddressFamily with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend IpAddressFamily with Eq::{not_equal}
+
+///|
 pub fn IpAddressFamily::ordinal(self : IpAddressFamily) -> Int {
   match self {
     IPV4 => 0
@@ -135,10 +168,32 @@ pub(all) enum IpAddress {
 } derive(Debug, Eq)
 
 ///|
+pub extend IpAddress with @debug.Debug::{to_repr}
+
+///|
+pub extend IpAddress with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend IpAddress with Eq::{not_equal}
+
+///|
 pub(all) struct Ipv4SocketAddress {
   port : UInt
   address : (Byte, Byte, Byte, Byte)
 } derive(Debug, Eq)
+
+///|
+pub extend Ipv4SocketAddress with @debug.Debug::{to_repr}
+
+///|
+pub extend Ipv4SocketAddress with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Ipv4SocketAddress with Eq::{not_equal}
 
 ///|
 pub(all) struct Ipv6SocketAddress {
@@ -149,7 +204,29 @@ pub(all) struct Ipv6SocketAddress {
 } derive(Debug, Eq)
 
 ///|
+pub extend Ipv6SocketAddress with @debug.Debug::{to_repr}
+
+///|
+pub extend Ipv6SocketAddress with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Ipv6SocketAddress with Eq::{not_equal}
+
+///|
 pub(all) enum IpSocketAddress {
   Ipv4(Ipv4SocketAddress)
   Ipv6(Ipv6SocketAddress)
 } derive(Debug, Eq)
+
+///|
+pub extend IpSocketAddress with @debug.Debug::{to_repr}
+
+///|
+pub extend IpSocketAddress with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend IpSocketAddress with Eq::{not_equal}

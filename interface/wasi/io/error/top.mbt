@@ -23,6 +23,17 @@
 pub(all) struct Error_(Int) derive(Debug, Eq)
 
 ///|
+pub extend Error_ with @debug.Debug::{to_repr}
+
+///|
+pub extend Error_ with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Error_ with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn Error_::drop(self : Error_) -> Unit {
   let Error_(resource) = self

@@ -12,8 +12,10 @@ import {
 // Types and methods
 pub(all) struct Connection(Int) derive(Eq, @debug.Debug)
 pub fn Connection::drop(Self) -> Unit
+pub fn Connection::equal(Self, Self) -> Bool
 pub fn Connection::open(String, String, String, UInt64) -> Result[Self, Error_]
 pub fn Connection::publish(Self, String, FixedArray[Byte], Qos) -> Result[Unit, Error_]
+pub fn Connection::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Error_ {
   InvalidAddress
@@ -21,14 +23,18 @@ pub(all) enum Error_ {
   ConnectionFailed(String)
   Other(String)
 } derive(Eq, @debug.Debug)
+pub fn Error_::equal(Self, Self) -> Bool
+pub fn Error_::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Qos {
   AT_MOST_ONCE
   AT_LEAST_ONCE
   EXACTLY_ONCE
 } derive(Eq, @debug.Debug)
+pub fn Qos::equal(Self, Self) -> Bool
 pub fn Qos::from(Int) -> Self
 pub fn Qos::ordinal(Self) -> Int
+pub fn Qos::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

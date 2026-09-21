@@ -8,6 +8,17 @@ pub(all) struct IncomingDatagram {
 } derive(Debug, Eq)
 
 ///|
+pub extend IncomingDatagram with @debug.Debug::{to_repr}
+
+///|
+pub extend IncomingDatagram with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend IncomingDatagram with Eq::{not_equal}
+
+///|
 /// A datagram to be sent out.
 pub(all) struct OutgoingDatagram {
   data : FixedArray[Byte]
@@ -15,8 +26,30 @@ pub(all) struct OutgoingDatagram {
 } derive(Debug, Eq)
 
 ///|
+pub extend OutgoingDatagram with @debug.Debug::{to_repr}
+
+///|
+pub extend OutgoingDatagram with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend OutgoingDatagram with Eq::{not_equal}
+
+///|
 /// A UDP socket handle.
 pub(all) struct UdpSocket(Int) derive(Debug, Eq)
+
+///|
+pub extend UdpSocket with @debug.Debug::{to_repr}
+
+///|
+pub extend UdpSocket with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend UdpSocket with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.
@@ -29,6 +62,17 @@ pub fn UdpSocket::drop(self : UdpSocket) -> Unit {
 pub(all) struct IncomingDatagramStream(Int) derive(Debug, Eq)
 
 ///|
+pub extend IncomingDatagramStream with @debug.Debug::{to_repr}
+
+///|
+pub extend IncomingDatagramStream with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend IncomingDatagramStream with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn IncomingDatagramStream::drop(self : IncomingDatagramStream) -> Unit {
   let IncomingDatagramStream(resource) = self
@@ -37,6 +81,17 @@ pub fn IncomingDatagramStream::drop(self : IncomingDatagramStream) -> Unit {
 
 ///|
 pub(all) struct OutgoingDatagramStream(Int) derive(Debug, Eq)
+
+///|
+pub extend OutgoingDatagramStream with @debug.Debug::{to_repr}
+
+///|
+pub extend OutgoingDatagramStream with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend OutgoingDatagramStream with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.

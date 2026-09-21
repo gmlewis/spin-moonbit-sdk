@@ -5,6 +5,17 @@
 pub(all) struct Connection(Int) derive(Debug, Eq)
 
 ///|
+pub extend Connection with @debug.Debug::{to_repr}
+
+///|
+pub extend Connection with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Connection with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn Connection::drop(self : Connection) -> Unit {
   let Connection(resource) = self

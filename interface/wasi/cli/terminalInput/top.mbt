@@ -5,6 +5,17 @@
 pub(all) struct TerminalInput(Int) derive(Debug, Eq)
 
 ///|
+pub extend TerminalInput with @debug.Debug::{to_repr}
+
+///|
+pub extend TerminalInput with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend TerminalInput with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn TerminalInput::drop(self : TerminalInput) -> Unit {
   let TerminalInput(resource) = self

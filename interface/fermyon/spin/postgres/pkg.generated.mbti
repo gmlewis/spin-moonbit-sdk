@@ -13,9 +13,11 @@ import {
 // Types and methods
 pub(all) struct Connection(Int) derive(Eq, @debug.Debug)
 pub fn Connection::drop(Self) -> Unit
+pub fn Connection::equal(Self, Self) -> Bool
 pub fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[UInt64, @rdbmsTypes.Error_]
 pub fn Connection::open(String) -> Result[Self, @rdbmsTypes.Error_]
 pub fn Connection::query(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_]
+pub fn Connection::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

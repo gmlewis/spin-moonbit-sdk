@@ -14,7 +14,9 @@ pub fn poll(Array[Pollable]) -> FixedArray[UInt]
 pub(all) struct Pollable(Int) derive(Eq, @debug.Debug)
 pub fn Pollable::block(Self) -> Unit
 pub fn Pollable::drop(Self) -> Unit
+pub fn Pollable::equal(Self, Self) -> Bool
 pub fn Pollable::ready(Self) -> Bool
+pub fn Pollable::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

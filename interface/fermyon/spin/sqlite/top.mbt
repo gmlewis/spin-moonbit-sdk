@@ -5,6 +5,17 @@
 pub(all) struct Connection(Int) derive(Debug, Eq)
 
 ///|
+pub extend Connection with @debug.Debug::{to_repr}
+
+///|
+pub extend Connection with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Connection with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn Connection::drop(self : Connection) -> Unit {
   let Connection(resource) = self
@@ -22,6 +33,17 @@ pub(all) enum Error_ {
 } derive(Debug, Eq)
 
 ///|
+pub extend Error_ with @debug.Debug::{to_repr}
+
+///|
+pub extend Error_ with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Error_ with Eq::{not_equal}
+
+///|
 /// A single column's result from a database query
 pub(all) enum Value {
   Integer(Int64)
@@ -32,10 +54,32 @@ pub(all) enum Value {
 } derive(Debug, Eq)
 
 ///|
+pub extend Value with @debug.Debug::{to_repr}
+
+///|
+pub extend Value with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Value with Eq::{not_equal}
+
+///|
 /// A set of values for each of the columns in a query-result
 pub(all) struct RowResult {
   values : Array[Value]
 } derive(Debug, Eq)
+
+///|
+pub extend RowResult with @debug.Debug::{to_repr}
+
+///|
+pub extend RowResult with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend RowResult with Eq::{not_equal}
 
 ///|
 /// A result of a query
@@ -43,6 +87,17 @@ pub(all) struct QueryResult {
   columns : Array[String]
   rows : Array[RowResult]
 } derive(Debug, Eq)
+
+///|
+pub extend QueryResult with @debug.Debug::{to_repr}
+
+///|
+pub extend QueryResult with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend QueryResult with Eq::{not_equal}
 
 ///|
 /// Open a connection to a named database instance.

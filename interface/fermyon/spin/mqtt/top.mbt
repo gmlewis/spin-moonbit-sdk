@@ -10,12 +10,34 @@ pub(all) enum Error_ {
 } derive(Debug, Eq)
 
 ///|
+pub extend Error_ with @debug.Debug::{to_repr}
+
+///|
+pub extend Error_ with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Error_ with Eq::{not_equal}
+
+///|
 /// QoS for publishing Mqtt messages
 pub(all) enum Qos {
   AT_MOST_ONCE
   AT_LEAST_ONCE
   EXACTLY_ONCE
 } derive(Debug, Eq)
+
+///|
+pub extend Qos with @debug.Debug::{to_repr}
+
+///|
+pub extend Qos with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Qos with Eq::{not_equal}
 
 ///|
 pub fn Qos::ordinal(self : Qos) -> Int {
@@ -38,6 +60,17 @@ pub fn Qos::from(self : Int) -> Qos {
 
 ///|
 pub(all) struct Connection(Int) derive(Debug, Eq)
+
+///|
+pub extend Connection with @debug.Debug::{to_repr}
+
+///|
+pub extend Connection with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Connection with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.

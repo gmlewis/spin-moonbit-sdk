@@ -1,3 +1,4 @@
 import {
   "gmlewis/spin-moonbit-sdk/ffi",
+  "moonbitlang/core/debug",
 }

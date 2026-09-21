@@ -12,8 +12,10 @@ import {
 // Types and methods
 pub(all) struct Connection(Int) derive(Eq, @debug.Debug)
 pub fn Connection::drop(Self) -> Unit
+pub fn Connection::equal(Self, Self) -> Bool
 pub fn Connection::execute(Self, String, Array[Value]) -> Result[QueryResult, Error_]
 pub fn Connection::open(String) -> Result[Self, Error_]
+pub fn Connection::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Error_ {
   NoSuchDatabase
@@ -22,15 +24,21 @@ pub(all) enum Error_ {
   DatabaseFull
   Io(String)
 } derive(Eq, @debug.Debug)
+pub fn Error_::equal(Self, Self) -> Bool
+pub fn Error_::to_repr(Self) -> @debug.Repr
 
 pub(all) struct QueryResult {
   columns : Array[String]
   rows : Array[RowResult]
 } derive(Eq, @debug.Debug)
+pub fn QueryResult::equal(Self, Self) -> Bool
+pub fn QueryResult::to_repr(Self) -> @debug.Repr
 
 pub(all) struct RowResult {
   values : Array[Value]
 } derive(Eq, @debug.Debug)
+pub fn RowResult::equal(Self, Self) -> Bool
+pub fn RowResult::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Value {
   Integer(Int64)
@@ -39,6 +47,8 @@ pub(all) enum Value {
   Blob(FixedArray[Byte])
   Null
 } derive(Eq, @debug.Debug)
+pub fn Value::equal(Self, Self) -> Bool
+pub fn Value::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

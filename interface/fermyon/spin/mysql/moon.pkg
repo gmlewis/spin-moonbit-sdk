@@ -1,4 +1,5 @@
 import {
   "gmlewis/spin-moonbit-sdk/ffi",
   "gmlewis/spin-moonbit-sdk/interface/fermyon/spin/rdbmsTypes",
+  "moonbitlang/core/debug",
 }

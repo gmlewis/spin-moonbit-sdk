@@ -2,4 +2,5 @@ import {
   "gmlewis/spin-moonbit-sdk/ffi",
   "gmlewis/spin-moonbit-sdk/interface/wasi/io/error",
   "gmlewis/spin-moonbit-sdk/interface/wasi/io/poll",
+  "moonbitlang/core/debug",
 }

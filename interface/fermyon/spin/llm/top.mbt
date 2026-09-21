@@ -12,12 +12,34 @@ pub(all) struct InferencingParams {
 } derive(Debug, Eq)
 
 ///|
+pub extend InferencingParams with @debug.Debug::{to_repr}
+
+///|
+pub extend InferencingParams with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend InferencingParams with Eq::{not_equal}
+
+///|
 /// The set of errors which may be raised by functions in this interface
 pub(all) enum Error_ {
   ModelNotSupported
   RuntimeError(String)
   InvalidInput(String)
 } derive(Debug, Eq)
+
+///|
+pub extend Error_ with @debug.Debug::{to_repr}
+
+///|
+pub extend Error_ with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Error_ with Eq::{not_equal}
 
 ///|
 /// Usage information related to the inferencing result
@@ -27,11 +49,33 @@ pub(all) struct InferencingUsage {
 } derive(Debug, Eq)
 
 ///|
+pub extend InferencingUsage with @debug.Debug::{to_repr}
+
+///|
+pub extend InferencingUsage with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend InferencingUsage with Eq::{not_equal}
+
+///|
 /// An inferencing result
 pub(all) struct InferencingResult {
   text : String
   usage : InferencingUsage
 } derive(Debug, Eq)
+
+///|
+pub extend InferencingResult with @debug.Debug::{to_repr}
+
+///|
+pub extend InferencingResult with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend InferencingResult with Eq::{not_equal}
 
 ///|
 /// Usage related to an embeddings generation request
@@ -40,11 +84,33 @@ pub(all) struct EmbeddingsUsage {
 } derive(Debug, Eq)
 
 ///|
+pub extend EmbeddingsUsage with @debug.Debug::{to_repr}
+
+///|
+pub extend EmbeddingsUsage with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend EmbeddingsUsage with Eq::{not_equal}
+
+///|
 /// Result of generating embeddings
 pub(all) struct EmbeddingsResult {
   embeddings : Array[FixedArray[Float]]
   usage : EmbeddingsUsage
 } derive(Debug, Eq)
+
+///|
+pub extend EmbeddingsResult with @debug.Debug::{to_repr}
+
+///|
+pub extend EmbeddingsResult with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend EmbeddingsResult with Eq::{not_equal}
 
 ///|
 /// Perform inferencing using the provided model and prompt with the given optional params

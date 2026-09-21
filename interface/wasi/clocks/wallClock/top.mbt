@@ -8,6 +8,17 @@ pub(all) struct Datetime {
 } derive(Debug, Eq)
 
 ///|
+pub extend Datetime with @debug.Debug::{to_repr}
+
+///|
+pub extend Datetime with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Datetime with Eq::{not_equal}
+
+///|
 /// Read the current value of the clock.
 ///
 /// This clock is not monotonic, therefore calling this function repeatedly

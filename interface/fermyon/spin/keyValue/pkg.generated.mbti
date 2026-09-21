@@ -16,15 +16,19 @@ pub(all) enum Error_ {
   AccessDenied
   Other(String)
 } derive(Eq, @debug.Debug)
+pub fn Error_::equal(Self, Self) -> Bool
+pub fn Error_::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Store(Int) derive(Eq, @debug.Debug)
 pub fn Store::delete(Self, String) -> Result[Unit, Error_]
 pub fn Store::drop(Self) -> Unit
+pub fn Store::equal(Self, Self) -> Bool
 pub fn Store::exists(Self, String) -> Result[Bool, Error_]
 pub fn Store::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
 pub fn Store::get_keys(Self) -> Result[Array[String], Error_]
 pub fn Store::open(String) -> Result[Self, Error_]
 pub fn Store::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
+pub fn Store::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

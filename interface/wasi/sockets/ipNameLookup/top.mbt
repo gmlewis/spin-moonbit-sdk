@@ -4,6 +4,17 @@
 pub(all) struct ResolveAddressStream(Int) derive(Debug, Eq)
 
 ///|
+pub extend ResolveAddressStream with @debug.Debug::{to_repr}
+
+///|
+pub extend ResolveAddressStream with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend ResolveAddressStream with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn ResolveAddressStream::drop(self : ResolveAddressStream) -> Unit {
   let ResolveAddressStream(resource) = self

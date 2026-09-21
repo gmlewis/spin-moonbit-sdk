@@ -17,16 +17,22 @@ pub(all) struct EmbeddingsResult {
   embeddings : Array[FixedArray[Float]]
   usage : EmbeddingsUsage
 } derive(Eq, @debug.Debug)
+pub fn EmbeddingsResult::equal(Self, Self) -> Bool
+pub fn EmbeddingsResult::to_repr(Self) -> @debug.Repr
 
 pub(all) struct EmbeddingsUsage {
   prompt_token_count : UInt
 } derive(Eq, @debug.Debug)
+pub fn EmbeddingsUsage::equal(Self, Self) -> Bool
+pub fn EmbeddingsUsage::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Error_ {
   ModelNotSupported
   RuntimeError(String)
   InvalidInput(String)
 } derive(Eq, @debug.Debug)
+pub fn Error_::equal(Self, Self) -> Bool
+pub fn Error_::to_repr(Self) -> @debug.Repr
 
 pub(all) struct InferencingParams {
   max_tokens : UInt
@@ -36,16 +42,22 @@ pub(all) struct InferencingParams {
   top_k : UInt
   top_p : Float
 } derive(Eq, @debug.Debug)
+pub fn InferencingParams::equal(Self, Self) -> Bool
+pub fn InferencingParams::to_repr(Self) -> @debug.Repr
 
 pub(all) struct InferencingResult {
   text : String
   usage : InferencingUsage
 } derive(Eq, @debug.Debug)
+pub fn InferencingResult::equal(Self, Self) -> Bool
+pub fn InferencingResult::to_repr(Self) -> @debug.Repr
 
 pub(all) struct InferencingUsage {
   prompt_token_count : UInt
   generated_token_count : UInt
 } derive(Eq, @debug.Debug)
+pub fn InferencingUsage::equal(Self, Self) -> Bool
+pub fn InferencingUsage::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

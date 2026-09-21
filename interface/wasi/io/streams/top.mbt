@@ -8,6 +8,17 @@ pub(all) enum StreamError {
 } derive(Debug, Eq)
 
 ///|
+pub extend StreamError with @debug.Debug::{to_repr}
+
+///|
+pub extend StreamError with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend StreamError with Eq::{not_equal}
+
+///|
 /// An input bytestream.
 ///
 /// `input-stream`s are *non-blocking* to the extent practical on underlying
@@ -17,6 +28,17 @@ pub(all) enum StreamError {
 /// use the `subscribe` function to obtain a `pollable` which can be polled
 /// for using `wasi:io/poll`.
 pub(all) struct InputStream(Int) derive(Debug, Eq)
+
+///|
+pub extend InputStream with @debug.Debug::{to_repr}
+
+///|
+pub extend InputStream with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend InputStream with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.
@@ -35,6 +57,17 @@ pub fn InputStream::drop(self : InputStream) -> Unit {
 /// accept data, the `subscribe` function to obtain a `pollable` which can be
 /// polled for using `wasi:io/poll`.
 pub(all) struct OutputStream(Int) derive(Debug, Eq)
+
+///|
+pub extend OutputStream with @debug.Debug::{to_repr}
+
+///|
+pub extend OutputStream with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend OutputStream with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.

@@ -33,30 +33,40 @@ pub(all) enum ErrorCode {
   TEMPORARY_RESOLVER_FAILURE
   PERMANENT_RESOLVER_FAILURE
 } derive(Eq, @debug.Debug)
+pub fn ErrorCode::equal(Self, Self) -> Bool
 pub fn ErrorCode::from(Int) -> Self
 pub fn ErrorCode::ordinal(Self) -> Int
+pub fn ErrorCode::to_repr(Self) -> @debug.Repr
 
 pub(all) enum IpAddress {
   Ipv4((Byte, Byte, Byte, Byte))
   Ipv6((UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt))
 } derive(Eq, @debug.Debug)
+pub fn IpAddress::equal(Self, Self) -> Bool
+pub fn IpAddress::to_repr(Self) -> @debug.Repr
 
 pub(all) enum IpAddressFamily {
   IPV4
   IPV6
 } derive(Eq, @debug.Debug)
+pub fn IpAddressFamily::equal(Self, Self) -> Bool
 pub fn IpAddressFamily::from(Int) -> Self
 pub fn IpAddressFamily::ordinal(Self) -> Int
+pub fn IpAddressFamily::to_repr(Self) -> @debug.Repr
 
 pub(all) enum IpSocketAddress {
   Ipv4(Ipv4SocketAddress)
   Ipv6(Ipv6SocketAddress)
 } derive(Eq, @debug.Debug)
+pub fn IpSocketAddress::equal(Self, Self) -> Bool
+pub fn IpSocketAddress::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Ipv4SocketAddress {
   port : UInt
   address : (Byte, Byte, Byte, Byte)
 } derive(Eq, @debug.Debug)
+pub fn Ipv4SocketAddress::equal(Self, Self) -> Bool
+pub fn Ipv4SocketAddress::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Ipv6SocketAddress {
   port : UInt
@@ -64,9 +74,13 @@ pub(all) struct Ipv6SocketAddress {
   address : (UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt)
   scope_id : UInt
 } derive(Eq, @debug.Debug)
+pub fn Ipv6SocketAddress::equal(Self, Self) -> Bool
+pub fn Ipv6SocketAddress::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Network(Int) derive(Eq, @debug.Debug)
 pub fn Network::drop(Self) -> Unit
+pub fn Network::equal(Self, Self) -> Bool
+pub fn Network::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

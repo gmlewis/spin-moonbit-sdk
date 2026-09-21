@@ -25,6 +25,10 @@
 // directory, and no generated export trampoline (the application supplies
 // `cabi_realloc` + `wasmExportHandle` itself).
 //
+// Finally, the methods of every derived trait (`Debug`, `Eq`, `Show`) are
+// promoted with an explicit `pub extend`, because moonc deprecates the implicit
+// promotion it applies to `derive(...)` and warns about it.
+//
 // It must be run from the `wit/` directory (or via wit/run-wit-bindgen.sh),
 // with `wit-bindgen` (>= 0.62.0) and `moon` in $PATH.
 package main
@@ -208,18 +212,22 @@ func main() {
 	// 10. Give every package that now calls `@ffi.*` an import for it.
 	addFFIImports(tmp)
 
+	// 11. Make the promotion of every derived trait method explicit, so that
+	// `moon check` does not warn about the implicit promotion moonc deprecates.
+	addDerivePromotions(tmp)
+
 	if *dryRun {
 		log.Printf("Dry run: translated output left in %v", tmp)
 		return
 	}
 
-	// 11. Install the translated tree into the repository.
+	// 12. Install the translated tree into the repository.
 	install(tmp, absRepo)
 
-	// 12. Regenerate ffi/top_notwasm.mbt from ffi/top_wasm.mbt.
+	// 13. Regenerate ffi/top_notwasm.mbt from ffi/top_wasm.mbt.
 	run(absRepo, "go", "run", "cmd/gen-ffi-top-notwasm/main.go")
 
-	// 13. Final formatting + interface files.
+	// 14. Final formatting + interface files.
 	run(absRepo, "moon", "fmt")
 	run(absRepo, "moon", "info")
 	log.Printf("Done.")
@@ -664,6 +672,144 @@ func addFFIImports(root string) {
 	log.Printf("Added the @ffi import to %v packages", count)
 }
 
+// ---------------------------------------------------------------------------
+// step 11: make the promotion of derived trait methods explicit
+// ---------------------------------------------------------------------------
+
+// derivePromotions describes how one `derive(...)`d trait is promoted. moonc
+// promotes every method of a derived trait to an inherent method and then warns
+// (`implicit_impl_as_method`) that the promotion is deprecated: an explicit
+// `pub extend` both silences that warning and records the promoted methods in
+// the `.mbti` file.
+//
+// `plain` methods are promoted as-is. `deprecated` methods are promoted too (so
+// that existing callers keep working) but marked deprecated and hidden, because
+// they are pure derivatives (`!=`, `output`) that nothing in this SDK calls.
+var derivePromotions = []struct {
+	derive     string // trait as spelled in `derive(...)`
+	trait      string // trait as spelled in `pub extend`
+	plain      string // comma-separated methods to promote
+	deprecated string // comma-separated methods to promote and deprecate
+	reason     string // deprecation message
+	coreDir    string // package the trait lives in, if it is not in the prelude
+}{
+	{"Debug", "@debug.Debug", "to_repr", "", "", "moonbitlang/core/debug"},
+	{"Eq", "Eq", "equal", "not_equal", "Use `!=` instead", ""},
+	{"Show", "Show", "to_string", "output", "Use `to_string` instead", ""},
+}
+
+var (
+	// deriveRE matches the `derive(...)` clause of a type declaration.
+	deriveRE = regexp.MustCompile(`derive\(([^)\n]*)\)`)
+
+	// typeDeclRE matches the `struct <name>` / `enum <name>` part of a type
+	// declaration, which is where a `derive(...)`d type's name comes from. For a
+	// tuple struct it is the line that carries the `derive(...)`; for an enum or
+	// a record struct it is the first line of the declaration, whose `derive(...)`
+	// sits on the closing brace.
+	typeDeclRE = regexp.MustCompile(`^(?:pub(?:\(all\))?\s+)?(?:struct|enum)\s+([A-Za-z_][A-Za-z0-9_]*)`)
+)
+
+// addDerivePromotions appends a `pub extend` declaration to every type whose
+// derived trait methods moonc would otherwise promote implicitly, and adds the
+// core imports those declarations need.
+func addDerivePromotions(root string) {
+	var (
+		files   int
+		extends int
+		imports = map[string]bool{}
+	)
+	for _, path := range mbtFiles(root) {
+		src := readFile(path)
+		if !strings.Contains(src, "derive(") {
+			continue
+		}
+		out, added, coreDirs := promoteDerivedMethods(src)
+		if added == 0 {
+			continue
+		}
+		writeFile(path, out)
+		files++
+		extends += added
+		for _, dir := range coreDirs {
+			pkgPath := filepath.Join(filepath.Dir(path), "moon.pkg")
+			if !fileExists(pkgPath) {
+				log.Fatalf("%v has a derived type but no moon.pkg", filepath.Dir(path))
+			}
+			addImport(pkgPath, dir, filepath.Base(dir))
+			imports[pkgPath+":"+dir] = true
+		}
+	}
+	log.Printf("Promoted %v derived trait methods explicitly in %v files, adding %v imports",
+		extends, files, len(imports))
+}
+
+// promoteDerivedMethods rewrites the type declarations of one generated file so
+// that the promotion of their derived trait methods is explicit. It returns the
+// new source, the number of `pub extend` declarations added, and the core
+// packages the file now needs to import.
+func promoteDerivedMethods(src string) (string, int, []string) {
+	lines := strings.Split(src, "\n")
+	var (
+		out      = make([]string, 0, len(lines))
+		added    int
+		coreDirs []string
+		typeName string
+	)
+	for _, line := range lines {
+		if m := typeDeclRE.FindStringSubmatch(line); m != nil {
+			typeName = m[1]
+		}
+		out = append(out, line)
+		m := deriveRE.FindStringSubmatch(line)
+		if m == nil {
+			continue
+		}
+		if typeName == "" {
+			log.Fatalf("found a `derive(...)` with no preceding type declaration:\n%v", line)
+		}
+		derives := strings.Split(m[1], ",")
+		for _, p := range derivePromotions {
+			if !hasDerive(derives, p.derive) {
+				continue
+			}
+			if p.coreDir != "" {
+				coreDirs = append(coreDirs, p.coreDir)
+			}
+			if p.plain != "" {
+				out = append(out, "", "///|", extendDecl(typeName, p.trait, p.plain))
+				added++
+			}
+			if p.deprecated != "" {
+				out = append(out, "", "///|",
+					fmt.Sprintf("#deprecated(%q, skip_current_package=true)", p.reason),
+					"#doc(hidden)",
+					extendDecl(typeName, p.trait, p.deprecated))
+				added++
+			}
+		}
+		// One `derive(...)` per declaration: do not let a stray one pick up the
+		// name of the type declared before it.
+		typeName = ""
+	}
+	return strings.Join(out, "\n"), added, coreDirs
+}
+
+// extendDecl renders `pub extend <type> with <trait>::{<methods>}`.
+func extendDecl(typeName, trait, methods string) string {
+	return fmt.Sprintf("pub extend %v with %v::{%v}", typeName, trait, methods)
+}
+
+// hasDerive reports whether a `derive(...)` clause lists the given trait.
+func hasDerive(derives []string, name string) bool {
+	for _, d := range derives {
+		if strings.TrimSpace(d) == name {
+			return true
+		}
+	}
+	return false
+}
+
 // addImport inserts `"path" @alias,` into the import block of a moon.pkg file,
 // creating the block if necessary, and keeps the list sorted.
 func addImport(pkgPath, path, alias string) {
@@ -773,7 +919,7 @@ func renderImportBlock(entries []string) string {
 }
 
 // ---------------------------------------------------------------------------
-// step 10: install into the repository
+// step 12: install into the repository
 // ---------------------------------------------------------------------------
 
 func install(tmp, repo string) {

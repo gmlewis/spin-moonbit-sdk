@@ -1,11 +1,11 @@
 name = "gmlewis/spin-moonbit-sdk"
 
-version = "0.55.1"
+version = "0.55.2"
 
 import {
-  "gmlewis/base64@0.16.12",
-  "gmlewis/md5@0.19.36",
-  "gmlewis/sha256@0.17.33",
+  "gmlewis/base64@0.16.13",
+  "gmlewis/md5@0.20.0",
+  "gmlewis/sha256@0.18.0",
 }
 
 readme = "README.md"

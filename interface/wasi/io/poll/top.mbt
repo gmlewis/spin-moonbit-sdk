@@ -5,6 +5,17 @@
 pub(all) struct Pollable(Int) derive(Debug, Eq)
 
 ///|
+pub extend Pollable with @debug.Debug::{to_repr}
+
+///|
+pub extend Pollable with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Pollable with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn Pollable::drop(self : Pollable) -> Unit {
   let Pollable(resource) = self

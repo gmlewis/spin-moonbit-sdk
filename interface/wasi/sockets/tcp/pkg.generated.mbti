@@ -18,13 +18,16 @@ pub(all) enum ShutdownType {
   SEND
   BOTH
 } derive(Eq, @debug.Debug)
+pub fn ShutdownType::equal(Self, Self) -> Bool
 pub fn ShutdownType::from(Int) -> Self
 pub fn ShutdownType::ordinal(Self) -> Int
+pub fn ShutdownType::to_repr(Self) -> @debug.Repr
 
 pub(all) struct TcpSocket(Int) derive(Eq, @debug.Debug)
 pub fn TcpSocket::accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 pub fn TcpSocket::address_family(Self) -> @network.IpAddressFamily
 pub fn TcpSocket::drop(Self) -> Unit
+pub fn TcpSocket::equal(Self, Self) -> Bool
 pub fn TcpSocket::finish_bind(Self) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::finish_connect(Self) -> Result[(@streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 pub fn TcpSocket::finish_listen(Self) -> Result[Unit, @network.ErrorCode]
@@ -51,6 +54,7 @@ pub fn TcpSocket::start_bind(Self, @network.Network, @network.IpSocketAddress) -
 pub fn TcpSocket::start_connect(Self, @network.Network, @network.IpSocketAddress) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::start_listen(Self) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::subscribe(Self) -> @poll.Pollable
+pub fn TcpSocket::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

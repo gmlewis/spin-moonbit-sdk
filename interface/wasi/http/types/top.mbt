@@ -16,12 +16,34 @@ pub(all) enum Method {
 } derive(Debug, Eq)
 
 ///|
+pub extend Method with @debug.Debug::{to_repr}
+
+///|
+pub extend Method with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Method with Eq::{not_equal}
+
+///|
 /// This type corresponds to HTTP standard Related Schemes.
 pub(all) enum Scheme {
   Http
   Https
   Other(String)
 } derive(Debug, Eq)
+
+///|
+pub extend Scheme with @debug.Debug::{to_repr}
+
+///|
+pub extend Scheme with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Scheme with Eq::{not_equal}
 
 ///|
 /// Defines the case payload type for `DNS-error` above:
@@ -31,6 +53,17 @@ pub(all) struct DnsErrorPayload {
 } derive(Debug, Eq)
 
 ///|
+pub extend DnsErrorPayload with @debug.Debug::{to_repr}
+
+///|
+pub extend DnsErrorPayload with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend DnsErrorPayload with Eq::{not_equal}
+
+///|
 /// Defines the case payload type for `TLS-alert-received` above:
 pub(all) struct TlsAlertReceivedPayload {
   alert_id : Byte?
@@ -38,11 +71,33 @@ pub(all) struct TlsAlertReceivedPayload {
 } derive(Debug, Eq)
 
 ///|
+pub extend TlsAlertReceivedPayload with @debug.Debug::{to_repr}
+
+///|
+pub extend TlsAlertReceivedPayload with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend TlsAlertReceivedPayload with Eq::{not_equal}
+
+///|
 /// Defines the case payload type for `HTTP-response-{header,trailer}-size` above:
 pub(all) struct FieldSizePayload {
   field_name : String?
   field_size : UInt?
 } derive(Debug, Eq)
+
+///|
+pub extend FieldSizePayload with @debug.Debug::{to_repr}
+
+///|
+pub extend FieldSizePayload with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend FieldSizePayload with Eq::{not_equal}
 
 ///|
 /// These cases are inspired by the IANA HTTP Proxy Error Types:
@@ -90,6 +145,17 @@ pub(all) enum ErrorCode {
 } derive(Debug, Eq)
 
 ///|
+pub extend ErrorCode with @debug.Debug::{to_repr}
+
+///|
+pub extend ErrorCode with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend ErrorCode with Eq::{not_equal}
+
+///|
 /// This type enumerates the different kinds of errors that may occur when
 /// setting or appending to a `fields` resource.
 pub(all) enum HeaderError {
@@ -97,6 +163,17 @@ pub(all) enum HeaderError {
   Forbidden
   Immutable
 } derive(Debug, Eq)
+
+///|
+pub extend HeaderError with @debug.Debug::{to_repr}
+
+///|
+pub extend HeaderError with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend HeaderError with Eq::{not_equal}
 
 ///|
 /// This following block defines the `fields` resource which corresponds to
@@ -112,6 +189,17 @@ pub(all) enum HeaderError {
 pub(all) struct Fields(Int) derive(Debug, Eq)
 
 ///|
+pub extend Fields with @debug.Debug::{to_repr}
+
+///|
+pub extend Fields with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Fields with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn Fields::drop(self : Fields) -> Unit {
   let Fields(resource) = self
@@ -123,6 +211,17 @@ pub fn Fields::drop(self : Fields) -> Unit {
 pub(all) struct IncomingRequest(Int) derive(Debug, Eq)
 
 ///|
+pub extend IncomingRequest with @debug.Debug::{to_repr}
+
+///|
+pub extend IncomingRequest with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend IncomingRequest with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn IncomingRequest::drop(self : IncomingRequest) -> Unit {
   let IncomingRequest(resource) = self
@@ -132,6 +231,17 @@ pub fn IncomingRequest::drop(self : IncomingRequest) -> Unit {
 ///|
 /// Represents an outgoing HTTP Request.
 pub(all) struct OutgoingRequest(Int) derive(Debug, Eq)
+
+///|
+pub extend OutgoingRequest with @debug.Debug::{to_repr}
+
+///|
+pub extend OutgoingRequest with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend OutgoingRequest with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.
@@ -150,6 +260,17 @@ pub fn OutgoingRequest::drop(self : OutgoingRequest) -> Unit {
 pub(all) struct RequestOptions(Int) derive(Debug, Eq)
 
 ///|
+pub extend RequestOptions with @debug.Debug::{to_repr}
+
+///|
+pub extend RequestOptions with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend RequestOptions with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn RequestOptions::drop(self : RequestOptions) -> Unit {
   let RequestOptions(resource) = self
@@ -165,6 +286,17 @@ pub fn RequestOptions::drop(self : RequestOptions) -> Unit {
 pub(all) struct ResponseOutparam(Int) derive(Debug, Eq)
 
 ///|
+pub extend ResponseOutparam with @debug.Debug::{to_repr}
+
+///|
+pub extend ResponseOutparam with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend ResponseOutparam with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn ResponseOutparam::drop(self : ResponseOutparam) -> Unit {
   let ResponseOutparam(resource) = self
@@ -174,6 +306,17 @@ pub fn ResponseOutparam::drop(self : ResponseOutparam) -> Unit {
 ///|
 /// Represents an incoming HTTP Response.
 pub(all) struct IncomingResponse(Int) derive(Debug, Eq)
+
+///|
+pub extend IncomingResponse with @debug.Debug::{to_repr}
+
+///|
+pub extend IncomingResponse with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend IncomingResponse with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.
@@ -194,6 +337,17 @@ pub fn IncomingResponse::drop(self : IncomingResponse) -> Unit {
 pub(all) struct IncomingBody(Int) derive(Debug, Eq)
 
 ///|
+pub extend IncomingBody with @debug.Debug::{to_repr}
+
+///|
+pub extend IncomingBody with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend IncomingBody with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn IncomingBody::drop(self : IncomingBody) -> Unit {
   let IncomingBody(resource) = self
@@ -209,6 +363,17 @@ pub fn IncomingBody::drop(self : IncomingBody) -> Unit {
 pub(all) struct FutureTrailers(Int) derive(Debug, Eq)
 
 ///|
+pub extend FutureTrailers with @debug.Debug::{to_repr}
+
+///|
+pub extend FutureTrailers with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend FutureTrailers with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn FutureTrailers::drop(self : FutureTrailers) -> Unit {
   let FutureTrailers(resource) = self
@@ -218,6 +383,17 @@ pub fn FutureTrailers::drop(self : FutureTrailers) -> Unit {
 ///|
 /// Represents an outgoing HTTP Response.
 pub(all) struct OutgoingResponse(Int) derive(Debug, Eq)
+
+///|
+pub extend OutgoingResponse with @debug.Debug::{to_repr}
+
+///|
+pub extend OutgoingResponse with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend OutgoingResponse with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.
@@ -246,6 +422,17 @@ pub fn OutgoingResponse::drop(self : OutgoingResponse) -> Unit {
 pub(all) struct OutgoingBody(Int) derive(Debug, Eq)
 
 ///|
+pub extend OutgoingBody with @debug.Debug::{to_repr}
+
+///|
+pub extend OutgoingBody with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend OutgoingBody with Eq::{not_equal}
+
+///|
 /// Drops a resource handle.
 pub fn OutgoingBody::drop(self : OutgoingBody) -> Unit {
   let OutgoingBody(resource) = self
@@ -259,6 +446,17 @@ pub fn OutgoingBody::drop(self : OutgoingBody) -> Unit {
 /// This resource is returned by the `wasi:http/outgoing-handler` interface to
 /// provide the HTTP Response corresponding to the sent Request.
 pub(all) struct FutureIncomingResponse(Int) derive(Debug, Eq)
+
+///|
+pub extend FutureIncomingResponse with @debug.Debug::{to_repr}
+
+///|
+pub extend FutureIncomingResponse with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend FutureIncomingResponse with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.

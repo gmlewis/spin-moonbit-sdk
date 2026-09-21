@@ -8,6 +8,17 @@ pub(all) enum ShutdownType {
 } derive(Debug, Eq)
 
 ///|
+pub extend ShutdownType with @debug.Debug::{to_repr}
+
+///|
+pub extend ShutdownType with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend ShutdownType with Eq::{not_equal}
+
+///|
 pub fn ShutdownType::ordinal(self : ShutdownType) -> Int {
   match self {
     RECEIVE => 0
@@ -49,6 +60,17 @@ pub fn ShutdownType::from(self : Int) -> ShutdownType {
 /// `network::error-code` type, TCP socket methods may always return
 /// `error(invalid-state)` when in the `closed` state.
 pub(all) struct TcpSocket(Int) derive(Debug, Eq)
+
+///|
+pub extend TcpSocket with @debug.Debug::{to_repr}
+
+///|
+pub extend TcpSocket with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend TcpSocket with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.

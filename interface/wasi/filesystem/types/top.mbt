@@ -16,6 +16,17 @@ pub(all) enum DescriptorType {
 } derive(Debug, Eq)
 
 ///|
+pub extend DescriptorType with @debug.Debug::{to_repr}
+
+///|
+pub extend DescriptorType with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend DescriptorType with Eq::{not_equal}
+
+///|
 pub fn DescriptorType::ordinal(self : DescriptorType) -> Int {
   match self {
     UNKNOWN => 0
@@ -49,6 +60,17 @@ pub fn DescriptorType::from(self : Int) -> DescriptorType {
 ///
 /// Note: This was called `fdflags` in earlier versions of WASI.
 pub(all) struct DescriptorFlags(Byte) derive(Debug, Eq)
+
+///|
+pub extend DescriptorFlags with @debug.Debug::{to_repr}
+
+///|
+pub extend DescriptorFlags with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend DescriptorFlags with Eq::{not_equal}
 
 ///|
 pub fn DescriptorFlags::default() -> DescriptorFlags {
@@ -109,6 +131,17 @@ pub fn DescriptorFlags::is_set(
 pub(all) struct PathFlags(Byte) derive(Debug, Eq)
 
 ///|
+pub extend PathFlags with @debug.Debug::{to_repr}
+
+///|
+pub extend PathFlags with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend PathFlags with Eq::{not_equal}
+
+///|
 pub fn PathFlags::default() -> PathFlags {
   b'\x00'
 }
@@ -146,6 +179,17 @@ pub fn PathFlags::is_set(self : Self, other : PathFlagsFlag) -> Bool {
 ///|
 /// Open flags used by `open-at`.
 pub(all) struct OpenFlags(Byte) derive(Debug, Eq)
+
+///|
+pub extend OpenFlags with @debug.Debug::{to_repr}
+
+///|
+pub extend OpenFlags with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend OpenFlags with Eq::{not_equal}
 
 ///|
 pub fn OpenFlags::default() -> OpenFlags {
@@ -202,6 +246,17 @@ pub(all) struct DescriptorStat {
 } derive(Debug, Eq)
 
 ///|
+pub extend DescriptorStat with @debug.Debug::{to_repr}
+
+///|
+pub extend DescriptorStat with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend DescriptorStat with Eq::{not_equal}
+
+///|
 /// When setting a timestamp, this gives the value to set it to.
 pub(all) enum NewTimestamp {
   NoChange
@@ -210,11 +265,33 @@ pub(all) enum NewTimestamp {
 } derive(Debug, Eq)
 
 ///|
+pub extend NewTimestamp with @debug.Debug::{to_repr}
+
+///|
+pub extend NewTimestamp with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend NewTimestamp with Eq::{not_equal}
+
+///|
 /// A directory entry.
 pub(all) struct DirectoryEntry {
   type_ : DescriptorType
   name : String
 } derive(Debug, Eq)
+
+///|
+pub extend DirectoryEntry with @debug.Debug::{to_repr}
+
+///|
+pub extend DirectoryEntry with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend DirectoryEntry with Eq::{not_equal}
 
 ///|
 /// Error codes returned by functions, similar to `errno` in POSIX.
@@ -260,6 +337,17 @@ pub(all) enum ErrorCode {
   TEXT_FILE_BUSY
   CROSS_DEVICE
 } derive(Debug, Eq)
+
+///|
+pub extend ErrorCode with @debug.Debug::{to_repr}
+
+///|
+pub extend ErrorCode with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend ErrorCode with Eq::{not_equal}
 
 ///|
 pub fn ErrorCode::ordinal(self : ErrorCode) -> Int {
@@ -360,6 +448,17 @@ pub(all) enum Advice {
 } derive(Debug, Eq)
 
 ///|
+pub extend Advice with @debug.Debug::{to_repr}
+
+///|
+pub extend Advice with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Advice with Eq::{not_equal}
+
+///|
 pub fn Advice::ordinal(self : Advice) -> Int {
   match self {
     NORMAL => 0
@@ -393,10 +492,32 @@ pub(all) struct MetadataHashValue {
 } derive(Debug, Eq)
 
 ///|
+pub extend MetadataHashValue with @debug.Debug::{to_repr}
+
+///|
+pub extend MetadataHashValue with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend MetadataHashValue with Eq::{not_equal}
+
+///|
 /// A descriptor is a reference to a filesystem object, which may be a file,
 /// directory, named pipe, special file, or other object on which filesystem
 /// calls may be made.
 pub(all) struct Descriptor(Int) derive(Debug, Eq)
+
+///|
+pub extend Descriptor with @debug.Debug::{to_repr}
+
+///|
+pub extend Descriptor with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Descriptor with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.
@@ -408,6 +529,17 @@ pub fn Descriptor::drop(self : Descriptor) -> Unit {
 ///|
 /// A stream of directory entries.
 pub(all) struct DirectoryEntryStream(Int) derive(Debug, Eq)
+
+///|
+pub extend DirectoryEntryStream with @debug.Debug::{to_repr}
+
+///|
+pub extend DirectoryEntryStream with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend DirectoryEntryStream with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.

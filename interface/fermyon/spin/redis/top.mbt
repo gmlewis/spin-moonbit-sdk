@@ -10,7 +10,29 @@ pub(all) enum Error_ {
 } derive(Debug, Eq)
 
 ///|
+pub extend Error_ with @debug.Debug::{to_repr}
+
+///|
+pub extend Error_ with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Error_ with Eq::{not_equal}
+
+///|
 pub(all) struct Connection(Int) derive(Debug, Eq)
+
+///|
+pub extend Connection with @debug.Debug::{to_repr}
+
+///|
+pub extend Connection with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Connection with Eq::{not_equal}
 
 ///|
 /// Drops a resource handle.
@@ -27,6 +49,17 @@ pub(all) enum RedisParameter {
 } derive(Debug, Eq)
 
 ///|
+pub extend RedisParameter with @debug.Debug::{to_repr}
+
+///|
+pub extend RedisParameter with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend RedisParameter with Eq::{not_equal}
+
+///|
 /// A return type for the general-purpose `execute` function.
 pub(all) enum RedisResult {
   Nil
@@ -34,6 +67,17 @@ pub(all) enum RedisResult {
   Int64(Int64)
   Binary(FixedArray[Byte])
 } derive(Debug, Eq)
+
+///|
+pub extend RedisResult with @debug.Debug::{to_repr}
+
+///|
+pub extend RedisResult with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend RedisResult with Eq::{not_equal}
 
 ///|
 /// Open a connection to the Redis instance at `address`.
