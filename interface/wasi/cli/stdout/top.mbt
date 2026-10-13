@@ -2,7 +2,7 @@
 
 ///|
 pub fn get_stdout() -> @streams.OutputStream {
-  let result : Int = wasmImportGetStdout()
+  let result : Int32 = wasmImportGetStdout()
   let ret = @streams.OutputStream::OutputStream(result)
   return ret
 }

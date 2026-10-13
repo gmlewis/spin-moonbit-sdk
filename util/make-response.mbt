@@ -7,7 +7,7 @@ let max_write_size = 4096
 /// `new_response` makes a new `OutgoingResponse` with no body written yet.
 fn new_response(
   content_type : Bytes,
-  status_code : UInt,
+  status_code : UInt32,
 ) -> @types.OutgoingResponse {
   let fields = @types.Fields::from_list([
     ("Content-Type", content_type.to_fixedarray()),
@@ -52,8 +52,8 @@ fn write_all(
 /// `respond_bytes` or `stream` for anything larger.
 pub fn make_response(
   body : Bytes,
-  content_type? : Bytes = b"text/plain",
-  status_code? : UInt = 200,
+  content_type~ : Bytes = b"text/plain",
+  status_code~ : UInt32 = 200,
 ) -> @types.OutgoingResponse {
   let response = new_response(content_type, status_code)
   let out_stream = response.body().unwrap().write().unwrap()
@@ -71,8 +71,8 @@ pub fn make_response(
 pub fn respond_bytes(
   response_out : @types.ResponseOutparam,
   body : Bytes,
-  content_type? : Bytes = b"text/plain",
-  status_code? : UInt = 200,
+  content_type~ : Bytes = b"text/plain",
+  status_code~ : UInt32 = 200,
 ) -> Unit {
   let response = new_response(content_type, status_code)
   let out_stream = response.body().unwrap().write().unwrap()
@@ -84,8 +84,8 @@ pub fn respond_bytes(
 /// `make_response_str` makes a new `OutgoingResponse` from the provided `String`.
 pub fn make_response_str(
   body : String,
-  content_type? : Bytes = b"text/plain",
-  status_code? : UInt = 200,
+  content_type~ : Bytes = b"text/plain",
+  status_code~ : UInt32 = 200,
 ) -> @types.OutgoingResponse {
   make_response(@base64.str2bytes(body), content_type~, status_code~)
 }
@@ -95,8 +95,8 @@ pub fn make_response_str(
 pub fn respond_str(
   response_out : @types.ResponseOutparam,
   body : String,
-  content_type? : Bytes = b"text/plain",
-  status_code? : UInt = 200,
+  content_type~ : Bytes = b"text/plain",
+  status_code~ : UInt32 = 200,
 ) -> Unit {
   respond_bytes(
     response_out,

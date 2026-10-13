@@ -3,7 +3,7 @@
 ///|
 /// Get a handle to the default network.
 pub fn instance_network() -> @network.Network {
-  let result : Int = wasmImportInstanceNetwork()
+  let result : Int32 = wasmImportInstanceNetwork()
   let ret = @network.Network::Network(result)
   return ret
 }

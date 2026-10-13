@@ -3,11 +3,11 @@
 ///|
 /// Inference request parameters
 pub(all) struct InferencingParams {
-  max_tokens : UInt
+  max_tokens : UInt32
   repeat_penalty : Float
-  repeat_penalty_last_n_token_count : UInt
+  repeat_penalty_last_n_token_count : UInt32
   temperature : Float
-  top_k : UInt
+  top_k : UInt32
   top_p : Float
 } derive(Debug, Eq)
 
@@ -44,8 +44,8 @@ pub extend Error_ with Eq::{not_equal}
 ///|
 /// Usage information related to the inferencing result
 pub(all) struct InferencingUsage {
-  prompt_token_count : UInt
-  generated_token_count : UInt
+  prompt_token_count : UInt32
+  generated_token_count : UInt32
 } derive(Debug, Eq)
 
 ///|
@@ -80,7 +80,7 @@ pub extend InferencingResult with Eq::{not_equal}
 ///|
 /// Usage related to an embeddings generation request
 pub(all) struct EmbeddingsUsage {
-  prompt_token_count : UInt
+  prompt_token_count : UInt32
 } derive(Debug, Eq)
 
 ///|
@@ -207,7 +207,7 @@ pub fn generate_embeddings(
   model : String,
   text : Array[String],
 ) -> Result[EmbeddingsResult, Error_] {
-  let cleanup_list : Array[Int] = []
+  let cleanup_list : Array[Int32] = []
 
   let ptr = @ffi.str2ptr(model)
 

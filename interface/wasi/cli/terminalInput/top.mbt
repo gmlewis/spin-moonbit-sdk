@@ -2,7 +2,7 @@
 
 ///|
 /// The input side of a terminal.
-pub(all) struct TerminalInput(Int) derive(Debug, Eq)
+pub(all) struct TerminalInput(Int32) derive(Debug, Eq)
 
 ///|
 pub extend TerminalInput with @debug.Debug::{to_repr}

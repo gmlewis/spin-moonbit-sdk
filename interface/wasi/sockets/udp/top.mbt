@@ -38,7 +38,7 @@ pub extend OutgoingDatagram with Eq::{not_equal}
 
 ///|
 /// A UDP socket handle.
-pub(all) struct UdpSocket(Int) derive(Debug, Eq)
+pub(all) struct UdpSocket(Int32) derive(Debug, Eq)
 
 ///|
 pub extend UdpSocket with @debug.Debug::{to_repr}
@@ -59,7 +59,7 @@ pub fn UdpSocket::drop(self : UdpSocket) -> Unit {
 }
 
 ///|
-pub(all) struct IncomingDatagramStream(Int) derive(Debug, Eq)
+pub(all) struct IncomingDatagramStream(Int32) derive(Debug, Eq)
 
 ///|
 pub extend IncomingDatagramStream with @debug.Debug::{to_repr}
@@ -80,7 +80,7 @@ pub fn IncomingDatagramStream::drop(self : IncomingDatagramStream) -> Unit {
 }
 
 ///|
-pub(all) struct OutgoingDatagramStream(Int) derive(Debug, Eq)
+pub(all) struct OutgoingDatagramStream(Int32) derive(Debug, Eq)
 
 ///|
 pub extend OutgoingDatagramStream with @debug.Debug::{to_repr}
@@ -500,7 +500,7 @@ pub fn UdpSocket::remote_address(
 /// Equivalent to the SO_DOMAIN socket option.
 pub fn UdpSocket::address_family(self : UdpSocket) -> @network.IpAddressFamily {
   let UdpSocket(handle) = self
-  let result : Int = wasmImportMethodUdpSocketAddressFamily(handle)
+  let result : Int32 = wasmImportMethodUdpSocketAddressFamily(handle)
   let ret = @network.IpAddressFamily::from(result)
   return ret
 }
@@ -651,7 +651,7 @@ pub fn UdpSocket::set_send_buffer_size(
 /// It's planned to be removed when `future` is natively supported in Preview3.
 pub fn UdpSocket::subscribe(self : UdpSocket) -> @poll.Pollable {
   let UdpSocket(handle) = self
-  let result : Int = wasmImportMethodUdpSocketSubscribe(handle)
+  let result : Int32 = wasmImportMethodUdpSocketSubscribe(handle)
   let ret = @poll.Pollable::Pollable(result)
   return ret
 }
@@ -760,7 +760,7 @@ pub fn IncomingDatagramStream::subscribe(
   self : IncomingDatagramStream,
 ) -> @poll.Pollable {
   let IncomingDatagramStream(handle) = self
-  let result : Int = wasmImportMethodIncomingDatagramStreamSubscribe(handle)
+  let result : Int32 = wasmImportMethodIncomingDatagramStreamSubscribe(handle)
   let ret = @poll.Pollable::Pollable(result)
   return ret
 }
@@ -833,7 +833,7 @@ pub fn OutgoingDatagramStream::send(
   self : OutgoingDatagramStream,
   datagrams : Array[OutgoingDatagram],
 ) -> Result[UInt64, @network.ErrorCode] {
-  let cleanup_list : Array[Int] = []
+  let cleanup_list : Array[Int32] = []
 
   let OutgoingDatagramStream(handle) = self
 
@@ -947,7 +947,7 @@ pub fn OutgoingDatagramStream::subscribe(
   self : OutgoingDatagramStream,
 ) -> @poll.Pollable {
   let OutgoingDatagramStream(handle) = self
-  let result : Int = wasmImportMethodOutgoingDatagramStreamSubscribe(handle)
+  let result : Int32 = wasmImportMethodOutgoingDatagramStreamSubscribe(handle)
   let ret = @poll.Pollable::Pollable(result)
   return ret
 }

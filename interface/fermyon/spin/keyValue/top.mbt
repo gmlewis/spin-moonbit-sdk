@@ -2,7 +2,7 @@
 
 ///|
 /// An open key-value store
-pub(all) struct Store(Int) derive(Debug, Eq)
+pub(all) struct Store(Int32) derive(Debug, Eq)
 
 ///|
 pub extend Store with @debug.Debug::{to_repr}

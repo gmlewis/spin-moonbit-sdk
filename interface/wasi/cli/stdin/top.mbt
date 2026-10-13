@@ -2,7 +2,7 @@
 
 ///|
 pub fn get_stdin() -> @streams.InputStream {
-  let result : Int = wasmImportGetStdin()
+  let result : Int32 = wasmImportGetStdin()
   let ret = @streams.InputStream::InputStream(result)
   return ret
 }

@@ -2,7 +2,7 @@
 
 ///|
 /// A handle to an open sqlite instance
-pub(all) struct Connection(Int) derive(Debug, Eq)
+pub(all) struct Connection(Int32) derive(Debug, Eq)
 
 ///|
 pub extend Connection with @debug.Debug::{to_repr}
@@ -146,7 +146,7 @@ pub fn Connection::execute(
   statement : String,
   parameters : Array[Value],
 ) -> Result[QueryResult, Error_] {
-  let cleanup_list : Array[Int] = []
+  let cleanup_list : Array[Int32] = []
 
   let Connection(handle) = self
 

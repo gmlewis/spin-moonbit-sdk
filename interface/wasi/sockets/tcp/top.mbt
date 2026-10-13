@@ -19,7 +19,7 @@ pub extend ShutdownType with Eq::{equal}
 pub extend ShutdownType with Eq::{not_equal}
 
 ///|
-pub fn ShutdownType::ordinal(self : ShutdownType) -> Int {
+pub fn ShutdownType::ordinal(self : ShutdownType) -> Int32 {
   match self {
     RECEIVE => 0
     SEND => 1
@@ -28,7 +28,7 @@ pub fn ShutdownType::ordinal(self : ShutdownType) -> Int {
 }
 
 ///|
-pub fn ShutdownType::from(self : Int) -> ShutdownType {
+pub fn ShutdownType::from(self : Int32) -> ShutdownType {
   match self {
     0 => RECEIVE
     1 => SEND
@@ -59,7 +59,7 @@ pub fn ShutdownType::from(self : Int) -> ShutdownType {
 /// In addition to the general error codes documented on the
 /// `network::error-code` type, TCP socket methods may always return
 /// `error(invalid-state)` when in the `closed` state.
-pub(all) struct TcpSocket(Int) derive(Debug, Eq)
+pub(all) struct TcpSocket(Int32) derive(Debug, Eq)
 
 ///|
 pub extend TcpSocket with @debug.Debug::{to_repr}
@@ -598,7 +598,7 @@ pub fn TcpSocket::remote_address(
 /// Equivalent to the SO_ACCEPTCONN socket option.
 pub fn TcpSocket::is_listening(self : TcpSocket) -> Bool {
   let TcpSocket(handle) = self
-  let result : Int = wasmImportMethodTcpSocketIsListening(handle)
+  let result : Int32 = wasmImportMethodTcpSocketIsListening(handle)
   let ret = result != 0
   return ret
 }
@@ -609,7 +609,7 @@ pub fn TcpSocket::is_listening(self : TcpSocket) -> Bool {
 /// Equivalent to the SO_DOMAIN socket option.
 pub fn TcpSocket::address_family(self : TcpSocket) -> @network.IpAddressFamily {
   let TcpSocket(handle) = self
-  let result : Int = wasmImportMethodTcpSocketAddressFamily(handle)
+  let result : Int32 = wasmImportMethodTcpSocketAddressFamily(handle)
   let ret = @network.IpAddressFamily::from(result)
   return ret
 }
@@ -815,7 +815,7 @@ pub fn TcpSocket::set_keep_alive_interval(
 /// - `invalid-argument`:     (set) The provided value was 0.
 pub fn TcpSocket::keep_alive_count(
   self : TcpSocket,
-) -> Result[UInt, @network.ErrorCode] {
+) -> Result[UInt32, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(8)
   wasmImportMethodTcpSocketKeepAliveCount(handle, return_area)
@@ -833,7 +833,7 @@ pub fn TcpSocket::keep_alive_count(
 ///|
 pub fn TcpSocket::set_keep_alive_count(
   self : TcpSocket,
-  value : UInt,
+  value : UInt32,
 ) -> Result[Unit, @network.ErrorCode] {
   let TcpSocket(handle) = self
   let return_area = @ffi.malloc(2)
@@ -1008,7 +1008,7 @@ pub fn TcpSocket::set_send_buffer_size(
 /// It's planned to be removed when `future` is natively supported in Preview3.
 pub fn TcpSocket::subscribe(self : TcpSocket) -> @poll.Pollable {
   let TcpSocket(handle) = self
-  let result : Int = wasmImportMethodTcpSocketSubscribe(handle)
+  let result : Int32 = wasmImportMethodTcpSocketSubscribe(handle)
   let ret = @poll.Pollable::Pollable(result)
   return ret
 }

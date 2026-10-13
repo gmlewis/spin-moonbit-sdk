@@ -20,7 +20,7 @@
 ///
 /// The set of functions which can "downcast" an `error` into a more
 /// concrete type is open.
-pub(all) struct Error_(Int) derive(Debug, Eq)
+pub(all) struct Error_(Int32) derive(Debug, Eq)
 
 ///|
 pub extend Error_ with @debug.Debug::{to_repr}

@@ -2,7 +2,7 @@
 /// `send_request` sends an outgoing request and waits for the response.
 pub fn send_request(
   request : @types.OutgoingRequest,
-  debug? : Bool = false,
+  debug~ : Bool = false,
 ) -> Result[Bytes, @types.ErrorCode] {
   let future = match @outgoingHandler.handle(request, None) {
     Ok(result) => result
@@ -59,7 +59,7 @@ pub fn send_request(
 
 ///|
 /// `get_content_length` returns the `Content-Length` header or 0 if it doesn't exist.
-pub fn get_content_length(fields : @types.Fields) -> Int {
+pub fn get_content_length(fields : @types.Fields) -> Int32 {
   match fields.get("Content-Length") {
     [value] =>
       @string.parse_int(@base64.bytes2str(Bytes::from_array(value))) catch {

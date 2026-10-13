@@ -2,7 +2,7 @@
 
 ///|
 /// A connection to a MySQL database.
-pub(all) struct Connection(Int) derive(Debug, Eq)
+pub(all) struct Connection(Int32) derive(Debug, Eq)
 
 ///|
 pub extend Connection with @debug.Debug::{to_repr}
@@ -95,7 +95,7 @@ pub fn Connection::query(
   statement : String,
   params : Array[@rdbmsTypes.ParameterValue],
 ) -> Result[@rdbmsTypes.RowSet, @rdbmsTypes.Error_] {
-  let cleanup_list : Array[Int] = []
+  let cleanup_list : Array[Int32] = []
 
   let Connection(handle) = self
 
@@ -362,7 +362,7 @@ pub fn Connection::execute(
   statement : String,
   params : Array[@rdbmsTypes.ParameterValue],
 ) -> Result[Unit, @rdbmsTypes.Error_] {
-  let cleanup_list : Array[Int] = []
+  let cleanup_list : Array[Int32] = []
 
   let Connection(handle) = self
 

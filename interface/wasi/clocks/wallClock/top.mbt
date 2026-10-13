@@ -4,7 +4,7 @@
 /// A time and date in seconds plus nanoseconds.
 pub(all) struct Datetime {
   seconds : UInt64
-  nanoseconds : UInt
+  nanoseconds : UInt32
 } derive(Debug, Eq)
 
 ///|

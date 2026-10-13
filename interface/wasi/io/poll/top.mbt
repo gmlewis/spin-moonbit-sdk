@@ -2,7 +2,7 @@
 
 ///|
 /// `pollable` represents a single I/O event which may be ready, or not.
-pub(all) struct Pollable(Int) derive(Debug, Eq)
+pub(all) struct Pollable(Int32) derive(Debug, Eq)
 
 ///|
 pub extend Pollable with @debug.Debug::{to_repr}
@@ -28,7 +28,7 @@ pub fn Pollable::drop(self : Pollable) -> Unit {
 /// Returns `true` when the pollable is ready, and `false` otherwise.
 pub fn Pollable::ready(self : Pollable) -> Bool {
   let Pollable(handle) = self
-  let result : Int = wasmImportMethodPollableReady(handle)
+  let result : Int32 = wasmImportMethodPollableReady(handle)
   let ret = result != 0
   return ret
 }
@@ -63,7 +63,7 @@ pub fn Pollable::block(self : Pollable) -> Unit {
 /// do any I/O so it doesn't fail. If any of the I/O sources identified by
 /// the pollables has an error, it is indicated by marking the source as
 /// being reaedy for I/O.
-pub fn poll(in_ : Array[Pollable]) -> FixedArray[UInt] {
+pub fn poll(in_ : Array[Pollable]) -> FixedArray[UInt32] {
   let address = @ffi.malloc(in_.length() * 4)
   for index = 0; index < in_.length(); index = index + 1 {
     let iter_elem : Pollable = in_[index]

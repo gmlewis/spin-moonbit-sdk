@@ -27,7 +27,7 @@ pub extend StreamError with Eq::{not_equal}
 /// available, which could even be zero. To wait for data to be available,
 /// use the `subscribe` function to obtain a `pollable` which can be polled
 /// for using `wasi:io/poll`.
-pub(all) struct InputStream(Int) derive(Debug, Eq)
+pub(all) struct InputStream(Int32) derive(Debug, Eq)
 
 ///|
 pub extend InputStream with @debug.Debug::{to_repr}
@@ -56,7 +56,7 @@ pub fn InputStream::drop(self : InputStream) -> Unit {
 /// promptly, which could even be zero. To wait for the stream to be ready to
 /// accept data, the `subscribe` function to obtain a `pollable` which can be
 /// polled for using `wasi:io/poll`.
-pub(all) struct OutputStream(Int) derive(Debug, Eq)
+pub(all) struct OutputStream(Int32) derive(Debug, Eq)
 
 ///|
 pub extend OutputStream with @debug.Debug::{to_repr}
@@ -269,7 +269,7 @@ pub fn InputStream::blocking_skip(
 /// all derived `pollable`s created with this function are dropped.
 pub fn InputStream::subscribe(self : InputStream) -> @poll.Pollable {
   let InputStream(handle) = self
-  let result : Int = wasmImportMethodInputStreamSubscribe(handle)
+  let result : Int32 = wasmImportMethodInputStreamSubscribe(handle)
   let ret = @poll.Pollable::Pollable(result)
   return ret
 }
@@ -503,7 +503,7 @@ pub fn OutputStream::blocking_flush(
 /// all derived `pollable`s created with this function are dropped.
 pub fn OutputStream::subscribe(self : OutputStream) -> @poll.Pollable {
   let OutputStream(handle) = self
-  let result : Int = wasmImportMethodOutputStreamSubscribe(handle)
+  let result : Int32 = wasmImportMethodOutputStreamSubscribe(handle)
   let ret = @poll.Pollable::Pollable(result)
   return ret
 }

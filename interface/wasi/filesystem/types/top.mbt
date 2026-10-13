@@ -27,7 +27,7 @@ pub extend DescriptorType with Eq::{equal}
 pub extend DescriptorType with Eq::{not_equal}
 
 ///|
-pub fn DescriptorType::ordinal(self : DescriptorType) -> Int {
+pub fn DescriptorType::ordinal(self : DescriptorType) -> Int32 {
   match self {
     UNKNOWN => 0
     BLOCK_DEVICE => 1
@@ -41,7 +41,7 @@ pub fn DescriptorType::ordinal(self : DescriptorType) -> Int {
 }
 
 ///|
-pub fn DescriptorType::from(self : Int) -> DescriptorType {
+pub fn DescriptorType::from(self : Int32) -> DescriptorType {
   match self {
     0 => UNKNOWN
     1 => BLOCK_DEVICE
@@ -350,7 +350,7 @@ pub extend ErrorCode with Eq::{equal}
 pub extend ErrorCode with Eq::{not_equal}
 
 ///|
-pub fn ErrorCode::ordinal(self : ErrorCode) -> Int {
+pub fn ErrorCode::ordinal(self : ErrorCode) -> Int32 {
   match self {
     ACCESS => 0
     WOULD_BLOCK => 1
@@ -393,7 +393,7 @@ pub fn ErrorCode::ordinal(self : ErrorCode) -> Int {
 }
 
 ///|
-pub fn ErrorCode::from(self : Int) -> ErrorCode {
+pub fn ErrorCode::from(self : Int32) -> ErrorCode {
   match self {
     0 => ACCESS
     1 => WOULD_BLOCK
@@ -459,7 +459,7 @@ pub extend Advice with Eq::{equal}
 pub extend Advice with Eq::{not_equal}
 
 ///|
-pub fn Advice::ordinal(self : Advice) -> Int {
+pub fn Advice::ordinal(self : Advice) -> Int32 {
   match self {
     NORMAL => 0
     SEQUENTIAL => 1
@@ -471,7 +471,7 @@ pub fn Advice::ordinal(self : Advice) -> Int {
 }
 
 ///|
-pub fn Advice::from(self : Int) -> Advice {
+pub fn Advice::from(self : Int32) -> Advice {
   match self {
     0 => NORMAL
     1 => SEQUENTIAL
@@ -506,7 +506,7 @@ pub extend MetadataHashValue with Eq::{not_equal}
 /// A descriptor is a reference to a filesystem object, which may be a file,
 /// directory, named pipe, special file, or other object on which filesystem
 /// calls may be made.
-pub(all) struct Descriptor(Int) derive(Debug, Eq)
+pub(all) struct Descriptor(Int32) derive(Debug, Eq)
 
 ///|
 pub extend Descriptor with @debug.Debug::{to_repr}
@@ -528,7 +528,7 @@ pub fn Descriptor::drop(self : Descriptor) -> Unit {
 
 ///|
 /// A stream of directory entries.
-pub(all) struct DirectoryEntryStream(Int) derive(Debug, Eq)
+pub(all) struct DirectoryEntryStream(Int32) derive(Debug, Eq)
 
 ///|
 pub extend DirectoryEntryStream with @debug.Debug::{to_repr}
@@ -1490,7 +1490,7 @@ pub fn Descriptor::is_same_object(
   let Descriptor(handle) = self
 
   let Descriptor(handle0) = other
-  let result : Int = wasmImportMethodDescriptorIsSameObject(handle, handle0)
+  let result : Int32 = wasmImportMethodDescriptorIsSameObject(handle, handle0)
   let ret = result != 0
   return ret
 }

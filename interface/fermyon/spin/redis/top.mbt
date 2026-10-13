@@ -21,7 +21,7 @@ pub extend Error_ with Eq::{equal}
 pub extend Error_ with Eq::{not_equal}
 
 ///|
-pub(all) struct Connection(Int) derive(Debug, Eq)
+pub(all) struct Connection(Int32) derive(Debug, Eq)
 
 ///|
 pub extend Connection with @debug.Debug::{to_repr}
@@ -326,8 +326,8 @@ pub fn Connection::incr(
 pub fn Connection::del(
   self : Connection,
   keys : Array[String],
-) -> Result[UInt, Error_] {
-  let cleanup_list : Array[Int] = []
+) -> Result[UInt32, Error_] {
+  let cleanup_list : Array[Int32] = []
 
   let Connection(handle) = self
 
@@ -380,8 +380,8 @@ pub fn Connection::sadd(
   self : Connection,
   key : String,
   values : Array[String],
-) -> Result[UInt, Error_] {
-  let cleanup_list : Array[Int] = []
+) -> Result[UInt32, Error_] {
+  let cleanup_list : Array[Int32] = []
 
   let Connection(handle) = self
 
@@ -499,8 +499,8 @@ pub fn Connection::srem(
   self : Connection,
   key : String,
   values : Array[String],
-) -> Result[UInt, Error_] {
-  let cleanup_list : Array[Int] = []
+) -> Result[UInt32, Error_] {
+  let cleanup_list : Array[Int32] = []
 
   let Connection(handle) = self
 
@@ -564,7 +564,7 @@ pub fn Connection::execute(
   command : String,
   arguments : Array[RedisParameter],
 ) -> Result[Array[RedisResult], Error_] {
-  let cleanup_list : Array[Int] = []
+  let cleanup_list : Array[Int32] = []
 
   let Connection(handle) = self
 

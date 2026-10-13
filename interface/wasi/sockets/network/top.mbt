@@ -4,7 +4,7 @@
 /// An opaque resource that represents access to (a subset of) the network.
 /// This enables context-based security for networking.
 /// There is no need for this to map 1:1 to a physical network interface.
-pub(all) struct Network(Int) derive(Debug, Eq)
+pub(all) struct Network(Int32) derive(Debug, Eq)
 
 ///|
 pub extend Network with @debug.Debug::{to_repr}
@@ -73,7 +73,7 @@ pub extend ErrorCode with Eq::{equal}
 pub extend ErrorCode with Eq::{not_equal}
 
 ///|
-pub fn ErrorCode::ordinal(self : ErrorCode) -> Int {
+pub fn ErrorCode::ordinal(self : ErrorCode) -> Int32 {
   match self {
     UNKNOWN => 0
     ACCESS_DENIED => 1
@@ -100,7 +100,7 @@ pub fn ErrorCode::ordinal(self : ErrorCode) -> Int {
 }
 
 ///|
-pub fn ErrorCode::from(self : Int) -> ErrorCode {
+pub fn ErrorCode::from(self : Int32) -> ErrorCode {
   match self {
     0 => UNKNOWN
     1 => ACCESS_DENIED
@@ -145,7 +145,7 @@ pub extend IpAddressFamily with Eq::{equal}
 pub extend IpAddressFamily with Eq::{not_equal}
 
 ///|
-pub fn IpAddressFamily::ordinal(self : IpAddressFamily) -> Int {
+pub fn IpAddressFamily::ordinal(self : IpAddressFamily) -> Int32 {
   match self {
     IPV4 => 0
     IPV6 => 1
@@ -153,7 +153,7 @@ pub fn IpAddressFamily::ordinal(self : IpAddressFamily) -> Int {
 }
 
 ///|
-pub fn IpAddressFamily::from(self : Int) -> IpAddressFamily {
+pub fn IpAddressFamily::from(self : Int32) -> IpAddressFamily {
   match self {
     0 => IPV4
     1 => IPV6
@@ -164,7 +164,7 @@ pub fn IpAddressFamily::from(self : Int) -> IpAddressFamily {
 ///|
 pub(all) enum IpAddress {
   Ipv4((Byte, Byte, Byte, Byte))
-  Ipv6((UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt))
+  Ipv6((UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32))
 } derive(Debug, Eq)
 
 ///|
@@ -180,7 +180,7 @@ pub extend IpAddress with Eq::{not_equal}
 
 ///|
 pub(all) struct Ipv4SocketAddress {
-  port : UInt
+  port : UInt32
   address : (Byte, Byte, Byte, Byte)
 } derive(Debug, Eq)
 
@@ -197,10 +197,10 @@ pub extend Ipv4SocketAddress with Eq::{not_equal}
 
 ///|
 pub(all) struct Ipv6SocketAddress {
-  port : UInt
-  flow_info : UInt
-  address : (UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt)
-  scope_id : UInt
+  port : UInt32
+  flow_info : UInt32
+  address : (UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
+  scope_id : UInt32
 } derive(Debug, Eq)
 
 ///|

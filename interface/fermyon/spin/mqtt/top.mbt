@@ -40,7 +40,7 @@ pub extend Qos with Eq::{equal}
 pub extend Qos with Eq::{not_equal}
 
 ///|
-pub fn Qos::ordinal(self : Qos) -> Int {
+pub fn Qos::ordinal(self : Qos) -> Int32 {
   match self {
     AT_MOST_ONCE => 0
     AT_LEAST_ONCE => 1
@@ -49,7 +49,7 @@ pub fn Qos::ordinal(self : Qos) -> Int {
 }
 
 ///|
-pub fn Qos::from(self : Int) -> Qos {
+pub fn Qos::from(self : Int32) -> Qos {
   match self {
     0 => AT_MOST_ONCE
     1 => AT_LEAST_ONCE
@@ -59,7 +59,7 @@ pub fn Qos::from(self : Int) -> Qos {
 }
 
 ///|
-pub(all) struct Connection(Int) derive(Debug, Eq)
+pub(all) struct Connection(Int32) derive(Debug, Eq)
 
 ///|
 pub extend Connection with @debug.Debug::{to_repr}

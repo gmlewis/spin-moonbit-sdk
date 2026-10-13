@@ -2,25 +2,25 @@
 
 ///|
 fn wasmImportInfer(
-  p0 : Int,
-  p1 : Int,
-  p2 : Int,
-  p3 : Int,
-  p4 : Int,
-  p5 : Int,
+  p0 : Int32,
+  p1 : Int32,
+  p2 : Int32,
+  p3 : Int32,
+  p4 : Int32,
+  p5 : Int32,
   p6 : Float,
-  p7 : Int,
+  p7 : Int32,
   p8 : Float,
-  p9 : Int,
+  p9 : Int32,
   p10 : Float,
-  p11 : Int,
+  p11 : Int32,
 ) = "fermyon:spin/llm@2.0.0" "infer"
 
 ///|
 fn wasmImportGenerateEmbeddings(
-  p0 : Int,
-  p1 : Int,
-  p2 : Int,
-  p3 : Int,
-  p4 : Int,
+  p0 : Int32,
+  p1 : Int32,
+  p2 : Int32,
+  p3 : Int32,
+  p4 : Int32,
 ) = "fermyon:spin/llm@2.0.0" "generate-embeddings"

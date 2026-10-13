@@ -52,7 +52,7 @@ pub fn handle(
             _ => panic()
           }
 
-          let lifted3 : UInt? = match @ffi.load8_u(return_area + 28) {
+          let lifted3 : UInt32? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(
@@ -123,7 +123,7 @@ pub fn handle(
         19 => @types.ErrorCode::HttpRequestUriInvalid
         20 => @types.ErrorCode::HttpRequestUriTooLong
         21 => {
-          let lifted8 : UInt? = match @ffi.load8_u(return_area + 16) {
+          let lifted8 : UInt32? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
@@ -150,7 +150,7 @@ pub fn handle(
                 _ => panic()
               }
 
-              let lifted11 : UInt? = match @ffi.load8_u(return_area + 32) {
+              let lifted11 : UInt32? = match @ffi.load8_u(return_area + 32) {
                 0 => Option::None
                 1 =>
                   Option::Some(
@@ -170,7 +170,7 @@ pub fn handle(
           @types.ErrorCode::HttpRequestHeaderSize(lifted12)
         }
         23 => {
-          let lifted13 : UInt? = match @ffi.load8_u(return_area + 16) {
+          let lifted13 : UInt32? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
@@ -193,7 +193,7 @@ pub fn handle(
             _ => panic()
           }
 
-          let lifted16 : UInt? = match @ffi.load8_u(return_area + 28) {
+          let lifted16 : UInt32? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
@@ -207,7 +207,7 @@ pub fn handle(
         }
         25 => @types.ErrorCode::HttpResponseIncomplete
         26 => {
-          let lifted17 : UInt? = match @ffi.load8_u(return_area + 16) {
+          let lifted17 : UInt32? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
@@ -230,7 +230,7 @@ pub fn handle(
             _ => panic()
           }
 
-          let lifted20 : UInt? = match @ffi.load8_u(return_area + 28) {
+          let lifted20 : UInt32? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())
@@ -255,7 +255,7 @@ pub fn handle(
           @types.ErrorCode::HttpResponseBodySize(lifted21)
         }
         29 => {
-          let lifted22 : UInt? = match @ffi.load8_u(return_area + 16) {
+          let lifted22 : UInt32? = match @ffi.load8_u(return_area + 16) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 20).reinterpret_as_uint())
@@ -278,7 +278,7 @@ pub fn handle(
             _ => panic()
           }
 
-          let lifted25 : UInt? = match @ffi.load8_u(return_area + 28) {
+          let lifted25 : UInt32? = match @ffi.load8_u(return_area + 28) {
             0 => Option::None
             1 =>
               Option::Some(@ffi.load32(return_area + 32).reinterpret_as_uint())

@@ -52,7 +52,7 @@ pub extend DbDataType with Eq::{equal}
 pub extend DbDataType with Eq::{not_equal}
 
 ///|
-pub fn DbDataType::ordinal(self : DbDataType) -> Int {
+pub fn DbDataType::ordinal(self : DbDataType) -> Int32 {
   match self {
     BOOLEAN => 0
     INT8 => 1
@@ -72,7 +72,7 @@ pub fn DbDataType::ordinal(self : DbDataType) -> Int {
 }
 
 ///|
-pub fn DbDataType::from(self : Int) -> DbDataType {
+pub fn DbDataType::from(self : Int32) -> DbDataType {
   match self {
     0 => BOOLEAN
     1 => INT8
@@ -96,13 +96,13 @@ pub fn DbDataType::from(self : Int) -> DbDataType {
 /// Database values
 pub(all) enum DbValue {
   Boolean(Bool)
-  Int8(Int)
-  Int16(Int)
-  Int32(Int)
+  Int8(Int32)
+  Int16(Int32)
+  Int32(Int32)
   Int64(Int64)
   Uint8(Byte)
-  Uint16(UInt)
-  Uint32(UInt)
+  Uint16(UInt32)
+  Uint32(UInt32)
   Uint64(UInt64)
   Floating32(Float)
   Floating64(Double)
@@ -127,13 +127,13 @@ pub extend DbValue with Eq::{not_equal}
 /// Values used in parameterized queries
 pub(all) enum ParameterValue {
   Boolean(Bool)
-  Int8(Int)
-  Int16(Int)
-  Int32(Int)
+  Int8(Int32)
+  Int16(Int32)
+  Int32(Int32)
   Int64(Int64)
   Uint8(Byte)
-  Uint16(UInt)
-  Uint32(UInt)
+  Uint16(UInt32)
+  Uint32(UInt32)
   Uint64(UInt64)
   Floating32(Float)
   Floating64(Double)
