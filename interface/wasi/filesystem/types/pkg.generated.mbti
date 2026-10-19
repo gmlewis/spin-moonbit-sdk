@@ -23,11 +23,11 @@ pub(all) enum Advice {
   NO_REUSE
 } derive(Eq, @debug.Debug)
 pub fn Advice::equal(Self, Self) -> Bool
-pub fn Advice::from(Int) -> Self
-pub fn Advice::ordinal(Self) -> Int
+pub fn Advice::from(Int32) -> Self
+pub fn Advice::ordinal(Self) -> Int32
 pub fn Advice::to_repr(Self) -> @debug.Repr
 
-pub(all) struct Descriptor(Int) derive(Eq, @debug.Debug)
+pub(all) struct Descriptor(Int32) derive(Eq, @debug.Debug)
 pub fn Descriptor::advise(Self, UInt64, UInt64, Advice) -> Result[Unit, ErrorCode]
 pub fn Descriptor::append_via_stream(Self) -> Result[@streams.OutputStream, ErrorCode]
 pub fn Descriptor::create_directory_at(Self, String) -> Result[Unit, ErrorCode]
@@ -98,8 +98,8 @@ pub(all) enum DescriptorType {
   SOCKET
 } derive(Eq, @debug.Debug)
 pub fn DescriptorType::equal(Self, Self) -> Bool
-pub fn DescriptorType::from(Int) -> Self
-pub fn DescriptorType::ordinal(Self) -> Int
+pub fn DescriptorType::from(Int32) -> Self
+pub fn DescriptorType::ordinal(Self) -> Int32
 pub fn DescriptorType::to_repr(Self) -> @debug.Repr
 
 pub(all) struct DirectoryEntry {
@@ -109,7 +109,7 @@ pub(all) struct DirectoryEntry {
 pub fn DirectoryEntry::equal(Self, Self) -> Bool
 pub fn DirectoryEntry::to_repr(Self) -> @debug.Repr
 
-pub(all) struct DirectoryEntryStream(Int) derive(Eq, @debug.Debug)
+pub(all) struct DirectoryEntryStream(Int32) derive(Eq, @debug.Debug)
 pub fn DirectoryEntryStream::drop(Self) -> Unit
 pub fn DirectoryEntryStream::equal(Self, Self) -> Bool
 pub fn DirectoryEntryStream::read_directory_entry(Self) -> Result[DirectoryEntry?, ErrorCode]
@@ -155,8 +155,8 @@ pub(all) enum ErrorCode {
   CROSS_DEVICE
 } derive(Eq, @debug.Debug)
 pub fn ErrorCode::equal(Self, Self) -> Bool
-pub fn ErrorCode::from(Int) -> Self
-pub fn ErrorCode::ordinal(Self) -> Int
+pub fn ErrorCode::from(Int32) -> Self
+pub fn ErrorCode::ordinal(Self) -> Int32
 pub fn ErrorCode::to_repr(Self) -> @debug.Repr
 
 pub(all) struct MetadataHashValue {

@@ -19,7 +19,7 @@ pub(all) struct IncomingDatagram {
 pub fn IncomingDatagram::equal(Self, Self) -> Bool
 pub fn IncomingDatagram::to_repr(Self) -> @debug.Repr
 
-pub(all) struct IncomingDatagramStream(Int) derive(Eq, @debug.Debug)
+pub(all) struct IncomingDatagramStream(Int32) derive(Eq, @debug.Debug)
 pub fn IncomingDatagramStream::drop(Self) -> Unit
 pub fn IncomingDatagramStream::equal(Self, Self) -> Bool
 pub fn IncomingDatagramStream::receive(Self, UInt64) -> Result[Array[IncomingDatagram], @network.ErrorCode]
@@ -33,7 +33,7 @@ pub(all) struct OutgoingDatagram {
 pub fn OutgoingDatagram::equal(Self, Self) -> Bool
 pub fn OutgoingDatagram::to_repr(Self) -> @debug.Repr
 
-pub(all) struct OutgoingDatagramStream(Int) derive(Eq, @debug.Debug)
+pub(all) struct OutgoingDatagramStream(Int32) derive(Eq, @debug.Debug)
 pub fn OutgoingDatagramStream::check_send(Self) -> Result[UInt64, @network.ErrorCode]
 pub fn OutgoingDatagramStream::drop(Self) -> Unit
 pub fn OutgoingDatagramStream::equal(Self, Self) -> Bool
@@ -41,7 +41,7 @@ pub fn OutgoingDatagramStream::send(Self, Array[OutgoingDatagram]) -> Result[UIn
 pub fn OutgoingDatagramStream::subscribe(Self) -> @poll.Pollable
 pub fn OutgoingDatagramStream::to_repr(Self) -> @debug.Repr
 
-pub(all) struct UdpSocket(Int) derive(Eq, @debug.Debug)
+pub(all) struct UdpSocket(Int32) derive(Eq, @debug.Debug)
 pub fn UdpSocket::address_family(Self) -> @network.IpAddressFamily
 pub fn UdpSocket::drop(Self) -> Unit
 pub fn UdpSocket::equal(Self, Self) -> Bool

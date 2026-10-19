@@ -34,19 +34,19 @@ pub(all) enum DbDataType {
   OTHER
 } derive(Eq, @debug.Debug)
 pub fn DbDataType::equal(Self, Self) -> Bool
-pub fn DbDataType::from(Int) -> Self
-pub fn DbDataType::ordinal(Self) -> Int
+pub fn DbDataType::from(Int32) -> Self
+pub fn DbDataType::ordinal(Self) -> Int32
 pub fn DbDataType::to_repr(Self) -> @debug.Repr
 
 pub(all) enum DbValue {
   Boolean(Bool)
-  Int8(Int)
-  Int16(Int)
-  Int32(Int)
+  Int8(Int32)
+  Int16(Int32)
+  Int32(Int32)
   Int64(Int64)
   Uint8(Byte)
-  Uint16(UInt)
-  Uint32(UInt)
+  Uint16(UInt32)
+  Uint32(UInt32)
   Uint64(UInt64)
   Floating32(Float)
   Floating64(Double)
@@ -70,13 +70,13 @@ pub fn Error_::to_repr(Self) -> @debug.Repr
 
 pub(all) enum ParameterValue {
   Boolean(Bool)
-  Int8(Int)
-  Int16(Int)
-  Int32(Int)
+  Int8(Int32)
+  Int16(Int32)
+  Int32(Int32)
   Int64(Int64)
   Uint8(Byte)
-  Uint16(UInt)
-  Uint32(UInt)
+  Uint16(UInt32)
+  Uint32(UInt32)
   Uint64(UInt64)
   Floating32(Float)
   Floating64(Double)

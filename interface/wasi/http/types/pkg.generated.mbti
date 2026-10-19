@@ -16,7 +16,7 @@ pub fn http_error_code(@error.Error_) -> ErrorCode?
 // Types and methods
 pub(all) struct DnsErrorPayload {
   rcode : String?
-  info_code : UInt?
+  info_code : UInt32?
 } derive(Eq, @debug.Debug)
 pub fn DnsErrorPayload::equal(Self, Self) -> Bool
 pub fn DnsErrorPayload::to_repr(Self) -> @debug.Repr
@@ -43,15 +43,15 @@ pub(all) enum ErrorCode {
   HttpRequestMethodInvalid
   HttpRequestUriInvalid
   HttpRequestUriTooLong
-  HttpRequestHeaderSectionSize(UInt?)
+  HttpRequestHeaderSectionSize(UInt32?)
   HttpRequestHeaderSize(FieldSizePayload?)
-  HttpRequestTrailerSectionSize(UInt?)
+  HttpRequestTrailerSectionSize(UInt32?)
   HttpRequestTrailerSize(FieldSizePayload)
   HttpResponseIncomplete
-  HttpResponseHeaderSectionSize(UInt?)
+  HttpResponseHeaderSectionSize(UInt32?)
   HttpResponseHeaderSize(FieldSizePayload)
   HttpResponseBodySize(UInt64?)
-  HttpResponseTrailerSectionSize(UInt?)
+  HttpResponseTrailerSectionSize(UInt32?)
   HttpResponseTrailerSize(FieldSizePayload)
   HttpResponseTransferCoding(String?)
   HttpResponseContentCoding(String?)
@@ -67,12 +67,12 @@ pub fn ErrorCode::to_repr(Self) -> @debug.Repr
 
 pub(all) struct FieldSizePayload {
   field_name : String?
-  field_size : UInt?
+  field_size : UInt32?
 } derive(Eq, @debug.Debug)
 pub fn FieldSizePayload::equal(Self, Self) -> Bool
 pub fn FieldSizePayload::to_repr(Self) -> @debug.Repr
 
-pub(all) struct Fields(Int) derive(Eq, @debug.Debug)
+pub(all) struct Fields(Int32) derive(Eq, @debug.Debug)
 pub fn Fields::append(Self, String, FixedArray[Byte]) -> Result[Unit, HeaderError]
 pub fn Fields::clone(Self) -> Self
 pub fn Fields::delete(Self, String) -> Result[Unit, HeaderError]
@@ -86,14 +86,14 @@ pub fn Fields::has(Self, String) -> Bool
 pub fn Fields::set(Self, String, Array[FixedArray[Byte]]) -> Result[Unit, HeaderError]
 pub fn Fields::to_repr(Self) -> @debug.Repr
 
-pub(all) struct FutureIncomingResponse(Int) derive(Eq, @debug.Debug)
+pub(all) struct FutureIncomingResponse(Int32) derive(Eq, @debug.Debug)
 pub fn FutureIncomingResponse::drop(Self) -> Unit
 pub fn FutureIncomingResponse::equal(Self, Self) -> Bool
 pub fn FutureIncomingResponse::get(Self) -> Result[Result[IncomingResponse, ErrorCode], Unit]?
 pub fn FutureIncomingResponse::subscribe(Self) -> @poll.Pollable
 pub fn FutureIncomingResponse::to_repr(Self) -> @debug.Repr
 
-pub(all) struct FutureTrailers(Int) derive(Eq, @debug.Debug)
+pub(all) struct FutureTrailers(Int32) derive(Eq, @debug.Debug)
 pub fn FutureTrailers::drop(Self) -> Unit
 pub fn FutureTrailers::equal(Self, Self) -> Bool
 pub fn FutureTrailers::get(Self) -> Result[Result[Fields?, ErrorCode], Unit]?
@@ -108,14 +108,14 @@ pub(all) enum HeaderError {
 pub fn HeaderError::equal(Self, Self) -> Bool
 pub fn HeaderError::to_repr(Self) -> @debug.Repr
 
-pub(all) struct IncomingBody(Int) derive(Eq, @debug.Debug)
+pub(all) struct IncomingBody(Int32) derive(Eq, @debug.Debug)
 pub fn IncomingBody::drop(Self) -> Unit
 pub fn IncomingBody::equal(Self, Self) -> Bool
 pub fn IncomingBody::finish(Self) -> FutureTrailers
 pub fn IncomingBody::stream(Self) -> Result[@streams.InputStream, Unit]
 pub fn IncomingBody::to_repr(Self) -> @debug.Repr
 
-pub(all) struct IncomingRequest(Int) derive(Eq, @debug.Debug)
+pub(all) struct IncomingRequest(Int32) derive(Eq, @debug.Debug)
 pub fn IncomingRequest::authority(Self) -> String?
 pub fn IncomingRequest::consume(Self) -> Result[IncomingBody, Unit]
 pub fn IncomingRequest::drop(Self) -> Unit
@@ -126,12 +126,12 @@ pub fn IncomingRequest::path_with_query(Self) -> String?
 pub fn IncomingRequest::scheme(Self) -> Scheme?
 pub fn IncomingRequest::to_repr(Self) -> @debug.Repr
 
-pub(all) struct IncomingResponse(Int) derive(Eq, @debug.Debug)
+pub(all) struct IncomingResponse(Int32) derive(Eq, @debug.Debug)
 pub fn IncomingResponse::consume(Self) -> Result[IncomingBody, Unit]
 pub fn IncomingResponse::drop(Self) -> Unit
 pub fn IncomingResponse::equal(Self, Self) -> Bool
 pub fn IncomingResponse::headers(Self) -> Fields
-pub fn IncomingResponse::status(Self) -> UInt
+pub fn IncomingResponse::status(Self) -> UInt32
 pub fn IncomingResponse::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Method {
@@ -149,14 +149,14 @@ pub(all) enum Method {
 pub fn Method::equal(Self, Self) -> Bool
 pub fn Method::to_repr(Self) -> @debug.Repr
 
-pub(all) struct OutgoingBody(Int) derive(Eq, @debug.Debug)
+pub(all) struct OutgoingBody(Int32) derive(Eq, @debug.Debug)
 pub fn OutgoingBody::drop(Self) -> Unit
 pub fn OutgoingBody::equal(Self, Self) -> Bool
 pub fn OutgoingBody::finish(Self, Fields?) -> Result[Unit, ErrorCode]
 pub fn OutgoingBody::to_repr(Self) -> @debug.Repr
 pub fn OutgoingBody::write(Self) -> Result[@streams.OutputStream, Unit]
 
-pub(all) struct OutgoingRequest(Int) derive(Eq, @debug.Debug)
+pub(all) struct OutgoingRequest(Int32) derive(Eq, @debug.Debug)
 pub fn OutgoingRequest::authority(Self) -> String?
 pub fn OutgoingRequest::body(Self) -> Result[OutgoingBody, Unit]
 pub fn OutgoingRequest::drop(Self) -> Unit
@@ -172,17 +172,17 @@ pub fn OutgoingRequest::set_path_with_query(Self, String?) -> Result[Unit, Unit]
 pub fn OutgoingRequest::set_scheme(Self, Scheme?) -> Result[Unit, Unit]
 pub fn OutgoingRequest::to_repr(Self) -> @debug.Repr
 
-pub(all) struct OutgoingResponse(Int) derive(Eq, @debug.Debug)
+pub(all) struct OutgoingResponse(Int32) derive(Eq, @debug.Debug)
 pub fn OutgoingResponse::body(Self) -> Result[OutgoingBody, Unit]
 pub fn OutgoingResponse::drop(Self) -> Unit
 pub fn OutgoingResponse::equal(Self, Self) -> Bool
 pub fn OutgoingResponse::headers(Self) -> Fields
 pub fn OutgoingResponse::outgoing_response(Fields) -> Self
-pub fn OutgoingResponse::set_status_code(Self, UInt) -> Result[Unit, Unit]
-pub fn OutgoingResponse::status_code(Self) -> UInt
+pub fn OutgoingResponse::set_status_code(Self, UInt32) -> Result[Unit, Unit]
+pub fn OutgoingResponse::status_code(Self) -> UInt32
 pub fn OutgoingResponse::to_repr(Self) -> @debug.Repr
 
-pub(all) struct RequestOptions(Int) derive(Eq, @debug.Debug)
+pub(all) struct RequestOptions(Int32) derive(Eq, @debug.Debug)
 pub fn RequestOptions::between_bytes_timeout(Self) -> UInt64?
 pub fn RequestOptions::connect_timeout(Self) -> UInt64?
 pub fn RequestOptions::drop(Self) -> Unit
@@ -194,7 +194,7 @@ pub fn RequestOptions::set_connect_timeout(Self, UInt64?) -> Result[Unit, Unit]
 pub fn RequestOptions::set_first_byte_timeout(Self, UInt64?) -> Result[Unit, Unit]
 pub fn RequestOptions::to_repr(Self) -> @debug.Repr
 
-pub(all) struct ResponseOutparam(Int) derive(Eq, @debug.Debug)
+pub(all) struct ResponseOutparam(Int32) derive(Eq, @debug.Debug)
 pub fn ResponseOutparam::drop(Self) -> Unit
 pub fn ResponseOutparam::equal(Self, Self) -> Bool
 pub fn ResponseOutparam::set(Self, Result[OutgoingResponse, ErrorCode]) -> Unit

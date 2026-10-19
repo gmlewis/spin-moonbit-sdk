@@ -10,7 +10,7 @@ import {
 // Errors
 
 // Types and methods
-pub(all) struct Error_(Int) derive(Eq, @debug.Debug)
+pub(all) struct Error_(Int32) derive(Eq, @debug.Debug)
 pub fn Error_::drop(Self) -> Unit
 pub fn Error_::equal(Self, Self) -> Bool
 pub fn Error_::to_debug_string(Self) -> String

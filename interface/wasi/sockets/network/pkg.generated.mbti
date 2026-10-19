@@ -34,13 +34,13 @@ pub(all) enum ErrorCode {
   PERMANENT_RESOLVER_FAILURE
 } derive(Eq, @debug.Debug)
 pub fn ErrorCode::equal(Self, Self) -> Bool
-pub fn ErrorCode::from(Int) -> Self
-pub fn ErrorCode::ordinal(Self) -> Int
+pub fn ErrorCode::from(Int32) -> Self
+pub fn ErrorCode::ordinal(Self) -> Int32
 pub fn ErrorCode::to_repr(Self) -> @debug.Repr
 
 pub(all) enum IpAddress {
   Ipv4((Byte, Byte, Byte, Byte))
-  Ipv6((UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt))
+  Ipv6((UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32))
 } derive(Eq, @debug.Debug)
 pub fn IpAddress::equal(Self, Self) -> Bool
 pub fn IpAddress::to_repr(Self) -> @debug.Repr
@@ -50,8 +50,8 @@ pub(all) enum IpAddressFamily {
   IPV6
 } derive(Eq, @debug.Debug)
 pub fn IpAddressFamily::equal(Self, Self) -> Bool
-pub fn IpAddressFamily::from(Int) -> Self
-pub fn IpAddressFamily::ordinal(Self) -> Int
+pub fn IpAddressFamily::from(Int32) -> Self
+pub fn IpAddressFamily::ordinal(Self) -> Int32
 pub fn IpAddressFamily::to_repr(Self) -> @debug.Repr
 
 pub(all) enum IpSocketAddress {
@@ -62,22 +62,22 @@ pub fn IpSocketAddress::equal(Self, Self) -> Bool
 pub fn IpSocketAddress::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Ipv4SocketAddress {
-  port : UInt
+  port : UInt32
   address : (Byte, Byte, Byte, Byte)
 } derive(Eq, @debug.Debug)
 pub fn Ipv4SocketAddress::equal(Self, Self) -> Bool
 pub fn Ipv4SocketAddress::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Ipv6SocketAddress {
-  port : UInt
-  flow_info : UInt
-  address : (UInt, UInt, UInt, UInt, UInt, UInt, UInt, UInt)
-  scope_id : UInt
+  port : UInt32
+  flow_info : UInt32
+  address : (UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
+  scope_id : UInt32
 } derive(Eq, @debug.Debug)
 pub fn Ipv6SocketAddress::equal(Self, Self) -> Bool
 pub fn Ipv6SocketAddress::to_repr(Self) -> @debug.Repr
 
-pub(all) struct Network(Int) derive(Eq, @debug.Debug)
+pub(all) struct Network(Int32) derive(Eq, @debug.Debug)
 pub fn Network::drop(Self) -> Unit
 pub fn Network::equal(Self, Self) -> Bool
 pub fn Network::to_repr(Self) -> @debug.Repr

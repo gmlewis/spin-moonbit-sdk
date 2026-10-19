@@ -19,11 +19,11 @@ pub(all) enum ShutdownType {
   BOTH
 } derive(Eq, @debug.Debug)
 pub fn ShutdownType::equal(Self, Self) -> Bool
-pub fn ShutdownType::from(Int) -> Self
-pub fn ShutdownType::ordinal(Self) -> Int
+pub fn ShutdownType::from(Int32) -> Self
+pub fn ShutdownType::ordinal(Self) -> Int32
 pub fn ShutdownType::to_repr(Self) -> @debug.Repr
 
-pub(all) struct TcpSocket(Int) derive(Eq, @debug.Debug)
+pub(all) struct TcpSocket(Int32) derive(Eq, @debug.Debug)
 pub fn TcpSocket::accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 pub fn TcpSocket::address_family(Self) -> @network.IpAddressFamily
 pub fn TcpSocket::drop(Self) -> Unit
@@ -33,7 +33,7 @@ pub fn TcpSocket::finish_connect(Self) -> Result[(@streams.InputStream, @streams
 pub fn TcpSocket::finish_listen(Self) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::hop_limit(Self) -> Result[Byte, @network.ErrorCode]
 pub fn TcpSocket::is_listening(Self) -> Bool
-pub fn TcpSocket::keep_alive_count(Self) -> Result[UInt, @network.ErrorCode]
+pub fn TcpSocket::keep_alive_count(Self) -> Result[UInt32, @network.ErrorCode]
 pub fn TcpSocket::keep_alive_enabled(Self) -> Result[Bool, @network.ErrorCode]
 pub fn TcpSocket::keep_alive_idle_time(Self) -> Result[UInt64, @network.ErrorCode]
 pub fn TcpSocket::keep_alive_interval(Self) -> Result[UInt64, @network.ErrorCode]
@@ -42,7 +42,7 @@ pub fn TcpSocket::receive_buffer_size(Self) -> Result[UInt64, @network.ErrorCode
 pub fn TcpSocket::remote_address(Self) -> Result[@network.IpSocketAddress, @network.ErrorCode]
 pub fn TcpSocket::send_buffer_size(Self) -> Result[UInt64, @network.ErrorCode]
 pub fn TcpSocket::set_hop_limit(Self, Byte) -> Result[Unit, @network.ErrorCode]
-pub fn TcpSocket::set_keep_alive_count(Self, UInt) -> Result[Unit, @network.ErrorCode]
+pub fn TcpSocket::set_keep_alive_count(Self, UInt32) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::set_keep_alive_enabled(Self, Bool) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::set_keep_alive_idle_time(Self, UInt64) -> Result[Unit, @network.ErrorCode]
 pub fn TcpSocket::set_keep_alive_interval(Self, UInt64) -> Result[Unit, @network.ErrorCode]

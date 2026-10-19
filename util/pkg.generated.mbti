@@ -16,29 +16,29 @@ pub fn dump_headers(@types.Fields) -> Unit
 
 pub fn get_body_bytes(@types.IncomingRequest) -> Result[Bytes, @streams.StreamError]
 
-pub fn get_content_length(@types.Fields) -> Int
+pub fn get_content_length(@types.Fields) -> Int32
 
 pub fn make_404_response() -> @types.OutgoingResponse
 
 pub fn make_500_response() -> @types.OutgoingResponse
 
-pub fn make_response(Bytes, content_type? : Bytes, status_code? : UInt) -> @types.OutgoingResponse
+pub fn make_response(Bytes, content_type? : Bytes, status_code? : UInt32) -> @types.OutgoingResponse
 
-pub fn make_response_str(String, content_type? : Bytes, status_code? : UInt) -> @types.OutgoingResponse
+pub fn make_response_str(String, content_type? : Bytes, status_code? : UInt32) -> @types.OutgoingResponse
 
 pub fn new_request(@types.Method, String, fields? : Array[(String, Bytes)]) -> @types.OutgoingRequest
 
 pub fn println(String) -> Unit
 
-pub fn random_int(Int) -> Int
+pub fn random_int(Int32) -> Int32
 
 pub fn respond_404(@types.ResponseOutparam) -> Unit
 
 pub fn respond_500(@types.ResponseOutparam) -> Unit
 
-pub fn respond_bytes(@types.ResponseOutparam, Bytes, content_type? : Bytes, status_code? : UInt) -> Unit
+pub fn respond_bytes(@types.ResponseOutparam, Bytes, content_type? : Bytes, status_code? : UInt32) -> Unit
 
-pub fn respond_str(@types.ResponseOutparam, String, content_type? : Bytes, status_code? : UInt) -> Unit
+pub fn respond_str(@types.ResponseOutparam, String, content_type? : Bytes, status_code? : UInt32) -> Unit
 
 pub fn send_request(@types.OutgoingRequest, debug? : Bool) -> Result[Bytes, @types.ErrorCode]
 

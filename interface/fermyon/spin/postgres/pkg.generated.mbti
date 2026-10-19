@@ -11,7 +11,7 @@ import {
 // Errors
 
 // Types and methods
-pub(all) struct Connection(Int) derive(Eq, @debug.Debug)
+pub(all) struct Connection(Int32) derive(Eq, @debug.Debug)
 pub fn Connection::drop(Self) -> Unit
 pub fn Connection::equal(Self, Self) -> Bool
 pub fn Connection::execute(Self, String, Array[@rdbmsTypes.ParameterValue]) -> Result[UInt64, @rdbmsTypes.Error_]

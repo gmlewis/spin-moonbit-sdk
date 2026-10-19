@@ -19,7 +19,7 @@ pub(all) enum Error_ {
 pub fn Error_::equal(Self, Self) -> Bool
 pub fn Error_::to_repr(Self) -> @debug.Repr
 
-pub(all) struct Store(Int) derive(Eq, @debug.Debug)
+pub(all) struct Store(Int32) derive(Eq, @debug.Debug)
 pub fn Store::delete(Self, String) -> Result[Unit, Error_]
 pub fn Store::drop(Self) -> Unit
 pub fn Store::equal(Self, Self) -> Bool

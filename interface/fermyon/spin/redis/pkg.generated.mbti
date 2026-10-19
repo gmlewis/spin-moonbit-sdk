@@ -10,8 +10,8 @@ import {
 // Errors
 
 // Types and methods
-pub(all) struct Connection(Int) derive(Eq, @debug.Debug)
-pub fn Connection::del(Self, Array[String]) -> Result[UInt, Error_]
+pub(all) struct Connection(Int32) derive(Eq, @debug.Debug)
+pub fn Connection::del(Self, Array[String]) -> Result[UInt32, Error_]
 pub fn Connection::drop(Self) -> Unit
 pub fn Connection::equal(Self, Self) -> Bool
 pub fn Connection::execute(Self, String, Array[RedisParameter]) -> Result[Array[RedisResult], Error_]
@@ -19,10 +19,10 @@ pub fn Connection::get(Self, String) -> Result[FixedArray[Byte]?, Error_]
 pub fn Connection::incr(Self, String) -> Result[Int64, Error_]
 pub fn Connection::open(String) -> Result[Self, Error_]
 pub fn Connection::publish(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
-pub fn Connection::sadd(Self, String, Array[String]) -> Result[UInt, Error_]
+pub fn Connection::sadd(Self, String, Array[String]) -> Result[UInt32, Error_]
 pub fn Connection::set(Self, String, FixedArray[Byte]) -> Result[Unit, Error_]
 pub fn Connection::smembers(Self, String) -> Result[Array[String], Error_]
-pub fn Connection::srem(Self, String, Array[String]) -> Result[UInt, Error_]
+pub fn Connection::srem(Self, String, Array[String]) -> Result[UInt32, Error_]
 pub fn Connection::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Error_ {

@@ -2,57 +2,57 @@
 package "gmlewis/spin-moonbit-sdk/ffi"
 
 // Values
-pub fn bytes2ptr(FixedArray[Byte]) -> Int
+pub fn bytes2ptr(FixedArray[Byte]) -> Int32
 
-pub fn cabi_realloc(Int, Int, Int, Int) -> Int
+pub fn cabi_realloc(Int32, Int32, Int32, Int32) -> Int32
 
-pub fn copy(Int, Int, Int) -> Unit
+pub fn copy(Int32, Int32, Int32) -> Unit
 
-pub fn extend16(Int) -> Int
+pub fn extend16(Int32) -> Int32
 
-pub fn extend8(Int) -> Int
+pub fn extend8(Int32) -> Int32
 
-pub fn free(Int) -> Unit
+pub fn free(Int32) -> Unit
 
-pub fn load16(Int) -> Int
+pub fn load16(Int32) -> Int32
 
-pub fn load16_u(Int) -> Int
+pub fn load16_u(Int32) -> Int32
 
-pub fn load32(Int) -> Int
+pub fn load32(Int32) -> Int32
 
-pub fn load64(Int) -> Int64
+pub fn load64(Int32) -> Int64
 
-pub fn load8(Int) -> Int
+pub fn load8(Int32) -> Int32
 
-pub fn load8_u(Int) -> Int
+pub fn load8_u(Int32) -> Int32
 
-pub fn loadf32(Int) -> Float
+pub fn loadf32(Int32) -> Float
 
-pub fn loadf64(Int) -> Double
+pub fn loadf64(Int32) -> Double
 
-pub fn malloc(Int) -> Int
+pub fn malloc(Int32) -> Int32
 
-pub fn ptr2bytes(Int, Int) -> FixedArray[Byte]
+pub fn ptr2bytes(Int32, Int32) -> FixedArray[Byte]
 
-pub fn ptr2float_array(Int, Int) -> FixedArray[Float]
+pub fn ptr2float_array(Int32, Int32) -> FixedArray[Float]
 
-pub fn ptr2str(Int, Int) -> String
+pub fn ptr2str(Int32, Int32) -> String
 
-pub fn ptr2uint_array(Int, Int) -> FixedArray[UInt]
+pub fn ptr2uint_array(Int32, Int32) -> FixedArray[UInt32]
 
-pub fn store16(Int, Int) -> Unit
+pub fn store16(Int32, Int32) -> Unit
 
-pub fn store32(Int, Int) -> Unit
+pub fn store32(Int32, Int32) -> Unit
 
-pub fn store64(Int, Int64) -> Unit
+pub fn store64(Int32, Int64) -> Unit
 
-pub fn store8(Int, Int) -> Unit
+pub fn store8(Int32, Int32) -> Unit
 
-pub fn storef32(Int, Float) -> Unit
+pub fn storef32(Int32, Float) -> Unit
 
-pub fn storef64(Int, Double) -> Unit
+pub fn storef64(Int32, Double) -> Unit
 
-pub fn str2ptr(String) -> Int
+pub fn str2ptr(String) -> Int32
 
 // Errors
 

@@ -21,7 +21,7 @@ pub fn EmbeddingsResult::equal(Self, Self) -> Bool
 pub fn EmbeddingsResult::to_repr(Self) -> @debug.Repr
 
 pub(all) struct EmbeddingsUsage {
-  prompt_token_count : UInt
+  prompt_token_count : UInt32
 } derive(Eq, @debug.Debug)
 pub fn EmbeddingsUsage::equal(Self, Self) -> Bool
 pub fn EmbeddingsUsage::to_repr(Self) -> @debug.Repr
@@ -35,11 +35,11 @@ pub fn Error_::equal(Self, Self) -> Bool
 pub fn Error_::to_repr(Self) -> @debug.Repr
 
 pub(all) struct InferencingParams {
-  max_tokens : UInt
+  max_tokens : UInt32
   repeat_penalty : Float
-  repeat_penalty_last_n_token_count : UInt
+  repeat_penalty_last_n_token_count : UInt32
   temperature : Float
-  top_k : UInt
+  top_k : UInt32
   top_p : Float
 } derive(Eq, @debug.Debug)
 pub fn InferencingParams::equal(Self, Self) -> Bool
@@ -53,8 +53,8 @@ pub fn InferencingResult::equal(Self, Self) -> Bool
 pub fn InferencingResult::to_repr(Self) -> @debug.Repr
 
 pub(all) struct InferencingUsage {
-  prompt_token_count : UInt
-  generated_token_count : UInt
+  prompt_token_count : UInt32
+  generated_token_count : UInt32
 } derive(Eq, @debug.Debug)
 pub fn InferencingUsage::equal(Self, Self) -> Bool
 pub fn InferencingUsage::to_repr(Self) -> @debug.Repr
