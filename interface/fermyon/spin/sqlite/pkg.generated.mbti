@@ -10,43 +10,48 @@ import {
 // Errors
 
 // Types and methods
-pub(all) struct Connection(Int32) derive(Eq, @debug.Debug)
+#derive(Eq, @debug.Debug)
+pub(all) struct Connection(Int32)
 pub fn Connection::drop(Self) -> Unit
 pub fn Connection::equal(Self, Self) -> Bool
 pub fn Connection::execute(Self, String, Array[Value]) -> Result[QueryResult, Error_]
 pub fn Connection::open(String) -> Result[Self, Error_]
 pub fn Connection::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum Error_ {
   NoSuchDatabase
   AccessDenied
   InvalidConnection
   DatabaseFull
   Io(String)
-} derive(Eq, @debug.Debug)
+}
 pub fn Error_::equal(Self, Self) -> Bool
 pub fn Error_::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct QueryResult {
   columns : Array[String]
   rows : Array[RowResult]
-} derive(Eq, @debug.Debug)
+}
 pub fn QueryResult::equal(Self, Self) -> Bool
 pub fn QueryResult::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct RowResult {
   values : Array[Value]
-} derive(Eq, @debug.Debug)
+}
 pub fn RowResult::equal(Self, Self) -> Bool
 pub fn RowResult::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum Value {
   Integer(Int64)
   Real(Double)
   Text(String)
   Blob(FixedArray[Byte])
   Null
-} derive(Eq, @debug.Debug)
+}
 pub fn Value::equal(Self, Self) -> Bool
 pub fn Value::to_repr(Self) -> @debug.Repr
 

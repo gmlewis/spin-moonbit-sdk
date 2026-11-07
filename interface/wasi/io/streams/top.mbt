@@ -2,10 +2,11 @@
 
 ///|
 /// An error for input-stream and output-stream operations.
+#derive(Debug, Eq)
 pub(all) enum StreamError {
   LastOperationFailed(@error.Error_)
   Closed
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend StreamError with @debug.Debug::{to_repr}
@@ -27,7 +28,8 @@ pub extend StreamError with Eq::{not_equal}
 /// available, which could even be zero. To wait for data to be available,
 /// use the `subscribe` function to obtain a `pollable` which can be polled
 /// for using `wasi:io/poll`.
-pub(all) struct InputStream(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct InputStream(Int32)
 
 ///|
 pub extend InputStream with @debug.Debug::{to_repr}
@@ -56,7 +58,8 @@ pub fn InputStream::drop(self : InputStream) -> Unit {
 /// promptly, which could even be zero. To wait for the stream to be ready to
 /// accept data, the `subscribe` function to obtain a `pollable` which can be
 /// polled for using `wasi:io/poll`.
-pub(all) struct OutputStream(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct OutputStream(Int32)
 
 ///|
 pub extend OutputStream with @debug.Debug::{to_repr}

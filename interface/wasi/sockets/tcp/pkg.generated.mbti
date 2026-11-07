@@ -13,17 +13,19 @@ import {
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug)
 pub(all) enum ShutdownType {
   RECEIVE
   SEND
   BOTH
-} derive(Eq, @debug.Debug)
+}
 pub fn ShutdownType::equal(Self, Self) -> Bool
 pub fn ShutdownType::from(Int32) -> Self
 pub fn ShutdownType::ordinal(Self) -> Int32
 pub fn ShutdownType::to_repr(Self) -> @debug.Repr
 
-pub(all) struct TcpSocket(Int32) derive(Eq, @debug.Debug)
+#derive(Eq, @debug.Debug)
+pub(all) struct TcpSocket(Int32)
 pub fn TcpSocket::accept(Self) -> Result[(Self, @streams.InputStream, @streams.OutputStream), @network.ErrorCode]
 pub fn TcpSocket::address_family(Self) -> @network.IpAddressFamily
 pub fn TcpSocket::drop(Self) -> Unit

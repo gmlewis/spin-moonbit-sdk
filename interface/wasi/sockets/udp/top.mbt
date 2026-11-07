@@ -2,10 +2,11 @@
 
 ///|
 /// A received datagram.
+#derive(Debug, Eq)
 pub(all) struct IncomingDatagram {
   data : FixedArray[Byte]
   remote_address : @network.IpSocketAddress
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend IncomingDatagram with @debug.Debug::{to_repr}
@@ -20,10 +21,11 @@ pub extend IncomingDatagram with Eq::{not_equal}
 
 ///|
 /// A datagram to be sent out.
+#derive(Debug, Eq)
 pub(all) struct OutgoingDatagram {
   data : FixedArray[Byte]
   remote_address : @network.IpSocketAddress?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend OutgoingDatagram with @debug.Debug::{to_repr}
@@ -38,7 +40,8 @@ pub extend OutgoingDatagram with Eq::{not_equal}
 
 ///|
 /// A UDP socket handle.
-pub(all) struct UdpSocket(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct UdpSocket(Int32)
 
 ///|
 pub extend UdpSocket with @debug.Debug::{to_repr}
@@ -59,7 +62,8 @@ pub fn UdpSocket::drop(self : UdpSocket) -> Unit {
 }
 
 ///|
-pub(all) struct IncomingDatagramStream(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct IncomingDatagramStream(Int32)
 
 ///|
 pub extend IncomingDatagramStream with @debug.Debug::{to_repr}
@@ -80,7 +84,8 @@ pub fn IncomingDatagramStream::drop(self : IncomingDatagramStream) -> Unit {
 }
 
 ///|
-pub(all) struct OutgoingDatagramStream(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct OutgoingDatagramStream(Int32)
 
 ///|
 pub extend OutgoingDatagramStream with @debug.Debug::{to_repr}

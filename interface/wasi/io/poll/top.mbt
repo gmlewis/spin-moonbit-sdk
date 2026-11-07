@@ -2,7 +2,8 @@
 
 ///|
 /// `pollable` represents a single I/O event which may be ready, or not.
-pub(all) struct Pollable(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Pollable(Int32)
 
 ///|
 pub extend Pollable with @debug.Debug::{to_repr}

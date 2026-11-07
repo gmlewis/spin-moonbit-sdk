@@ -2,7 +2,8 @@
 
 ///|
 /// The output side of a terminal.
-pub(all) struct TerminalOutput(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct TerminalOutput(Int32)
 
 ///|
 pub extend TerminalOutput with @debug.Debug::{to_repr}

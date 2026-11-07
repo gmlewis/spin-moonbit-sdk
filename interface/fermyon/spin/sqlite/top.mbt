@@ -2,7 +2,8 @@
 
 ///|
 /// A handle to an open sqlite instance
-pub(all) struct Connection(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Connection(Int32)
 
 ///|
 pub extend Connection with @debug.Debug::{to_repr}
@@ -24,13 +25,14 @@ pub fn Connection::drop(self : Connection) -> Unit {
 
 ///|
 /// The set of errors which may be raised by functions in this interface
+#derive(Debug, Eq)
 pub(all) enum Error_ {
   NoSuchDatabase
   AccessDenied
   InvalidConnection
   DatabaseFull
   Io(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Error_ with @debug.Debug::{to_repr}
@@ -45,13 +47,14 @@ pub extend Error_ with Eq::{not_equal}
 
 ///|
 /// A single column's result from a database query
+#derive(Debug, Eq)
 pub(all) enum Value {
   Integer(Int64)
   Real(Double)
   Text(String)
   Blob(FixedArray[Byte])
   Null
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Value with @debug.Debug::{to_repr}
@@ -66,9 +69,10 @@ pub extend Value with Eq::{not_equal}
 
 ///|
 /// A set of values for each of the columns in a query-result
+#derive(Debug, Eq)
 pub(all) struct RowResult {
   values : Array[Value]
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend RowResult with @debug.Debug::{to_repr}
@@ -83,10 +87,11 @@ pub extend RowResult with Eq::{not_equal}
 
 ///|
 /// A result of a query
+#derive(Debug, Eq)
 pub(all) struct QueryResult {
   columns : Array[String]
   rows : Array[RowResult]
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend QueryResult with @debug.Debug::{to_repr}

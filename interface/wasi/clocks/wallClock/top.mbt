@@ -2,10 +2,11 @@
 
 ///|
 /// A time and date in seconds plus nanoseconds.
+#derive(Debug, Eq)
 pub(all) struct Datetime {
   seconds : UInt64
   nanoseconds : UInt32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Datetime with @debug.Debug::{to_repr}

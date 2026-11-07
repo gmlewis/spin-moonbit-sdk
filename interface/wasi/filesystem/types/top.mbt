@@ -4,6 +4,7 @@
 /// The type of a filesystem object referenced by a descriptor.
 ///
 /// Note: This was called `filetype` in earlier versions of WASI.
+#derive(Debug, Eq)
 pub(all) enum DescriptorType {
   UNKNOWN
   BLOCK_DEVICE
@@ -13,7 +14,7 @@ pub(all) enum DescriptorType {
   SYMBOLIC_LINK
   REGULAR_FILE
   SOCKET
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend DescriptorType with @debug.Debug::{to_repr}
@@ -59,7 +60,8 @@ pub fn DescriptorType::from(self : Int32) -> DescriptorType {
 /// Descriptor flags.
 ///
 /// Note: This was called `fdflags` in earlier versions of WASI.
-pub(all) struct DescriptorFlags(Byte) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct DescriptorFlags(Byte)
 
 ///|
 pub extend DescriptorFlags with @debug.Debug::{to_repr}
@@ -128,7 +130,8 @@ pub fn DescriptorFlags::is_set(
 
 ///|
 /// Flags determining the method of how paths are resolved.
-pub(all) struct PathFlags(Byte) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct PathFlags(Byte)
 
 ///|
 pub extend PathFlags with @debug.Debug::{to_repr}
@@ -178,7 +181,8 @@ pub fn PathFlags::is_set(self : Self, other : PathFlagsFlag) -> Bool {
 
 ///|
 /// Open flags used by `open-at`.
-pub(all) struct OpenFlags(Byte) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct OpenFlags(Byte)
 
 ///|
 pub extend OpenFlags with @debug.Debug::{to_repr}
@@ -236,6 +240,7 @@ pub fn OpenFlags::is_set(self : Self, other : OpenFlagsFlag) -> Bool {
 /// File attributes.
 ///
 /// Note: This was called `filestat` in earlier versions of WASI.
+#derive(Debug, Eq)
 pub(all) struct DescriptorStat {
   type_ : DescriptorType
   link_count : UInt64
@@ -243,7 +248,7 @@ pub(all) struct DescriptorStat {
   data_access_timestamp : @wallClock.Datetime?
   data_modification_timestamp : @wallClock.Datetime?
   status_change_timestamp : @wallClock.Datetime?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend DescriptorStat with @debug.Debug::{to_repr}
@@ -258,11 +263,12 @@ pub extend DescriptorStat with Eq::{not_equal}
 
 ///|
 /// When setting a timestamp, this gives the value to set it to.
+#derive(Debug, Eq)
 pub(all) enum NewTimestamp {
   NoChange
   Now
   Timestamp(@wallClock.Datetime)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend NewTimestamp with @debug.Debug::{to_repr}
@@ -277,10 +283,11 @@ pub extend NewTimestamp with Eq::{not_equal}
 
 ///|
 /// A directory entry.
+#derive(Debug, Eq)
 pub(all) struct DirectoryEntry {
   type_ : DescriptorType
   name : String
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend DirectoryEntry with @debug.Debug::{to_repr}
@@ -298,6 +305,7 @@ pub extend DirectoryEntry with Eq::{not_equal}
 /// Not all of these error codes are returned by the functions provided by this
 /// API; some are used in higher-level library layers, and others are provided
 /// merely for alignment with POSIX.
+#derive(Debug, Eq)
 pub(all) enum ErrorCode {
   ACCESS
   WOULD_BLOCK
@@ -336,7 +344,7 @@ pub(all) enum ErrorCode {
   INVALID_SEEK
   TEXT_FILE_BUSY
   CROSS_DEVICE
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ErrorCode with @debug.Debug::{to_repr}
@@ -438,6 +446,7 @@ pub fn ErrorCode::from(self : Int32) -> ErrorCode {
 
 ///|
 /// File or memory access pattern advisory information.
+#derive(Debug, Eq)
 pub(all) enum Advice {
   NORMAL
   SEQUENTIAL
@@ -445,7 +454,7 @@ pub(all) enum Advice {
   WILL_NEED
   DONT_NEED
   NO_REUSE
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Advice with @debug.Debug::{to_repr}
@@ -486,10 +495,11 @@ pub fn Advice::from(self : Int32) -> Advice {
 ///|
 /// A 128-bit hash value, split into parts because wasm doesn't have a
 /// 128-bit integer type.
+#derive(Debug, Eq)
 pub(all) struct MetadataHashValue {
   lower : UInt64
   upper : UInt64
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend MetadataHashValue with @debug.Debug::{to_repr}
@@ -506,7 +516,8 @@ pub extend MetadataHashValue with Eq::{not_equal}
 /// A descriptor is a reference to a filesystem object, which may be a file,
 /// directory, named pipe, special file, or other object on which filesystem
 /// calls may be made.
-pub(all) struct Descriptor(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Descriptor(Int32)
 
 ///|
 pub extend Descriptor with @debug.Debug::{to_repr}
@@ -528,7 +539,8 @@ pub fn Descriptor::drop(self : Descriptor) -> Unit {
 
 ///|
 /// A stream of directory entries.
-pub(all) struct DirectoryEntryStream(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct DirectoryEntryStream(Int32)
 
 ///|
 pub extend DirectoryEntryStream with @debug.Debug::{to_repr}

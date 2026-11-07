@@ -2,12 +2,13 @@
 
 ///|
 /// Errors related to interacting with Mqtt
+#derive(Debug, Eq)
 pub(all) enum Error_ {
   InvalidAddress
   TooManyConnections
   ConnectionFailed(String)
   Other(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Error_ with @debug.Debug::{to_repr}
@@ -22,11 +23,12 @@ pub extend Error_ with Eq::{not_equal}
 
 ///|
 /// QoS for publishing Mqtt messages
+#derive(Debug, Eq)
 pub(all) enum Qos {
   AT_MOST_ONCE
   AT_LEAST_ONCE
   EXACTLY_ONCE
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Qos with @debug.Debug::{to_repr}
@@ -59,7 +61,8 @@ pub fn Qos::from(self : Int32) -> Qos {
 }
 
 ///|
-pub(all) struct Connection(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Connection(Int32)
 
 ///|
 pub extend Connection with @debug.Debug::{to_repr}

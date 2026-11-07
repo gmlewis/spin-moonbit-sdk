@@ -11,7 +11,8 @@ pub fn poll(Array[Pollable]) -> FixedArray[UInt32]
 // Errors
 
 // Types and methods
-pub(all) struct Pollable(Int32) derive(Eq, @debug.Debug)
+#derive(Eq, @debug.Debug)
+pub(all) struct Pollable(Int32)
 pub fn Pollable::block(Self) -> Unit
 pub fn Pollable::drop(Self) -> Unit
 pub fn Pollable::equal(Self, Self) -> Bool

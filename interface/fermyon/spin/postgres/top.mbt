@@ -2,7 +2,8 @@
 
 ///|
 /// A connection to a postgres database.
-pub(all) struct Connection(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Connection(Int32)
 
 ///|
 pub extend Connection with @debug.Debug::{to_repr}

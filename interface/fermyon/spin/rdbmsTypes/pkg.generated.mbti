@@ -10,13 +10,15 @@ import {
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug)
 pub(all) struct Column {
   name : String
   data_type : DbDataType
-} derive(Eq, @debug.Debug)
+}
 pub fn Column::equal(Self, Self) -> Bool
 pub fn Column::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum DbDataType {
   BOOLEAN
   INT8
@@ -32,12 +34,13 @@ pub(all) enum DbDataType {
   STR
   BINARY
   OTHER
-} derive(Eq, @debug.Debug)
+}
 pub fn DbDataType::equal(Self, Self) -> Bool
 pub fn DbDataType::from(Int32) -> Self
 pub fn DbDataType::ordinal(Self) -> Int32
 pub fn DbDataType::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum DbValue {
   Boolean(Bool)
   Int8(Int32)
@@ -54,20 +57,22 @@ pub(all) enum DbValue {
   Binary(FixedArray[Byte])
   DbNull
   Unsupported
-} derive(Eq, @debug.Debug)
+}
 pub fn DbValue::equal(Self, Self) -> Bool
 pub fn DbValue::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum Error_ {
   ConnectionFailed(String)
   BadParameter(String)
   QueryFailed(String)
   ValueConversionFailed(String)
   Other(String)
-} derive(Eq, @debug.Debug)
+}
 pub fn Error_::equal(Self, Self) -> Bool
 pub fn Error_::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum ParameterValue {
   Boolean(Bool)
   Int8(Int32)
@@ -83,14 +88,15 @@ pub(all) enum ParameterValue {
   Str(String)
   Binary(FixedArray[Byte])
   DbNull
-} derive(Eq, @debug.Debug)
+}
 pub fn ParameterValue::equal(Self, Self) -> Bool
 pub fn ParameterValue::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct RowSet {
   columns : Array[Column]
   rows : Array[Array[DbValue]]
-} derive(Eq, @debug.Debug)
+}
 pub fn RowSet::equal(Self, Self) -> Bool
 pub fn RowSet::to_repr(Self) -> @debug.Repr
 

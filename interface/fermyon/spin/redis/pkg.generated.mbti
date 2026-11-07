@@ -10,7 +10,8 @@ import {
 // Errors
 
 // Types and methods
-pub(all) struct Connection(Int32) derive(Eq, @debug.Debug)
+#derive(Eq, @debug.Debug)
+pub(all) struct Connection(Int32)
 pub fn Connection::del(Self, Array[String]) -> Result[UInt32, Error_]
 pub fn Connection::drop(Self) -> Unit
 pub fn Connection::equal(Self, Self) -> Bool
@@ -25,28 +26,31 @@ pub fn Connection::smembers(Self, String) -> Result[Array[String], Error_]
 pub fn Connection::srem(Self, String, Array[String]) -> Result[UInt32, Error_]
 pub fn Connection::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum Error_ {
   InvalidAddress
   TooManyConnections
   TypeError
   Other(String)
-} derive(Eq, @debug.Debug)
+}
 pub fn Error_::equal(Self, Self) -> Bool
 pub fn Error_::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum RedisParameter {
   Int64(Int64)
   Binary(FixedArray[Byte])
-} derive(Eq, @debug.Debug)
+}
 pub fn RedisParameter::equal(Self, Self) -> Bool
 pub fn RedisParameter::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum RedisResult {
   Nil
   Status(String)
   Int64(Int64)
   Binary(FixedArray[Byte])
-} derive(Eq, @debug.Debug)
+}
 pub fn RedisResult::equal(Self, Self) -> Bool
 pub fn RedisResult::to_repr(Self) -> @debug.Repr
 

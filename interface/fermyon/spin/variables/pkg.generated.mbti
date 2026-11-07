@@ -11,12 +11,13 @@ pub fn get(String) -> Result[String, Error_]
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug)
 pub(all) enum Error_ {
   InvalidName(String)
   Undefined(String)
   Provider(String)
   Other(String)
-} derive(Eq, @debug.Debug)
+}
 pub fn Error_::equal(Self, Self) -> Bool
 pub fn Error_::to_repr(Self) -> @debug.Repr
 

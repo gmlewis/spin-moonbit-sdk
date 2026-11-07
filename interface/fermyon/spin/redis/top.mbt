@@ -2,12 +2,13 @@
 
 ///|
 /// Errors related to interacting with Redis
+#derive(Debug, Eq)
 pub(all) enum Error_ {
   InvalidAddress
   TooManyConnections
   TypeError
   Other(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Error_ with @debug.Debug::{to_repr}
@@ -21,7 +22,8 @@ pub extend Error_ with Eq::{equal}
 pub extend Error_ with Eq::{not_equal}
 
 ///|
-pub(all) struct Connection(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Connection(Int32)
 
 ///|
 pub extend Connection with @debug.Debug::{to_repr}
@@ -43,10 +45,11 @@ pub fn Connection::drop(self : Connection) -> Unit {
 
 ///|
 /// A parameter type for the general-purpose `execute` function.
+#derive(Debug, Eq)
 pub(all) enum RedisParameter {
   Int64(Int64)
   Binary(FixedArray[Byte])
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend RedisParameter with @debug.Debug::{to_repr}
@@ -61,12 +64,13 @@ pub extend RedisParameter with Eq::{not_equal}
 
 ///|
 /// A return type for the general-purpose `execute` function.
+#derive(Debug, Eq)
 pub(all) enum RedisResult {
   Nil
   Status(String)
   Int64(Int64)
   Binary(FixedArray[Byte])
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend RedisResult with @debug.Debug::{to_repr}

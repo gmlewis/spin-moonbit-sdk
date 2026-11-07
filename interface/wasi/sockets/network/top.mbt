@@ -4,7 +4,8 @@
 /// An opaque resource that represents access to (a subset of) the network.
 /// This enables context-based security for networking.
 /// There is no need for this to map 1:1 to a physical network interface.
-pub(all) struct Network(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Network(Int32)
 
 ///|
 pub extend Network with @debug.Debug::{to_repr}
@@ -37,6 +38,7 @@ pub fn Network::drop(self : Network) -> Unit {
 /// - `concurrency-conflict`
 ///
 /// See each individual API for what the POSIX equivalents are. They sometimes differ per API.
+#derive(Debug, Eq)
 pub(all) enum ErrorCode {
   UNKNOWN
   ACCESS_DENIED
@@ -59,7 +61,7 @@ pub(all) enum ErrorCode {
   NAME_UNRESOLVABLE
   TEMPORARY_RESOLVER_FAILURE
   PERMANENT_RESOLVER_FAILURE
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ErrorCode with @debug.Debug::{to_repr}
@@ -128,10 +130,11 @@ pub fn ErrorCode::from(self : Int32) -> ErrorCode {
 }
 
 ///|
+#derive(Debug, Eq)
 pub(all) enum IpAddressFamily {
   IPV4
   IPV6
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend IpAddressFamily with @debug.Debug::{to_repr}
@@ -162,10 +165,11 @@ pub fn IpAddressFamily::from(self : Int32) -> IpAddressFamily {
 }
 
 ///|
+#derive(Debug, Eq)
 pub(all) enum IpAddress {
   Ipv4((Byte, Byte, Byte, Byte))
   Ipv6((UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32))
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend IpAddress with @debug.Debug::{to_repr}
@@ -179,10 +183,11 @@ pub extend IpAddress with Eq::{equal}
 pub extend IpAddress with Eq::{not_equal}
 
 ///|
+#derive(Debug, Eq)
 pub(all) struct Ipv4SocketAddress {
   port : UInt32
   address : (Byte, Byte, Byte, Byte)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Ipv4SocketAddress with @debug.Debug::{to_repr}
@@ -196,12 +201,13 @@ pub extend Ipv4SocketAddress with Eq::{equal}
 pub extend Ipv4SocketAddress with Eq::{not_equal}
 
 ///|
+#derive(Debug, Eq)
 pub(all) struct Ipv6SocketAddress {
   port : UInt32
   flow_info : UInt32
   address : (UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
   scope_id : UInt32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Ipv6SocketAddress with @debug.Debug::{to_repr}
@@ -215,10 +221,11 @@ pub extend Ipv6SocketAddress with Eq::{equal}
 pub extend Ipv6SocketAddress with Eq::{not_equal}
 
 ///|
+#derive(Debug, Eq)
 pub(all) enum IpSocketAddress {
   Ipv4(Ipv4SocketAddress)
   Ipv6(Ipv6SocketAddress)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend IpSocketAddress with @debug.Debug::{to_repr}

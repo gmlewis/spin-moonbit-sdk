@@ -2,12 +2,13 @@
 
 ///|
 /// The set of errors which may be raised by functions in this interface.
+#derive(Debug, Eq)
 pub(all) enum Error_ {
   InvalidName(String)
   Undefined(String)
   Provider(String)
   Other(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Error_ with @debug.Debug::{to_repr}

@@ -2,13 +2,14 @@
 
 ///|
 /// Errors related to interacting with a database.
+#derive(Debug, Eq)
 pub(all) enum Error_ {
   ConnectionFailed(String)
   BadParameter(String)
   QueryFailed(String)
   ValueConversionFailed(String)
   Other(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Error_ with @debug.Debug::{to_repr}
@@ -23,6 +24,7 @@ pub extend Error_ with Eq::{not_equal}
 
 ///|
 /// Data types for a database column
+#derive(Debug, Eq)
 pub(all) enum DbDataType {
   BOOLEAN
   INT8
@@ -38,7 +40,7 @@ pub(all) enum DbDataType {
   STR
   BINARY
   OTHER
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend DbDataType with @debug.Debug::{to_repr}
@@ -94,6 +96,7 @@ pub fn DbDataType::from(self : Int32) -> DbDataType {
 
 ///|
 /// Database values
+#derive(Debug, Eq)
 pub(all) enum DbValue {
   Boolean(Bool)
   Int8(Int32)
@@ -110,7 +113,7 @@ pub(all) enum DbValue {
   Binary(FixedArray[Byte])
   DbNull
   Unsupported
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend DbValue with @debug.Debug::{to_repr}
@@ -125,6 +128,7 @@ pub extend DbValue with Eq::{not_equal}
 
 ///|
 /// Values used in parameterized queries
+#derive(Debug, Eq)
 pub(all) enum ParameterValue {
   Boolean(Bool)
   Int8(Int32)
@@ -140,7 +144,7 @@ pub(all) enum ParameterValue {
   Str(String)
   Binary(FixedArray[Byte])
   DbNull
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ParameterValue with @debug.Debug::{to_repr}
@@ -155,10 +159,11 @@ pub extend ParameterValue with Eq::{not_equal}
 
 ///|
 /// A database column
+#derive(Debug, Eq)
 pub(all) struct Column {
   name : String
   data_type : DbDataType
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Column with @debug.Debug::{to_repr}
@@ -173,10 +178,11 @@ pub extend Column with Eq::{not_equal}
 
 ///|
 /// A set of database rows
+#derive(Debug, Eq)
 pub(all) struct RowSet {
   columns : Array[Column]
   rows : Array[Array[DbValue]]
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend RowSet with @debug.Debug::{to_repr}

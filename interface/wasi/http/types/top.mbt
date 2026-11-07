@@ -2,6 +2,7 @@
 
 ///|
 /// This type corresponds to HTTP standard Methods.
+#derive(Debug, Eq)
 pub(all) enum Method {
   Get
   Head
@@ -13,7 +14,7 @@ pub(all) enum Method {
   Trace
   Patch
   Other(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Method with @debug.Debug::{to_repr}
@@ -28,11 +29,12 @@ pub extend Method with Eq::{not_equal}
 
 ///|
 /// This type corresponds to HTTP standard Related Schemes.
+#derive(Debug, Eq)
 pub(all) enum Scheme {
   Http
   Https
   Other(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Scheme with @debug.Debug::{to_repr}
@@ -47,10 +49,11 @@ pub extend Scheme with Eq::{not_equal}
 
 ///|
 /// Defines the case payload type for `DNS-error` above:
+#derive(Debug, Eq)
 pub(all) struct DnsErrorPayload {
   rcode : String?
   info_code : UInt32?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend DnsErrorPayload with @debug.Debug::{to_repr}
@@ -65,10 +68,11 @@ pub extend DnsErrorPayload with Eq::{not_equal}
 
 ///|
 /// Defines the case payload type for `TLS-alert-received` above:
+#derive(Debug, Eq)
 pub(all) struct TlsAlertReceivedPayload {
   alert_id : Byte?
   alert_message : String?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend TlsAlertReceivedPayload with @debug.Debug::{to_repr}
@@ -83,10 +87,11 @@ pub extend TlsAlertReceivedPayload with Eq::{not_equal}
 
 ///|
 /// Defines the case payload type for `HTTP-response-{header,trailer}-size` above:
+#derive(Debug, Eq)
 pub(all) struct FieldSizePayload {
   field_name : String?
   field_size : UInt32?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend FieldSizePayload with @debug.Debug::{to_repr}
@@ -102,6 +107,7 @@ pub extend FieldSizePayload with Eq::{not_equal}
 ///|
 /// These cases are inspired by the IANA HTTP Proxy Error Types:
 ///   https://www.iana.org/assignments/http-proxy-status/http-proxy-status.xhtml#table-http-proxy-error-types
+#derive(Debug, Eq)
 pub(all) enum ErrorCode {
   DnsTimeout
   DnsError(DnsErrorPayload)
@@ -142,7 +148,7 @@ pub(all) enum ErrorCode {
   LoopDetected
   ConfigurationError
   InternalError(String?)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ErrorCode with @debug.Debug::{to_repr}
@@ -158,11 +164,12 @@ pub extend ErrorCode with Eq::{not_equal}
 ///|
 /// This type enumerates the different kinds of errors that may occur when
 /// setting or appending to a `fields` resource.
+#derive(Debug, Eq)
 pub(all) enum HeaderError {
   InvalidSyntax
   Forbidden
   Immutable
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend HeaderError with @debug.Debug::{to_repr}
@@ -186,7 +193,8 @@ pub extend HeaderError with Eq::{not_equal}
 /// `incoming-request.headers`, `outgoing-request.headers`) might be be
 /// immutable. In an immutable fields, the `set`, `append`, and `delete`
 /// operations will fail with `header-error.immutable`.
-pub(all) struct Fields(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Fields(Int32)
 
 ///|
 pub extend Fields with @debug.Debug::{to_repr}
@@ -208,7 +216,8 @@ pub fn Fields::drop(self : Fields) -> Unit {
 
 ///|
 /// Represents an incoming HTTP Request.
-pub(all) struct IncomingRequest(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct IncomingRequest(Int32)
 
 ///|
 pub extend IncomingRequest with @debug.Debug::{to_repr}
@@ -230,7 +239,8 @@ pub fn IncomingRequest::drop(self : IncomingRequest) -> Unit {
 
 ///|
 /// Represents an outgoing HTTP Request.
-pub(all) struct OutgoingRequest(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct OutgoingRequest(Int32)
 
 ///|
 pub extend OutgoingRequest with @debug.Debug::{to_repr}
@@ -257,7 +267,8 @@ pub fn OutgoingRequest::drop(self : OutgoingRequest) -> Unit {
 ///
 /// These timeouts are separate from any the user may use to bound a
 /// blocking call to `wasi:io/poll.poll`.
-pub(all) struct RequestOptions(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct RequestOptions(Int32)
 
 ///|
 pub extend RequestOptions with @debug.Debug::{to_repr}
@@ -283,7 +294,8 @@ pub fn RequestOptions::drop(self : RequestOptions) -> Unit {
 /// This resource is used by the `wasi:http/incoming-handler` interface to
 /// allow a Response to be sent corresponding to the Request provided as the
 /// other argument to `incoming-handler.handle`.
-pub(all) struct ResponseOutparam(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct ResponseOutparam(Int32)
 
 ///|
 pub extend ResponseOutparam with @debug.Debug::{to_repr}
@@ -305,7 +317,8 @@ pub fn ResponseOutparam::drop(self : ResponseOutparam) -> Unit {
 
 ///|
 /// Represents an incoming HTTP Response.
-pub(all) struct IncomingResponse(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct IncomingResponse(Int32)
 
 ///|
 pub extend IncomingResponse with @debug.Debug::{to_repr}
@@ -334,7 +347,8 @@ pub fn IncomingResponse::drop(self : IncomingResponse) -> Unit {
 /// an `input-stream` and the delivery of trailers as a `future-trailers`,
 /// and ensures that the user of this interface may only be consuming either
 /// the body contents or waiting on trailers at any given time.
-pub(all) struct IncomingBody(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct IncomingBody(Int32)
 
 ///|
 pub extend IncomingBody with @debug.Debug::{to_repr}
@@ -360,7 +374,8 @@ pub fn IncomingBody::drop(self : IncomingBody) -> Unit {
 /// In the case that the incoming HTTP Request or Response did not have any
 /// trailers, this future will resolve to the empty set of trailers once the
 /// complete Request or Response body has been received.
-pub(all) struct FutureTrailers(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct FutureTrailers(Int32)
 
 ///|
 pub extend FutureTrailers with @debug.Debug::{to_repr}
@@ -382,7 +397,8 @@ pub fn FutureTrailers::drop(self : FutureTrailers) -> Unit {
 
 ///|
 /// Represents an outgoing HTTP Response.
-pub(all) struct OutgoingResponse(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct OutgoingResponse(Int32)
 
 ///|
 pub extend OutgoingResponse with @debug.Debug::{to_repr}
@@ -419,7 +435,8 @@ pub fn OutgoingResponse::drop(self : OutgoingResponse) -> Unit {
 /// error to the HTTP protocol by whatever means it has available,
 /// including: corrupting the body on the wire, aborting the associated
 /// Request, or sending a late status code for the Response.
-pub(all) struct OutgoingBody(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct OutgoingBody(Int32)
 
 ///|
 pub extend OutgoingBody with @debug.Debug::{to_repr}
@@ -445,7 +462,8 @@ pub fn OutgoingBody::drop(self : OutgoingBody) -> Unit {
 ///
 /// This resource is returned by the `wasi:http/outgoing-handler` interface to
 /// provide the HTTP Response corresponding to the sent Request.
-pub(all) struct FutureIncomingResponse(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct FutureIncomingResponse(Int32)
 
 ///|
 pub extend FutureIncomingResponse with @debug.Debug::{to_repr}

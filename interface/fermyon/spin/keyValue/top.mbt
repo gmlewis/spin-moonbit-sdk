@@ -2,7 +2,8 @@
 
 ///|
 /// An open key-value store
-pub(all) struct Store(Int32) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Store(Int32)
 
 ///|
 pub extend Store with @debug.Debug::{to_repr}
@@ -24,12 +25,13 @@ pub fn Store::drop(self : Store) -> Unit {
 
 ///|
 /// The set of errors which may be raised by functions in this interface
+#derive(Debug, Eq)
 pub(all) enum Error_ {
   StoreTableFull
   NoSuchStore
   AccessDenied
   Other(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Error_ with @debug.Debug::{to_repr}

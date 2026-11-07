@@ -2,6 +2,7 @@
 
 ///|
 /// Inference request parameters
+#derive(Debug, Eq)
 pub(all) struct InferencingParams {
   max_tokens : UInt32
   repeat_penalty : Float
@@ -9,7 +10,7 @@ pub(all) struct InferencingParams {
   temperature : Float
   top_k : UInt32
   top_p : Float
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend InferencingParams with @debug.Debug::{to_repr}
@@ -24,11 +25,12 @@ pub extend InferencingParams with Eq::{not_equal}
 
 ///|
 /// The set of errors which may be raised by functions in this interface
+#derive(Debug, Eq)
 pub(all) enum Error_ {
   ModelNotSupported
   RuntimeError(String)
   InvalidInput(String)
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Error_ with @debug.Debug::{to_repr}
@@ -43,10 +45,11 @@ pub extend Error_ with Eq::{not_equal}
 
 ///|
 /// Usage information related to the inferencing result
+#derive(Debug, Eq)
 pub(all) struct InferencingUsage {
   prompt_token_count : UInt32
   generated_token_count : UInt32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend InferencingUsage with @debug.Debug::{to_repr}
@@ -61,10 +64,11 @@ pub extend InferencingUsage with Eq::{not_equal}
 
 ///|
 /// An inferencing result
+#derive(Debug, Eq)
 pub(all) struct InferencingResult {
   text : String
   usage : InferencingUsage
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend InferencingResult with @debug.Debug::{to_repr}
@@ -79,9 +83,10 @@ pub extend InferencingResult with Eq::{not_equal}
 
 ///|
 /// Usage related to an embeddings generation request
+#derive(Debug, Eq)
 pub(all) struct EmbeddingsUsage {
   prompt_token_count : UInt32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend EmbeddingsUsage with @debug.Debug::{to_repr}
@@ -96,10 +101,11 @@ pub extend EmbeddingsUsage with Eq::{not_equal}
 
 ///|
 /// Result of generating embeddings
+#derive(Debug, Eq)
 pub(all) struct EmbeddingsResult {
   embeddings : Array[FixedArray[Float]]
   usage : EmbeddingsUsage
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend EmbeddingsResult with @debug.Debug::{to_repr}
