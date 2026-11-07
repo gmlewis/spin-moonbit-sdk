@@ -1,5 +1,5 @@
 name = "username/{{project-name | kebab_case}}"
 
 import {
-  "gmlewis/spin-moonbit-sdk@0.55.0",
+  "gmlewis/spin-moonbit-sdk@0.55.5",
 }
