@@ -25,7 +25,7 @@ pub fn send_request(
   }
   let result = match content_length {
     0 => @buffer.Buffer()
-    size_hint => @buffer.Buffer(size_hint~)
+    capacity => @buffer.Buffer(capacity~)
   }
   //
   let in_stream = match incoming_response.consume() {

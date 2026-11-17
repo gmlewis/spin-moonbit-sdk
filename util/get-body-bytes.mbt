@@ -19,7 +19,7 @@ pub fn get_body_bytes(
       }
     _ => return Err(@streams.StreamError::Closed)
   }
-  let result = @buffer.Buffer(size_hint=content_length)
+  let result = @buffer.Buffer(capacity=content_length)
   for ;; {
     let buf = match in_stream.blocking_read(max_buf_size) {
       Ok(buf) => buf
