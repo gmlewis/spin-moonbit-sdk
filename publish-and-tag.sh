@@ -9,9 +9,12 @@ set -euo pipefail
 #   2. If moon.mod's version is newer than the last published version, tag
 #      HEAD "vA.B.C", push the tag, and publish. If that tag already exists,
 #      fall through to step 3.
-#   3. Bump the PATCH version in moon.mod, refresh sibling dependencies,
-#      commit "Bump version to A.B.C", tag "vA.B.C", push the commit and the
-#      tag, and publish.
+#   3. Bump the PATCH version in moon.mod, refresh dependencies with
+#      `update-moonbit-deps -refresh`, commit "Bump version to A.B.C", tag
+#      "vA.B.C", push the commit and the tag, and publish.
+#
+# After a successful publish, `update-moonbit-deps -refresh` runs again so the
+# registry cache and every dependent repository see the new version.
 #
 # The module name and version come from moon.mod, so this file is identical
 # in every sibling repo, but each copy is independent: it only reads, tags,
@@ -85,6 +88,14 @@ tag_exists() {
   git rev-parse -q --verify "refs/tags/$1" >/dev/null 2>&1
 }
 
+# refresh_registry runs update-moonbit-deps with -refresh: the on-disk cache is
+# bypassed, so a version that was just published is seen immediately and every
+# dependent repository's pins are advanced.
+refresh_registry() {
+  note "Refreshing update-moonbit-deps (-refresh) ..."
+  "$HOME/tools/bin/update-moonbit-deps" -refresh
+}
+
 # --- Step 1: update --------------------------------------------------------
 
 note "Running ./update.sh (required before publishing) ..."
@@ -134,6 +145,7 @@ if [[ -n "$published_version" ]] &&
     git push origin "refs/tags/v$local_version"
     note "Publishing $module@$local_version ..."
     moon publish
+    refresh_registry
     note "Published $module@$local_version with tag v$local_version"
     exit 0
   fi
@@ -151,11 +163,10 @@ if tag_exists "v$new_version"; then
   die "tag v$new_version already exists; delete it or bump the version manually"
 fi
 
+refresh_registry
+
 note "Bumping $local_version -> $new_version in moon.mod ..."
 set_version "$new_version"
-
-note "Refreshing sibling dependencies with ~/tools/bin/update-moonbit-deps ..."
-"$HOME/tools/bin/update-moonbit-deps"
 
 note "Committing the release ..."
 git commit -sam "Bump version to $new_version"
@@ -166,4 +177,5 @@ git push origin "refs/tags/v$new_version"
 
 note "Publishing $module@$new_version ..."
 moon publish
+refresh_registry
 note "Published $module@$new_version with tag v$new_version"
