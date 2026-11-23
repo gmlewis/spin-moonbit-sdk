@@ -101,6 +101,11 @@ refresh_registry() {
 note "Running ./update.sh (required before publishing) ..."
 ./update.sh
 
+# Never release a module that still has compiler warnings.
+note "Checking for compiler warnings (moon check --deny-warn) ..."
+moon check --deny-warn --no-mbti ||
+  die "moon check reported warnings or errors; refusing to cut the release"
+
 # --- Find the last published version ---------------------------------------
 
 published_version=""
